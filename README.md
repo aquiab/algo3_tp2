@@ -6,10 +6,10 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 ## Grupo {N}
 
-* **Integrante 1** - [integrante1](https://github.com/integrante1)
-* **Integrante 2** - [integrante2](https://github.com/integrante2)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Aquiles Abuin** - [integrante1](https://github.com/aquiab)
+* **Pedro Gallino** - [integrante2](https://github.com/pgallino)
+* **Edgar Matías Campillay** - [integrante3](https://github.com/EdCampi)
+* **Valentin Brizuela** - [integrante4](https://github.com/ValentinBrizuela)
 
 Corrector: **{Corrector}**
 

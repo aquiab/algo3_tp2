@@ -2,16 +2,16 @@
 
 # TP2 Algoritmos 3: GPS 
 
-Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
+Trabajo Práctico número 2 de la materia Algoritmos y Programación III de la FIUBA.
 
-## Grupo {N}
+## Grupo 21
 
 * **Aquiles Abuin** - [aquiab](https://github.com/aquiab)
 * **Pedro Gallino** - [pgallino](https://github.com/pgallino)
 * **Edgar Matías Campillay** - [EdCampi](https://github.com/EdCampi)
 * **Valentin Brizuela** - [ValentinBrizuela](https://github.com/ValentinBrizuela)
 
-Corrector: **{Corrector}**
+Corrector: **Maia Naftali**
 
 ## Aplicación
 

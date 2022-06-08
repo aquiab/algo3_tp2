@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo;
 public class Usuario {
     Vehiculo vehiculo;
-    Integer movimientos;
-    Esquina posicion;
 
     void hacerMovimiento(String direccion) {
         vehiculo.hacerMovimiento(direccion);

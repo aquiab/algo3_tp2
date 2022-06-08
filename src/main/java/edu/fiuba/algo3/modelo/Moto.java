@@ -8,9 +8,9 @@ public class Moto extends Vehiculo{
     @Override
     protected void initObsMap() {
         ObsMap = new HashMap<>();
-        ObsMap.put(Pozo.class, x -> pasarPozo(x));
-        ObsMap.put(Piquete.class, x -> pasarPiquete(x));
-        ObsMap.put(Policial.class, x -> pasarPolicial(x));
+        ObsMap.put(Pozo.class, this::pasarPozo);
+        ObsMap.put(Piquete.class, this::pasarPiquete);
+        ObsMap.put(Policial.class, this::pasarPolicial);
     }
 
     private void pasarPozo(Obstaculo x) {

@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Test;
 
-public class MotoEncuentraPozoTest {
-	//Una moto atraviesa la ciudad y se encuentra con un Pozo. Es penalizada en tres movimientos.
-	
+public class MotoTest {
 	@Test
-	public void Test1() {
+	public void MotoEncuentraPozoTest() {
+		//Una moto atraviesa la ciudad y se encuentra con un Pozo. Es penalizada en tres movimientos.
 		//arrange
 		Usuario usuario = new Usuario();
 		Moto moto = new Moto();

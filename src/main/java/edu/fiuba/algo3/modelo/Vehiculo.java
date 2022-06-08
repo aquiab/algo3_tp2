@@ -9,7 +9,7 @@ public abstract class Vehiculo {
     Esquina posicion;
     Esquina posicion_siguiente;
     Integer movimientos;
-    public Vehiculo() {
+    protected Vehiculo() {
         Integer movimientos = 0;
         this.initObsMap();
     }

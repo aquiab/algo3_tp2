@@ -19,6 +19,7 @@ public abstract class Vehiculo {
         posicion_siguiente = nueva_pos.devolverEsquina();
         Calle calle = nueva_pos.devolverCalle();
         pasarObstaculo(calle.devolverObstaculo());
+        posicion = posicion_siguiente;
     }
     public void pasarObstaculo(Obstaculo obstaculo) {
         Obshandler handler = this.ObsMap.get(obstaculo.getClass());

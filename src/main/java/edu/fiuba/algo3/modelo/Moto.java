@@ -19,7 +19,6 @@ public class Moto extends Vehiculo{
 
     private void pasarPiquete(Obstaculo x) {
         this.movimientos += 2;
-        this.posicion = posicion_siguiente;
     }
     private void pasarPolicial(Obstaculo x) {
         Random rand = new Random();

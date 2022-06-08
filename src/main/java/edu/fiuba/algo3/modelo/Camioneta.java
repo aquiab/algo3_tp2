@@ -27,6 +27,7 @@ public class Camioneta extends Vehiculo{
     }
 
     private void pasarPiquete(Obstaculo x) {
+        this.posicion_siguiente = posicion;
     }
     private void pasarPolicial(Obstaculo x) {
         Random rand = new Random();

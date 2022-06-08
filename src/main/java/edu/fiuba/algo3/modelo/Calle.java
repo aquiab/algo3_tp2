@@ -8,9 +8,15 @@ public class Calle {
         obstaculo = j;
     }
     Sorpresa devolverSorpresa(){
-        return sorpresa;
+        Sorpresa sorpresa1 = sorpresa;
+        BorrarSorpresa();
+        return sorpresa1;
     }
     Obstaculo devolverObstaculo(){
         return obstaculo;
+    }
+
+    void BorrarSorpresa() {
+        sorpresa = null;
     }
 }

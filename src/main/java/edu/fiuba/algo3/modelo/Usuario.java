@@ -1,14 +1,11 @@
 package edu.fiuba.algo3.modelo;
 public class Usuario {
     Vehiculo vehiculo;
-    Integer puntaje;
+    Integer movimientos;
     Esquina posicion;
 
     void hacerMovimiento(String direccion) {
-        Tuple nueva_pos = posicion.devolver_esquina_calle(direccion);
-        posicion = nueva_pos.devolverEsquina();
-        Calle calle = nueva_pos.devolverCalle();
-        //vehiculo.aplicarObstaculo(calle.devolverObstaculo());
+        vehiculo.hacerMovimiento(direccion);
     }
     Vehiculo devolverVehiculo() {
         return vehiculo;

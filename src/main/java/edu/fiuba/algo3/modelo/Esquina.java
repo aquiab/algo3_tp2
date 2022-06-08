@@ -13,7 +13,7 @@ public class Esquina {
     Tuple devolver_esquina_calle(String direccion) {
         return map.get(direccion);
     }
-    public void modificarDiccionario(Tuple tupla, String str) {
+    public void modificarDiccionario(String str, Tuple tupla) {
         map.put(str, tupla);
     }
 }

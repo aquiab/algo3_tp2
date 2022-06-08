@@ -10,6 +10,6 @@ public class MotoEncuentraPozoTest1 {
 	Tuple tupla1 = new Tuple(esquina1, calle);
 	Tuple tupla2 = new Tuple(esquina2, calle);
 	String str = "arr";
-	esquina1.modificarDiccionario(tupla1, str);
-	moto.asignarPosicionInicial(esquina1);
+	esquina1.modificarDiccionario(str, tupla2);
+	//moto.asignarPosicionInicial(esquina1);
 }

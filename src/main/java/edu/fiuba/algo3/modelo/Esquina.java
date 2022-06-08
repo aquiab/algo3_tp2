@@ -16,4 +16,7 @@ public class Esquina {
     public void modificarDiccionario(Tuple tupla, String str) {
         map.put(str, tupla);
     }
+    public Esquina crearEsquinaVacia() {
+        
+    }
 }

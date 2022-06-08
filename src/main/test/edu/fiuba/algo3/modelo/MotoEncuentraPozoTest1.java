@@ -6,7 +6,9 @@ public class MotoEncuentraPozoTest1 {
 	Moto moto = new Moto();
 	Calle calle = new Calle(null, new Pozo());
 	Esquina esquina1 = new Esquina(null, null, null, null);
+	Esquina esquina2 = new Esquina(null, null, null, null);
 	Tuple tupla1 = new Tuple(esquina1, calle);
-	Esquina esquina2 = new Esquina(tupla1, null, null, null);
-	moto.asignarPosicionInicial(esquina);
+	Tuple tupla2 = new Tuple(esquina2, calle);
+	esquina1.modificarDiccionario(tupla1, "arr");
+	moto.asignarPosicionInicial(esquina1);
 }

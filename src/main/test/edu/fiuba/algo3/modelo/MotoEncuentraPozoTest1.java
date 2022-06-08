@@ -5,8 +5,8 @@ public class MotoEncuentraPozoTest1 {
 	//arrange
 	Moto moto = new Moto();
 	Calle calle = new Calle(null, new Pozo());
-	Esquina esquina1 = new Esquina(null, null, null, null);
-	Esquina esquina2 = new Esquina(null, null, null, null);
+	Esquina esquina1 = new Esquina();
+	Esquina esquina2 = new Esquina();
 	Tuple tupla1 = new Tuple(esquina1, calle);
 	Tuple tupla2 = new Tuple(esquina2, calle);
 	esquina1.modificarDiccionario(tupla1, "arr");

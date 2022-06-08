@@ -28,4 +28,7 @@ public abstract class Vehiculo {
     interface Obshandler { //pozo policial piquete
         void pasarObstaculo(Obstaculo obstaculo);
     }
+    public void asignarPosicionInicial(Esquina esquina) {
+        this.posicion = esquina;
+    }
 }

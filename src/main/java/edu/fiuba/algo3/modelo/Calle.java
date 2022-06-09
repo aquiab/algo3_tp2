@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 public class Calle {
-    Sorpresa sorpresa;
-    Obstaculo obstaculo;
+    private Sorpresa sorpresa;
+    private Obstaculo obstaculo;
     Calle(Sorpresa i, Obstaculo j) {
         sorpresa = i;
         obstaculo = j;

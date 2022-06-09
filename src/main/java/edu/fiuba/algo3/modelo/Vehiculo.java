@@ -6,9 +6,9 @@ public abstract class Vehiculo {
 
     protected HashMap<Class, Obshandler> ObsMap;
     protected abstract void initObsMap();
-    Esquina posicion;
-    Esquina posicion_siguiente;
-    Integer movimientos;
+    protected Esquina posicion;
+    protected Esquina posicion_siguiente;
+    protected Integer movimientos;
     protected Vehiculo() {
         this.movimientos = 0;
         this.initObsMap();
@@ -21,6 +21,10 @@ public abstract class Vehiculo {
         pasarObstaculo(calle.devolverObstaculo());
         posicion = posicion_siguiente;
         this.movimientos++;
+    }
+
+    public Integer obtenerMovimientos() {
+        return this.movimientos;
     }
     public void pasarObstaculo(Obstaculo obstaculo) {
         Obshandler handler = this.ObsMap.get(obstaculo.getClass());

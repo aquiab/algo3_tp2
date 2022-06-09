@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class Camioneta extends Vehiculo{
 
-    Integer cantpozos;
+    Integer cantidadPozos;
 
-    private void Camioneta() {
-        cantpozos = 0;
+    Camioneta() {
+        cantidadPozos = 0;
     }
     @Override
     protected void initObsMap() {
@@ -19,8 +19,8 @@ public class Camioneta extends Vehiculo{
     }
 
     private void pasarPozo(Obstaculo x) {
-        cantpozos++;
-        if (cantpozos%3 == 0) {
+        cantidadPozos++;
+        if (cantidadPozos %3 == 0) {
             this.movimientos += 2;
         }
         this.movimientos += 0;

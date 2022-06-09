@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 public class CamionetaTest {
 
     @Test
-    public void camionetaEncuentraPozoNoEsPenalizado() {
+    public void camionetaEncuentraPozoNoEsPenalizada() {
         //Una 4x4 atraviesa la ciudad y se encuentra con un Pozo. No es penalizada.
         Usuario conductor = new Usuario();
         Camioneta camioneta = new Camioneta();
@@ -23,6 +23,6 @@ public class CamionetaTest {
         camioneta.asignarPosicionInicial(esquinaA0);
         conductor.hacerMovimiento("a1");
 
-        assert (camioneta.movimientos == 1);
+        assert (camioneta.obtenerMovimientos() == 1);
     }
 }

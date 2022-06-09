@@ -14,15 +14,15 @@ public class MotoTest {
 		Esquina esquina2 = new Esquina();
 		Tuple tupla1 = new Tuple(esquina1, calle);
 		Tuple tupla2 = new Tuple(esquina2, calle);
-
 		esquina1.agregarEsquinaAdyacente(tupla2, "arr");
 		esquina2.agregarEsquinaAdyacente(tupla1, "ab");
-
 		moto.asignarPosicionInicial(esquina1);
+
+		//act
 		usuario.hacerMovimiento("arr");
 
-		//Agregar supuesto al informe con cantidad total x+1 (y los piquetes que también suman movimiento).
-		assert(moto.movimientos == 4);
+		//assert
+		assert(moto.obtenerMovimientos() == 4);
 	}
 	
 }

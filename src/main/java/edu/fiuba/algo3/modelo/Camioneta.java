@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Camioneta extends Vehiculo{
 
-    Integer cantidadPozos;
+    private Integer cantidadPozos;
 
     Camioneta() {
         cantidadPozos = 0;

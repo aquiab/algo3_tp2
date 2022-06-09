@@ -19,7 +19,6 @@ public class Moto extends Vehiculo{
     }
 
     private void pasarLibremente(Obstaculo x) {
-        return;
     }
     private void pasarPiquete(Obstaculo x) {
         this.movimientos += 2;
@@ -30,7 +29,6 @@ public class Moto extends Vehiculo{
         if (val) {
             this.movimientos += 3;
         }
-        this.movimientos+= 0;
     }
 
 }

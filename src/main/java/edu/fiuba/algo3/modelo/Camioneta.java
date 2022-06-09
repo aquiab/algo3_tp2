@@ -16,6 +16,7 @@ public class Camioneta extends Vehiculo{
         ObsMap.put(Pozo.class, this::pasarPozo);
         ObsMap.put(Piquete.class, this::pasarPiquete);
         ObsMap.put(Policial.class, this::pasarPolicial);
+        ObsMap.put(Libre.class, this::pasarLibremente);
     }
 
     private void pasarPozo(Obstaculo x) {
@@ -23,7 +24,6 @@ public class Camioneta extends Vehiculo{
         if (cantidadPozos %3 == 0) {
             this.movimientos += 2;
         }
-        this.movimientos += 0;
     }
 
     private void pasarPiquete(Obstaculo x) {
@@ -36,6 +36,7 @@ public class Camioneta extends Vehiculo{
             this.movimientos += 3;
         }
     }
-
+    private void pasarLibremente(Obstaculo x) {
+    }
 }
 

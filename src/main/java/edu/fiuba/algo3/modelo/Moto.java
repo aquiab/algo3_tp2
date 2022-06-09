@@ -11,12 +11,16 @@ public class Moto extends Vehiculo{
         ObsMap.put(Pozo.class, this::pasarPozo);
         ObsMap.put(Piquete.class, this::pasarPiquete);
         ObsMap.put(Policial.class, this::pasarPolicial);
+        ObsMap.put(Libre.class, this::pasarLibremente);
     }
 
     private void pasarPozo(Obstaculo x) {
         this.movimientos += 3;
     }
 
+    private void pasarLibremente(Obstaculo x) {
+        return;
+    }
     private void pasarPiquete(Obstaculo x) {
         this.movimientos += 2;
     }

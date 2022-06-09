@@ -24,5 +24,33 @@ public class MotoTest {
 		//assert
 		assert(moto.obtenerMovimientos() == 4);
 	}
+
+	@Test
+	public void motoSeMueveLibrementeEntreCallesVaciasSumaUnMovimiento() {
+		Usuario conductor = new Usuario();
+		Moto moto = new Moto();
+		conductor.establecerVehiculo(moto);
+		Calle calle = new Calle(null, new Libre());
+
+		Esquina esquinaA0 = new Esquina();
+		Esquina esquinaA1 = new Esquina();
+		Tuple direccionA0 = new Tuple(esquinaA0, calle);
+		Tuple direccionA1 = new Tuple(esquinaA1, calle);
+
+		//Enlazo las esquinas entre sí.
+		esquinaA0.agregarEsquinaAdyacente(direccionA1, "a1");
+		esquinaA1.agregarEsquinaAdyacente(direccionA0, "a0");
+
+		//Ida
+		moto.asignarPosicionInicial(esquinaA0);
+		conductor.hacerMovimiento("a1");
+		assert (moto.obtenerPosicionActual() == esquinaA1);
+		assert (moto.obtenerMovimientos() == 1);
+
+		//Vuelta
+		conductor.hacerMovimiento("a0");
+		assert (moto.obtenerPosicionActual() == esquinaA0);
+		assert (moto.obtenerMovimientos() == 2);
+	}
 	
 }

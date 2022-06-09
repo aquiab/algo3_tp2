@@ -36,4 +36,8 @@ public abstract class Vehiculo {
     public void asignarPosicionInicial(Esquina esquina) {
         this.posicion = esquina;
     }
+
+    public Esquina obtenerPosicionActual() {
+        return this.posicion;
+    }
 }

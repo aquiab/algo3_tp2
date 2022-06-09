@@ -11,6 +11,7 @@ public class Auto extends Vehiculo{
         ObsMap.put(Pozo.class, (x) -> pasarPozo(x));
         ObsMap.put(Piquete.class, (x) -> pasarPiquete(x));
         ObsMap.put(Policial.class, (x) -> pasarPolicial(x));
+        ObsMap.put(Libre.class, (x) -> pasarLibremente(x));
     }
 
     private void pasarPozo(Obstaculo x) {
@@ -26,5 +27,8 @@ public class Auto extends Vehiculo{
         if (val) {
             this.movimientos += 3;
         }
+    }
+    private void pasarLibremente(Obstaculo x) {
+        return;
     }
 }

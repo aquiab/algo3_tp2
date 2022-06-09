@@ -1,12 +1,16 @@
 package edu.fiuba.algo3.modelo;
 public class Usuario {
-    Vehiculo vehiculo;
+    private Vehiculo vehiculo;
 
     void hacerMovimiento(String direccion) {
         vehiculo.hacerMovimiento(direccion);
     }
     Vehiculo devolverVehiculo() {
         return vehiculo;
+    }
+
+    public void establecerVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
 }
 

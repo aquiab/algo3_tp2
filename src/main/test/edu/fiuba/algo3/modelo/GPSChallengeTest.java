@@ -22,8 +22,41 @@ public class GPSChallengeTest {
 
         auto.asignarPosicionInicial(esquinaA0);
         juego.hacerMovimiento("a1");
-
         assert (juego.cantidadDeMovimientos() == 0.8);
+
+        juego.hacerMovimiento("a0");
+        assert (juego.cantidadDeMovimientos() == 1.8);
+
+        juego.hacerMovimiento("a1");
+        assert (juego.cantidadDeMovimientos() == 2.8);
+    }
+
+    @Test
+    public void vehiculoEncuentraSorpresaDesfavorable() {
+        //Test 2 - Entrega número 2.
+        Usuario juego = new Usuario();
+        Auto auto = new Auto(new Puntaje());
+        juego.establecerVehiculo(auto);
+        Calle calle = new Calle(new SorpresaDesfavorable(), null);
+
+        Esquina esquinaA0 = new Esquina();
+        Esquina esquinaA1 = new Esquina();
+        Tuple direccionA0 = new Tuple(esquinaA0, calle);
+        Tuple direccionA1 = new Tuple(esquinaA1, calle);
+
+        //Enlazo las esquinas entre sí.
+        esquinaA0.agregarEsquinaAdyacente(direccionA1, "a1");
+        esquinaA1.agregarEsquinaAdyacente(direccionA0, "a0");
+
+        auto.asignarPosicionInicial(esquinaA0);
+        juego.hacerMovimiento("a1");
+        assert (juego.cantidadDeMovimientos() == 1.25);
+
+        juego.hacerMovimiento("a0");
+        assert (juego.cantidadDeMovimientos() == 2.25);
+
+        juego.hacerMovimiento("a1");
+        assert (juego.cantidadDeMovimientos() == 3.25);
     }
 
     @Test
@@ -107,5 +140,4 @@ public class GPSChallengeTest {
         juego.hacerMovimiento("a1");
         assert (juego.devolverVehiculo().getClass() == Auto.class);
     }
-
 }

@@ -55,7 +55,7 @@ public abstract class Vehiculo {
         return null;
     }
 
-    public void descontarPuntosPor(double descuento) {
-        this.movimientos.multiplicarPor(descuento);
+    public void multiplicarPuntosPor(double multiplicador) {
+        this.movimientos.multiplicarPor(multiplicador);
     }
 }

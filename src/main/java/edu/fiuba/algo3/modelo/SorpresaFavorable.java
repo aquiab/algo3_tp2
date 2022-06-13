@@ -5,6 +5,6 @@ public class SorpresaFavorable extends Sorpresa {
 
     public void aplicar(Usuario juego) {
         Vehiculo vehiculo = juego.devolverVehiculo();
-        vehiculo.descontarPuntosPor(DESCUENTO_SORPRESA);
+        vehiculo.multiplicarPuntosPor(DESCUENTO_SORPRESA);
     }
 }

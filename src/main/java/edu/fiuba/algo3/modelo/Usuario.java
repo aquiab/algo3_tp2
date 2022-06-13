@@ -4,7 +4,7 @@ public class Usuario {
 
     void hacerMovimiento(String direccion) {
         Sorpresa sorpresa = vehiculo.hacerMovimiento(direccion);
-        if (sorpresa != null) sorpresa.aplicar(this, vehiculo);
+        if (sorpresa != null) sorpresa.aplicar(this);
     }
     Vehiculo devolverVehiculo() {
         return vehiculo;

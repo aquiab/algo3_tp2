@@ -43,10 +43,6 @@ public abstract class Vehiculo {
         void pasarObstaculo(Obstaculo obstaculo);
     }
 
-    public void pasarSorpresa(Sorpresa sorpresa) {
-        sorpresa.aplicar(null,this);
-    }
-
     public void asignarPosicionInicial(Esquina esquina) {
         this.posicion = esquina;
     }

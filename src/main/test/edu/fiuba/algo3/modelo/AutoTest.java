@@ -8,7 +8,7 @@ public class AutoTest {
 		//Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
 		//arrange
 		Usuario usuario = new Usuario();
-		Auto auto = new Auto();
+		Auto auto = new Auto(new Puntaje());
 		usuario.establecerVehiculo(auto);
 		Calle calle = new Calle(null, new Pozo());
 		Esquina esquina1 = new Esquina();

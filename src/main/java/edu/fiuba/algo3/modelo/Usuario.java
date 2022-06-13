@@ -3,7 +3,8 @@ public class Usuario {
     private Vehiculo vehiculo;
 
     void hacerMovimiento(String direccion) {
-        vehiculo.hacerMovimiento(direccion);
+        Sorpresa sorpresa = vehiculo.hacerMovimiento(direccion);
+        if (sorpresa != null) sorpresa.aplicar(this, vehiculo);
     }
     Vehiculo devolverVehiculo() {
         return vehiculo;
@@ -11,6 +12,14 @@ public class Usuario {
 
     public void establecerVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+
+    public double cantidadDeMovimientos() {
+        return vehiculo.obtenerMovimientos();
+    }
+
+    public void asignarPosicionInicial(Esquina esquina) {
+        vehiculo.asignarPosicionInicial(esquina);
     }
 }
 

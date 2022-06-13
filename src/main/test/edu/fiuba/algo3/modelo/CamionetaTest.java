@@ -7,7 +7,7 @@ public class CamionetaTest {
     public void camionetaEncuentraPozoNoEsPenalizada() {
         //Una 4x4 atraviesa la ciudad y se encuentra con un Pozo. No es penalizada.
         Usuario conductor = new Usuario();
-        Camioneta camioneta = new Camioneta();
+        Camioneta camioneta = new Camioneta(new Puntaje());
         conductor.establecerVehiculo(camioneta);
         Calle calle = new Calle(null, new Pozo());
 

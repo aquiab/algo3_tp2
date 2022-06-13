@@ -5,6 +5,10 @@ import java.util.Random;
 
 public class Camioneta extends Vehiculo{
 
+    public Camioneta(Puntaje puntos) {
+        this.movimientos = puntos;
+    }
+
     private Integer cantidadPozos;
 
     Camioneta() {
@@ -16,13 +20,12 @@ public class Camioneta extends Vehiculo{
         ObsMap.put(Pozo.class, this::pasarPozo);
         ObsMap.put(Piquete.class, this::pasarPiquete);
         ObsMap.put(Policial.class, this::pasarPolicial);
-        ObsMap.put(Libre.class, this::pasarLibremente);
     }
 
     private void pasarPozo(Obstaculo x) {
         cantidadPozos++;
         if (cantidadPozos %3 == 0) {
-            this.movimientos += 2;
+            this.movimientos.aumentarPuntos(2);
         }
     }
 
@@ -33,10 +36,11 @@ public class Camioneta extends Vehiculo{
         Random rand = new Random();
         boolean val = rand.nextInt(10)<=2;
         if (val) {
-            this.movimientos += 3;
+            this.movimientos.aumentarPuntos(3);
         }
     }
-    private void pasarLibremente(Obstaculo x) {
+    public Moto cambiarAlSiguiente() {
+        return (new Moto(this.movimientos));
     }
 }
 

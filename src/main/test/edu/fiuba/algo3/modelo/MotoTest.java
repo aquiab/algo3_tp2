@@ -7,7 +7,7 @@ public class MotoTest {
 		//Una moto atraviesa la ciudad y se encuentra con un Pozo. Es penalizada en tres movimientos.
 		//arrange
 		Usuario usuario = new Usuario();
-		Moto moto = new Moto();
+		Moto moto = new Moto(new Puntaje());
 		usuario.establecerVehiculo(moto);
 		Calle calle = new Calle(null, new Pozo());
 		Esquina esquina1 = new Esquina();
@@ -28,9 +28,9 @@ public class MotoTest {
 	@Test
 	public void motoSeMueveLibrementeEntreCallesVaciasSumaUnMovimiento() {
 		Usuario conductor = new Usuario();
-		Moto moto = new Moto();
+		Moto moto = new Moto(new Puntaje());
 		conductor.establecerVehiculo(moto);
-		Calle calle = new Calle(null, new Libre());
+		Calle calle = new Calle(null, null);
 
 		Esquina esquinaA0 = new Esquina();
 		Esquina esquinaA1 = new Esquina();

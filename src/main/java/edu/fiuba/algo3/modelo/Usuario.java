@@ -38,8 +38,10 @@ public class Usuario {
     }
 
     public double cantidadDeMovimientos() {
-        return vehiculo.obtenerMovimientos();
+        return vehiculo.movimientos;
     }
+
+    private void aplicarSorpresa(String sorpresa){}
 }
 
 /*

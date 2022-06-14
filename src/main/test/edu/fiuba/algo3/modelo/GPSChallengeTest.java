@@ -162,7 +162,6 @@ public class GPSChallengeTest {
         moto.asignarPosicionInicial(esquinaA0);
         juego.hacerMovimiento("a1");
 
-        //assert
         assert (moto.obtenerPosicionActual() == esquinaA1);
         assert(moto.obtenerMovimientos() == 3);
     }

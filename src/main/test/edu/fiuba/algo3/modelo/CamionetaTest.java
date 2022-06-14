@@ -29,7 +29,7 @@ public class CamionetaTest {
     @Test
     public void camionetaEncuentraPiqueteNoSeMueveAunqueIntentaCuentaComoMovimiento() {
         Usuario conductor = new Usuario();
-        Camioneta camioneta = new Camioneta();
+        Camioneta camioneta = new Camioneta(new Puntaje());
         conductor.establecerVehiculo(camioneta);
         Calle calle = new Calle(null, new Piquete());
 
@@ -52,5 +52,28 @@ public class CamionetaTest {
         conductor.hacerMovimiento("a1");
         assert (camioneta.obtenerPosicionActual() == esquinaA0);
         assert (camioneta.obtenerMovimientos() == 2);
+    }
+
+    @Test
+    public void MOTOEncuentraPolicial() {
+        //NO ES UN TEST SOLO QUIERO PROBAR QUE SIRVA.
+        Usuario conductor = new Usuario();
+        Moto moto = new Moto(new Puntaje());
+        conductor.establecerVehiculo(moto);
+        Calle calle = new Calle(null, new Policial());
+
+        Esquina esquinaA0 = new Esquina();
+        Esquina esquinaA1 = new Esquina();
+        Tuple direccionA0 = new Tuple(esquinaA0, calle);
+        Tuple direccionA1 = new Tuple(esquinaA1, calle);
+
+        //Enlazo las esquinas entre sí.
+        esquinaA0.agregarEsquinaAdyacente(direccionA1, "a1");
+        esquinaA1.agregarEsquinaAdyacente(direccionA0, "a0");
+        moto.asignarPosicionInicial(esquinaA0);
+
+        //Primer intento
+        conductor.hacerMovimiento("a1");
+        System.out.println(moto.obtenerMovimientos());
     }
 }

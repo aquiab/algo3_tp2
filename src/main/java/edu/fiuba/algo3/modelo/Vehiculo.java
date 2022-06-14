@@ -4,15 +4,14 @@ import java.util.HashMap;
 
 public abstract class Vehiculo {
 
-    protected HashMap<Class, Obshandler> ObsMap;
+    protected int PROBABILIDAD_DE_ENCONTRAR_CONTROL;
 
-    protected abstract void initObsMap();
     protected Esquina posicion;
     protected Esquina posicion_siguiente;
     protected Puntaje movimientos;
+
     protected Vehiculo() {
         this.movimientos = new Puntaje();
-        this.initObsMap();
     }
 
     Sorpresa hacerMovimiento(String direccion) {
@@ -21,9 +20,12 @@ public abstract class Vehiculo {
         posicion_siguiente = nueva_pos.devolverEsquina();
         Calle calle = nueva_pos.devolverCalle();
         //.......... if (obstaculoActual != null)?
+        Obstaculo obstaculo = calle.devolverObstaculo();
         try {
-            pasarObstaculo(calle.devolverObstaculo());
-        } catch (Exception e) {}
+            obstaculo.aplicar(this);
+        } catch (CaminoCortado error) {
+            posicion_siguiente = posicion;
+        } catch (Exception error) {}
         posicion = posicion_siguiente;
         return calle.devolverSorpresa();
     }
@@ -34,14 +36,18 @@ public abstract class Vehiculo {
     public Puntaje obtenerPuntos() {
         return this.movimientos;
     }
-    public void pasarObstaculo(Obstaculo obstaculo) {
-        Obshandler handler = this.ObsMap.get(obstaculo.getClass());
-        handler.pasarObstaculo(obstaculo);
+
+    public void aumentarPuntos(float cantidad) {
+        this.movimientos.aumentarPuntos(cantidad);
     }
 
-    interface Obshandler { //pozo policial piquete
-        void pasarObstaculo(Obstaculo obstaculo);
+
+
+
+    public int probabilidadEncontrarControl() {
+        return PROBABILIDAD_DE_ENCONTRAR_CONTROL;
     }
+
 
     public void asignarPosicionInicial(Esquina esquina) {
         this.posicion = esquina;
@@ -57,5 +63,9 @@ public abstract class Vehiculo {
 
     public void multiplicarPuntosPor(double multiplicador) {
         this.movimientos.multiplicarPor(multiplicador);
+    }
+
+
+    public void pasarPozo() {
     }
 }

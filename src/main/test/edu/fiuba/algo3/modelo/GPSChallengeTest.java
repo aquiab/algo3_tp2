@@ -140,4 +140,30 @@ public class GPSChallengeTest {
         juego.hacerMovimiento("a1");
         assert (juego.devolverVehiculo().getClass() == Auto.class);
     }
+
+    @Test
+    public void MotoPasaPiquete() {
+        //Test 4 - Entrega número 2.
+        //A diferencia de los autos y camionetas 4x4, las motos sí puede atravesar piquetes,
+        //pero este le genera una penalización de 2 movimientos.
+        Usuario juego = new Usuario();
+        Moto moto = new Moto(new Puntaje());
+        juego.establecerVehiculo(moto);
+        Calle calle = new Calle(null, new Piquete());
+
+        Esquina esquinaA0 = new Esquina();
+        Esquina esquinaA1 = new Esquina();
+        Tuple direccionA0 = new Tuple(esquinaA0, calle);
+        Tuple direccionA1 = new Tuple(esquinaA1, calle);
+
+        esquinaA0.agregarEsquinaAdyacente(direccionA1, "a1");
+        esquinaA1.agregarEsquinaAdyacente(direccionA0, "a0");
+
+        moto.asignarPosicionInicial(esquinaA0);
+        juego.hacerMovimiento("a1");
+
+        //assert
+        assert (moto.obtenerPosicionActual() == esquinaA1);
+        assert(moto.obtenerMovimientos() == 3);
+    }
 }

@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
+import java.util.HashMap;
 
 public class Calle {
+    private HashMap<String, Tuple> adyacentes = new HashMap<>();
     private Sorpresa sorpresa;
     private Obstaculo obstaculo;
     Calle(Sorpresa sor, Obstaculo obst) {

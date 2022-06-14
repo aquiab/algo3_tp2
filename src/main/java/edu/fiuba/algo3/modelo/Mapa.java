@@ -15,8 +15,8 @@ public class Mapa {
 			filas.add(new LinkedList<Calle>());
 			columnas.add(new LinkedList<Calle>());
 			for (int j=0; j < size; j++) {
-				filas.get(i).add(new Calle(null, null));
-				columnas.get(i).add(new Calle(null, null));
+				filas.get(i).add(new Calle());
+				columnas.get(i).add(new Calle());
 			}
 		}
 	}

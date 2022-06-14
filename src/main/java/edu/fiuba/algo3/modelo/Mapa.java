@@ -3,18 +3,20 @@ import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Mapa {
-	public LinkedList<LinkedList<Calle>> callesHorizontales;
-	public LinkedList<LinkedList<Calle>> callesVerticales;
+	public LinkedList<LinkedList<Calle>> filas;
+	public LinkedList<LinkedList<Calle>> columnas;
+	private int size;
+
 	Mapa() {
-		int size = ThreadLocalRandom.current().nextInt(10, 20);
-		callesHorizontales = new LinkedList<LinkedList<Calle>>();
-		callesVerticales = new LinkedList<LinkedList<Calle>>();
+		size = ThreadLocalRandom.current().nextInt(10, 20);
+		filas = new LinkedList<LinkedList<Calle>>();
+		columnas = new LinkedList<LinkedList<Calle>>();
 		for (int i=0; i < size; i++) {
-			callesHorizontales.add(new LinkedList<Calle>());
-			callesVerticales.add(new LinkedList<Calle>());
+			filas.add(new LinkedList<Calle>());
+			columnas.add(new LinkedList<Calle>());
 			for (int j=0; j < size; j++) {
-				callesHorizontales.get(i).add(new Calle(null, null));
-				callesVerticales.get(i).add(new Calle(null, null));
+				filas.get(i).add(new Calle(null, null));
+				columnas.get(i).add(new Calle(null, null));
 			}
 		}
 	}

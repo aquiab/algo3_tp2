@@ -5,30 +5,30 @@ import java.util.Random;
 
 public class Auto extends Vehiculo{
 
-    public Auto(Puntaje puntos) {
+    public Auto(double puntos) {
         this.movimientos = puntos;
     }
 
     @Override
     protected void initObsMap() {
         ObsMap = new HashMap<>();
-        ObsMap.put(Pozo.class, this::pasarPozo);
-        ObsMap.put(Piquete.class, this::pasarPiquete);
-        ObsMap.put(Policial.class, this::pasarPolicial);
+        ObsMap.put("pozo", this::pasarPozo);
+        ObsMap.put("piquete", this::pasarPiquete);
+        ObsMap.put("policial", this::pasarPolicial);
     }
 
-    private void pasarPozo(Obstaculo x) {
-        this.movimientos.aumentarPuntos(3);
+    private void pasarPozo(String x) {
+        this.movimientos += 3;
     }
 
-    private void pasarPiquete(Obstaculo x) {
+    private void pasarPiquete(String x) {
         this.posicion_siguiente = posicion;
     }
-    private void pasarPolicial(Obstaculo x) {
+    private void pasarPolicial(String x) {
         Random rand = new Random();
         boolean val = rand.nextInt(10)<=4;
         if (val) {
-            this.movimientos.aumentarPuntos(3);
+            this.movimientos += 3;
         }
     }
 

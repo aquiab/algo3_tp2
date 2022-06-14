@@ -4,6 +4,9 @@ import java.util.HashMap;
 
 public abstract class Vehiculo {
 
+    protected int fila;
+    protected int columna;
+
     protected HashMap<String, Obshandler> ObsMap;
 
     protected abstract void initObsMap();

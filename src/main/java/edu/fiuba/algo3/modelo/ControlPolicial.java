@@ -1,11 +1,8 @@
 package edu.fiuba.algo3.modelo;
-import java.util.Random;
 
-public class ControlPolicial extends Obstaculo {
-	Random rand = new Random();
+public class ControlPolicial implements Obstaculo {
 
-    public void aplicarObstaculo(Vehiculo vehiculo) {
-		vehiculo.pasarControlPolicial();
+	public void aplicarObstaculo(Vehiculo vehiculo) {
+        vehiculo.pasarControlPolicial();
 	}
-
 }

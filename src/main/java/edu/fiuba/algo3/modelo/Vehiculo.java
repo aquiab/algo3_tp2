@@ -13,6 +13,7 @@ public abstract class Vehiculo {
     public void mover(Direccion direccion) {
         this.movimientos += 1;
         direccion.mover(this.posicion, this);
+        this.movimientos += 1;
     }
 
     public void cambiarPosicion(Posicion posicion) {
@@ -29,9 +30,7 @@ public abstract class Vehiculo {
 
     public abstract Vehiculo aplicarSorpresaCambioVehiculo();
 
-    public void pasarControlPolicial() {
-        this.movimientos += 3;
-    }
+    public abstract void pasarControlPolicial();
 
     public abstract void pasarPiquete();
 

@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
-
 import java.util.Random;
 
 public class Camioneta extends Vehiculo{
+    Random rand = new Random();
 
     public Camioneta(double movimientos, Posicion posicion) {
         super(movimientos, posicion);
@@ -16,15 +16,14 @@ public class Camioneta extends Vehiculo{
         }
     }
 
-    public void pasarPiquete() {
-
-    }
-
     public void pasarControlPolicial() {
-        Random rand = new Random();
         if (rand.nextInt(10) <= 2) {
             this.movimientos += 3;
         }
+    }
+
+    public void pasarPiquete() {
+        
     }
 
     public Moto aplicarSorpresaCambioVehiculo() {

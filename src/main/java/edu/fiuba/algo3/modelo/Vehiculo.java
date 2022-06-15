@@ -11,7 +11,6 @@ public abstract class Vehiculo {
     }
 
     public void mover(Direccion direccion) {
-        this.movimientos += 1;
         direccion.mover(this.posicion, this);
         this.movimientos += 1;
     }

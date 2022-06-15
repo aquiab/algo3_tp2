@@ -7,11 +7,12 @@ public class AutoTest {
 	public void AutoEncuentraPozoTest() {
 		//Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
 		//arrange
-		Juego juego = new Juego(new Auto(0, new Posicion(0,0)));
+		Juego juego = new Juego(new Moto(0, new Posicion(0,0)));
 		//act
 		juego.mover(new DireccionDerecha(juego.mapa));
 
 		//assert
-		assert(juego.vehiculo.movimientos == 4);
+		assert(juego.vehiculo.posicion.x() == 1 );
+		assert(juego.vehiculo.posicion.y() == 0 );
 	}
 }

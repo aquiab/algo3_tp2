@@ -4,10 +4,12 @@ public abstract class Vehiculo {
 
     protected Posicion posicion;
     protected double movimientos;
+    protected boolean paso;
 
     protected Vehiculo(double movimientos, Posicion posicion) {
         this.movimientos = movimientos;
         this.posicion = posicion;
+        this.paso = true;
     }
 
     public void mover(Direccion direccion) {
@@ -16,7 +18,11 @@ public abstract class Vehiculo {
     }
 
     public void cambiarPosicion(Posicion posicion) {
-        this.posicion = posicion;
+        if (this.paso) {
+            this.posicion = posicion;
+        }
+        this.paso = true;
+
     }
 
     public void aplicarSorpresaDesfavorable() {

@@ -8,7 +8,7 @@ public class Calle {
 
     Calle() {
         //Obstaculo[] obstaculos = {new Pozo(), new Piquete(), new ControlPolicial(), null, null, null};
-        Obstaculo[] obstaculos = {new Pozo()};
+        Obstaculo[] obstaculos = {new Piquete()};
         Sorpresa[] sorpresas = {new Sorpresa(), null, null, null};
         this.obstaculo = obstaculos[rand.nextInt(obstaculos.length)];
         this.sorpresa = sorpresas[rand.nextInt(sorpresas.length)];

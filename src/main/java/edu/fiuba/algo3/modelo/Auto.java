@@ -19,7 +19,7 @@ public class Auto extends Vehiculo{
     }
 
     public void pasarPiquete() {
-
+        this.paso = false;
     }
     
     public Camioneta aplicarSorpresaCambioVehiculo() {

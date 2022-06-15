@@ -23,7 +23,7 @@ public class Camioneta extends Vehiculo{
     }
 
     public void pasarPiquete() {
-        
+        this.paso = false;
     }
 
     public Moto aplicarSorpresaCambioVehiculo() {

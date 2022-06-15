@@ -2,12 +2,16 @@ package edu.fiuba.algo3.modelo;
 
 public abstract class Vehiculo {
 
-    protected int fila;
-    protected int columna;
+    protected Posicion posicion;
     protected double movimientos;
 
-    protected Vehiculo(double movimientos) {
+    protected Vehiculo(double movimientos, Posicion posicion) {
         this.movimientos = movimientos;
+        this.posicion = posicion;
+    }
+
+    public void mover(Direccion direccion) {
+        direccion.mover(this.posicion);
     }
 
     public void aplicarSorpresaDesfavorable() {

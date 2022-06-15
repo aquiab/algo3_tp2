@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 public class Camioneta extends Vehiculo{
 
-    public Camioneta(double movimientos) {
-        super(movimientos);
+    public Camioneta(double movimientos, Posicion posicion) {
+        super(movimientos, posicion);
     }
     protected int cantidadPozos = 0;
 
@@ -19,7 +19,7 @@ public class Camioneta extends Vehiculo{
     }
 
     public Moto aplicarSorpresaCambioVehiculo() {
-        return (new Moto(this.movimientos));
+        return (new Moto(this.movimientos, this.posicion));
     }
 }
 

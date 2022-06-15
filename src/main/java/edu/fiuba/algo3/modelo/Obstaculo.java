@@ -1,8 +1,19 @@
 package edu.fiuba.algo3.modelo;
 
-public interface Obstaculo {
-	public abstract void aplicarObstaculo(Vehiculo vehiculo);
-	public abstract void aplicarObstaculo(Auto auto);
-	public abstract void aplicarObstaculo(Moto moto);
-	public abstract void aplicarObstaculo(Camioneta camioneta);
+public abstract class Obstaculo {
+	public void aplicarObstaculo(Vehiculo vehiculo) {
+
+	}
+
+	public void aplicarObstaculo(Auto auto) {
+
+	}
+
+	public void aplicarObstaculo(Moto moto) {
+
+	}
+
+	public void aplicarObstaculo(Camioneta camioneta) {
+
+	}
 }

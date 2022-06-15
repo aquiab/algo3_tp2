@@ -1,8 +1,18 @@
 package edu.fiuba.algo3.modelo;
 
-public class DireccionArriba implements Direccion {
+public class DireccionArriba extends Direccion {
+
+	DireccionArriba(Mapa mapa) {
+		super(mapa);
+	}
 	
-	public Posicion mover(Posicion posicion) {
-		return new Posicion(posicion.x, posicion.y - 1);
+	public void mover(Posicion posicion, Vehiculo vehiculo) {
+		Calle calle = this.obtenerCalle(posicion);
+		calle.aplicarObstaculo(vehiculo);
+		vehiculo.cambiarPosicion(new Posicion(posicion.x(), posicion.y() - 1));
+	}
+
+	public Calle obtenerCalle(Posicion posicion) {
+		return mapa.obtenerCalleVertical(posicion);
 	}
 }

@@ -18,11 +18,11 @@ public class Mapa {
 		}
 	}
 
-	public Calle obtenerCalle(int x, int y, String direccion) {
-		if (direccion.equals("horizontal")) {
-			return filas.get(x).get(y);
-		} else {
-			return columnas.get(x).get(y);
-		}
+	public Calle obtenerCalleHorizontal(Posicion posicion) {
+		return filas.get(posicion.x()).get(posicion.y());
+	}
+
+	public Calle obtenerCalleVertical(Posicion posicion) {
+		return columnas.get(posicion.x()).get(posicion.y());
 	}
 }

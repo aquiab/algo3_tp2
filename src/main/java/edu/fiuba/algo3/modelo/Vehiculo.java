@@ -1,31 +1,30 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.HashMap;
-
 public abstract class Vehiculo {
 
     protected int fila;
     protected int columna;
-
-    protected HashMap<String, Obshandler> ObsMap;
-
-    protected abstract void initObsMap();
     protected double movimientos;
-    protected Vehiculo() {
-        this.movimientos = 0;
-        this.initObsMap();
+
+    protected Vehiculo(double movimientos) {
+        this.movimientos = movimientos;
     }
 
-    public void pasarObstaculo(String obstaculo) {
-        Obshandler handler = this.ObsMap.get(obstaculo);
-        handler.pasarObstaculo(obstaculo);
+    public void aplicarSorpresaDesfavorable() {
+        this.movimientos *= 1.25;
     }
 
-    interface Obshandler { //pozo policial piquete
-        void pasarObstaculo(String obstaculo);
+    public void aplicarSorpresaFavorable() {
+        this.movimientos *= 0.8;
     }
 
-    public Vehiculo cambiarAlSiguiente() {
-        return null;
+    public abstract Vehiculo aplicarSorpresaCambioVehiculo();
+
+    public void pasarControlPolicial() {
+        this.movimientos += 3;
     }
+
+    public abstract void pasarPiquete();
+
+    public abstract void pasarPozo();
 }

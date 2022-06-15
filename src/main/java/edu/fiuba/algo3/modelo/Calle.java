@@ -2,22 +2,18 @@ package edu.fiuba.algo3.modelo;
 import java.util.Random;
 
 public class Calle {
-    public String obstaculo;
-    public String sorpresa;
-    //Calle(String obs, String sorp) {
-        //obstaculo = obs;
-        //sorpresa = sorp;
-    //}
+    public Obstaculo obstaculo;
+    public Sorpresa sorpresa;
+    Random rand = new Random();
 
     Calle() {
+        Obstaculo[] obstaculos = {new Pozo(), new Piquete(), new ControlPolicial(), null, null, null};
+        Sorpresa[] sorpresas = {new Sorpresa(), null, null, null};
+        this.obstaculo = obstaculos[rand.nextInt(obstaculos.length)];
+        this.sorpresa = sorpresas[rand.nextInt(sorpresas.length)];
+    }
 
-        String[] obstaculos = {"pozo", "piquete", "policial", null};
-        String[] sorpresas = {"favorable", "desfavorable", "vehiculo", null};
-        Random rand1 = new Random();
-        Random rand2 = new Random();
-        int obs = rand1.nextInt(4);
-        int sor = rand2.nextInt(4);
-        this.obstaculo = obstaculos[obs];
-        this.sorpresa = sorpresas[sor];
+    public void aplicarObstaculo(Vehiculo vehiculo) {
+        obstaculo.aplicarObstaculo(vehiculo);
     }
 }

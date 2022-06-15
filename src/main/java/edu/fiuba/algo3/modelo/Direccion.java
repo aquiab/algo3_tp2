@@ -1,5 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
-public interface Direccion {
-	public abstract Posicion mover(Posicion posicion);
+public abstract class Direccion {
+	public abstract void mover(Posicion posicion, Vehiculo vehiculo);
+	public abstract Calle obtenerCalle(Posicion posicion);
+	Mapa mapa;
+	Direccion (Mapa mapa) {
+		this.mapa = mapa;
+	}
 }

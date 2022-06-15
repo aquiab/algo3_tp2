@@ -11,7 +11,11 @@ public abstract class Vehiculo {
     }
 
     public void mover(Direccion direccion) {
-        direccion.mover(this.posicion);
+        direccion.mover(this.posicion, this);
+    }
+
+    public void cambiarPosicion(Posicion posicion) {
+        this.posicion = posicion;
     }
 
     public void aplicarSorpresaDesfavorable() {

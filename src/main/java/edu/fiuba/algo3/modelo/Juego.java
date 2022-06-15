@@ -7,7 +7,6 @@ public class Juego {
 	Vehiculo vehiculo = new Auto(0, new Posicion(0,0));
 	Direccion direccion = null;
 
-	public void mover() {
-		this.vehiculo.mover(direccion);
+	public void mover() {this.vehiculo.mover(direccion);
 	}
 }

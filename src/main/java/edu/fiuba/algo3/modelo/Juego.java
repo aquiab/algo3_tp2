@@ -6,7 +6,7 @@ public class Juego {
 
 	Vehiculo vehiculo = new Vehiculo(0, new Posicion(0, 0));
 
-	public Mapa mapa = Mapa.generarMapa(mapSize);
+	public Mapa mapa = new Mapa(mapSize);
 
 	public void mover(Direccion direccion) {
 		this.vehiculo.mover(direccion);

@@ -4,27 +4,26 @@ import java.util.LinkedList;
 public class Mapa {
 	protected LinkedList<LinkedList<Calle>> callesHorizontales;
 	protected LinkedList<LinkedList<Calle>> callesVerticales;
+	protected Generador generador;
+	protected int cantidadObstaculos;
+	protected int cantidadSorpresas;
 
-	Mapa(int size) {
+	Mapa(int dimension) {
 		callesHorizontales = new LinkedList<>();
 		callesVerticales = new LinkedList<>();
-		for (int i=0; i < size; i++) {
+		cantidadObstaculos = dimension * 2;
+		cantidadSorpresas = dimension * 2;
+		generador = new Generador();
+		for (int i=0; i < dimension; i++) {
 			callesHorizontales.add(new LinkedList<Calle>());
 			callesVerticales.add(new LinkedList<Calle>());
-			for (int j=0; j < size; j++) {
+			for (int j=0; j < dimension; j++) {
 				callesHorizontales.get(i).add(new Calle());
 				callesVerticales.get(i).add(new Calle());
 			}
 		}
-	}
-
-	public static Mapa generarMapa(int dimension) {
-		Mapa mapa = new Mapa(dimension);
-		Generador generador = new Generador();
-
-		mapa.llenarDeObstaculos(dimension, generador);
-		mapa.llenarDeSorpresas(dimension, generador);
-		return mapa;
+		llenarDeObstaculos(dimension, generador);
+		llenarDeSorpresas(dimension, generador);
 	}
 
 	public Calle obtenerCalleHorizontal(Posicion posicion) {
@@ -37,7 +36,8 @@ public class Mapa {
 
 
 	public void llenarDeObstaculos(int dimension, Generador generador) {
-		while (this.cantidadObstaculos(this.callesVerticales) < dimension) {
+		int obstaculosAgregados = 0;
+		while (obstaculosAgregados < cantidadObstaculos) {
 			int[] posiciones = obtenerPosicionesAleatorias(dimension);
 			generador.generarObstaculo(this.obtenerCalleVertical(new Posicion(posiciones[0], posiciones[1])));
 			posiciones = obtenerPosicionesAleatorias(dimension);
@@ -46,7 +46,8 @@ public class Mapa {
 	}
 
 	public void llenarDeSorpresas(int dimension, Generador generador) {
-		while (this.cantidadSorpresas(this.callesVerticales) < dimension) {
+		int sorpresasAgregadas = 0;
+		while (sorpresasAgregadas < cantidadSorpresas) {
 			int[] posiciones = obtenerPosicionesAleatorias(dimension);
 			generador.generarSorpresa(this.obtenerCalleVertical(new Posicion(posiciones[0], posiciones[1])));
 			posiciones = obtenerPosicionesAleatorias(dimension);
@@ -61,43 +62,7 @@ public class Mapa {
 		return res;
 	}
 
-
-
-
-	//-----------------
-	public int cantidadObstaculos(LinkedList<LinkedList<Calle>> lista) {
-		//saber cuantos hay.
-		int cantidad = 0;
-		for (int i = 0; i < lista.size(); i++) {
-			for (int j = 0; j < lista.size(); j++) {
-				if ((lista.get(i).get(j)).obstaculo != null){
-					cantidad++;
-				}
-			}
-		}
-		return cantidad;
-	}
-
-	private int cantidadSorpresas(LinkedList<LinkedList<Calle>> lista) {
-		int cantidad = 0;
-		for (int i = 0; i < lista.size(); i++) {
-			for (int j = 0; j < lista.size(); j++) {
-				if ((lista.get(i).get(j)).sorpresa != null){
-					cantidad++;
-				}
-			}
-		}
-		return cantidad;
-	}
-
-	public void printear(LinkedList<LinkedList<Calle>> lista) {
-		//Borrar
-		for (int i = 0; i < lista.size(); i++) {
-			for (int j = 0; j < lista.size(); j++) {
-				System.out.println("--");
-				System.out.println(lista.get(i).get(j).obstaculo);
-				System.out.println(lista.get(i).get(j).sorpresa);
-			}
-		}
-	}
+	public void insertarEn(int fil, int col, Modificador mod) {
+        obtenerCalleHorizontal(new Posicion(fil, col)).agregarObstaculo(mod);
+    }
 }

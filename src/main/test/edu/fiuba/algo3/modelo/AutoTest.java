@@ -7,7 +7,7 @@ public class AutoTest {
 	public void AutoEncuentraPozoTest() {
 		//Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
 		//arrange
-		Juego juego = new Juego(new Moto(0, new Posicion(0,0)));
+		Juego juego = new Juego();
 		//act
 		juego.mover(new DireccionDerecha(juego.mapa));
 

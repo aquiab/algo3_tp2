@@ -7,12 +7,9 @@ public class DireccionAbajo extends Direccion {
 	}
 	
 	public void mover(Posicion posicion, Vehiculo vehiculo) {
-		Calle calle = this.obtenerCalle(posicion);
+		Posicion posicionNueva = new Posicion(posicion.x(), posicion.y() + 1);
+		Calle calle = mapa.obtenerCalleVertical(posicionNueva);
 		calle.recorrer(vehiculo);
-		vehiculo.cambiarPosicion(new Posicion(posicion.x(), posicion.y() + 1));
-	}
-
-	public Calle obtenerCalle(Posicion posicion) {
-		return mapa.obtenerCalleVertical(posicion);
+		vehiculo.cambiarPosicion(posicionNueva);
 	}
 }

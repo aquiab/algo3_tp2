@@ -37,32 +37,27 @@ public class Mapa {
 
 	public void llenarDeObstaculos(int dimension, Generador generador) {
 		int obstaculosAgregados = 0;
-		while (obstaculosAgregados < cantidadObstaculos) {
-			int[] posiciones = obtenerPosicionesAleatorias(dimension);
-			generador.generarObstaculo(this.obtenerCalleVertical(new Posicion(posiciones[0], posiciones[1])));
-			posiciones = obtenerPosicionesAleatorias(dimension);
-			generador.generarObstaculo(this.obtenerCalleHorizontal(new Posicion(posiciones[0], posiciones[1])));
+		while (obstaculosAgregados < cantidadSorpresas) {
+			Posicion posicion = obtenerPosicionAleatoria(dimension);
+			generador.generarObstaculo(this.obtenerCalleVertical(posicion));
+			posicion = obtenerPosicionAleatoria(dimension);
+			generador.generarObstaculo(this.obtenerCalleHorizontal(posicion));
+			obstaculosAgregados += 2;
 		}
 	}
 
 	public void llenarDeSorpresas(int dimension, Generador generador) {
 		int sorpresasAgregadas = 0;
 		while (sorpresasAgregadas < cantidadSorpresas) {
-			int[] posiciones = obtenerPosicionesAleatorias(dimension);
-			generador.generarSorpresa(this.obtenerCalleVertical(new Posicion(posiciones[0], posiciones[1])));
-			posiciones = obtenerPosicionesAleatorias(dimension);
-			generador.generarSorpresa(this.obtenerCalleHorizontal(new Posicion(posiciones[0], posiciones[1])));
+			Posicion posicion = obtenerPosicionAleatoria(dimension);
+			generador.generarSorpresa(this.obtenerCalleVertical(posicion));
+			posicion = obtenerPosicionAleatoria(dimension);
+			generador.generarSorpresa(this.obtenerCalleHorizontal(posicion));
+			sorpresasAgregadas += 2;
 		}
 	}
 
-	private static int[] obtenerPosicionesAleatorias(int dimension) {
-		int[] res = {0, 0};
-		res[0] = (int)(Math.random()*dimension);
-		res[1] = (int)(Math.random()*dimension);
-		return res;
+	private static Posicion obtenerPosicionAleatoria(int dimension) {
+		return new Posicion((int) Math.random()*dimension, (int) Math.random()*dimension);
 	}
-
-	public void insertarEn(int fil, int col, Modificador mod) {
-        obtenerCalleHorizontal(new Posicion(fil, col)).agregarObstaculo(mod);
-    }
 }

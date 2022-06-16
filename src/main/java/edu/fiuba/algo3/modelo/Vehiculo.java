@@ -1,71 +1,52 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.HashMap;
+public class Vehiculo {
 
-public abstract class Vehiculo {
+    protected Posicion posicion;
+    protected double movimientos;
+    protected boolean paso;
+    protected Estado estado;
 
-    protected int PROBABILIDAD_DE_ENCONTRAR_CONTROL;
-
-    protected Esquina posicion;
-    protected Esquina posicion_siguiente;
-    protected Puntaje movimientos;
-
-    protected Vehiculo() {
-        this.movimientos = new Puntaje();
+    protected Vehiculo(double movimientos, Posicion posicion) {
+        this.movimientos = movimientos;
+        this.posicion = posicion;
+        this.paso = true;
+        this.estado = new Auto(this);
     }
 
-    Sorpresa hacerMovimiento(String direccion) {
-        this.movimientos.aumentarPuntos(1);
-        Tuple nueva_pos = posicion.devolver_esquina_calle(direccion);
-        posicion_siguiente = nueva_pos.devolverEsquina();
-        Calle calle = nueva_pos.devolverCalle();
-        //.......... if (obstaculoActual != null)?
-        Obstaculo obstaculo = calle.devolverObstaculo();
-        try {
-            obstaculo.aplicar(this);
-        } catch (CaminoCortado error) {
-            posicion_siguiente = posicion;
-        } catch (Exception error) {}
-        posicion = posicion_siguiente;
-        return calle.devolverSorpresa();
+    public void mover(Direccion direccion) {
+        movimientos += 1;
+        direccion.mover(posicion, this);
     }
 
-    public double obtenerMovimientos() {
-        return this.movimientos.obtenerCantidadTotalMovimientos();
-    }
-    public Puntaje obtenerPuntos() {
-        return this.movimientos;
-    }
-
-    public void aumentarPuntos(float cantidad) {
-        this.movimientos.aumentarPuntos(cantidad);
+    public void cambiarPosicion(Posicion posicion) {
+        if (paso) {
+            this.posicion = posicion;
+        }
+        paso = true;
     }
 
-
-
-
-    public int probabilidadEncontrarControl() {
-        return PROBABILIDAD_DE_ENCONTRAR_CONTROL;
+    public void aplicarSorpresaDesfavorable() {
+        movimientos *= 1.25;
     }
 
-
-    public void asignarPosicionInicial(Esquina esquina) {
-        this.posicion = esquina;
+    public void aplicarSorpresaFavorable() {
+        movimientos *= 0.8;
     }
 
-    public Esquina obtenerPosicionActual() {
-        return this.posicion;
+    public void pasarPiquete() {
+        estado.pasarPiquete();
     }
-
-    public Vehiculo cambiarAlSiguiente() {
-        return null;
-    }
-
-    public void multiplicarPuntosPor(double multiplicador) {
-        this.movimientos.multiplicarPor(multiplicador);
-    }
-
 
     public void pasarPozo() {
+        estado.pasarPozo();
+    }
+
+    public void pasarControlPolicial() {
+        estado.pasarControlPolicial();
+    }
+
+    public void aplicarSorpresaCambioVehiculo() {
+        estado.aplicarSorpresaCambioVehiculo();
     }
 }

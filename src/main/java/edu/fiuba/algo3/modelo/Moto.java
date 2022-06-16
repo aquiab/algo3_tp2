@@ -1,16 +1,28 @@
 package edu.fiuba.algo3.modelo;
-
-import java.util.HashMap;
-
 import java.util.Random;
 
-public class Moto extends Vehiculo{
-    public Moto(Puntaje puntos) {
-        this.movimientos = puntos;
-        this.PROBABILIDAD_DE_ENCONTRAR_CONTROL = 8;
+public class Moto extends Estado{
+    Random rand = new Random();
+
+    public Moto(Vehiculo vehiculo) {
+        super(vehiculo);
     }
 
-    public Auto cambiarAlSiguiente() {
-        return new Auto(this.movimientos);
+    public void pasarPozo() {
+        vehiculo.movimientos += 3;
+    }
+
+    public void pasarPiquete() {
+        vehiculo.movimientos += 2;
+    }
+
+    public void pasarControlPolicial() {
+        if (rand.nextInt(10) <= 7) {
+            vehiculo.movimientos += 3;
+        }
+    }
+
+    public Auto aplicarSorpresaCambioVehiculo() {
+        return (new Auto(vehiculo));
     }
 }

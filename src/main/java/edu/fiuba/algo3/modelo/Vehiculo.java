@@ -47,6 +47,6 @@ public class Vehiculo {
     }
 
     public void aplicarSorpresaCambioVehiculo() {
-        estado.aplicarSorpresaCambioVehiculo();
+        estado = estado.aplicarSorpresaCambioVehiculo();
     }
 }

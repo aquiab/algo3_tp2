@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-public class Piquete implements Obstaculo {
+public class Piquete implements Modificador {
 
-	public void aplicarObstaculo(Vehiculo vehiculo) {
+	public void aplicar(Vehiculo vehiculo) {
 		vehiculo.pasarPiquete();
 	}
 }

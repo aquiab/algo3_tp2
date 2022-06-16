@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-public class Pozo implements Obstaculo {
+public class Pozo implements Modificador {
 
-	public void aplicarObstaculo(Vehiculo vehiculo) {
+	public void aplicar(Vehiculo vehiculo) {
 		vehiculo.pasarPozo();
 	}
 }

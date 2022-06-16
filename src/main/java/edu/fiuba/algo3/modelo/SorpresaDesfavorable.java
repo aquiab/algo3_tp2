@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-public class SorpresaDesfavorable implements Sorpresa{
-	public void aplicarSorpresa(Vehiculo vehiculo) {
+public class SorpresaDesfavorable implements Modificador {
+	public void aplicar(Vehiculo vehiculo) {
 		vehiculo.aplicarSorpresaDesfavorable();
 	}
 }

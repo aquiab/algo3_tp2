@@ -13,8 +13,8 @@ public abstract class Vehiculo {
     }
 
     public void mover(Direccion direccion) {
-        direccion.mover(this.posicion, this);
         this.movimientos += 1;
+        direccion.mover(this.posicion, this);
     }
 
     public void cambiarPosicion(Posicion posicion) {
@@ -22,7 +22,6 @@ public abstract class Vehiculo {
             this.posicion = posicion;
         }
         this.paso = true;
-
     }
 
     public void aplicarSorpresaDesfavorable() {

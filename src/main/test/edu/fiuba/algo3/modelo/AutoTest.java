@@ -12,7 +12,6 @@ public class AutoTest {
 		juego.mover(new DireccionDerecha(juego.mapa));
 
 		//assert
-		assert(juego.vehiculo.posicion.x() == 1 );
-		assert(juego.vehiculo.posicion.y() == 0 );
+		assert(juego.vehiculo.movimientos == 5);
 	}
 }

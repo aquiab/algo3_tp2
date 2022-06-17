@@ -7,9 +7,8 @@ public class DireccionIzquierda extends Direccion {
 	}
 	
 	public void mover(Posicion posicion, Vehiculo vehiculo) {
-		Posicion posicionNueva = new Posicion(posicion.x() - 1, posicion.y());
 		Calle calle = mapa.obtenerCalleHorizontal(posicion);
+		posicion.modificarX(-1);
 		calle.recorrer(vehiculo);
-		vehiculo.cambiarPosicion(posicionNueva);
 	}
 }

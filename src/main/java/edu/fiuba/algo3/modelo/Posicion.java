@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 public class Posicion {
-	private int x;
-	private int y;
+	public int x;
+	public int y;
 	Posicion(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -12,12 +12,16 @@ public class Posicion {
 		return true;
 	}
 
-	public int x() {
-		return x;
+	public void modificarX(int num) {
+		x += num;
 	}
 
-	public int y() {
-		return y;
+	public void modificarY(int num) {
+		y += num;
+	}
+
+	public void mover(Direccion direccion, Vehiculo vehiculo) {
+		direccion.mover(this, vehiculo);
 	}
 
 }

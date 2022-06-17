@@ -16,14 +16,7 @@ public class Vehiculo {
 
     public void mover(Direccion direccion) {
         movimientos += 1;
-        direccion.mover(posicion, this);
-    }
-
-    public void cambiarPosicion(Posicion posicion) {
-        if (paso) {
-            this.posicion = posicion;
-        }
-        paso = true;
+        posicion.mover(direccion, this);
     }
 
     public void aplicarSorpresaDesfavorable() {

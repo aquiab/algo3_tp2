@@ -27,11 +27,11 @@ public class Mapa {
 	}
 
 	public Calle obtenerCalleHorizontal(Posicion posicion) {
-		return callesHorizontales.get(posicion.x()).get(posicion.y());
+		return callesHorizontales.get(posicion.x).get(posicion.y);
 	}
 
 	public Calle obtenerCalleVertical(Posicion posicion) {
-		return callesVerticales.get(posicion.x()).get(posicion.y());
+		return callesVerticales.get(posicion.x).get(posicion.y);
 	}
 
 

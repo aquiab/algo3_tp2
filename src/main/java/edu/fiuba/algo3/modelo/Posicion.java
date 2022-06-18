@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 public class Posicion {
 	public int x;
 	public int y;
-	boolean bloqueo = false;
+	PasoPosicion paso = new PasoAbierto();
 	Mapa mapa;
 	Posicion(int x, int y, Mapa mapa) {
 		this.x = x;
@@ -16,29 +16,37 @@ public class Posicion {
 		return true;
 	}
 
+	public void modificarPaso(PasoPosicion paso) {
+		this.paso = paso;
+	}
+
+	public void modificarX(int x) {
+		this.x = x;
+	}
+
+	public void modificarY(int y) {
+		this.y = y;
+	}
+
 	public void moverArriba(Vehiculo vehiculo) {
 		Calle calle = mapa.obtenerCalleVertical(x, y);
 		calle.recorrer(vehiculo);
-		if (!bloqueo) {y -= 1;} //todos estos if hay que ver si se sacan con estados
-		bloqueo = false;
+		paso.modificarPosicion(this, x, y-1);
 	}
 	public void moverAbajo(Vehiculo vehiculo) {
 		Calle calle = mapa.obtenerCalleVertical(x, y+1);
 		calle.recorrer(vehiculo);
-		if (!bloqueo) {y += 1;}
-		bloqueo = false;
+		paso.modificarPosicion(this, x, y+1);
 	}
 	public void moverDerecha(Vehiculo vehiculo) {
 		Calle calle = mapa.obtenerCalleHorizontal(x+1, y);
 		calle.recorrer(vehiculo);
-		if (!bloqueo) {x += 1;}
-		bloqueo = false;
+		paso.modificarPosicion(this, x+1, y);
 	}
 	public void moverIzquierda(Vehiculo vehiculo) {
 		Calle calle = mapa.obtenerCalleHorizontal(x, y);
 		calle.recorrer(vehiculo);
-		if (!bloqueo) {x -= 1;}
-		bloqueo = false;
+		paso.modificarPosicion(this, x-1, y);
 	}
 
 }

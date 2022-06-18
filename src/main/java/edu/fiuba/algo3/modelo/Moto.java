@@ -9,16 +9,16 @@ public class Moto extends Estado{
     }
 
     public void pasarPozo() {
-        vehiculo.movimientos += 3;
+        vehiculo.incrementarMovimientos(3);
     }
 
     public void pasarPiquete() {
-        vehiculo.movimientos += 2;
+        vehiculo.incrementarMovimientos(2);
     }
 
     public void pasarControlPolicial() {
         if (rand.nextInt(10) <= 7) {
-            vehiculo.movimientos += 3;
+            vehiculo.incrementarMovimientos(3);
         }
     }
 

@@ -9,7 +9,6 @@ public class Vehiculo {
     protected Vehiculo(double movimientos, Posicion posicion) {
         this.movimientos = movimientos;
         this.posicion = posicion;
-        this.estado = null;
     }
 
     public void mover(Direccion direccion) {
@@ -18,6 +17,10 @@ public class Vehiculo {
     }
     public void aplicarEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public void incrementarMovimientos(int incremento) {
+        movimientos += incremento;
     }
 
     public void aplicarSorpresaDesfavorable() {
@@ -44,6 +47,6 @@ public class Vehiculo {
         estado = estado.aplicarSorpresaCambioVehiculo();
     }
 
-    public void aplicarVacio() {estado.pasarVacio();};
+    public void aplicarVacio() {estado.pasarVacio();}
 }
 

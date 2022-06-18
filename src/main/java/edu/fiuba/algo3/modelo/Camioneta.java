@@ -12,18 +12,18 @@ public class Camioneta extends Estado{
     public void pasarPozo() {
         this.cantidadPozos++;
         if (this.cantidadPozos % 3 == 0) {
-            vehiculo.movimientos += 2;
+            vehiculo.incrementarMovimientos(2);;
         }
     }
 
     public void pasarControlPolicial() {
         if (rand.nextInt(10) <= 2) {
-            vehiculo.movimientos += 3;
+            vehiculo.incrementarMovimientos(3);
         }
     }
 
     public void pasarPiquete() {
-        vehiculo.posicion.bloqueo = true;
+        vehiculo.posicion.modificarPaso(new PasoBloqueado());
     }
 
     public Moto aplicarSorpresaCambioVehiculo() {

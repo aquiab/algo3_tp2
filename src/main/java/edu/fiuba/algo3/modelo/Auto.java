@@ -9,17 +9,17 @@ public class Auto extends Estado{
     }
 
     public void pasarPozo() {
-        vehiculo.movimientos += 3;
+        vehiculo.incrementarMovimientos(3);
     }
 
     public void pasarControlPolicial() {
         if (rand.nextInt(10) <= 4) {
-            vehiculo.movimientos += 3;
+            vehiculo.incrementarMovimientos(3);
         }
     }
 
     public void pasarPiquete() {
-        vehiculo.posicion.bloqueo = true;
+        vehiculo.posicion.modificarPaso(new PasoBloqueado());
     }
 
     public Camioneta aplicarSorpresaCambioVehiculo() {

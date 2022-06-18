@@ -17,25 +17,25 @@ public class Posicion {
 	}
 
 	public void moverArriba(Vehiculo vehiculo) {
-		Calle calle = this.mapa.obtenerCalleVertical(x, y);
+		Calle calle = mapa.obtenerCalleVertical(x, y);
 		calle.recorrer(vehiculo);
-		if (!bloqueo) {y -= 1;}
+		if (!bloqueo) {y -= 1;} //todos estos if hay que ver si se sacan con estados
 		bloqueo = false;
 	}
 	public void moverAbajo(Vehiculo vehiculo) {
-		Calle calle = this.mapa.obtenerCalleVertical(x, y+1);
+		Calle calle = mapa.obtenerCalleVertical(x, y+1);
 		calle.recorrer(vehiculo);
 		if (!bloqueo) {y += 1;}
 		bloqueo = false;
 	}
 	public void moverDerecha(Vehiculo vehiculo) {
-		Calle calle = this.mapa.obtenerCalleHorizontal(x+1, y);
+		Calle calle = mapa.obtenerCalleHorizontal(x+1, y);
 		calle.recorrer(vehiculo);
 		if (!bloqueo) {x += 1;}
 		bloqueo = false;
 	}
 	public void moverIzquierda(Vehiculo vehiculo) {
-		Calle calle = this.mapa.obtenerCalleHorizontal(x, y);
+		Calle calle = mapa.obtenerCalleHorizontal(x, y);
 		calle.recorrer(vehiculo);
 		if (!bloqueo) {x -= 1;}
 		bloqueo = false;

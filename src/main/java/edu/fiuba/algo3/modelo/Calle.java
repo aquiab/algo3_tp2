@@ -1,16 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
 public class Calle {
-    public Modificador obstaculo;
-    public Modificador sorpresa;
+    public Modificador obstaculo = new Vacio();
+    public Modificador sorpresa = new Vacio();
 
     public void recorrer(Vehiculo vehiculo) {
-        if (obstaculo != null) {
-            obstaculo.aplicar(vehiculo);
-        }
-        if (sorpresa != null) {
-            sorpresa.aplicar(vehiculo);
-        }
+        obstaculo.aplicar(vehiculo);
+        sorpresa.aplicar(vehiculo);
     }
 
     public void agregarObstaculo(Modificador obstaculo) {

@@ -14,5 +14,9 @@ public abstract class Estado {
     public abstract void pasarPiquete();
 
     public abstract void pasarPozo();
+
+    public void pasarVacio() {
+        vehiculo.movimientos += 0; //no hace nada
+    }
 }
 

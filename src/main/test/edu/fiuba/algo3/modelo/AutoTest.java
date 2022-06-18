@@ -9,7 +9,7 @@ public class AutoTest {
 		Juego juego = new Juego();
 		juego.aplicarEstado(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(null);
+		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new Vacio());
 		//act
 		juego.mover(new DireccionDerecha());
 
@@ -22,7 +22,7 @@ public class AutoTest {
 		Juego juego = new Juego();
 		juego.aplicarEstado(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Piquete());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(null);
+		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new Vacio());
 		//act
 		juego.mover(new DireccionDerecha());
 		//assert
@@ -36,7 +36,7 @@ public class AutoTest {
 		Juego juego = new Juego();
 		juego.aplicarEstado(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new ControlPolicial());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(null);
+		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new Vacio());
 		//act
 		juego.mover(new DireccionDerecha());
 
@@ -50,8 +50,8 @@ public class AutoTest {
 		juego.aplicarEstado(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
 		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new Piquete());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(null);
-		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(null);
+		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new Vacio());
+		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new Vacio());
 		//act
 		juego.mover(new DireccionDerecha());
 		juego.mover(new DireccionDerecha());
@@ -67,7 +67,7 @@ public class AutoTest {
 		Juego juego = new Juego();
 		juego.aplicarEstado(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaVehiculo());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(null);
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Vacio());
 		//act
 		juego.mover(new DireccionDerecha());
 		//assert
@@ -82,7 +82,7 @@ public class AutoTest {
 		Juego juego = new Juego();
 		juego.aplicarEstado(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaFavorable());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(null);
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Vacio());
 		//act
 		juego.mover(new DireccionDerecha());
 		//assert
@@ -97,7 +97,7 @@ public class AutoTest {
 		Juego juego = new Juego();
 		juego.aplicarEstado(new Auto(juego.vehiculo));
 		juego.mapa.callesVerticales.get(0).get(1).agregarSorpresa(new SorpresaDesfavorable());
-		juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(null);
+		juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(new Vacio());
 		//act
 		juego.mover(new DireccionAbajo());
 		//assert
@@ -114,9 +114,9 @@ public class AutoTest {
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaVehiculo());
 		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new SorpresaVehiculo());
 		juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(new SorpresaVehiculo());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(null);
-		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(null);
-		juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(null);
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Vacio());
+		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new Vacio());
+		juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(new Vacio());
 		//act
 		juego.mover(new DireccionDerecha());
 		juego.mover(new DireccionDerecha());
@@ -134,8 +134,8 @@ public class AutoTest {
 		juego.aplicarEstado(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaVehiculo());
 		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new SorpresaVehiculo());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(null);
-		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(null);
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Vacio());
+		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new Vacio());
 		//act
 		juego.mover(new DireccionDerecha());
 		juego.mover(new DireccionDerecha());

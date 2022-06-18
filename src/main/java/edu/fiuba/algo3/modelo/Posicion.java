@@ -17,13 +17,13 @@ public class Posicion {
 	}
 
 	public void moverArriba(Vehiculo vehiculo) {
-		Calle calle = vehiculo.posicion.mapa.obtenerCalleVertical(x, y);
+		Calle calle = this.mapa.obtenerCalleVertical(x, y);
 		calle.recorrer(vehiculo);
 		if (!bloqueo) {y -= 1;}
 		bloqueo = false;
 	}
 	public void moverAbajo(Vehiculo vehiculo) {
-		Calle calle = vehiculo.posicion.mapa.obtenerCalleVertical(x, y+1);
+		Calle calle = this.mapa.obtenerCalleVertical(x, y+1);
 		calle.recorrer(vehiculo);
 		if (!bloqueo) {y += 1;}
 		bloqueo = false;
@@ -35,7 +35,7 @@ public class Posicion {
 		bloqueo = false;
 	}
 	public void moverIzquierda(Vehiculo vehiculo) {
-		Calle calle = vehiculo.posicion.mapa.obtenerCalleHorizontal(x, y);
+		Calle calle = this.mapa.obtenerCalleHorizontal(x, y);
 		calle.recorrer(vehiculo);
 		if (!bloqueo) {x -= 1;}
 		bloqueo = false;

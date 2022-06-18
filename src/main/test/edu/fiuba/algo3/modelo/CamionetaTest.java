@@ -17,6 +17,28 @@ public class CamionetaTest {
         assert(juego.vehiculo.movimientos == 1);
     }
     @Test
+    public void CamionetaEncuentra3PozosTest() {
+        //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
+        //arrange
+        Juego juego = new Juego();
+        juego.aplicarEstado(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new Pozo());
+        juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(new Pozo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(null);
+        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(null);
+        juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(null);
+        //act
+        juego.mover(new DireccionDerecha());
+        juego.mover(new DireccionDerecha());
+        juego.mover(new DireccionDerecha());
+
+        //assert
+        assert(juego.vehiculo.posicion.x == 3);
+        assert(juego.vehiculo.posicion.y == 0);
+        assert(juego.vehiculo.movimientos == 5);
+    }
+    @Test
     public void CamionetaEncuentraPiqueteTest() {
         //arrange
         Juego juego = new Juego();
@@ -29,6 +51,19 @@ public class CamionetaTest {
         assert(juego.vehiculo.posicion.x == 0);
         assert(juego.vehiculo.posicion.y == 0);
         assert(juego.vehiculo.movimientos == 1);
+    }
+    @Test
+    public void CamionetaEncuentraPolicialTest() {
+        //arrange
+        Juego juego = new Juego();
+        juego.aplicarEstado(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new ControlPolicial());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(null);
+        //act
+        juego.mover(new DireccionDerecha());
+
+        //assert
+        assert(juego.vehiculo.movimientos == 4 || juego.vehiculo.movimientos == 1);
     }
     @Test
     public void CamionetaEncuentraPiqueteYPozoTest() {

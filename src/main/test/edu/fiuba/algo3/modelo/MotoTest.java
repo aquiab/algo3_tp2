@@ -31,6 +31,19 @@ public class MotoTest {
         assert(juego.vehiculo.movimientos == 3);
     }
     @Test
+    public void MotoEncuentraPolicialTest() {
+        //arrange
+        Juego juego = new Juego();
+        juego.aplicarEstado(new Moto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new ControlPolicial());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(null);
+        //act
+        juego.mover(new DireccionDerecha());
+
+        //assert
+        assert(juego.vehiculo.movimientos == 4 || juego.vehiculo.movimientos == 1);
+    }
+    @Test
     public void MotoEncuentraPiqueteYPozoTest() {
         //arrange
         Juego juego = new Juego();

@@ -31,6 +31,19 @@ public class AutoTest {
 		assert(juego.vehiculo.movimientos == 1);
 	}
 	@Test
+	public void AutoEncuentraPolicialTest() {
+		//arrange
+		Juego juego = new Juego();
+		juego.aplicarEstado(new Auto(juego.vehiculo));
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new ControlPolicial());
+		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(null);
+		//act
+		juego.mover(new DireccionDerecha());
+
+		//assert
+		assert(juego.vehiculo.movimientos == 4 || juego.vehiculo.movimientos == 1);
+	}
+	@Test
 	public void AutoEncuentraPiqueteYPozoTest() {
 		//arrange
 		Juego juego = new Juego();

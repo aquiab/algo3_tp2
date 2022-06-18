@@ -8,10 +8,10 @@ public class Juego {
 	Vehiculo vehiculo = new Vehiculo(0, new Posicion(0, 0, this.mapa));
 
 	public void mover(Direccion direccion) {
-		this.vehiculo.mover(direccion);
+		vehiculo.mover(direccion);
 	}
 
 	public void aplicarEstado(Estado estado) {
-		this.vehiculo.aplicarEstado(estado);
+		vehiculo.aplicarEstado(estado);
 	}
 }

@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 public class Posicion {
 	public int x;
 	public int y;
-	PasoPosicion paso = new PasoAbierto();
+	Paso paso = new PasoAbierto();
 	Mapa mapa;
 	Posicion(int x, int y, Mapa mapa) {
 		this.x = x;
@@ -16,7 +16,7 @@ public class Posicion {
 		return true;
 	}
 
-	public void modificarPaso(PasoPosicion paso) {
+	public void modificarPaso(Paso paso) {
 		this.paso = paso;
 	}
 
@@ -46,7 +46,7 @@ public class Posicion {
 	public void moverIzquierda(Vehiculo vehiculo) {
 		Calle calle = mapa.obtenerCalleHorizontal(x, y);
 		calle.recorrer(vehiculo);
-		paso.modificarPosicion(this, x-1, y);
+		paso.modificarPosicion(this, x, y+1);
 	}
 
 }

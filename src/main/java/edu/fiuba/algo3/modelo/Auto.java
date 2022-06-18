@@ -19,9 +19,9 @@ public class Auto extends Estado{
     }
 
     public void pasarPiquete() {
-        vehiculo.paso = false;
+        vehiculo.posicion.bloqueo = true;
     }
-    
+
     public Camioneta aplicarSorpresaCambioVehiculo() {
         return (new Camioneta(vehiculo));
     }

@@ -26,12 +26,12 @@ public class Mapa {
 		llenarDeSorpresas(dimension, generador);
 	}
 
-	public Calle obtenerCalleHorizontal(Posicion posicion) {
-		return callesHorizontales.get(posicion.x).get(posicion.y);
+	public Calle obtenerCalleHorizontal(int x, int y) {
+		return callesHorizontales.get(x).get(y);
 	}
 
-	public Calle obtenerCalleVertical(Posicion posicion) {
-		return callesVerticales.get(posicion.x).get(posicion.y);
+	public Calle obtenerCalleVertical(int x, int y) {
+		return callesVerticales.get(x).get(y);
 	}
 
 
@@ -39,9 +39,9 @@ public class Mapa {
 		int obstaculosAgregados = 0;
 		while (obstaculosAgregados < cantidadSorpresas) {
 			Posicion posicion = obtenerPosicionAleatoria(dimension);
-			generador.generarObstaculo(this.obtenerCalleVertical(posicion));
+			generador.generarObstaculo(this.obtenerCalleVertical(posicion.x, posicion.y));
 			posicion = obtenerPosicionAleatoria(dimension);
-			generador.generarObstaculo(this.obtenerCalleHorizontal(posicion));
+			generador.generarObstaculo(this.obtenerCalleHorizontal(posicion.x, posicion.y));
 			obstaculosAgregados += 2;
 		}
 	}
@@ -50,14 +50,14 @@ public class Mapa {
 		int sorpresasAgregadas = 0;
 		while (sorpresasAgregadas < cantidadSorpresas) {
 			Posicion posicion = obtenerPosicionAleatoria(dimension);
-			generador.generarSorpresa(this.obtenerCalleVertical(posicion));
+			generador.generarSorpresa(this.obtenerCalleVertical(posicion.x,posicion.y));
 			posicion = obtenerPosicionAleatoria(dimension);
-			generador.generarSorpresa(this.obtenerCalleHorizontal(posicion));
+			generador.generarSorpresa(this.obtenerCalleHorizontal(posicion.x,posicion.y));
 			sorpresasAgregadas += 2;
 		}
 	}
 
-	private static Posicion obtenerPosicionAleatoria(int dimension) {
-		return new Posicion((int) Math.random()*dimension, (int) Math.random()*dimension);
+	private Posicion obtenerPosicionAleatoria(int dimension) {
+		return new Posicion((int) (Math.random() * dimension), (int) (Math.random() * dimension), this);
 	}
 }

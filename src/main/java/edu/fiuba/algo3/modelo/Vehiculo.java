@@ -4,19 +4,20 @@ public class Vehiculo {
 
     protected Posicion posicion;
     protected double movimientos;
-    protected boolean paso;
     protected Estado estado;
 
     protected Vehiculo(double movimientos, Posicion posicion) {
         this.movimientos = movimientos;
         this.posicion = posicion;
-        this.paso = true;
-        this.estado = new Auto(this);
+        this.estado = null;
     }
 
     public void mover(Direccion direccion) {
         movimientos += 1;
-        posicion.mover(direccion, this);
+        direccion.mover(this.posicion, this);
+    }
+    public void aplicarEstado(Estado estado) {
+        this.estado = estado;
     }
 
     public void aplicarSorpresaDesfavorable() {
@@ -43,3 +44,4 @@ public class Vehiculo {
         estado = estado.aplicarSorpresaCambioVehiculo();
     }
 }
+

@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
 public abstract class Estado {
-	Vehiculo vehiculo;
+    Vehiculo vehiculo;
 
-	Estado(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
-	}
+    Estado(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
 
     public abstract Estado aplicarSorpresaCambioVehiculo();
 
@@ -15,3 +15,4 @@ public abstract class Estado {
 
     public abstract void pasarPozo();
 }
+

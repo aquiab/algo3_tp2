@@ -23,7 +23,7 @@ public class Camioneta extends Estado{
     }
 
     public void pasarPiquete() {
-        vehiculo.paso = false;
+        vehiculo.posicion.bloqueo = true;
     }
 
     public Moto aplicarSorpresaCambioVehiculo() {

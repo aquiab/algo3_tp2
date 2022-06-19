@@ -7,8 +7,10 @@ public class Mapa {
 	protected Generador generador;
 	protected int cantidadObstaculos;
 	protected int cantidadSorpresas;
+	protected int dimension;
 
 	Mapa(int dimension) {
+		this.dimension = dimension;
 		callesHorizontales = new LinkedList<>();
 		callesVerticales = new LinkedList<>();
 		cantidadObstaculos = dimension * 2;
@@ -34,6 +36,9 @@ public class Mapa {
 		return callesVerticales.get(x).get(y);
 	}
 
+	public int dimension() {
+		return dimension;
+	}
 
 	public void llenarDeObstaculos(int dimension, Generador generador) {
 		int obstaculosAgregados = 0;

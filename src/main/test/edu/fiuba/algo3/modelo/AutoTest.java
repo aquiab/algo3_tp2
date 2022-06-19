@@ -92,7 +92,7 @@ public class AutoTest {
 		assert(juego.vehiculo.estado.getClass() == Auto.class);
 	}
 	@Test
-	public void AutoEncuentraSorpresaDesavorable() {
+	public void AutoEncuentraSorpresaDesfavorable() {
 		//arrange
 		Juego juego = new Juego();
 		juego.aplicarEstado(new Auto(juego.vehiculo));
@@ -144,5 +144,19 @@ public class AutoTest {
 		assert(juego.vehiculo.posicion.y == 0);
 		assert(juego.vehiculo.movimientos == 2);
 		assert(juego.vehiculo.estado.getClass() == Moto.class);
+	}
+	@Test
+	public void AutoVisitaCalleEnLimiteDelMapaYSigueEnElMismoLugar() {
+		//arrange
+		Juego juego = new Juego();
+		juego.aplicarEstado(new Auto(juego.vehiculo));
+		juego.mapa.callesHorizontales.get(0).get(0).agregarSorpresa(new SorpresaDesfavorable());
+		juego.mapa.callesHorizontales.get(0).get(0).agregarObstaculo(new Vacio());
+		//act
+		juego.mover(new DireccionIzquierda());
+		//assert
+		assert(juego.vehiculo.posicion.x == 0);
+		assert(juego.vehiculo.posicion.y == 0);
+		assert(juego.vehiculo.movimientos == 1.25);
 	}
 }

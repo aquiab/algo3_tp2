@@ -8,8 +8,7 @@ import java.util.LinkedList;
 public class Mapa {
 	protected LinkedList<LinkedList<Calle>> callesHorizontales;
 	protected LinkedList<LinkedList<Calle>> callesVerticales;
-	protected int cantidadObstaculos;
-	protected int cantidadSorpresas;
+	private int cantidadModificadoresIniciales;
 	protected int dimension;
 
 	private Obstaculos OBSTACULOS = new Obstaculos();
@@ -20,8 +19,7 @@ public class Mapa {
 		this.dimension = dimension;
 		callesHorizontales = new LinkedList<>();
 		callesVerticales = new LinkedList<>();
-		cantidadObstaculos = dimension * 2;
-		cantidadSorpresas = dimension * 2;
+		cantidadModificadoresIniciales = dimension * 2;
 		for (int i=0; i < dimension; i++) {
 			callesHorizontales.add(new LinkedList<Calle>());
 			callesVerticales.add(new LinkedList<Calle>());
@@ -30,17 +28,17 @@ public class Mapa {
 				callesVerticales.get(i).add(new Calle());
 			}
 		}
-		llenarDeObstaculos();
-		llenarDeSorpresas();
-		rellenarResto();
+		agregarObstaculos(cantidadModificadoresIniciales);
+		agregarSorpresas(cantidadModificadoresIniciales);
+		liberarElRestoDelMapa();
 	}
 
-	private void rellenarResto() {
-		for (int i=0; i < dimension; i++ ){
-			callesHorizontales.get(i).stream().filter(s -> s.obstaculo == null).forEach(s -> s.agregarObstaculo(VACIO));
-			callesVerticales.get(i).stream().filter(s -> s.obstaculo == null).forEach(s -> s.agregarObstaculo(VACIO));
-			callesHorizontales.get(i).stream().filter(s -> s.sorpresa == null).forEach(s -> s.agregarSorpresa(VACIO));
-			callesVerticales.get(i).stream().filter(s -> s.sorpresa == null).forEach(s -> s.agregarSorpresa(VACIO));
+	private void liberarElRestoDelMapa() {
+		for (int i=0; i < dimension; i++){
+			callesHorizontales.get(i).stream().filter(calle -> calle.obstaculo == null).forEach(calle -> calle.agregarObstaculo(VACIO));
+			callesVerticales.get(i).stream().filter(calle -> calle.obstaculo == null).forEach(calle -> calle.agregarObstaculo(VACIO));
+			callesHorizontales.get(i).stream().filter(calle -> calle.sorpresa == null).forEach(calle -> calle.agregarSorpresa(VACIO));
+			callesVerticales.get(i).stream().filter(calle -> calle.sorpresa == null).forEach(calle -> calle.agregarSorpresa(VACIO));
 		}
 	}
 
@@ -56,9 +54,9 @@ public class Mapa {
 		return dimension;
 	}
 
-	public void llenarDeObstaculos() {
+	public void agregarObstaculos(Integer cantidadObstaculos) {
 		int obstaculosAgregados = 0;
-		while (obstaculosAgregados < cantidadSorpresas) {
+		while (obstaculosAgregados < cantidadObstaculos) {
 			Posicion posicion = obtenerPosicionAleatoria(dimension);
 			this.obtenerCalleVertical(posicion.x, posicion.y).agregarObstaculo(this.OBSTACULOS.devolverObstaculo());
 			posicion = obtenerPosicionAleatoria(dimension);
@@ -67,7 +65,7 @@ public class Mapa {
 		}
 	}
 
-	public void llenarDeSorpresas() {
+	public void agregarSorpresas(Integer cantidadSorpresas) {
 		int sorpresasAgregadas = 0;
 		while (sorpresasAgregadas < cantidadSorpresas) {
 			Posicion posicion = obtenerPosicionAleatoria(dimension);

@@ -19,7 +19,9 @@ public class Moto extends Estado{
     public void pasarControlPolicial() {
         if (rand.nextInt(10) <= 7) {
             vehiculo.incrementarMovimientos(3);
+            return;
         }
+        vehiculo.incrementarMovimientos(1);
     }
 
     public Auto aplicarSorpresaCambioVehiculo() {

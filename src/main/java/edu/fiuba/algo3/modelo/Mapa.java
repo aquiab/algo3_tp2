@@ -1,13 +1,21 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.modificadores.Obstaculos;
+import edu.fiuba.algo3.modelo.modificadores.Sorpresas;
+import edu.fiuba.algo3.modelo.modificadores.Vacio;
+
 import java.util.LinkedList;
 
 public class Mapa {
 	protected LinkedList<LinkedList<Calle>> callesHorizontales;
 	protected LinkedList<LinkedList<Calle>> callesVerticales;
-	protected Generador generador;
+	//protected Generador generador;
 	protected int cantidadObstaculos;
 	protected int cantidadSorpresas;
 	protected int dimension;
+
+	private Obstaculos OBSTACULOS = new Obstaculos();
+	private Sorpresas SORPRESAS = new Sorpresas();
+	private Vacio VACIO = new Vacio();
 
 	Mapa(int dimension) {
 		this.dimension = dimension;
@@ -15,7 +23,6 @@ public class Mapa {
 		callesVerticales = new LinkedList<>();
 		cantidadObstaculos = dimension * 2;
 		cantidadSorpresas = dimension * 2;
-		generador = new Generador();
 		for (int i=0; i < dimension; i++) {
 			callesHorizontales.add(new LinkedList<Calle>());
 			callesVerticales.add(new LinkedList<Calle>());
@@ -24,8 +31,29 @@ public class Mapa {
 				callesVerticales.get(i).add(new Calle());
 			}
 		}
-		llenarDeObstaculos(dimension, generador);
-		llenarDeSorpresas(dimension, generador);
+		llenarDeObstaculos();
+		llenarDeSorpresas();
+		rellenarResto();
+	}
+
+	private void rellenarResto() {
+		for (int i=0; i < dimension; i++ ){
+			callesHorizontales.get(i).stream().filter(s -> s.obstaculo == null).forEach(s -> s.agregarObstaculo(VACIO));
+			callesVerticales.get(i).stream().filter(s -> s.obstaculo == null).forEach(s -> s.agregarObstaculo(VACIO));
+			callesHorizontales.get(i).stream().filter(s -> s.sorpresa == null).forEach(s -> s.agregarSorpresa(VACIO));
+			callesVerticales.get(i).stream().filter(s -> s.sorpresa == null).forEach(s -> s.agregarSorpresa(VACIO));
+		}
+	}
+
+	private void printearMapa(LinkedList<LinkedList<Calle>> lista) {
+		//BORRAR
+		for (int i=0; i < lista.size(); i++ ){
+			for (int j=0; j < lista.size(); j++) {
+				System.out.println("--lista[i][j]---"+i+" "+j+"--");
+				System.out.println(lista.get(i).get(j).obstaculo);
+				System.out.println(lista.get(i).get(j).sorpresa);
+			}
+		}
 	}
 
 	public Calle obtenerCalleHorizontal(int x, int y) {
@@ -40,24 +68,24 @@ public class Mapa {
 		return dimension;
 	}
 
-	public void llenarDeObstaculos(int dimension, Generador generador) {
+	public void llenarDeObstaculos() {
 		int obstaculosAgregados = 0;
 		while (obstaculosAgregados < cantidadSorpresas) {
 			Posicion posicion = obtenerPosicionAleatoria(dimension);
-			generador.generarObstaculo(this.obtenerCalleVertical(posicion.x, posicion.y));
+			this.obtenerCalleVertical(posicion.x, posicion.y).agregarObstaculo(this.OBSTACULOS.devolverObstaculo());
 			posicion = obtenerPosicionAleatoria(dimension);
-			generador.generarObstaculo(this.obtenerCalleHorizontal(posicion.x, posicion.y));
+			this.obtenerCalleHorizontal(posicion.x, posicion.y).agregarObstaculo(this.OBSTACULOS.devolverObstaculo());
 			obstaculosAgregados += 2;
 		}
 	}
 
-	public void llenarDeSorpresas(int dimension, Generador generador) {
+	public void llenarDeSorpresas() {
 		int sorpresasAgregadas = 0;
 		while (sorpresasAgregadas < cantidadSorpresas) {
 			Posicion posicion = obtenerPosicionAleatoria(dimension);
-			generador.generarSorpresa(this.obtenerCalleVertical(posicion.x,posicion.y));
+			this.obtenerCalleHorizontal(posicion.x, posicion.y).agregarSorpresa(this.SORPRESAS.devolverSorpresa());
 			posicion = obtenerPosicionAleatoria(dimension);
-			generador.generarSorpresa(this.obtenerCalleHorizontal(posicion.x,posicion.y));
+			this.obtenerCalleVertical(posicion.x, posicion.y).agregarSorpresa(this.SORPRESAS.devolverSorpresa());
 			sorpresasAgregadas += 2;
 		}
 	}

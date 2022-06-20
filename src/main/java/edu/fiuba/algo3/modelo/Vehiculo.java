@@ -12,7 +12,8 @@ public class Vehiculo {
     }
 
     public void mover(Direccion direccion) {
-        movimientos += 1;
+        //Si soy penalizado por un pozo solo me dan 3 de penalización.
+        //movimientos += 0;
         direccion.mover(this.posicion, this);
     }
     public void aplicarEstado(Estado estado) {
@@ -47,6 +48,8 @@ public class Vehiculo {
         estado = estado.aplicarSorpresaCambioVehiculo();
     }
 
-    public void aplicarVacio() {estado.pasarVacio();}
+    public void aplicarVacio() {
+        estado.pasarVacio();
+    }
 }
 

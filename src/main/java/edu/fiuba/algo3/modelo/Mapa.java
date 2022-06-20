@@ -45,17 +45,6 @@ public class Mapa {
 		}
 	}
 
-	private void printearMapa(LinkedList<LinkedList<Calle>> lista) {
-		//BORRAR
-		for (int i=0; i < lista.size(); i++ ){
-			for (int j=0; j < lista.size(); j++) {
-				System.out.println("--lista[i][j]---"+i+" "+j+"--");
-				System.out.println(lista.get(i).get(j).obstaculo);
-				System.out.println(lista.get(i).get(j).sorpresa);
-			}
-		}
-	}
-
 	public Calle obtenerCalleHorizontal(int x, int y) {
 		return callesHorizontales.get(x).get(y);
 	}

@@ -9,7 +9,6 @@ public class Calle {
     public Sorpresa sorpresa = null;
 
     public void recorrer(Vehiculo vehiculo) {
-        if (obstaculo.getClass() == Vacio.class) {vehiculo.incrementarMovimientos(1);}
         obstaculo.aplicar(vehiculo);
         sorpresa.aplicar(vehiculo);
     }

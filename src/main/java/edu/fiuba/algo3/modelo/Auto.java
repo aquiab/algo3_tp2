@@ -6,23 +6,23 @@ public class Auto extends Estado{
 
     public Auto(Vehiculo vehiculo) {
         super(vehiculo);
+        PENALIZACION_POLICIAL = 3;
+        PENALIZACION_POZO = 3;
+        PROBABILIDAD_CONTROL_POLICIAL = 5;
     }
 
     public void pasarPozo() {
-        vehiculo.incrementarMovimientos(3);
+        vehiculo.incrementarMovimientos(PENALIZACION_POZO);
     }
 
     public void pasarControlPolicial() {
-        if (rand.nextInt(10) <= 4) {
-            vehiculo.incrementarMovimientos(3);
-            return;
+        if (rand.nextInt(10) <= PROBABILIDAD_CONTROL_POLICIAL) {
+            vehiculo.incrementarMovimientos(PENALIZACION_POLICIAL);
         }
-        vehiculo.incrementarMovimientos(1);
     }
 
     public void pasarPiquete() {
         vehiculo.posicion.modificarPaso(new PasoBloqueado());
-        vehiculo.incrementarMovimientos(1);
     }
 
     public Camioneta aplicarSorpresaCambioVehiculo() {

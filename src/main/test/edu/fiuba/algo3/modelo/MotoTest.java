@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.modificadores.*;
 import org.junit.jupiter.api.Test;
+import edu.fiuba.algo3.modelo.modificadores.*;
 
 public class MotoTest {
     @Test
@@ -15,7 +15,7 @@ public class MotoTest {
         juego.mover(new DireccionDerecha());
 
         //assert
-        assert(juego.vehiculo.movimientos == 3);
+        assert(juego.vehiculo.movimientos == 4);
     }
     @Test
     public void MotoEncuentraPiqueteTest() {
@@ -29,7 +29,7 @@ public class MotoTest {
         //assert
         assert(juego.vehiculo.posicion.x == 1);
         assert(juego.vehiculo.posicion.y == 0);
-        assert(juego.vehiculo.movimientos == 2);
+        assert(juego.vehiculo.movimientos == 3);
     }
     @Test
     public void MotoEncuentraPolicialTest() {
@@ -42,7 +42,7 @@ public class MotoTest {
         juego.mover(new DireccionDerecha());
 
         //assert
-        assert(juego.vehiculo.movimientos == 3 || juego.vehiculo.movimientos == 1);
+        assert(juego.vehiculo.movimientos == 4 || juego.vehiculo.movimientos == 1);
     }
     @Test
     public void MotoEncuentraPiqueteYPozoTest() {
@@ -59,7 +59,7 @@ public class MotoTest {
         //assert
         assert(juego.vehiculo.posicion.x == 2);
         assert(juego.vehiculo.posicion.y == 0);
-        assert(juego.vehiculo.movimientos == 5);
+        assert(juego.vehiculo.movimientos == 7);
     }
 
     @Test

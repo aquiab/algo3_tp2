@@ -8,7 +8,6 @@ import java.util.LinkedList;
 public class Mapa {
 	protected LinkedList<LinkedList<Calle>> callesHorizontales;
 	protected LinkedList<LinkedList<Calle>> callesVerticales;
-	//protected Generador generador;
 	protected int cantidadObstaculos;
 	protected int cantidadSorpresas;
 	protected int dimension;

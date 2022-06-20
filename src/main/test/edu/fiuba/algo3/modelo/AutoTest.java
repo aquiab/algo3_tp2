@@ -15,7 +15,7 @@ public class AutoTest {
 		juego.mover(new DireccionDerecha());
 
 		//assert
-		assert(juego.vehiculo.movimientos == 3);
+		assert(juego.vehiculo.movimientos == 4);
 	}
 	@Test
 	public void AutoEncuentraPiqueteTest() {
@@ -42,7 +42,7 @@ public class AutoTest {
 		juego.mover(new DireccionDerecha());
 
 		//assert
-		assert(juego.vehiculo.movimientos == 3 || juego.vehiculo.movimientos == 1);
+		assert(juego.vehiculo.movimientos == 4 || juego.vehiculo.movimientos == 1);
 	}
 	@Test
 	public void AutoEncuentraPiqueteYPozoTest() {
@@ -59,7 +59,7 @@ public class AutoTest {
 		//assert
 		assert(juego.vehiculo.posicion.x == 1);
 		assert(juego.vehiculo.posicion.y == 0);
-		assert(juego.vehiculo.movimientos == 4);
+		assert(juego.vehiculo.movimientos == 5);
 	}
 
 	@Test

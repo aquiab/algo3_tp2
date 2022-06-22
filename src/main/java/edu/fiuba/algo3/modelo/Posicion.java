@@ -3,14 +3,14 @@ package edu.fiuba.algo3.modelo;
 public class Posicion {
 
 	//El mapa es un cuadrado, por lo tanto comparte los límites izq/sup y los der/inf.
-	private Integer LIMITE_IZQUIERDO_O_SUPERIOR_MAPA = 1;
-	private Integer LIMITE_DERECHO_O_INFERIOR_MAPA;
-	protected int x;
-	protected int y;
+	private static final Integer LIMITE_IZQUIERDO_O_SUPERIOR_MAPA = 1;
+	private Integer limiteDerechoInferiorMapa;
+	public int x;
+	public int y;
 	Paso paso = new PasoAbierto();
 	Mapa mapa;
 	Posicion(int x, int y, Mapa mapa) {
-		LIMITE_DERECHO_O_INFERIOR_MAPA = mapa.dimension() - 1;
+		this.limiteDerechoInferiorMapa = mapa.dimension() - 1;
 		this.x = x;
 		this.y = y;
 		this.mapa = mapa;
@@ -21,7 +21,7 @@ public class Posicion {
 	}
 
 	private boolean dentroDeLimites(int coordenada) {
-		return (coordenada >= LIMITE_IZQUIERDO_O_SUPERIOR_MAPA && coordenada < LIMITE_DERECHO_O_INFERIOR_MAPA);
+		return (coordenada >= LIMITE_IZQUIERDO_O_SUPERIOR_MAPA && coordenada < limiteDerechoInferiorMapa);
 	}
 
 	public void modificarX(int x) {

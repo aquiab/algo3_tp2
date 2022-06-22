@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.modificadores.Obstaculo;
 import edu.fiuba.algo3.modelo.modificadores.Sorpresa;
-import edu.fiuba.algo3.modelo.modificadores.Vacio;
 
 public class Calle {
     public Obstaculo obstaculo = null;

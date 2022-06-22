@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 public class Vehiculo {
 
-    protected Posicion posicion;
+    public Posicion posicion;
     protected double movimientos;
     protected Estado estado;
 

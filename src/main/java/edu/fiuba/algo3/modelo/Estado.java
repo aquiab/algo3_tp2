@@ -16,7 +16,6 @@ public abstract class Estado {
     public abstract void pasarPozo();
 
     public void pasarVacio() {
-        return;
     }
 }
 

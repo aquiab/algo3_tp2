@@ -9,11 +9,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.image.*;
+import javafx.scene.media.*;
 import javafx.scene.shape.Rectangle;
 import javafx.geometry.Insets;
 import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
+import java.text.DecimalFormat;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.modificadores.*;
 
@@ -59,8 +62,8 @@ public class App extends Application {
         pane.getChildren().add(imagen);
     }
 
-    private void dibujarObstaculosYSorpresas(Pane pane, Juego juego, LinkedList<LinkedList<Calle>> calles)
-    throws FileNotFoundException {
+    private void dibujarObstaculosYSorpresas(Pane pane, Juego juego, LinkedList<LinkedList<Calle>> calles,
+    int distanciaX, int distanciaY, int offsetSorpresaX, int offsetSorpresaY) throws FileNotFoundException {
         Image piquete = new Image(new FileInputStream("assets/tire.png"));
         Image policia = new Image(new FileInputStream("assets/policia.png"));
         Image pozo = new Image(new FileInputStream("assets/pozo.png"));
@@ -68,8 +71,8 @@ public class App extends Application {
         for (int i = 0; i < juego.mapSize; i++) {
             for (int j = 0; j < juego.mapSize; j++) {
                 Calle calle = calles.get(i).get(j);
-                int x = (TAMANIO_MANZANA / 2) + (TAMANIO_MANZANA + TAMANIO_CALLE) * i;
-                int y = TAMANIO_MANZANA + (TAMANIO_MANZANA + TAMANIO_CALLE) * j;
+                int x = distanciaX + (TAMANIO_MANZANA + TAMANIO_CALLE) * i;
+                int y = distanciaY + (TAMANIO_MANZANA + TAMANIO_CALLE) * j;
 
                 if (calle.obstaculo.getClass() == Piquete.class) {
                     dibujarElementoCalle(piquete, pane, x, y);
@@ -82,7 +85,7 @@ public class App extends Application {
                 if ((calle.sorpresa.getClass() == SorpresaFavorable.class) || 
                 (calle.sorpresa.getClass() == SorpresaDesfavorable.class) || 
                 (calle.sorpresa.getClass() == SorpresaVehiculo.class)) {
-                    dibujarElementoCalle(sorpresa, pane, x - OFFSET_SORPRESA, y);
+                    dibujarElementoCalle(sorpresa, pane, x - offsetSorpresaX, y - offsetSorpresaY);
                 }
             }
         }
@@ -97,10 +100,17 @@ public class App extends Application {
         ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y);
         Pane pane = new Pane(dibujarCalles(juego.mapSize), vehiculo);
 
-        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales);
-        //dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales);
+        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
+        (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
+        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
+        TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
+
+        Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
+        AudioClip mediaPlayer = new AudioClip(musica.getSource());
+        mediaPlayer.play();
 
         var scene = new Scene(pane);
+
         scene.setOnKeyReleased(e-> {
             if (e.getCode() == KeyCode.UP) {
                 juego.mover(new DireccionArriba());
@@ -117,7 +127,7 @@ public class App extends Application {
             }
             vehiculo.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
             vehiculo.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
-            stage.setTitle("Movimientos: " + juego.vehiculo.movimientos);
+            stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.vehiculo.movimientos));
         });
         
         stage.setScene(scene);

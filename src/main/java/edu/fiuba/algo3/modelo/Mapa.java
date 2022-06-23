@@ -6,8 +6,8 @@ import edu.fiuba.algo3.modelo.modificadores.Vacio;
 import java.util.LinkedList;
 
 public class Mapa {
-	protected LinkedList<LinkedList<Calle>> callesHorizontales;
-	protected LinkedList<LinkedList<Calle>> callesVerticales;
+	public LinkedList<LinkedList<Calle>> callesHorizontales;
+	public LinkedList<LinkedList<Calle>> callesVerticales;
 	private int cantidadModificadoresIniciales;
 	protected int dimension;
 

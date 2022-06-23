@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 public class Posicion {
 
 	//El mapa es un cuadrado, por lo tanto comparte los límites izq/sup y los der/inf.
-	private static final Integer LIMITE_IZQUIERDO_O_SUPERIOR_MAPA = 1;
+	private static final Integer LIMITE_IZQUIERDO_O_SUPERIOR_MAPA = 0;
 	private Integer limiteDerechoInferiorMapa;
 	public int x;
 	public int y;

@@ -68,6 +68,8 @@ public class App extends Application {
         Image policia = new Image(new FileInputStream("assets/policia.png"));
         Image pozo = new Image(new FileInputStream("assets/pozo.png"));
         Image sorpresa = new Image(new FileInputStream("assets/sorpresa.png"));
+        Image meta = new Image(new FileInputStream("assets/meta.png"));
+
         for (int i = 0; i < juego.mapSize; i++) {
             for (int j = 0; j < juego.mapSize; j++) {
                 Calle calle = calles.get(i).get(j);
@@ -80,6 +82,8 @@ public class App extends Application {
                     dibujarElementoCalle(policia, pane, x, y);
                 } else if (calle.obstaculo.getClass() == Pozo.class) {
                     dibujarElementoCalle(pozo, pane, x, y);
+                } else if (calle.obstaculo.getClass() == Meta.class) {
+                    dibujarElementoCalle(meta, pane, x + 5, y - 10);
                 }
                 
                 if ((calle.sorpresa.getClass() == SorpresaFavorable.class) || 

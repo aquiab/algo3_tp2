@@ -81,10 +81,12 @@ public class Mapa {
 
 	public void agregarMeta() {
 		Random rand = new Random();
-		this.obtenerCalleHorizontal(dimension-1, rand.nextInt(dimension)).agregarObstaculo(new Meta());
+		Calle calle = this.obtenerCalleHorizontal(dimension-1, rand.nextInt(dimension));
+		calle.agregarObstaculo(new Meta());
+		calle.agregarSorpresa(new Vacio());
 	}
 
 	private Posicion obtenerPosicionAleatoria(int dimension) {
-		return new Posicion((int) (Math.random() * dimension), (int) (Math.random() * (dimension - 1)), this);
+		return new Posicion((int) (Math.random() * (dimension - 1)), (int) (Math.random() * (dimension - 1)), this);
 	}
 }

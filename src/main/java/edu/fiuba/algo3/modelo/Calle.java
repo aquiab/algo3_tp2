@@ -5,12 +5,10 @@ import edu.fiuba.algo3.modelo.modificadores.*;
 public class Calle {
     public Obstaculo obstaculo;
     public Sorpresa sorpresa;
-
-    public Meta meta = new Vacio();
     public void recorrer(Vehiculo vehiculo) {
         obstaculo.aplicar(vehiculo);
         sorpresa.aplicar(vehiculo);
-        meta.aplicar(vehiculo);
+        borrarSorpresa();
     }
 
     public void agregarObstaculo(Obstaculo obstaculo) {
@@ -21,5 +19,7 @@ public class Calle {
         this.sorpresa = sorpresa;
     }
 
-    public void agregarMeta(MetaFinal meta) {this.meta = meta;}
+    public void borrarSorpresa() {
+        this.sorpresa = new Vacio();
+    }
 }

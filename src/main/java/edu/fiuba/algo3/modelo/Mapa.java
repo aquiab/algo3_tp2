@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.modificadores.MetaFinal;
+import edu.fiuba.algo3.modelo.modificadores.Meta;
 import edu.fiuba.algo3.modelo.modificadores.Obstaculos;
 import edu.fiuba.algo3.modelo.modificadores.Sorpresas;
 import edu.fiuba.algo3.modelo.modificadores.Vacio;
 import java.util.Random;
-
-import javafx.geometry.Pos;
 
 import java.util.LinkedList;
 
@@ -83,7 +81,7 @@ public class Mapa {
 
 	public void agregarMeta() {
 		Random rand = new Random();
-		this.obtenerCalleHorizontal(dimension-1, rand.nextInt(dimension)).agregarMeta(new MetaFinal());
+		this.obtenerCalleHorizontal(dimension-1, rand.nextInt(dimension)).agregarObstaculo(new Meta());
 	}
 
 	private Posicion obtenerPosicionAleatoria(int dimension) {

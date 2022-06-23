@@ -5,7 +5,6 @@ public class Vehiculo {
     public Posicion posicion;
     public double movimientos;
     protected Estado estado;
-    public String gano = "false";
     public Jugador jugador;
 
     private double SOPRESA_DESFAVORABLE = 1.25;
@@ -60,7 +59,6 @@ public class Vehiculo {
     }
 
     public void ganar() {
-        this.gano = "true";
         this.jugador.ingresarPuntaje(this.movimientos);
     }
 }

@@ -3,25 +3,27 @@ import java.util.Random;
 
 public class Moto extends Estado{
     Random rand = new Random();
+    private Integer PENALIZACION_PIQUETE = 2;
 
     public Moto(Vehiculo vehiculo) {
         super(vehiculo);
+        PENALIZACION_POLICIAL = 3;
+        PENALIZACION_POZO = 3;
+        PROBABILIDAD_CONTROL_POLICIAL = 7;
     }
 
     public void pasarPozo() {
-        vehiculo.incrementarMovimientos(3);
+        vehiculo.incrementarMovimientos(PENALIZACION_POZO);
     }
 
     public void pasarPiquete() {
-        vehiculo.incrementarMovimientos(2);
+        vehiculo.incrementarMovimientos(PENALIZACION_PIQUETE);
     }
 
     public void pasarControlPolicial() {
-        if (rand.nextInt(10) <= 7) {
-            vehiculo.incrementarMovimientos(3);
-            return;
+        if (rand.nextInt(10) <= PROBABILIDAD_CONTROL_POLICIAL) {
+            vehiculo.incrementarMovimientos(PENALIZACION_POLICIAL);
         }
-        vehiculo.incrementarMovimientos(1);
     }
 
     public Auto aplicarSorpresaCambioVehiculo() {

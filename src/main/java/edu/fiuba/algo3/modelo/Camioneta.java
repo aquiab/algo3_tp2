@@ -6,29 +6,27 @@ public class Camioneta extends Estado{
 
     public Camioneta(Vehiculo vehiculo) {
         super(vehiculo);
+        PENALIZACION_POLICIAL = 3;
+        PENALIZACION_POZO = 2;
+        PROBABILIDAD_CONTROL_POLICIAL = 2;
     }
     protected int cantidadPozos = 0;
 
     public void pasarPozo() {
         this.cantidadPozos++;
         if (this.cantidadPozos % 3 == 0) {
-            vehiculo.incrementarMovimientos(2);
-            return;
+            vehiculo.incrementarMovimientos(PENALIZACION_POZO);
         }
-        vehiculo.incrementarMovimientos(1);
     }
 
     public void pasarControlPolicial() {
-        if (rand.nextInt(10) <= 2) {
-            vehiculo.incrementarMovimientos(3);
-            return;
+        if (rand.nextInt(10) <= PROBABILIDAD_CONTROL_POLICIAL) {
+            vehiculo.incrementarMovimientos(PENALIZACION_POLICIAL);
         }
-        vehiculo.incrementarMovimientos(1);
     }
 
     public void pasarPiquete() {
         vehiculo.posicion.modificarPaso(new PasoBloqueado());
-        vehiculo.incrementarMovimientos(1);
     }
 
     public Moto aplicarSorpresaCambioVehiculo() {

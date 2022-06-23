@@ -1,11 +1,16 @@
 package edu.fiuba.algo3.modelo;
 
 public class Posicion {
-	protected int x;
-	protected int y;
+
+	//El mapa es un cuadrado, por lo tanto comparte los límites izq/sup y los der/inf.
+	private static final Integer LIMITE_IZQUIERDO_O_SUPERIOR_MAPA = 1;
+	private Integer limiteDerechoInferiorMapa;
+	public int x;
+	public int y;
 	Paso paso = new PasoAbierto();
 	Mapa mapa;
 	Posicion(int x, int y, Mapa mapa) {
+		this.limiteDerechoInferiorMapa = mapa.dimension() - 1;
 		this.x = x;
 		this.y = y;
 		this.mapa = mapa;
@@ -16,7 +21,7 @@ public class Posicion {
 	}
 
 	private boolean dentroDeLimites(int coordenada) {
-		return (coordenada >= 0 && coordenada < mapa.dimension() - 1);
+		return (coordenada >= LIMITE_IZQUIERDO_O_SUPERIOR_MAPA && coordenada < limiteDerechoInferiorMapa);
 	}
 
 	public void modificarX(int x) {

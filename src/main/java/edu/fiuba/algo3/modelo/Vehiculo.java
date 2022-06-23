@@ -2,9 +2,13 @@ package edu.fiuba.algo3.modelo;
 
 public class Vehiculo {
 
-    protected Posicion posicion;
+    public Posicion posicion;
     protected double movimientos;
     protected Estado estado;
+
+    private double SOPRESA_DESFAVORABLE = 1.25;
+    private double SORPRESA_FAVORABLE = 0.8;
+    private Integer PENALIZACION_POR_CADA_MOVIMENTO = 1;
 
     protected Vehiculo(double movimientos, Posicion posicion) {
         this.movimientos = movimientos;
@@ -12,8 +16,7 @@ public class Vehiculo {
     }
 
     public void mover(Direccion direccion) {
-        //Si soy penalizado por un pozo solo me dan 3 de penalización.
-        //movimientos += 0;
+        incrementarMovimientos(PENALIZACION_POR_CADA_MOVIMENTO);
         direccion.mover(this.posicion, this);
     }
     public void aplicarEstado(Estado estado) {
@@ -25,11 +28,11 @@ public class Vehiculo {
     }
 
     public void aplicarSorpresaDesfavorable() {
-        movimientos *= 1.25;
+        movimientos *= SOPRESA_DESFAVORABLE;
     }
 
     public void aplicarSorpresaFavorable() {
-        movimientos *= 0.8;
+        movimientos *= SORPRESA_FAVORABLE;
     }
 
     public void pasarPiquete() {

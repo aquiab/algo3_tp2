@@ -15,7 +15,7 @@ public class Sorpresas {
         sorpresaDesfavorable = new SorpresaDesfavorable();
         sorpresaVehiculo = new SorpresaVehiculo();
 
-        actual = sorpresaDesfavorable;
+        actual = sorpresaFavorable;
     }
 
     public Sorpresa devolverSorpresa() {
@@ -27,7 +27,7 @@ public class Sorpresas {
     private void siguienteSorpresa() {
         if (actual.getClass() == SorpresaFavorable.class) {
             actual = sorpresaDesfavorable;
-        } else if (actual.getClass() == SorpresaFavorable.class) {
+        } else if (actual.getClass() == SorpresaDesfavorable.class) {
             actual = sorpresaVehiculo;
         } else {
             actual = sorpresaFavorable;

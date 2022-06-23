@@ -4,8 +4,8 @@ import edu.fiuba.algo3.modelo.modificadores.Obstaculo;
 import edu.fiuba.algo3.modelo.modificadores.Sorpresa;
 
 public class Calle {
-    public Obstaculo obstaculo = null;
-    public Sorpresa sorpresa = null;
+    public Obstaculo obstaculo;
+    public Sorpresa sorpresa;
 
     public void recorrer(Vehiculo vehiculo) {
         obstaculo.aplicar(vehiculo);
@@ -16,10 +16,7 @@ public class Calle {
         this.obstaculo = obstaculo;
     }
 
-
     public void agregarSorpresa(Sorpresa sorpresa) {
         this.sorpresa = sorpresa;
     }
-
-
 }

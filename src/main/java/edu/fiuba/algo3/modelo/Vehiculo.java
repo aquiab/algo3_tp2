@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 public class Vehiculo {
 
     public Posicion posicion;
-    protected double movimientos;
+    public double movimientos;
     protected Estado estado;
 
     private double SOPRESA_DESFAVORABLE = 1.25;

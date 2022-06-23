@@ -32,6 +32,7 @@ public class App extends Application {
         
         Juego juego = new Juego();
         juego.aplicarEstado(new Auto(juego.vehiculo));
+        juego.aplicarJugador("RAUL");
         GridPane gp = new GridPane();
         
         gp.setPadding(new Insets(6));
@@ -68,6 +69,7 @@ public class App extends Application {
             imageView.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
             imageView.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
             stage.setTitle("Movimientos: " + juego.vehiculo.movimientos);
+            //stage.setTitle(juego.vehiculo.gano);
         });
 
         for (int i = 0; i < juego.mapSize; i++) {

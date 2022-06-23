@@ -5,6 +5,8 @@ public class Vehiculo {
     public Posicion posicion;
     public double movimientos;
     protected Estado estado;
+    public String gano = "false";
+    public Jugador jugador;
 
     private double SOPRESA_DESFAVORABLE = 1.25;
     private double SORPRESA_FAVORABLE = 0.8;
@@ -22,6 +24,8 @@ public class Vehiculo {
     public void aplicarEstado(Estado estado) {
         this.estado = estado;
     }
+
+    public void aplicarJugador(Jugador jugador) {this.jugador = jugador;}
 
     public void incrementarMovimientos(int incremento) {
         movimientos += incremento;
@@ -53,6 +57,11 @@ public class Vehiculo {
 
     public void aplicarVacio() {
         estado.pasarVacio();
+    }
+
+    public void ganar() {
+        this.gano = "true";
+        this.jugador.ingresarPuntaje(this.movimientos);
     }
 }
 

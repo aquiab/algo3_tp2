@@ -81,7 +81,7 @@ public class Mapa {
 
 	public void agregarMeta() {
 		Random rand = new Random();
-		Calle calle = this.obtenerCalleHorizontal(dimension-1, rand.nextInt(dimension));
+		Calle calle = this.obtenerCalleHorizontal(dimension-1, rand.nextInt(dimension) - 1);
 		calle.agregarObstaculo(new Meta());
 		calle.agregarSorpresa(new Vacio());
 	}

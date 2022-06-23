@@ -87,6 +87,6 @@ public class Mapa {
 	}
 
 	private Posicion obtenerPosicionAleatoria(int dimension) {
-		return new Posicion((int) (Math.random() * dimension), (int) (Math.random() * dimension), this);
+		return new Posicion((int) (Math.random() * dimension), (int) (Math.random() * (dimension - 1)), this);
 	}
 }

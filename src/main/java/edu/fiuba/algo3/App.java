@@ -107,6 +107,7 @@ public class App extends Application {
 
         Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
         AudioClip mediaPlayer = new AudioClip(musica.getSource());
+        mediaPlayer.setVolume(0.2);
         mediaPlayer.play();
 
         var scene = new Scene(pane);

@@ -25,7 +25,6 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
             <version>${javafx-version}</version>
-            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -72,12 +71,6 @@
                     <artifactId>javafx-graphics</artifactId>
                     <version>${javafx-version}</version>
                     <classifier>win</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-media</artifactId>
-                    <version>${javafx-version}</version>
-                    <type>pom</type>
                 </dependency>
             </dependencies>
         </profile>

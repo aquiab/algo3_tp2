@@ -2,7 +2,6 @@ package edu.fiuba.algo3;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -47,8 +46,8 @@ public class App extends Application {
         return gp;
     }
 
-    private ImageView dibujarVehiculo(int x, int y) throws FileNotFoundException {
-        Image auto = new Image(new FileInputStream("assets/car.png"));
+    private ImageView dibujarVehiculo(int x, int y, String src) throws FileNotFoundException {
+        Image auto = new Image(new FileInputStream(src));
         ImageView imageView = new ImageView(auto);
         imageView.setX(x);
         imageView.setY(y);
@@ -97,7 +96,7 @@ public class App extends Application {
         juego.aplicarEstado(new Auto(juego.vehiculo));
         juego.aplicarJugador("RAUL");
 
-        ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y);
+        ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y, "assets/car.png");
         Pane pane = new Pane(dibujarCalles(juego.mapSize), vehiculo);
 
         dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
@@ -112,27 +111,53 @@ public class App extends Application {
 
         var scene = new Scene(pane);
 
-        scene.setOnKeyReleased(e-> {
+        scene.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP) {
                 juego.mover(new DireccionArriba());
-                vehiculo.setRotate(-90);
+                try {
+                    actualizarMovimiento(pane, vehiculo, juego, -90);
+                } catch (FileNotFoundException error) {}
+
             } else if (e.getCode() == KeyCode.DOWN) {
                 juego.mover(new DireccionAbajo());
-                vehiculo.setRotate(90);
+                try {
+                    actualizarMovimiento(pane, vehiculo, juego, 90);
+                } catch (FileNotFoundException error) {}
             } else if (e.getCode() == KeyCode.LEFT) {
                 juego.mover(new DireccionIzquierda());
-                vehiculo.setRotate(180);
+                try {
+                    actualizarMovimiento(pane, vehiculo, juego, 180);
+                } catch (FileNotFoundException error) {}
             } else if (e.getCode() == KeyCode.RIGHT) {
                 juego.mover(new DireccionDerecha());
-                vehiculo.setRotate(0);
+                try {
+                    actualizarMovimiento(pane, vehiculo, juego, 0);
+                } catch (FileNotFoundException error) {}
             }
-            vehiculo.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
-            vehiculo.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
             stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.vehiculo.movimientos));
         });
         
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void actualizarMovimiento(Pane pane, ImageView imageView, Juego juego, int rotar) throws FileNotFoundException {
+        imageView.setImage(obtenerVehiculo(juego));
+        imageView.setFitHeight(30);
+        imageView.setFitWidth(30);
+        imageView.setRotate(rotar);
+        imageView.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
+        imageView.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+    }
+
+    private Image obtenerVehiculo(Juego juego) throws FileNotFoundException {
+        if (juego.vehiculo.estado.getClass() == Auto.class) {
+            return new Image(new FileInputStream("assets/car.png"));
+        }
+        if (juego.vehiculo.estado.getClass() == Camioneta.class) {
+            return new Image(new FileInputStream("assets/4x4.png"));
+        }
+        return new Image(new FileInputStream("assets/motorbike.png"));
     }
 
     public static void main(String[] args) {

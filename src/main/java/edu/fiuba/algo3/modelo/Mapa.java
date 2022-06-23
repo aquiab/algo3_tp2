@@ -21,7 +21,7 @@ public class Mapa {
 		this.dimension = dimension;
 		callesHorizontales = new LinkedList<>();
 		callesVerticales = new LinkedList<>();
-		cantidadModificadoresIniciales = dimension * 2;
+		cantidadModificadoresIniciales = dimension * 5;
 		for (int i=0; i < dimension; i++) {
 			callesHorizontales.add(new LinkedList<Calle>());
 			callesVerticales.add(new LinkedList<Calle>());

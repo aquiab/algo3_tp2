@@ -4,7 +4,7 @@ public class Vehiculo {
 
     public Posicion posicion;
     public double movimientos;
-    protected Estado estado;
+    public Estado estado;
     public Jugador jugador;
 
     private double SOPRESA_DESFAVORABLE = 1.25;

@@ -23,7 +23,7 @@ import edu.fiuba.algo3.modelo.modificadores.*;
 public class App extends Application {
     private static final int TAMANIO_MANZANA = 35;
     private static final int TAMANIO_CALLE = 15;
-    private static final int OFFSET_X = -9;
+    private static final int OFFSET_X = -7;
     private static final int OFFSET_Y = 3;
     private static final int OFFSET_SORPRESA = 15;
 
@@ -44,14 +44,6 @@ public class App extends Application {
             }
         }
         return gp;
-    }
-
-    private ImageView dibujarVehiculo(int x, int y, String src) throws FileNotFoundException {
-        Image auto = new Image(new FileInputStream(src));
-        ImageView imageView = new ImageView(auto);
-        imageView.setX(x);
-        imageView.setY(y);
-        return imageView;
     }
 
     private void dibujarElementoCalle(Image img, Pane pane, int x, int y) {
@@ -94,6 +86,32 @@ public class App extends Application {
         }
     }
 
+    private ImageView dibujarVehiculo(int x, int y, String src) throws FileNotFoundException {
+        Image auto = new Image(new FileInputStream(src));
+        ImageView imageView = new ImageView(auto);
+        imageView.setX(x);
+        imageView.setY(y);
+        return imageView;
+    }
+
+    private void actualizarMovimiento(ImageView imageView, Juego juego) throws FileNotFoundException {
+        imageView.setImage(obtenerVehiculo(juego));
+        imageView.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
+        imageView.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+    }
+
+    private Image obtenerVehiculo(Juego juego) throws FileNotFoundException {
+        Image auto = new Image(new FileInputStream("assets/car.png"));
+        Image camioneta = new Image(new FileInputStream("assets/4x4.png"));
+        Image moto = new Image(new FileInputStream("assets/motorbike.png"));
+        if (juego.vehiculo.estado.getClass() == Auto.class) {
+            return auto;
+        } else if (juego.vehiculo.estado.getClass() == Camioneta.class) {
+            return camioneta;
+        }
+        return moto;
+    }
+
     @Override
     public void start(Stage stage) throws FileNotFoundException {
         Juego juego = new Juego();
@@ -108,60 +126,38 @@ public class App extends Application {
         dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
         TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
 
-        Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
-        AudioClip mediaPlayer = new AudioClip(musica.getSource());
-        mediaPlayer.setVolume(0.2);
-        mediaPlayer.play();
+        //Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
+        //AudioClip mediaPlayer = new AudioClip(musica.getSource());
+        //mediaPlayer.setVolume(0.2);
+        //mediaPlayer.play();
 
         var scene = new Scene(pane);
 
         scene.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP) {
                 juego.mover(new DireccionArriba());
-                try {
-                    actualizarMovimiento(pane, vehiculo, juego, -90);
-                } catch (FileNotFoundException error) {}
-
+                vehiculo.setRotate(-90);
             } else if (e.getCode() == KeyCode.DOWN) {
                 juego.mover(new DireccionAbajo());
-                try {
-                    actualizarMovimiento(pane, vehiculo, juego, 90);
-                } catch (FileNotFoundException error) {}
+                vehiculo.setRotate(90);
             } else if (e.getCode() == KeyCode.LEFT) {
                 juego.mover(new DireccionIzquierda());
-                try {
-                    actualizarMovimiento(pane, vehiculo, juego, 180);
-                } catch (FileNotFoundException error) {}
+                vehiculo.setRotate(180);
             } else if (e.getCode() == KeyCode.RIGHT) {
                 juego.mover(new DireccionDerecha());
-                try {
-                    actualizarMovimiento(pane, vehiculo, juego, 0);
-                } catch (FileNotFoundException error) {}
+                vehiculo.setRotate(0);
+            }
+            try {
+                actualizarMovimiento(vehiculo, juego);
+            }
+            catch (Exception exception) {
+                System.out.print(exception);
             }
             stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.vehiculo.movimientos));
         });
         
         stage.setScene(scene);
         stage.show();
-    }
-
-    private void actualizarMovimiento(Pane pane, ImageView imageView, Juego juego, int rotar) throws FileNotFoundException {
-        imageView.setImage(obtenerVehiculo(juego));
-        imageView.setFitHeight(30);
-        imageView.setFitWidth(30);
-        imageView.setRotate(rotar);
-        imageView.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
-        imageView.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
-    }
-
-    private Image obtenerVehiculo(Juego juego) throws FileNotFoundException {
-        if (juego.vehiculo.estado.getClass() == Auto.class) {
-            return new Image(new FileInputStream("assets/car.png"));
-        }
-        if (juego.vehiculo.estado.getClass() == Camioneta.class) {
-            return new Image(new FileInputStream("assets/4x4.png"));
-        }
-        return new Image(new FileInputStream("assets/motorbike.png"));
     }
 
     public static void main(String[] args) {

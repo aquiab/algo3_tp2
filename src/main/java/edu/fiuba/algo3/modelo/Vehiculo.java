@@ -58,6 +58,10 @@ public class Vehiculo {
         estado.pasarVacio();
     }
 
+    public Posicion devolverPosicion() {
+        return this.posicion;
+    }
+
     public void ganar() {
         this.jugador.ingresarPuntaje(this.movimientos);
     }

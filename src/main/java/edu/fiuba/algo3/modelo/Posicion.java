@@ -7,17 +7,14 @@ public class Posicion {
 	private Integer limiteDerechoInferiorMapa;
 	public int x;
 	public int y;
-	Paso paso = new PasoAbierto();
+	public int sigX;
+	public int sigY;
 	Mapa mapa;
 	Posicion(int x, int y, Mapa mapa) {
 		this.limiteDerechoInferiorMapa = mapa.dimension() - 1;
 		this.x = x;
 		this.y = y;
 		this.mapa = mapa;
-	}
-
-	public void modificarPaso(Paso paso) {
-		this.paso = paso;
 	}
 
 	private boolean dentroDeLimites(int coordenada) {
@@ -35,25 +32,44 @@ public class Posicion {
 			this.y = y;
 		}
 	}
+	public void establecerSig(int x, int y) {
+		this.sigX = this.x + x;
+		this.sigY = this.y + y;
+	}
+	public void defaultearSig() {
+		this.sigX = x;
+		this.sigY = y;
+	}
+
+	public void modificarPosicion() {
+		if (dentroDeLimites(this.sigX) && dentroDeLimites(this.sigY)) {
+			this.x = this.sigX;
+			this.y = this.sigY;
+		}
+	}
 
 	public void moverArriba(Vehiculo vehiculo) {
+		establecerSig(0, -1);
 		Calle calle = mapa.obtenerCalleVertical(x, y);
 		calle.recorrer(vehiculo);
-		paso.modificarPosicion(this, x, y-1);
+		modificarPosicion();
 	}
 	public void moverAbajo(Vehiculo vehiculo) {
+		establecerSig(0, 1);
 		Calle calle = mapa.obtenerCalleVertical(x, y+1);
 		calle.recorrer(vehiculo);
-		paso.modificarPosicion(this, x, y+1);
+		modificarPosicion();
 	}
 	public void moverDerecha(Vehiculo vehiculo) {
+		establecerSig(1, 0);
 		Calle calle = mapa.obtenerCalleHorizontal(x+1, y);
 		calle.recorrer(vehiculo);
-		paso.modificarPosicion(this, x+1, y);
+		modificarPosicion();
 	}
 	public void moverIzquierda(Vehiculo vehiculo) {
+		establecerSig(-1, 0);
 		Calle calle = mapa.obtenerCalleHorizontal(x, y);
 		calle.recorrer(vehiculo);
-		paso.modificarPosicion(this, x-1, y);
+		modificarPosicion();
 	}
 }

@@ -22,7 +22,8 @@ public class Auto extends Estado{
     }
 
     public void pasarPiquete() {
-        vehiculo.posicion.modificarPaso(new PasoBloqueado());
+        Posicion posicion = vehiculo.devolverPosicion();
+        posicion.defaultearSig();
     }
 
     public Camioneta aplicarSorpresaCambioVehiculo() {

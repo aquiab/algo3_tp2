@@ -6,7 +6,7 @@ public class Calle {
     public Obstaculo obstaculo;
     public Sorpresa sorpresa;
     public void recorrer(Vehiculo vehiculo) {
-        obstaculo.aplicar(vehiculo);
+        obstaculo.pasar(vehiculo);
         sorpresa.aplicar(vehiculo);
         borrarSorpresa();
     }

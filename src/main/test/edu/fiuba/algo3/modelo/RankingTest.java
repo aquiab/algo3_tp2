@@ -11,7 +11,7 @@ public class RankingTest {
         juego.aplicarEstado(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new Vacio());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
         //act
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
@@ -19,7 +19,7 @@ public class RankingTest {
         juego.aplicarEstado(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Aquiles");
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new Vacio());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
 
@@ -33,7 +33,7 @@ public class RankingTest {
         juego.aplicarEstado(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new Vacio());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
         //
@@ -41,7 +41,7 @@ public class RankingTest {
         juego.aplicarEstado(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Aquiles");
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new Vacio());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
         //

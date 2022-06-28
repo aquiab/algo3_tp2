@@ -20,6 +20,6 @@ public class Calle {
     }
 
     public void borrarSorpresa() {
-        this.sorpresa = new Vacio();
+        this.sorpresa = new VacioSorpresa();
     }
 }

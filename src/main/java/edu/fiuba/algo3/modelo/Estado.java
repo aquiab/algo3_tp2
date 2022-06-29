@@ -17,9 +17,13 @@ public abstract class Estado {
 
     public abstract void pasarPiquete();
 
-    public abstract void pasarPozo();
+    public void pasarPozo(double penalizacion) {
+        vehiculo.incrementarMovimientos(penalizacion);
+    }
 
     public void pasarVacio() {
     }
+
+    public abstract Estado siguienteEstado();
 }
 

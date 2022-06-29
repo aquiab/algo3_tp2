@@ -11,10 +11,6 @@ public class Auto extends Estado{
         PROBABILIDAD_CONTROL_POLICIAL = 5;
     }
 
-    public void pasarPozo() {
-        vehiculo.incrementarMovimientos(PENALIZACION_POZO);
-    }
-
     public void pasarControlPolicial() {
         if (rand.nextInt(10) <= PROBABILIDAD_CONTROL_POLICIAL) {
             vehiculo.incrementarMovimientos(PENALIZACION_POLICIAL);
@@ -24,6 +20,11 @@ public class Auto extends Estado{
     public void pasarPiquete() {
         Posicion posicion = vehiculo.devolverPosicion();
         posicion.defaultearSig();
+    }
+
+    @Override
+    public Estado siguienteEstado() {
+        return new Camioneta(vehiculo);
     }
 
     public Camioneta aplicarSorpresaCambioVehiculo() {

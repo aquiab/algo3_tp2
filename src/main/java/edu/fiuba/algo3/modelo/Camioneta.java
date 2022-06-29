@@ -12,7 +12,8 @@ public class Camioneta extends Estado{
     }
     protected int cantidadPozos = 0;
 
-    public void pasarPozo() {
+    @Override
+    public void pasarPozo(double penalizacion) {
         this.cantidadPozos++;
         if (this.cantidadPozos % 3 == 0) {
             vehiculo.incrementarMovimientos(PENALIZACION_POZO);
@@ -32,6 +33,11 @@ public class Camioneta extends Estado{
 
     public Moto aplicarSorpresaCambioVehiculo() {
         return (new Moto(vehiculo));
+    }
+
+    @Override
+    public Estado siguienteEstado() {
+        return new Moto(vehiculo);
     }
 }
 

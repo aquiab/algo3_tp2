@@ -4,6 +4,6 @@ import edu.fiuba.algo3.modelo.Vehiculo;
 
 public class SorpresaVehiculo implements Sorpresa {
 	public void aplicar(Vehiculo vehiculo) {
-		vehiculo.aplicarSorpresaCambioVehiculo();
+		//vehiculo.aplicarSorpresaCambioVehiculo(this.siguienteEstado);
 	}
 }

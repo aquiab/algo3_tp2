@@ -1,5 +1,8 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.modelo.constructores.ISorpresa;
+import edu.fiuba.algo3.modelo.constructores.SopresaPuntaje;
+import edu.fiuba.algo3.modelo.constructores.SorpresaVehiculoV2;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -75,9 +78,8 @@ public class App extends Application {
                     dibujarElementoCalle(pozo, pane, x, y);
                 }
                 
-                if ((calle.sorpresa.getClass() == SorpresaFavorable.class) || 
-                (calle.sorpresa.getClass() == SorpresaDesfavorable.class) || 
-                (calle.sorpresa.getClass() == SorpresaVehiculo.class)) {
+                if ((calle.sorpresa.getClass() == SopresaPuntaje.class) ||
+                (calle.sorpresa.getClass() == SorpresaVehiculoV2.class)) {
                     dibujarElementoCalle(sorpresa, pane, x - offsetSorpresaX, y - offsetSorpresaY);
                 } else if (calle.sorpresa.getClass() == Meta.class) {
                     dibujarElementoCalle(meta, pane, x + 5, y - 10);
@@ -126,10 +128,10 @@ public class App extends Application {
         dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
         TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
 
-        Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
+        /*Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
         AudioClip mediaPlayer = new AudioClip(musica.getSource());
         mediaPlayer.setVolume(0.2);
-        mediaPlayer.play();
+        mediaPlayer.play();*/
 
         var scene = new Scene(pane);
 

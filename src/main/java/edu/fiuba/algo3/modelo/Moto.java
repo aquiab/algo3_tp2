@@ -12,9 +12,7 @@ public class Moto extends Estado{
         PROBABILIDAD_CONTROL_POLICIAL = 7;
     }
 
-    public void pasarPozo() {
-        vehiculo.incrementarMovimientos(PENALIZACION_POZO);
-    }
+
 
     public void pasarPiquete() {
         vehiculo.incrementarMovimientos(PENALIZACION_PIQUETE);
@@ -28,5 +26,10 @@ public class Moto extends Estado{
 
     public Auto aplicarSorpresaCambioVehiculo() {
         return (new Auto(vehiculo));
+    }
+
+    @Override
+    public Estado siguienteEstado() {
+        return new Auto(vehiculo);
     }
 }

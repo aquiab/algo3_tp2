@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.modificadores.*;
 
-public class CamionetaTest {
+/*public class CamionetaTest {
     @Test
     public void CamionetaEncuentraPozoTest() {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
@@ -168,4 +168,4 @@ public class CamionetaTest {
         assert(juego.vehiculo.movimientos == 2);
         assert(juego.vehiculo.estado.getClass() == Auto.class);
     }
-}
+}*/

@@ -26,8 +26,12 @@ public class Vehiculo {
 
     public void aplicarJugador(Jugador jugador) {this.jugador = jugador;}
 
-    public void incrementarMovimientos(int incremento) {
+    public void incrementarMovimientos(double incremento) {
         movimientos += incremento;
+    }
+
+    public void multiplicarMovimientos(double valorSorpresa) {
+        this.movimientos *= valorSorpresa;
     }
 
     public void aplicarSorpresaDesfavorable() {
@@ -42,8 +46,8 @@ public class Vehiculo {
         estado.pasarPiquete();
     }
 
-    public void pasarPozo() {
-        estado.pasarPozo();
+    public void pasarPozo(double penalizacion) {
+        estado.pasarPozo(penalizacion);
     }
 
     public void pasarControlPolicial() {

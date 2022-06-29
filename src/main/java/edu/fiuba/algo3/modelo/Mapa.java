@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.constructores.Director;
 import edu.fiuba.algo3.modelo.modificadores.*;
 
 import java.util.Random;
@@ -30,7 +31,6 @@ public class Mapa {
 			}
 		}
 		agregarObstaculos(cantidadModificadoresIniciales);
-		agregarSorpresas(cantidadModificadoresIniciales);
 		agregarMeta();
 		liberarElRestoDelMapa();
 	}
@@ -64,17 +64,6 @@ public class Mapa {
 			posicion = obtenerPosicionAleatoria(dimension);
 			this.obtenerCalleHorizontal(posicion.x, posicion.y).agregarObstaculo(this.OBSTACULOS.devolverObstaculo());
 			obstaculosAgregados += 2;
-		}
-	}
-
-	public void agregarSorpresas(Integer cantidadSorpresas) {
-		int sorpresasAgregadas = 0;
-		while (sorpresasAgregadas < cantidadSorpresas) {
-			Posicion posicion = obtenerPosicionAleatoria(dimension);
-			this.obtenerCalleHorizontal(posicion.x, posicion.y).agregarSorpresa(this.SORPRESAS.devolverSorpresa());
-			posicion = obtenerPosicionAleatoria(dimension);
-			this.obtenerCalleVertical(posicion.x, posicion.y).agregarSorpresa(this.SORPRESAS.devolverSorpresa());
-			sorpresasAgregadas += 2;
 		}
 	}
 

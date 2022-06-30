@@ -3,7 +3,13 @@ package edu.fiuba.algo3.modelo.constructores;
 import edu.fiuba.algo3.modelo.Estado;
 import edu.fiuba.algo3.modelo.modificadores.*;
 
+/**
+ * Clase encargada de la construcción tanto de obstáculos como de sorpresas.
+ */
 public class Director {
+
+    private static final int CANTIDAD_DE_SORPRESAS = 3;
+    private static final int CANTIDAD_DE_OBSTACULOS = 3;
 
     /*----Sorpresas----*/
 
@@ -29,7 +35,7 @@ public class Director {
     }
 
     public ISorpresa generarSopresa(int codigo) {
-        switch (codigo%3) {
+        switch (codigo % CANTIDAD_DE_SORPRESAS) {
             case 0:
                 return generarSorpresaFavorable();
             case 1:
@@ -44,9 +50,32 @@ public class Director {
         return new VacioObstaculo();
     }
 
-    public IObstaculo generarPozo() {
+    public IObstaculo generarPozo(Estado estadoActual) {
         PozoConstructor constructor = new PozoConstructor();
-        constructor.penalizacion(3);
+        constructor.penalizacion(estadoActual.obtenerPenalizacionPozo());
         return constructor.construir();
+    }
+
+    public IObstaculo generarPiquete(Estado estadoActual) {
+        PiqueteConstructor constructor = new PiqueteConstructor();
+        constructor.penalizacion(estadoActual.obtenerPenalizacionPiquete());
+        return constructor.construir();
+    }
+
+    public IObstaculo generarControlPolicial(Estado estadoActual) {
+        ControlPolicialConstructor constructor = new ControlPolicialConstructor();
+        constructor.penalizacion(estadoActual.obtenerPenalizacionControl());
+        constructor.probabilidad(estadoActual.obtenerProbabilidadControl());
+        return constructor.construir();
+    }
+
+    public IObstaculo generarObstaculo(int codigo, Estado estadoActual) {
+        switch (codigo % CANTIDAD_DE_OBSTACULOS) {
+            case 0:
+                return generarPozo(estadoActual);
+            case 1:
+                return generarPiquete(estadoActual);
+        }
+        return generarControlPolicial(estadoActual);
     }
 }

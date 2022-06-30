@@ -12,8 +12,6 @@ public class Mapa {
 	private int cantidadModificadoresIniciales;
 	protected int dimension;
 
-	private Obstaculos OBSTACULOS = new Obstaculos();
-	private Sorpresas SORPRESAS = new Sorpresas();
 	private VacioObstaculo VACIOOBSTACULO = new VacioObstaculo();
 	private VacioSorpresa VACIOSORPRESA = new VacioSorpresa();
 
@@ -30,7 +28,6 @@ public class Mapa {
 				callesVerticales.get(i).add(new Calle());
 			}
 		}
-		agregarObstaculos(cantidadModificadoresIniciales);
 		agregarMeta();
 		liberarElRestoDelMapa();
 	}
@@ -56,16 +53,7 @@ public class Mapa {
 		return dimension;
 	}
 
-	public void agregarObstaculos(Integer cantidadObstaculos) {
-		int obstaculosAgregados = 0;
-		while (obstaculosAgregados < cantidadObstaculos) {
-			Posicion posicion = obtenerPosicionAleatoria(dimension);
-			this.obtenerCalleVertical(posicion.x, posicion.y).agregarObstaculo(this.OBSTACULOS.devolverObstaculo());
-			posicion = obtenerPosicionAleatoria(dimension);
-			this.obtenerCalleHorizontal(posicion.x, posicion.y).agregarObstaculo(this.OBSTACULOS.devolverObstaculo());
-			obstaculosAgregados += 2;
-		}
-	}
+
 
 	public void agregarMeta() {
 		Random rand = new Random();

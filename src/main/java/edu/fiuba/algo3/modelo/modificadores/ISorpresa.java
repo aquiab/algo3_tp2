@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.constructores;
+package edu.fiuba.algo3.modelo.modificadores;
 
 import edu.fiuba.algo3.modelo.Vehiculo;
 

@@ -1,20 +1,19 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.constructores.Director;
-import edu.fiuba.algo3.modelo.constructores.ISorpresaConstructor;
-import edu.fiuba.algo3.modelo.constructores.PozoV2;
 import edu.fiuba.algo3.modelo.modificadores.*;
 import org.junit.jupiter.api.Test;
 
 public class AutoTest {
+	private Juego juego = new Juego();
 	private Director director = new Director();
+
 	@Test
 	public void AutoEncuentraPozoTest() {
 		//Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
 		//arrange
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 
-		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo());
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
 		//act
 		juego.mover(new DireccionDerecha());
@@ -22,13 +21,13 @@ public class AutoTest {
 		//assert
 		assert(juego.vehiculo.movimientos == 4);
 	}
-	/*@Test
+	@Test
 	public void AutoEncuentraPiqueteTest() {
 		//arrange
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Piquete());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPiquete(juego.obtenerEstadoActual()));
+		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
 		//act
 		juego.mover(new DireccionDerecha());
 		//assert
@@ -40,9 +39,9 @@ public class AutoTest {
 	public void AutoEncuentraPolicialTest() {
 		//arrange
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new ControlPolicial());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarControlPolicial(juego.obtenerEstadoActual()));
+		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
 		//act
 		juego.mover(new DireccionDerecha());
 
@@ -53,11 +52,11 @@ public class AutoTest {
 	public void AutoEncuentraPiqueteYPozoTest() {
 		//arrange
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new Piquete());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
-		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new VacioSorpresa());
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(director.generarPiquete(juego.obtenerEstadoActual()));
+		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
+		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(director.generarVacioSorpresa());
 		//act
 		juego.mover(new DireccionDerecha());
 		juego.mover(new DireccionDerecha());
@@ -65,14 +64,14 @@ public class AutoTest {
 		assert(juego.vehiculo.posicion.x == 1);
 		assert(juego.vehiculo.posicion.y == 0);
 		assert(juego.vehiculo.movimientos == 5);
-	}*/
+	}
 
 	@Test
 	public void AutoEncuentraSorpresaCambioVehiculo() {
 		//arrange
 
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
 		//act
@@ -87,9 +86,9 @@ public class AutoTest {
 	public void AutoEncuentraSorpresaFavorable() {
 		//arrange
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaFavorable());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarVacioObstaculo());
 		//act
 		juego.mover(new DireccionDerecha());
 		//assert
@@ -102,9 +101,9 @@ public class AutoTest {
 	public void AutoEncuentraSorpresaDesfavorable() {
 		//arrange
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesVerticales.get(0).get(1).agregarSorpresa(director.generarSorpresaDesfavorable());
-		juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(new VacioObstaculo());
+		juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(director.generarVacioObstaculo());
 		//act
 		juego.mover(new DireccionAbajo());
 		//assert
@@ -117,13 +116,13 @@ public class AutoTest {
 	public void AutoEncuentraSorpresaCambioVehiculo3Veces() {
 		//arrange
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
 		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
 		juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
-		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new VacioObstaculo());
-		juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(new VacioObstaculo());
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarVacioObstaculo());
+		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(director.generarVacioObstaculo());
+		juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(director.generarVacioObstaculo());
 		//act
 		juego.mover(new DireccionDerecha());
 		juego.mover(new DireccionDerecha());
@@ -138,11 +137,11 @@ public class AutoTest {
 	public void AutoEncuentraSorpresaCambioVehiculo2veces() {
 		//arrange
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
 		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
-		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
-		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new VacioObstaculo());
+		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarVacioObstaculo());
+		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(director.generarVacioObstaculo());
 		//act
 		juego.mover(new DireccionDerecha());
 		juego.mover(new DireccionDerecha());
@@ -154,12 +153,12 @@ public class AutoTest {
 	}
 	@Test
 	public void AutoVisitaCalleEnLimiteDelMapaYSigueEnElMismoLugar() {
-		//hacer luego todos los limitar p/c auto
+		//hacer luego todos los límites p/c auto
 		//arrange
 		Juego juego = new Juego();
-		juego.aplicarEstado(new Auto(juego.vehiculo));
+		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(0).get(0).agregarSorpresa(director.generarSorpresaDesfavorable());
-		juego.mapa.callesHorizontales.get(0).get(0).agregarObstaculo(new VacioObstaculo());
+		juego.mapa.callesHorizontales.get(0).get(0).agregarObstaculo(director.generarVacioObstaculo());
 		//act
 		juego.mover(new DireccionIzquierda());
 		//assert

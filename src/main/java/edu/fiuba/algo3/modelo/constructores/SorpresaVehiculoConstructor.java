@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.constructores;
 
 import edu.fiuba.algo3.modelo.Estado;
+import edu.fiuba.algo3.modelo.modificadores.ISorpresa;
+import edu.fiuba.algo3.modelo.modificadores.SorpresaVehiculo;
 
 public class SorpresaVehiculoConstructor implements ISorpresaConstructor {
 
@@ -31,6 +33,6 @@ public class SorpresaVehiculoConstructor implements ISorpresaConstructor {
 
     @Override
     public ISorpresa construir() {
-        return new SorpresaVehiculoV2(this);
+        return new SorpresaVehiculo(this);
     }
 }

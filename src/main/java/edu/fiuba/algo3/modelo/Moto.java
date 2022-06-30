@@ -14,22 +14,11 @@ public class Moto extends Estado{
 
 
 
-    public void pasarPiquete() {
+    public void pasarPiquete(double penalizacion) {
         vehiculo.incrementarMovimientos(PENALIZACION_PIQUETE);
-    }
-
-    public void pasarControlPolicial() {
-        if (rand.nextInt(10) <= PROBABILIDAD_CONTROL_POLICIAL) {
-            vehiculo.incrementarMovimientos(PENALIZACION_POLICIAL);
-        }
     }
 
     public Auto aplicarSorpresaCambioVehiculo() {
         return (new Auto(vehiculo));
-    }
-
-    @Override
-    public Estado siguienteEstado() {
-        return new Auto(vehiculo);
     }
 }

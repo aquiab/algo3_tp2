@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.constructores;
 
 import edu.fiuba.algo3.modelo.Estado;
+import edu.fiuba.algo3.modelo.modificadores.ISorpresa;
+import edu.fiuba.algo3.modelo.modificadores.SopresaPuntaje;
 
 public class SorpresaPuntajeConstructor implements ISorpresaConstructor {
 

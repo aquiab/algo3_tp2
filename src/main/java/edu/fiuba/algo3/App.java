@@ -1,8 +1,5 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.modelo.constructores.ISorpresa;
-import edu.fiuba.algo3.modelo.constructores.SopresaPuntaje;
-import edu.fiuba.algo3.modelo.constructores.SorpresaVehiculoV2;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -11,11 +8,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.image.*;
-import javafx.scene.media.*;
 import javafx.scene.shape.Rectangle;
 import javafx.geometry.Insets;
 import java.io.FileInputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.text.DecimalFormat;
@@ -79,7 +74,7 @@ public class App extends Application {
                 }
                 
                 if ((calle.sorpresa.getClass() == SopresaPuntaje.class) ||
-                (calle.sorpresa.getClass() == SorpresaVehiculoV2.class)) {
+                (calle.sorpresa.getClass() == SorpresaVehiculo.class)) {
                     dibujarElementoCalle(sorpresa, pane, x - offsetSorpresaX, y - offsetSorpresaY);
                 } else if (calle.sorpresa.getClass() == Meta.class) {
                     dibujarElementoCalle(meta, pane, x + 5, y - 10);
@@ -106,27 +101,20 @@ public class App extends Application {
         Image auto = new Image(new FileInputStream("assets/car.png"));
         Image camioneta = new Image(new FileInputStream("assets/4x4.png"));
         Image moto = new Image(new FileInputStream("assets/motorbike.png"));
-        if (juego.vehiculo.estado.getClass() == Auto.class) {
-            return auto;
-        } else if (juego.vehiculo.estado.getClass() == Camioneta.class) {
-            return camioneta;
-        }
+        if (juego.vehiculo.estado.getClass() == Auto.class) return auto;
+        if (juego.vehiculo.estado.getClass() == Camioneta.class) return camioneta;
         return moto;
     }
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
         Juego juego = new Juego();
-        juego.aplicarEstado(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("RAUL");
 
         ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y, "assets/car.png");
-        Pane pane = new Pane(dibujarCalles(juego.mapSize), vehiculo);
-
-        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
-        (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
-        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
-        TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
+        GridPane calles = dibujarCalles(juego.mapSize);
+        Pane pane = new Pane(calles, vehiculo);
 
         /*Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
         AudioClip mediaPlayer = new AudioClip(musica.getSource());
@@ -150,11 +138,17 @@ public class App extends Application {
                 vehiculo.setRotate(0);
             }
             try {
+                pane.getChildren().retainAll(vehiculo, calles);
                 actualizarMovimiento(vehiculo, juego);
+                dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
+                        (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
+                dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
+                        TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
             }
             catch (Exception exception) {
                 System.out.print(exception);
             }
+
             stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.vehiculo.movimientos));
         });
         

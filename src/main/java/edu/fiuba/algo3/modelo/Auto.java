@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo;
 import java.util.Random;
 
-public class Auto extends Estado{
-    Random rand = new Random();
+public class Auto extends Estado {
 
     public Auto(Vehiculo vehiculo) {
         super(vehiculo);
@@ -11,20 +10,9 @@ public class Auto extends Estado{
         PROBABILIDAD_CONTROL_POLICIAL = 5;
     }
 
-    public void pasarControlPolicial() {
-        if (rand.nextInt(10) <= PROBABILIDAD_CONTROL_POLICIAL) {
-            vehiculo.incrementarMovimientos(PENALIZACION_POLICIAL);
-        }
-    }
-
-    public void pasarPiquete() {
+    public void pasarPiquete(double penalizacion) {
         Posicion posicion = vehiculo.devolverPosicion();
         posicion.defaultearSig();
-    }
-
-    @Override
-    public Estado siguienteEstado() {
-        return new Camioneta(vehiculo);
     }
 
     public Camioneta aplicarSorpresaCambioVehiculo() {

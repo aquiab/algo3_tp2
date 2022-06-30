@@ -1,25 +1,27 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.constructores.Director;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.modificadores.*;
 
-/*public class RankingTest {
+public class RankingTest {
+    
+    private Director director = new Director();
     @Test
     public void DosJugadoresRankingTest() {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
         //act
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
         juego.reiniciarJuego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Aquiles");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
 
@@ -30,26 +32,26 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     @Test
     public void TresJugadoresRankingTest() {
         Juego juego = new Juego();
-        juego.aplicarEstado(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
         //
         juego.reiniciarJuego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Aquiles");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
         //
         juego.reiniciarJuego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Campi");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaFavorable());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaFavorable());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
 
@@ -58,4 +60,4 @@ import edu.fiuba.algo3.modelo.modificadores.*;
         assert(juego.ranking.devolverGanador().nombre == "Aquiles" );
         assert(juego.ranking.devolverGanador().nombre == "Pedro");
     }
-}*/
+}

@@ -1,10 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.constructores.ISorpresa;
+import edu.fiuba.algo3.modelo.modificadores.IObstaculo;
+import edu.fiuba.algo3.modelo.modificadores.ISorpresa;
 import edu.fiuba.algo3.modelo.modificadores.*;
 
 public class Calle {
-    public Obstaculo obstaculo;
+    public IObstaculo obstaculo;
     public ISorpresa sorpresa;
     public void recorrer(Vehiculo vehiculo) {
         obstaculo.pasar(vehiculo);
@@ -12,7 +13,7 @@ public class Calle {
         borrarSorpresa();
     }
 
-    public void agregarObstaculo(Obstaculo obstaculo) {
+    public void agregarObstaculo(IObstaculo obstaculo) {
         this.obstaculo = obstaculo;
     }
 

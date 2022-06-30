@@ -1,9 +1,12 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.modificadores.ControlPolicial;
 import org.junit.jupiter.api.Test;
+
+import javax.naming.ldap.Control;
 
 import static org.mockito.Mockito.*;
 
-/*public class VehiculoUnitariasTest {
+public class VehiculoUnitariasTest {
     @Test
     public void VehiculoMover() {
         Posicion posicion = mock(Posicion.class);
@@ -36,7 +39,7 @@ import static org.mockito.Mockito.*;
     public void VehiculoAplicarSorpresaDesfavorable() {
         Vehiculo vehiculo = new Vehiculo(10, null);
 
-        vehiculo.aplicarSorpresaDesfavorable();
+        vehiculo.aplicarSorpresaPuntaje(1.25);
 
         assert(vehiculo.movimientos == (10*1.25));
     }
@@ -44,7 +47,7 @@ import static org.mockito.Mockito.*;
     public void VehiculoAplicarSorpresaFavorable() {
         Vehiculo vehiculo = new Vehiculo(10, null);
 
-        vehiculo.aplicarSorpresaFavorable();
+        vehiculo.aplicarSorpresaPuntaje(0.8);
 
         assert (vehiculo.movimientos == (10 * 0.8));
     }
@@ -61,32 +64,39 @@ import static org.mockito.Mockito.*;
     @Test
     public void VehiculoPasarPozo() {
         Estado estado = mock(Estado.class);
+        when(estado.obtenerPenalizacionPozo()).thenReturn((double)3);
         Vehiculo vehiculo = new Vehiculo(0, null);
         vehiculo.aplicarEstado(estado);
 
-        vehiculo.pasarPozo(this.penalizacionPozo);
+        vehiculo.pasarPozo(estado.obtenerPenalizacionPozo());
 
-        verify(estado, times(1)).pasarPozo(penalizacion);
+        verify(estado, times(1)).pasarPozo(estado.obtenerPenalizacionPozo());
     }
     @Test
     public void VehiculoPasarPiquete() {
         Estado estado = mock(Estado.class);
+        when(estado.obtenerPenalizacionPiquete()).thenReturn((double)0);
         Vehiculo vehiculo = new Vehiculo(0, null);
         vehiculo.aplicarEstado(estado);
 
-        vehiculo.pasarPiquete();
+        vehiculo.pasarPiquete(estado.obtenerPenalizacionPiquete());
 
-        verify(estado, times(1)).pasarPiquete();
+        verify(estado, times(1)).pasarPiquete(estado.obtenerPenalizacionPiquete());
     }
     @Test
     public void VehiculoPasarControl() {
         Estado estado = mock(Estado.class);
+        ControlPolicial controlPolicial = mock(ControlPolicial.class);
         Vehiculo vehiculo = new Vehiculo(0, null);
         vehiculo.aplicarEstado(estado);
 
-        vehiculo.pasarControlPolicial();
+        when(estado.obtenerProbabilidadControl()).thenReturn((double)5);
+        when(estado.obtenerPenalizacionControl()).thenReturn((double)3);
+        when(controlPolicial.pasoControlAleatorio()).thenReturn((double)1);
 
-        verify(estado, times(1)).pasarControlPolicial();
+        vehiculo.pasarControlPolicial(estado.obtenerPenalizacionControl(), estado.obtenerProbabilidadControl(), controlPolicial.pasoControlAleatorio());
+
+        verify(estado, times(1)).pasarControlPolicial(estado.obtenerPenalizacionControl(), estado.obtenerProbabilidadControl(), controlPolicial.pasoControlAleatorio());
     }
     @Test
     public void VehiculoPasarVacio() {
@@ -98,4 +108,4 @@ import static org.mockito.Mockito.*;
 
         verify(estado, times(1)).pasarVacio();
     }
-}*/
+}

@@ -1,6 +1,7 @@
-package edu.fiuba.algo3.modelo.constructores;
+package edu.fiuba.algo3.modelo.modificadores;
 
 import edu.fiuba.algo3.modelo.Vehiculo;
+import edu.fiuba.algo3.modelo.constructores.ISorpresaConstructor;
 
 public class SopresaPuntaje implements ISorpresa {
 
@@ -12,6 +13,6 @@ public class SopresaPuntaje implements ISorpresa {
 
     @Override
     public void aplicar(Vehiculo vehiculo) {
-        vehiculo.multiplicarMovimientos(this.valorSorpresa);
+        vehiculo.aplicarSorpresaPuntaje(this.valorSorpresa);
     }
 }

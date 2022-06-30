@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.constructores;
 
 import edu.fiuba.algo3.modelo.Estado;
+import edu.fiuba.algo3.modelo.modificadores.ISorpresa;
 
 public interface ISorpresaConstructor {
 

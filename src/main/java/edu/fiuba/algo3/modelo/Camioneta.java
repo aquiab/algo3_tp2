@@ -20,24 +20,13 @@ public class Camioneta extends Estado{
         }
     }
 
-    public void pasarControlPolicial() {
-        if (rand.nextInt(10) <= PROBABILIDAD_CONTROL_POLICIAL) {
-            vehiculo.incrementarMovimientos(PENALIZACION_POLICIAL);
-        }
-    }
-
-    public void pasarPiquete() {
+    public void pasarPiquete(double penalizacion) {
         Posicion posicion = vehiculo.devolverPosicion();
         posicion.defaultearSig();
     }
 
     public Moto aplicarSorpresaCambioVehiculo() {
         return (new Moto(vehiculo));
-    }
-
-    @Override
-    public Estado siguienteEstado() {
-        return new Moto(vehiculo);
     }
 }
 

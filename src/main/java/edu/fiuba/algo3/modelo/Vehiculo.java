@@ -6,14 +6,13 @@ public class Vehiculo {
     public double movimientos;
     public Estado estado;
     public Jugador jugador;
-
-    private double SOPRESA_DESFAVORABLE = 1.25;
-    private double SORPRESA_FAVORABLE = 0.8;
     private Integer PENALIZACION_POR_CADA_MOVIMENTO = 1;
+    private Juego juego;
 
-    protected Vehiculo(double movimientos, Posicion posicion) {
+    protected Vehiculo(double movimientos, Posicion posicion, Juego juego) {
         this.movimientos = movimientos;
         this.posicion = posicion;
+        this.juego = juego;
     }
 
     public void mover(Direccion direccion) {
@@ -30,28 +29,20 @@ public class Vehiculo {
         movimientos += incremento;
     }
 
-    public void multiplicarMovimientos(double valorSorpresa) {
+    public void aplicarSorpresaPuntaje(double valorSorpresa) {
         this.movimientos *= valorSorpresa;
     }
 
-    public void aplicarSorpresaDesfavorable() {
-        movimientos *= SOPRESA_DESFAVORABLE;
-    }
-
-    public void aplicarSorpresaFavorable() {
-        movimientos *= SORPRESA_FAVORABLE;
-    }
-
-    public void pasarPiquete() {
-        estado.pasarPiquete();
+    public void pasarPiquete(double penalizacion) {
+        estado.pasarPiquete(penalizacion);
     }
 
     public void pasarPozo(double penalizacion) {
         estado.pasarPozo(penalizacion);
     }
 
-    public void pasarControlPolicial() {
-        estado.pasarControlPolicial();
+    public void pasarControlPolicial(double penalizacion, double probabilidad, double valorActual) {
+        estado.pasarControlPolicial(penalizacion, probabilidad, valorActual);
     }
 
     public void aplicarSorpresaCambioVehiculo() {
@@ -68,6 +59,11 @@ public class Vehiculo {
 
     public void ganar() {
         this.jugador.ingresarPuntaje(this.movimientos);
+        this.juego.reiniciarJuego();
+    }
+
+    public Estado estadoActual() {
+        return estado;
     }
 }
 

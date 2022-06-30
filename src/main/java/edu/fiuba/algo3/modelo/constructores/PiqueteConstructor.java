@@ -1,16 +1,16 @@
 package edu.fiuba.algo3.modelo.constructores;
 
 import edu.fiuba.algo3.modelo.modificadores.IObstaculo;
-import edu.fiuba.algo3.modelo.modificadores.Pozo;
+import edu.fiuba.algo3.modelo.modificadores.Piquete;
 
-public class PozoConstructor implements IConstructorObstaculo {
+public class PiqueteConstructor implements IConstructorObstaculo {
 
-    private double penalizacionPozo;
+    private double penalizacionPiquete;
     private double probabilidad;
 
     @Override
     public IConstructorObstaculo penalizacion(double penalizacion) {
-        this.penalizacionPozo = penalizacion;
+        this.penalizacionPiquete = penalizacion;
         return this;
     }
 
@@ -20,18 +20,18 @@ public class PozoConstructor implements IConstructorObstaculo {
         return this;
     }
 
+    @Override
+    public double obtenerPenalizacion() {
+        return this.penalizacionPiquete;
+    }
+
+    @Override
     public double obtenerProbabilidad() {
         return this.probabilidad;
     }
 
-    public double obtenerPenalizacion() {
-        return this.penalizacionPozo;
-    }
-
     @Override
     public IObstaculo construir() {
-        return new Pozo(this);
+        return new Piquete(this);
     }
-
-
 }

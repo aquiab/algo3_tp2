@@ -1,16 +1,18 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.constructores.Director;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.modificadores.*;
 
-/*public class CamionetaTest {
+public class CamionetaTest {
+
+    private Director director = new Director();
     @Test
     public void CamionetaEncuentraPozoTest() {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
         //act
         juego.mover(new DireccionDerecha());
 
@@ -22,13 +24,13 @@ import edu.fiuba.algo3.modelo.modificadores.*;
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new VacioSorpresa());
-        juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(director.generarVacioSorpresa());
+        juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(director.generarVacioSorpresa());
         //act
         juego.mover(new DireccionDerecha());
         juego.mover(new DireccionDerecha());
@@ -43,9 +45,9 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     public void CamionetaEncuentraPiqueteTest() {
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Piquete());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPiquete(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
         //act
         juego.mover(new DireccionDerecha());
         //assert
@@ -57,9 +59,9 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     public void CamionetaEncuentraPolicialTest() {
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new ControlPolicial());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarControlPolicial(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
         //act
         juego.mover(new DireccionDerecha());
 
@@ -70,11 +72,11 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     public void CamionetaEncuentraPiqueteYPozoTest() {
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new Pozo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new Piquete());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarPozo(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(director.generarPiquete(juego.obtenerEstadoActual()));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarVacioSorpresa());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(director.generarVacioSorpresa());
         //act
         juego.mover(new DireccionDerecha());
         juego.mover(new DireccionDerecha());
@@ -88,9 +90,9 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     public void CamionetaEncuentraSorpresaCambioVehiculo() {
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaVehiculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarVacioObstaculo());
         //act
         juego.mover(new DireccionDerecha());
         //assert
@@ -103,9 +105,9 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     public void CamionetaEncuentraSorpresaFavorable() {
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaFavorable());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaFavorable());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarVacioObstaculo());
         //act
         juego.mover(new DireccionDerecha());
         //assert
@@ -118,9 +120,9 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     public void CamionetaEncuentraSorpresaDesavorable() {
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesVerticales.get(0).get(1).agregarSorpresa(new SorpresaDesfavorable());
-        juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(new VacioObstaculo());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesVerticales.get(0).get(1).agregarSorpresa(director.generarSorpresaDesfavorable());
+        juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(director.generarVacioObstaculo());
         //act
         juego.mover(new DireccionAbajo());
         //assert
@@ -133,13 +135,13 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     public void CamionetaEncuentraSorpresaCambioVehiculo3Veces() {
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaVehiculo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new SorpresaVehiculo());
-        juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(new SorpresaVehiculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new VacioObstaculo());
-        juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(new VacioObstaculo());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarVacioObstaculo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(director.generarVacioObstaculo());
+        juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(director.generarVacioObstaculo());
         //act
         juego.mover(new DireccionDerecha());
         juego.mover(new DireccionDerecha());
@@ -154,11 +156,11 @@ import edu.fiuba.algo3.modelo.modificadores.*;
     public void CamionetaEncuentraSorpresaCambioVehiculo2veces() {
         //arrange
         Juego juego = new Juego();
-        juego.aplicarEstado(new Camioneta(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new SorpresaVehiculo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new SorpresaVehiculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new VacioObstaculo());
+        juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(director.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(director.generarVacioObstaculo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(director.generarVacioObstaculo());
         //act
         juego.mover(new DireccionDerecha());
         juego.mover(new DireccionDerecha());
@@ -168,4 +170,4 @@ import edu.fiuba.algo3.modelo.modificadores.*;
         assert(juego.vehiculo.movimientos == 2);
         assert(juego.vehiculo.estado.getClass() == Auto.class);
     }
-}*/
+}

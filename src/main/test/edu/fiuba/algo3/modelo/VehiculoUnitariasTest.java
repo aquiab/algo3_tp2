@@ -11,7 +11,7 @@ public class VehiculoUnitariasTest {
     public void VehiculoMover() {
         Posicion posicion = mock(Posicion.class);
         Direccion direccion = mock(Direccion.class);
-        Vehiculo vehiculo = new Vehiculo(0, posicion);
+        Vehiculo vehiculo = new Vehiculo(0, posicion, new Juego());
 
         vehiculo.mover(direccion);
 
@@ -21,7 +21,7 @@ public class VehiculoUnitariasTest {
     @Test
     public void VehiculoAplicarEstado() {
         Estado estado = mock(Estado.class);
-        Vehiculo vehiculo = new Vehiculo(0, null);
+        Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
 
         vehiculo.aplicarEstado(estado);
 
@@ -29,7 +29,7 @@ public class VehiculoUnitariasTest {
     }
     @Test
     public void VehiculoIncrementarMovimiento() {
-        Vehiculo vehiculo = new Vehiculo(0, null);
+        Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
 
         vehiculo.incrementarMovimientos(1);
 
@@ -37,7 +37,7 @@ public class VehiculoUnitariasTest {
     }
     @Test
     public void VehiculoAplicarSorpresaDesfavorable() {
-        Vehiculo vehiculo = new Vehiculo(10, null);
+        Vehiculo vehiculo = new Vehiculo(10, null, new Juego());
 
         vehiculo.aplicarSorpresaPuntaje(1.25);
 
@@ -45,7 +45,7 @@ public class VehiculoUnitariasTest {
     }
     @Test
     public void VehiculoAplicarSorpresaFavorable() {
-        Vehiculo vehiculo = new Vehiculo(10, null);
+        Vehiculo vehiculo = new Vehiculo(10, null, new Juego());
 
         vehiculo.aplicarSorpresaPuntaje(0.8);
 
@@ -54,7 +54,7 @@ public class VehiculoUnitariasTest {
     @Test
     public void VehiculoAplicarSorpresaCambioVehiculo() {
         Estado estado = mock(Estado.class);
-        Vehiculo vehiculo = new Vehiculo(0, null);
+        Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
         vehiculo.aplicarEstado(estado);
 
         vehiculo.aplicarSorpresaCambioVehiculo();
@@ -65,7 +65,7 @@ public class VehiculoUnitariasTest {
     public void VehiculoPasarPozo() {
         Estado estado = mock(Estado.class);
         when(estado.obtenerPenalizacionPozo()).thenReturn((double)3);
-        Vehiculo vehiculo = new Vehiculo(0, null);
+        Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
         vehiculo.aplicarEstado(estado);
 
         vehiculo.pasarPozo(estado.obtenerPenalizacionPozo());
@@ -76,7 +76,7 @@ public class VehiculoUnitariasTest {
     public void VehiculoPasarPiquete() {
         Estado estado = mock(Estado.class);
         when(estado.obtenerPenalizacionPiquete()).thenReturn((double)0);
-        Vehiculo vehiculo = new Vehiculo(0, null);
+        Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
         vehiculo.aplicarEstado(estado);
 
         vehiculo.pasarPiquete(estado.obtenerPenalizacionPiquete());
@@ -87,7 +87,7 @@ public class VehiculoUnitariasTest {
     public void VehiculoPasarControl() {
         Estado estado = mock(Estado.class);
         ControlPolicial controlPolicial = mock(ControlPolicial.class);
-        Vehiculo vehiculo = new Vehiculo(0, null);
+        Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
         vehiculo.aplicarEstado(estado);
 
         when(estado.obtenerProbabilidadControl()).thenReturn((double)5);
@@ -101,7 +101,7 @@ public class VehiculoUnitariasTest {
     @Test
     public void VehiculoPasarVacio() {
         Estado estado = mock(Estado.class);
-        Vehiculo vehiculo = new Vehiculo(0, null);
+        Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
         vehiculo.aplicarEstado(estado);
 
         vehiculo.aplicarVacio();

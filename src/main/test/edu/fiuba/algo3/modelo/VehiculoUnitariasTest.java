@@ -2,8 +2,6 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.modificadores.ControlPolicial;
 import org.junit.jupiter.api.Test;
 
-import javax.naming.ldap.Control;
-
 import static org.mockito.Mockito.*;
 
 public class VehiculoUnitariasTest {

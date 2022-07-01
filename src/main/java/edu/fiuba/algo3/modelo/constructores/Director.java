@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.modelo.constructores;
 
-import edu.fiuba.algo3.modelo.estados.Estado;
-import edu.fiuba.algo3.modelo.obstaculos.IObstaculo;
-import edu.fiuba.algo3.modelo.obstaculos.VacioObstaculo;
-import edu.fiuba.algo3.modelo.sorpresas.ISorpresa;
-import edu.fiuba.algo3.modelo.sorpresas.VacioSorpresa;
+import edu.fiuba.algo3.modelo.Estado;
+import edu.fiuba.algo3.modelo.modificadores.*;
 
 /**
  * Clase encargada de la construcción tanto de obstáculos como de sorpresas.
@@ -32,20 +29,19 @@ public class Director {
         return constructor.construir();
     }
 
-    public ISorpresa generarSorpresaCambioDeVehiculo(Estado estadoActual) {
+    public ISorpresa generarSorpresaCambioDeVehiculo() {
         SorpresaVehiculoConstructor constructor = new SorpresaVehiculoConstructor();
-        constructor.siguienteEstado(estadoActual.siguienteEstado());
         return constructor.construir();
     }
 
-    public ISorpresa generarSopresa(int codigo, Estado estadoActual) {
+    public ISorpresa generarSopresa(int codigo) {
         switch (codigo % CANTIDAD_DE_SORPRESAS) {
             case 0:
                 return generarSorpresaFavorable();
             case 1:
                 return generarSorpresaDesfavorable();
         }
-        return generarSorpresaCambioDeVehiculo(estadoActual);
+        return generarSorpresaCambioDeVehiculo();
     }
 
     /*----Obstáculos----*/

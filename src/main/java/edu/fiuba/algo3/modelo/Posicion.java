@@ -1,8 +1,4 @@
-package edu.fiuba.algo3.modelo.sistema_de_posicion;
-
-import edu.fiuba.algo3.modelo.Calle;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Vehiculo;
+package edu.fiuba.algo3.modelo;
 
 public class Posicion {
 
@@ -14,7 +10,7 @@ public class Posicion {
 	public int sigX;
 	public int sigY;
 	Mapa mapa;
-	public Posicion(int x, int y, Mapa mapa) {
+	Posicion(int x, int y, Mapa mapa) {
 		this.limiteDerechoInferiorMapa = mapa.dimension() - 1;
 		this.x = x;
 		this.y = y;

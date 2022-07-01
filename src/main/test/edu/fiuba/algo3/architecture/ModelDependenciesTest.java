@@ -11,6 +11,8 @@ public class ModelDependenciesTest {
     private final String MODEL = "..modelo..";
     private final String JAVA_LANG = "java..";
     private final String JUNIT = "org.junit..";
+
+    //REVISAR!
     private final String MOCK = "org.mockito..";
 
     @Test

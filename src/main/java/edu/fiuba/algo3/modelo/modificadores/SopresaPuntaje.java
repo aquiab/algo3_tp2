@@ -1,6 +1,5 @@
-package edu.fiuba.algo3.modelo.sorpresas;
+package edu.fiuba.algo3.modelo.modificadores;
 
-import edu.fiuba.algo3.modelo.estados.Estado;
 import edu.fiuba.algo3.modelo.Vehiculo;
 import edu.fiuba.algo3.modelo.constructores.ISorpresaConstructor;
 
@@ -15,10 +14,5 @@ public class SopresaPuntaje implements ISorpresa {
     @Override
     public void aplicar(Vehiculo vehiculo) {
         vehiculo.aplicarSorpresaPuntaje(this.valorSorpresa);
-    }
-
-    @Override
-    public void actualizar(double valor, Estado siguienteEstado) {
-        this.valorSorpresa = valor;
     }
 }

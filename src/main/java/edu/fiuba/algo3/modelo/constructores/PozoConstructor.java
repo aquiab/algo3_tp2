@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.constructores;
 
-import edu.fiuba.algo3.modelo.obstaculos.IObstaculo;
-import edu.fiuba.algo3.modelo.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.modificadores.IObstaculo;
+import edu.fiuba.algo3.modelo.modificadores.Pozo;
 
 public class PozoConstructor implements IConstructorObstaculo {
 

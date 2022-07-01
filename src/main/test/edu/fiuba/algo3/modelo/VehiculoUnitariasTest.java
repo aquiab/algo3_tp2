@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.estados.Estado;
-import edu.fiuba.algo3.modelo.obstaculos.ControlPolicial;
-import edu.fiuba.algo3.modelo.sistema_de_posicion.Direccion;
-import edu.fiuba.algo3.modelo.sistema_de_posicion.Posicion;
+import edu.fiuba.algo3.modelo.modificadores.ControlPolicial;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
@@ -58,7 +55,7 @@ public class VehiculoUnitariasTest {
         Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
         vehiculo.aplicarEstado(estado);
 
-        vehiculo.aplicarSorpresaCambioVehiculo(vehiculo.estadoActual());
+        vehiculo.aplicarSorpresaCambioVehiculo();
 
         verify(estado, times(1)).aplicarSorpresaCambioVehiculo();
     }

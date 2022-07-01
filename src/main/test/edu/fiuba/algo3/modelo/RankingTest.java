@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.estados.Auto;
-import edu.fiuba.algo3.modelo.estados.Camioneta;
 import edu.fiuba.algo3.modelo.constructores.Director;
-import edu.fiuba.algo3.modelo.sistema_de_posicion.DireccionDerecha;
 import org.junit.jupiter.api.Test;
 
 public class RankingTest {

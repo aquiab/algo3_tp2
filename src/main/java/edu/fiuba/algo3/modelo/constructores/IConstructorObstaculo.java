@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.constructores;
 
-import edu.fiuba.algo3.modelo.obstaculos.IObstaculo;
+import edu.fiuba.algo3.modelo.modificadores.IObstaculo;
 
 public interface IConstructorObstaculo {
 

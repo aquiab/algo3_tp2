@@ -1,16 +1,16 @@
-package edu.fiuba.algo3.modelo.estados;
+package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Vehiculo;
+import java.util.Random;
 
 public abstract class Estado {
 
     protected Integer PENALIZACION_POZO;
-    protected Integer PENALIZACION_POLICIAL = 3;
+    protected Integer PENALIZACION_POLICIAL;
     protected Integer PROBABILIDAD_CONTROL_POLICIAL;
     protected Integer PENALIZACION_PIQUETE = 0;
     protected Vehiculo vehiculo;
 
-    public Estado(Vehiculo vehiculo) {
+    Estado(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
 
@@ -26,26 +26,22 @@ public abstract class Estado {
         vehiculo.incrementarMovimientos(penalizacion);
     }
 
-    public void pasarVacio() {}
+    public void pasarVacio() {
+    }
 
+    public double obtenerPenalizacionPozo() {
+        return PENALIZACION_POZO;
+    }
     public double obtenerPenalizacionControl() {
-        return this.PENALIZACION_POLICIAL;
+        return PENALIZACION_POLICIAL;
+    }
+    public double obtenerProbabilidadControl() {
+        return PROBABILIDAD_CONTROL_POLICIAL;
+    }
+    public double obtenerPenalizacionPiquete() {
+        return PENALIZACION_PIQUETE;
     }
 
-    public abstract double obtenerProbabilidadControl();
 
-    public abstract double obtenerPenalizacionPozo();
-
-    public abstract double obtenerPenalizacionPiquete();
-
-    public abstract Estado siguienteEstado();
-
-    public double obtenerValorSorpresaFavorable() {
-        return 0.8;
-    }
-
-    public double obtenerValorSorpresaDesfavorable() {
-        return 1.25;
-    }
 }
 

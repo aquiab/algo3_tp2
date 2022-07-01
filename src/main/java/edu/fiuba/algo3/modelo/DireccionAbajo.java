@@ -1,6 +1,4 @@
-package edu.fiuba.algo3.modelo.sistema_de_posicion;
-
-import edu.fiuba.algo3.modelo.Vehiculo;
+package edu.fiuba.algo3.modelo;
 
 public class DireccionAbajo implements Direccion {
 

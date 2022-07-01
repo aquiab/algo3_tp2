@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.constructores.Director;
-import edu.fiuba.algo3.modelo.modificadores.*;
+import edu.fiuba.algo3.modelo.obstaculos.VacioObstaculo;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.Posicion;
+import edu.fiuba.algo3.modelo.sorpresas.Meta;
+import edu.fiuba.algo3.modelo.sorpresas.VacioSorpresa;
 
 import java.util.Random;
 
@@ -15,7 +17,7 @@ public class Mapa {
 	private VacioObstaculo VACIOOBSTACULO = new VacioObstaculo();
 	private VacioSorpresa VACIOSORPRESA = new VacioSorpresa();
 
-	Mapa(int dimension) {
+	public Mapa(int dimension) {
 		this.dimension = dimension;
 		callesHorizontales = new LinkedList<>();
 		callesVerticales = new LinkedList<>();
@@ -52,8 +54,6 @@ public class Mapa {
 	public int dimension() {
 		return dimension;
 	}
-
-
 
 	public void agregarMeta() {
 		Random rand = new Random();

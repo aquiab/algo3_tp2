@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.estados.Estado;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.Direccion;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.Posicion;
+
 public class Vehiculo {
 
     public Posicion posicion;
@@ -45,8 +49,9 @@ public class Vehiculo {
         estado.pasarControlPolicial(penalizacion, probabilidad, valorActual);
     }
 
-    public void aplicarSorpresaCambioVehiculo() {
-        estado = estado.aplicarSorpresaCambioVehiculo();
+    public void aplicarSorpresaCambioVehiculo(Estado siguienteEstado) {
+        estado = siguienteEstado;
+        juego.actualizarObstaculos();
     }
 
     public void aplicarVacio() {

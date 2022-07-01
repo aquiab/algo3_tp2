@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.constructores;
 
-import edu.fiuba.algo3.modelo.modificadores.ControlPolicial;
-import edu.fiuba.algo3.modelo.modificadores.IObstaculo;
+import edu.fiuba.algo3.modelo.obstaculos.ControlPolicial;
+import edu.fiuba.algo3.modelo.obstaculos.IObstaculo;
 
 public class ControlPolicialConstructor implements IConstructorObstaculo {
 

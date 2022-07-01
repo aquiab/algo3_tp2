@@ -1,5 +1,20 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.modelo.estados.Auto;
+import edu.fiuba.algo3.modelo.estados.Camioneta;
+import edu.fiuba.algo3.modelo.obstaculos.ControlPolicial;
+import edu.fiuba.algo3.modelo.obstaculos.Piquete;
+import edu.fiuba.algo3.modelo.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.DireccionAbajo;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.DireccionArriba;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.DireccionDerecha;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.DireccionIzquierda;
+import edu.fiuba.algo3.modelo.sorpresas.Meta;
+import edu.fiuba.algo3.modelo.sorpresas.SopresaPuntaje;
+import edu.fiuba.algo3.modelo.sorpresas.SorpresaVehiculo;
+import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -12,10 +27,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.geometry.Insets;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.file.PathMatcher;
 import java.util.LinkedList;
 import java.text.DecimalFormat;
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.modificadores.*;
+import javafx.util.Duration;
 
 
 public class App extends Application {
@@ -91,10 +107,26 @@ public class App extends Application {
         return imageView;
     }
 
-    private void actualizarMovimiento(ImageView imageView, Juego juego) throws FileNotFoundException {
-        imageView.setImage(obtenerVehiculo(juego));
-        imageView.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
-        imageView.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+    private void actualizarMovimientoHorizontal(ImageView imageView, Juego juego) {
+        try {
+            imageView.setImage(obtenerVehiculo(juego));
+        } catch (Exception e) {}
+        TranslateTransition transition = new TranslateTransition();
+        transition.setNode(imageView);
+        transition.setDuration(Duration.seconds(0.5));
+        transition.setToX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
+        transition.play();
+    }
+
+    private void actualizarMovimientoVertical(ImageView imageView, Juego juego) {
+        try {
+            imageView.setImage(obtenerVehiculo(juego));
+        } catch (Exception e) {}
+        TranslateTransition transition = new TranslateTransition();
+        transition.setNode(imageView);
+        transition.setDuration(Duration.seconds(0.5));
+        transition.setToY( juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+        transition.play();
     }
 
     private Image obtenerVehiculo(Juego juego) throws FileNotFoundException {
@@ -112,7 +144,7 @@ public class App extends Application {
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("RAUL");
 
-        ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y, "assets/car.png");
+        ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA, TAMANIO_MANZANA, "assets/car.png");
         GridPane calles = dibujarCalles(juego.mapSize);
         Pane pane = new Pane(calles, vehiculo);
 
@@ -123,23 +155,37 @@ public class App extends Application {
 
         var scene = new Scene(pane);
 
+        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
+                (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
+        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
+                (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
+
         scene.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP) {
                 juego.mover(new DireccionArriba());
-                vehiculo.setRotate(-90);
+                //vehiculo.setRotate(-90);
+                rotarVehiculo(vehiculo, -90);
+                actualizarMovimientoVertical(vehiculo, juego);
+
             } else if (e.getCode() == KeyCode.DOWN) {
                 juego.mover(new DireccionAbajo());
-                vehiculo.setRotate(90);
+                //vehiculo.setRotate(90);
+                rotarVehiculo(vehiculo, 90);
+                actualizarMovimientoVertical(vehiculo, juego);
             } else if (e.getCode() == KeyCode.LEFT) {
                 juego.mover(new DireccionIzquierda());
-                vehiculo.setRotate(180);
+                //vehiculo.setRotate(180);
+                rotarVehiculo(vehiculo, 180);
+                actualizarMovimientoHorizontal(vehiculo, juego);
             } else if (e.getCode() == KeyCode.RIGHT) {
                 juego.mover(new DireccionDerecha());
-                vehiculo.setRotate(0);
+                //vehiculo.setRotate(0);
+                rotarVehiculo(vehiculo, 0);
+                actualizarMovimientoHorizontal(vehiculo, juego);
             }
             try {
                 pane.getChildren().retainAll(vehiculo, calles);
-                actualizarMovimiento(vehiculo, juego);
+                //actualizarMovimiento(vehiculo, juego);
                 dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
                         (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
                 dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
@@ -154,6 +200,14 @@ public class App extends Application {
         
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void rotarVehiculo(ImageView vehiculo, int i) {
+        RotateTransition transition = new RotateTransition();
+        transition.setNode(vehiculo);
+        transition.setDuration(Duration.seconds(0.1));
+        transition.setToAngle(i);
+        transition.play();
     }
 
     public static void main(String[] args) {

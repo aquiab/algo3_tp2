@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.concurrent.ThreadLocalRandom;
+import edu.fiuba.algo3.modelo.estados.Auto;
+import edu.fiuba.algo3.modelo.estados.Estado;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.Direccion;
+import edu.fiuba.algo3.modelo.sistema_de_posicion.Posicion;
 
 public class Juego {
 
@@ -36,4 +39,9 @@ public class Juego {
 	public Estado obtenerEstadoActual() {
 		return vehiculo.estadoActual();
 	}
+
+    public void actualizarObstaculos() {
+		generador.actualizarObstaculos(vehiculo.estado);
+		generador.actualizarSorpresas(vehiculo.estado);
+    }
 }

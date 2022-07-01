@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.modificadores;
+package edu.fiuba.algo3.modelo.obstaculos;
 
 import edu.fiuba.algo3.modelo.Vehiculo;
 import edu.fiuba.algo3.modelo.constructores.ControlPolicialConstructor;
@@ -6,17 +6,17 @@ import edu.fiuba.algo3.modelo.constructores.ControlPolicialConstructor;
 import java.util.Random;
 
 public class ControlPolicial implements IObstaculo {
-    private final double penalizacionControl;
-    private final double probabilidadControl;
+    private double penalizacion;
+    private double probabilidad;
 
     public ControlPolicial(ControlPolicialConstructor constructor) {
-        this.penalizacionControl = constructor.obtenerPenalizacion();
-        this.probabilidadControl = constructor.obtenerProbabilidad();
+        this.penalizacion = constructor.obtenerPenalizacion();
+        this.probabilidad = constructor.obtenerProbabilidad();
     }
 
     @Override
     public void pasar(Vehiculo vehiculo) {
-        vehiculo.pasarControlPolicial(this.penalizacionControl, this.probabilidadControl, pasoControlAleatorio());
+        vehiculo.pasarControlPolicial(this.penalizacion, this.probabilidad, pasoControlAleatorio());
     }
 
     /** Generador de valores aleatorios para el paso del control policial
@@ -25,5 +25,11 @@ public class ControlPolicial implements IObstaculo {
     public double pasoControlAleatorio() {
         Random rand = new Random();
         return rand.nextInt(10);
+    }
+
+    @Override
+    public void actualizar(double penalizacion, double probabilidad) {
+        this.penalizacion = penalizacion;
+        this.probabilidad = probabilidad;
     }
 }

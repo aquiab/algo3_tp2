@@ -1,10 +1,14 @@
 package edu.fiuba.algo3;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.image.*;
@@ -12,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.geometry.Insets;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.text.DecimalFormat;
 import edu.fiuba.algo3.modelo.*;
@@ -24,6 +29,7 @@ public class App extends Application {
     private static final int OFFSET_X = -7;
     private static final int OFFSET_Y = 3;
     private static final int OFFSET_SORPRESA = 15;
+    private Scene active_scene;
 
     private GridPane dibujarCalles(int size) {
         GridPane gp = new GridPane();
@@ -112,18 +118,96 @@ public class App extends Application {
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("RAUL");
 
-        ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y, "assets/car.png");
-        GridPane calles = dibujarCalles(juego.mapSize);
-        Pane pane = new Pane(calles, vehiculo);
-
         /*Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
         AudioClip mediaPlayer = new AudioClip(musica.getSource());
         mediaPlayer.setVolume(0.2);
         mediaPlayer.play();*/
 
-        var scene = new Scene(pane);
+        //Escena Juego
+        ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y, "assets/car.png");
+        GridPane calles = dibujarCalles(juego.mapSize);
+        Pane pane = new Pane(calles, vehiculo);
+        Pane pane2 = new Pane();
+        //Desde aca es de la sombra
+        Rectangle rectangulo = new Rectangle();
+        rectangulo.setHeight(juego.mapSize* (TAMANIO_MANZANA + TAMANIO_CALLE));
+        rectangulo.setWidth(juego.mapSize* (TAMANIO_MANZANA + TAMANIO_CALLE));
 
-        scene.setOnKeyReleased(e -> {
+        Circle circulo = new Circle();
+        circulo.setCenterX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+        circulo.setCenterY(juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+        circulo.setRadius(2 * (TAMANIO_MANZANA + TAMANIO_CALLE));
+
+        Circle circulo2 = new Circle();
+        circulo2.setCenterX((juego.mapSize) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
+        circulo2.setCenterY((juego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+        circulo2.setRadius(TAMANIO_MANZANA + TAMANIO_CALLE);
+
+        Shape sombra = Shape.subtract(rectangulo, circulo);
+        sombra = Shape.subtract(sombra, circulo2);
+        pane2.setClip(sombra);
+        pane2.setStyle("-fx-background-color: black");
+        //Hasta aca
+        StackPane stack = new StackPane(pane, pane2);
+        
+        var scene1 = new Scene(stack);
+
+        //Escena MainMenu
+        Button botonRanking = new Button("Ranking");
+        Button botonSalir = new Button("Salir");
+        Button botonJugar = new Button("Jugar");
+        Label label = new Label("AlgoGPS");
+        label.setUnderline(true);
+        VBox vbox = new VBox(30, label, botonJugar, botonRanking, botonSalir);
+        VBox.setMargin(label, new Insets(60));
+        vbox.setPrefSize(350, 500);
+        vbox.setAlignment(Pos.TOP_CENTER);
+        var scene0 = new Scene(vbox);
+
+        //Escena Ranking
+        Button botonVolver = new Button("Volver");
+        VBox vboxizq = new VBox();
+        VBox vboxder = new VBox();
+        HBox hbox = new HBox(50, botonVolver, vboxizq, vboxder);
+        hbox.setPrefSize(350, 500);
+        hbox.setAlignment(Pos.TOP_CENTER);
+        var scene2 = new Scene(hbox);
+
+        active_scene = scene0;
+
+        //Accion de los botones de las escenas nuevas
+        botonJugar.setOnAction(e -> {
+            active_scene = scene1;
+            stage.setScene(active_scene);
+        });
+        botonSalir.setOnAction(e -> {
+            System.exit(0);
+        });
+        botonRanking.setOnAction(e -> {
+            ArrayList<Jugador> jugadores = new ArrayList<>();
+            vboxizq.getChildren().clear();
+            vboxder.getChildren().clear();
+            vboxizq.getChildren().add(new Label("Jugador"));
+            vboxder.getChildren().add(new Label("Puntaje"));
+            Jugador jugador = juego.ranking.devolverGanador();
+            while ( jugador != null) {
+                vboxizq.getChildren().add(new Label(jugador.nombre));
+                vboxder.getChildren().add(new Label(String.valueOf(jugador.movimientos)));
+                jugadores.add(jugador);
+                jugador = juego.ranking.devolverGanador();
+            }
+            for (int i = 0; i < jugadores.size(); i++) {
+                juego.ranking.agregarJugador(jugadores.get(i));
+            }
+            active_scene = scene2;
+            stage.setScene(active_scene);
+        });
+        botonVolver.setOnAction(e -> {
+            active_scene = scene0;
+            stage.setScene(active_scene);
+        });
+
+        scene1.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP) {
                 juego.mover(new DireccionArriba());
                 vehiculo.setRotate(-90);
@@ -136,7 +220,10 @@ public class App extends Application {
             } else if (e.getCode() == KeyCode.RIGHT) {
                 juego.mover(new DireccionDerecha());
                 vehiculo.setRotate(0);
-            }
+            } else if (e.getCode() == KeyCode.ENTER) { //Puse esto para volver al menu desde el juego porque no esta la ultima escena
+            active_scene = scene0;
+            stage.setScene(active_scene);
+        }
             try {
                 pane.getChildren().retainAll(vehiculo, calles);
                 actualizarMovimiento(vehiculo, juego);
@@ -148,11 +235,18 @@ public class App extends Application {
             catch (Exception exception) {
                 System.out.print(exception);
             }
+            //Actualiza la sombra
+            circulo.setCenterX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+            circulo.setCenterY(juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+            circulo2.setCenterY((juego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+            Shape sombra1 = Shape.subtract(rectangulo, circulo);
+            sombra1 = Shape.subtract(sombra1, circulo2);
+            pane2.setClip(sombra1);
 
             stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.vehiculo.movimientos));
         });
         
-        stage.setScene(scene);
+        stage.setScene(active_scene);
         stage.show();
     }
 

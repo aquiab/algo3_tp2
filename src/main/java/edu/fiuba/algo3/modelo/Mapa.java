@@ -62,6 +62,15 @@ public class Mapa {
 		calle.agregarSorpresa(new Meta());
 	}
 
+	public int obtenerMetaY() {
+		for (int i = 0; i < dimension; i++) {
+			if (obtenerCalleHorizontal(dimension-1, i).sorpresa.getClass() == Meta.class)
+				return i;
+		}
+		return 0;
+	}
+
+
 	private Posicion obtenerPosicionAleatoria(int dimension) {
 		return new Posicion((int) (Math.random() * (dimension - 1)), (int) (Math.random() * (dimension - 1)), this);
 	}

@@ -6,15 +6,16 @@ import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
 import org.junit.jupiter.api.Test;
 
 public class AutoTest {
-	private Juego juego = new Juego();
 	private Fabrica fabrica = new Fabrica();
 
 	@Test
 	public void AutoEncuentraPozoTest() {
 		//Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
 		//arrange
+		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
 		//act
@@ -27,6 +28,8 @@ public class AutoTest {
 	public void AutoEncuentraPiqueteTest() {
 		//arrange
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPiquete());
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
@@ -41,6 +44,8 @@ public class AutoTest {
 	public void AutoEncuentraPolicialTest() {
 		//arrange
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarControlPolicial());
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
@@ -54,6 +59,8 @@ public class AutoTest {
 	public void AutoEncuentraPiqueteYPozoTest() {
 		//arrange
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
 		juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(fabrica.generarPiquete());
@@ -73,6 +80,8 @@ public class AutoTest {
 		//arrange
 
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
@@ -88,6 +97,8 @@ public class AutoTest {
 	public void AutoEncuentraSorpresaFavorable() {
 		//arrange
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaFavorable());
 		juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
@@ -103,6 +114,8 @@ public class AutoTest {
 	public void AutoEncuentraSorpresaDesfavorable() {
 		//arrange
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesVerticales.get(0).get(1).agregarSorpresa(fabrica.generarSorpresaDesfavorable());
 		juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(fabrica.generarVacioObstaculo());
@@ -118,6 +131,8 @@ public class AutoTest {
 	public void AutoEncuentraSorpresaCambioVehiculo3Veces() {
 		//arrange
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
 		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
@@ -139,6 +154,8 @@ public class AutoTest {
 	public void AutoEncuentraSorpresaCambioVehiculo2veces() {
 		//arrange
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
 		juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
@@ -158,6 +175,8 @@ public class AutoTest {
 		//hacer luego todos los límites p/c auto
 		//arrange
 		Juego juego = new Juego();
+		juego.asginarLongitudMapa(5);
+		juego.asignarVehiculoInicial();
 		juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
 		juego.mapa.callesHorizontales.get(0).get(0).agregarSorpresa(fabrica.generarSorpresaDesfavorable());
 		juego.mapa.callesHorizontales.get(0).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());

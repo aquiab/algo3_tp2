@@ -12,6 +12,8 @@ public class CamionetaTest {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
         juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
@@ -26,6 +28,8 @@ public class CamionetaTest {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
         juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(fabrica.generarPozo());
@@ -47,6 +51,8 @@ public class CamionetaTest {
     public void CamionetaEncuentraPiqueteTest() {
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPiquete());
         juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
@@ -61,6 +67,8 @@ public class CamionetaTest {
     public void CamionetaEncuentraPolicialTest() {
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarControlPolicial());
         juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
@@ -74,6 +82,8 @@ public class CamionetaTest {
     public void CamionetaEncuentraPiqueteYPozoTest() {
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
         juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(fabrica.generarPiquete());
@@ -92,6 +102,8 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaCambioVehiculo() {
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
@@ -107,6 +119,8 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaFavorable() {
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaFavorable());
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
@@ -122,6 +136,8 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaDesavorable() {
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesVerticales.get(0).get(1).agregarSorpresa(fabrica.generarSorpresaDesfavorable());
         juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(fabrica.generarVacioObstaculo());
@@ -137,6 +153,8 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaCambioVehiculo3Veces() {
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
         juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
@@ -158,6 +176,8 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaCambioVehiculo2veces() {
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
         juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());

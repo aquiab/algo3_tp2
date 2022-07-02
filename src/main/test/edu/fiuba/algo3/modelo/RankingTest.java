@@ -11,6 +11,8 @@ public class RankingTest {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
@@ -33,6 +35,8 @@ public class RankingTest {
     @Test
     public void TresJugadoresRankingTest() {
         Juego juego = new Juego();
+        juego.asginarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
         juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());

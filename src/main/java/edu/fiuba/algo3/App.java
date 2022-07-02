@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,6 +23,7 @@ import java.util.LinkedList;
 import java.text.DecimalFormat;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.modificadores.*;
+import javafx.util.Duration;
 
 
 public class App extends Application {
@@ -30,6 +33,41 @@ public class App extends Application {
     private static final int OFFSET_Y = 3;
     private static final int OFFSET_SORPRESA = 15;
     private Scene active_scene;
+
+
+    //--------------
+
+    private void actualizarMovimientoHorizontal(ImageView imageView, Juego juego) {
+        try {
+            imageView.setImage(obtenerVehiculo(juego));
+        } catch (Exception e) {}
+        TranslateTransition transition = new TranslateTransition();
+        transition.setNode(imageView);
+        transition.setDuration(Duration.seconds(0.5));
+        transition.setToX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X+5);
+        transition.play();
+    }
+
+    private void actualizarMovimientoVertical(ImageView imageView, Juego juego) {
+        try {
+            imageView.setImage(obtenerVehiculo(juego));
+        } catch (Exception e) {}
+        TranslateTransition transition = new TranslateTransition();
+        transition.setNode(imageView);
+        transition.setDuration(Duration.seconds(0.5));
+        transition.setToY( juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+        transition.play();
+    }
+
+    private void rotarVehiculo(ImageView vehiculo, int i) {
+        RotateTransition transition = new RotateTransition();
+        transition.setNode(vehiculo);
+        transition.setDuration(Duration.seconds(0.1));
+        transition.setToAngle(i);
+        transition.play();
+    }
+
+    //--------
 
     private GridPane dibujarCalles(int size) {
         GridPane gp = new GridPane();
@@ -128,6 +166,12 @@ public class App extends Application {
         GridPane calles = dibujarCalles(juego.mapSize);
         Pane pane = new Pane(calles, vehiculo);
         Pane pane2 = new Pane();
+
+        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
+                (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
+        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
+                TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
+
         //Desde aca es de la sombra
         Rectangle rectangulo = new Rectangle();
         rectangulo.setHeight(juego.mapSize* (TAMANIO_MANZANA + TAMANIO_CALLE));
@@ -210,23 +254,26 @@ public class App extends Application {
         scene1.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP) {
                 juego.mover(new DireccionArriba());
-                vehiculo.setRotate(-90);
+                rotarVehiculo(vehiculo, -90);
+                actualizarMovimientoVertical(vehiculo, juego);
             } else if (e.getCode() == KeyCode.DOWN) {
                 juego.mover(new DireccionAbajo());
-                vehiculo.setRotate(90);
+                rotarVehiculo(vehiculo, 90);
+                actualizarMovimientoVertical(vehiculo, juego);
             } else if (e.getCode() == KeyCode.LEFT) {
                 juego.mover(new DireccionIzquierda());
-                vehiculo.setRotate(180);
+                rotarVehiculo(vehiculo, 180);
+                actualizarMovimientoHorizontal(vehiculo, juego);
             } else if (e.getCode() == KeyCode.RIGHT) {
                 juego.mover(new DireccionDerecha());
-                vehiculo.setRotate(0);
+                rotarVehiculo(vehiculo, 0);
+                actualizarMovimientoHorizontal(vehiculo, juego);
             } else if (e.getCode() == KeyCode.ENTER) { //Puse esto para volver al menu desde el juego porque no esta la ultima escena
             active_scene = scene0;
             stage.setScene(active_scene);
         }
             try {
                 pane.getChildren().retainAll(vehiculo, calles);
-                actualizarMovimiento(vehiculo, juego);
                 dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
                         (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
                 dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,

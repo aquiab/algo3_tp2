@@ -1,26 +1,24 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.concurrent.ThreadLocalRandom;
+import edu.fiuba.algo3.modelo.estado.Auto;
+import edu.fiuba.algo3.modelo.estado.Estado;
 
 public class Juego {
 
 	private Integer POSICION_INICIAL = 0;
 	private Integer MOVIMIENTOS_INICIALES = 0;
 	public Ranking ranking = new Ranking();
-	public int mapSize = 10;//ThreadLocalRandom.current().nextInt(10, 15);
-	public Mapa mapa = new Mapa(mapSize);
-	public Vehiculo vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
+	public int mapSize;//ThreadLocalRandom.current().nextInt(10, 15);
+	public Mapa mapa;
+	public Vehiculo vehiculo;
 	private GeneradorDeModificadores generador = new GeneradorDeModificadores(mapSize, mapa);
+
 	public void mover(Direccion direccion) {
 		vehiculo.mover(direccion);
 	}
 
 	public void reiniciarJuego() {
-		this.mapa = new Mapa(mapSize);
-		Jugador aux = vehiculo.jugador;
-		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
-		aplicarEstadoInicial(new Auto(this.vehiculo));
-		aplicarJugador(aux.nombre);
+
 	}
 
 	public void aplicarJugador(String nombre) {
@@ -33,7 +31,20 @@ public class Juego {
 		generador.llenarMapa(estado);
 	}
 
-	public Estado obtenerEstadoActual() {
-		return vehiculo.estadoActual();
+	public void asginarLongitudMapa(int dimension) {
+		this.mapSize = dimension;
+		this.mapa = new Mapa(dimension);
+	}
+
+	public void asignarVehiculoInicial() {
+		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
+	}
+
+	public Mapa obtenerMapa() {
+		return this.mapa;
+	}
+
+	public Vehiculo obtenerVehiculo() {
+		return this.vehiculo;
 	}
 }

@@ -1,5 +1,14 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
+import edu.fiuba.algo3.modelo.estado.Auto;
+import edu.fiuba.algo3.modelo.estado.Camioneta;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicial;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.Piquete;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.Meta;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.SopresaPuntaje;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaVehiculo;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -22,7 +31,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.text.DecimalFormat;
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.modificadores.*;
 import javafx.util.Duration;
 
 
@@ -152,8 +160,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
-        Juego juego = new Juego();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        JuegoDirector director = new JuegoDirector();
+        Juego juego = director.crearPartidaNormal();
         juego.aplicarJugador("RAUL");
 
         /*Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
@@ -177,18 +185,18 @@ public class App extends Application {
         rectangulo.setHeight(juego.mapSize* (TAMANIO_MANZANA + TAMANIO_CALLE));
         rectangulo.setWidth(juego.mapSize* (TAMANIO_MANZANA + TAMANIO_CALLE));
 
-        Circle circulo = new Circle();
-        circulo.setCenterX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
-        circulo.setCenterY(juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
-        circulo.setRadius(2 * (TAMANIO_MANZANA + TAMANIO_CALLE));
+        Circle visionVehiculo = new Circle();
+        visionVehiculo.setCenterX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+        visionVehiculo.setCenterY(juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+        visionVehiculo.setRadius(2 * (TAMANIO_MANZANA + TAMANIO_CALLE));
 
-        Circle circulo2 = new Circle();
-        circulo2.setCenterX((juego.mapSize) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
-        circulo2.setCenterY((juego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
-        circulo2.setRadius(TAMANIO_MANZANA + TAMANIO_CALLE);
+        Circle visionMeta = new Circle();
+        visionMeta.setCenterX((juego.mapSize) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
+        visionMeta.setCenterY((juego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+        visionMeta.setRadius(TAMANIO_MANZANA + TAMANIO_CALLE);
 
-        Shape sombra = Shape.subtract(rectangulo, circulo);
-        sombra = Shape.subtract(sombra, circulo2);
+        Shape sombra = Shape.subtract(rectangulo, visionVehiculo);
+        sombra = Shape.subtract(sombra, visionMeta);
         pane2.setClip(sombra);
         pane2.setStyle("-fx-background-color: black");
         //Hasta aca
@@ -269,11 +277,11 @@ public class App extends Application {
                 rotarVehiculo(vehiculo, 0);
                 actualizarMovimientoHorizontal(vehiculo, juego);
             } else if (e.getCode() == KeyCode.ENTER) { //Puse esto para volver al menu desde el juego porque no esta la ultima escena
-            active_scene = scene0;
-            stage.setScene(active_scene);
-        }
+                active_scene = scene0;
+                stage.setScene(active_scene);
+            }
+            pane.getChildren().retainAll(vehiculo, calles);
             try {
-                pane.getChildren().retainAll(vehiculo, calles);
                 dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
                         (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
                 dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
@@ -283,11 +291,11 @@ public class App extends Application {
                 System.out.print(exception);
             }
             //Actualiza la sombra
-            circulo.setCenterX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
-            circulo.setCenterY(juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
-            circulo2.setCenterY((juego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
-            Shape sombra1 = Shape.subtract(rectangulo, circulo);
-            sombra1 = Shape.subtract(sombra1, circulo2);
+            visionVehiculo.setCenterX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+            visionVehiculo.setCenterY(juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+            visionMeta.setCenterY((juego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+            Shape sombra1 = Shape.subtract(rectangulo, visionVehiculo);
+            sombra1 = Shape.subtract(sombra1, visionMeta);
             pane2.setClip(sombra1);
 
             stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.vehiculo.movimientos));

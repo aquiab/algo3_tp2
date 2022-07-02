@@ -10,7 +10,7 @@ public class Posicion {
 	public int sigX;
 	public int sigY;
 	Mapa mapa;
-	Posicion(int x, int y, Mapa mapa) {
+	public Posicion(int x, int y, Mapa mapa) {
 		this.limiteDerechoInferiorMapa = mapa.dimension() - 1;
 		this.x = x;
 		this.y = y;
@@ -71,5 +71,13 @@ public class Posicion {
 		Calle calle = mapa.obtenerCalleHorizontal(x, y);
 		calle.recorrer(vehiculo);
 		modificarPosicion();
+	}
+
+	public int obtenerCoordenadaX() {
+		return this.x;
+	}
+
+	public int obtenerCoordenadaY() {
+		return this.y;
 	}
 }

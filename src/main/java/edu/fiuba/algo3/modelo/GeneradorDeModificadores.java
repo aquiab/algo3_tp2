@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.constructores.Director;
+import edu.fiuba.algo3.modelo.estado.Estado;
 
 public class GeneradorDeModificadores {
 
@@ -18,25 +18,25 @@ public class GeneradorDeModificadores {
     }
 
     public void agregarSorpresas(Integer cantidadSorpresas) {
-        Director director = new Director();
+        Fabrica fabrica = new Fabrica();
         int sorpresasAgregadas = 0;
         while (sorpresasAgregadas < cantidadSorpresas) {
             Posicion posicion = obtenerPosicionAleatoria(mapSize);
-            mapa.obtenerCalleHorizontal(posicion.x, posicion.y).agregarSorpresa(director.generarSopresa(sorpresasAgregadas));
+            mapa.obtenerCalleHorizontal(posicion.x, posicion.y).agregarSorpresa(fabrica.generarSopresa(sorpresasAgregadas));
             posicion = obtenerPosicionAleatoria(mapSize);
-            mapa.obtenerCalleVertical(posicion.x, posicion.y).agregarSorpresa(director.generarSopresa(sorpresasAgregadas));
+            mapa.obtenerCalleVertical(posicion.x, posicion.y).agregarSorpresa(fabrica.generarSopresa(sorpresasAgregadas));
             sorpresasAgregadas += 1;
         }
     }
 
     public void agregarObstaculos(Integer cantidadObstaculos, Estado estadoActual) {
-        Director director = new Director();
+        Fabrica fabrica = new Fabrica();
         int obstaculosAgregados = 0;
         while (obstaculosAgregados < cantidadObstaculos) {
             Posicion posicion = obtenerPosicionAleatoria(mapSize);
-            mapa.obtenerCalleVertical(posicion.x, posicion.y).agregarObstaculo(director.generarObstaculo(obstaculosAgregados, estadoActual));
+            mapa.obtenerCalleVertical(posicion.x, posicion.y).agregarObstaculo(fabrica.generarObstaculo(obstaculosAgregados));
             posicion = obtenerPosicionAleatoria(mapSize);
-            mapa.obtenerCalleHorizontal(posicion.x, posicion.y).agregarObstaculo(director.generarObstaculo(obstaculosAgregados, estadoActual));
+            mapa.obtenerCalleHorizontal(posicion.x, posicion.y).agregarObstaculo(fabrica.generarObstaculo(obstaculosAgregados));
             obstaculosAgregados += 1;
         }
     }

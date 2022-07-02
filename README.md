@@ -1,6 +1,6 @@
 ![tp2](https://github.com/aquiab/algo3_tp2/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/aquiab/algo3_tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/aquiab/algo3_tp2)
 
-# TP2 Algoritmos 3: GPS 
+# TP2 Algoritmos 3: GPS Challenge
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de la FIUBA.
 
@@ -11,7 +11,8 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de la F
 * **Edgar Matías Campillay** - [EdCampi](https://github.com/EdCampi)
 * **Valentin Brizuela** - [ValentinBrizuela](https://github.com/ValentinBrizuela)
 
-Corrector: **Maia Naftali**
+Correctora: **Maia Naftali** <br>
+Documentacion: [GPS Challenge](https://docs.google.com/document/d/10b_6xQsLKIDiMHNgsnLCcMwNaK_P4oKI3zwPJVeRxL4/edit?usp=sharing)
 
 ## Aplicación
 

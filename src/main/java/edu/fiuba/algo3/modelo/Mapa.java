@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.constructores.Director;
-import edu.fiuba.algo3.modelo.modificadores.*;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.Meta;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
 
 import java.util.Random;
 

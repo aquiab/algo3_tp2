@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.modificadores.IObstaculo;
-import edu.fiuba.algo3.modelo.modificadores.ISorpresa;
-import edu.fiuba.algo3.modelo.modificadores.*;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.IObstaculo;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.ISorpresa;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
 
 public class Calle {
     public IObstaculo obstaculo;

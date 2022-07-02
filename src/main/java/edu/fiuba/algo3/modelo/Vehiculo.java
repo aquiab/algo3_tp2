@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.estado.Estado;
+
 public class Vehiculo {
 
     public Posicion posicion;
@@ -33,16 +35,16 @@ public class Vehiculo {
         this.movimientos *= valorSorpresa;
     }
 
-    public void pasarPiquete(double penalizacion) {
-        estado.pasarPiquete(penalizacion);
+    public void pasarPiquete() {
+        estado.pasarPiquete();
     }
 
-    public void pasarPozo(double penalizacion) {
-        estado.pasarPozo(penalizacion);
+    public void pasarPozo() {
+        estado.pasarPozo();
     }
 
-    public void pasarControlPolicial(double penalizacion, double probabilidad, double valorActual) {
-        estado.pasarControlPolicial(penalizacion, probabilidad, valorActual);
+    public void pasarControlPolicial(double valorActual) {
+        estado.pasarControlPolicial(valorActual);
     }
 
     public void aplicarSorpresaCambioVehiculo() {

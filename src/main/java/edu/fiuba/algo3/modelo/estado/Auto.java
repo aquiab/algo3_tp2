@@ -1,5 +1,7 @@
-package edu.fiuba.algo3.modelo;
-import java.util.Random;
+package edu.fiuba.algo3.modelo.estado;
+
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Vehiculo;
 
 public class Auto extends Estado {
 
@@ -10,7 +12,7 @@ public class Auto extends Estado {
         PROBABILIDAD_CONTROL_POLICIAL = 5;
     }
 
-    public void pasarPiquete(double penalizacion) {
+    public void pasarPiquete() {
         Posicion posicion = vehiculo.devolverPosicion();
         posicion.defaultearSig();
     }

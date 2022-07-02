@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.modificadores.ControlPolicial;
+import edu.fiuba.algo3.modelo.estado.Estado;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicial;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
@@ -66,9 +67,9 @@ public class VehiculoUnitariasTest {
         Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
         vehiculo.aplicarEstado(estado);
 
-        vehiculo.pasarPozo(estado.obtenerPenalizacionPozo());
+        vehiculo.pasarPozo();
 
-        verify(estado, times(1)).pasarPozo(estado.obtenerPenalizacionPozo());
+        verify(estado, times(1)).pasarPozo();
     }
     @Test
     public void VehiculoPasarPiquete() {
@@ -77,9 +78,9 @@ public class VehiculoUnitariasTest {
         Vehiculo vehiculo = new Vehiculo(0, null, new Juego());
         vehiculo.aplicarEstado(estado);
 
-        vehiculo.pasarPiquete(estado.obtenerPenalizacionPiquete());
+        vehiculo.pasarPiquete();
 
-        verify(estado, times(1)).pasarPiquete(estado.obtenerPenalizacionPiquete());
+        verify(estado, times(1)).pasarPiquete();
     }
     @Test
     public void VehiculoPasarControl() {
@@ -92,9 +93,9 @@ public class VehiculoUnitariasTest {
         when(estado.obtenerPenalizacionControl()).thenReturn((double)3);
         when(controlPolicial.pasoControlAleatorio()).thenReturn((double)1);
 
-        vehiculo.pasarControlPolicial(estado.obtenerPenalizacionControl(), estado.obtenerProbabilidadControl(), controlPolicial.pasoControlAleatorio());
+        vehiculo.pasarControlPolicial(estado.obtenerPenalizacionControl());
 
-        verify(estado, times(1)).pasarControlPolicial(estado.obtenerPenalizacionControl(), estado.obtenerProbabilidadControl(), controlPolicial.pasoControlAleatorio());
+        verify(estado, times(1)).pasarControlPolicial(estado.obtenerPenalizacionControl());
     }
     @Test
     public void VehiculoPasarVacio() {

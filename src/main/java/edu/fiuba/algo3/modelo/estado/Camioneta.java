@@ -1,7 +1,10 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.estado;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Vehiculo;
+
 import java.util.Random;
 
-public class Camioneta extends Estado{
+public class Camioneta extends Estado {
     Random rand = new Random();
 
     public Camioneta(Vehiculo vehiculo) {
@@ -13,14 +16,14 @@ public class Camioneta extends Estado{
     protected int cantidadPozos = 0;
 
     @Override
-    public void pasarPozo(double penalizacion) {
+    public void pasarPozo() {
         this.cantidadPozos++;
         if (this.cantidadPozos % 3 == 0) {
             vehiculo.incrementarMovimientos(PENALIZACION_POZO);
         }
     }
 
-    public void pasarPiquete(double penalizacion) {
+    public void pasarPiquete() {
         Posicion posicion = vehiculo.devolverPosicion();
         posicion.defaultearSig();
     }

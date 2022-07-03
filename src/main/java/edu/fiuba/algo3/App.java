@@ -40,6 +40,8 @@ public class App extends Application {
     private static final int OFFSET_X = -7;
     private static final int OFFSET_Y = 3;
     private static final int OFFSET_SORPRESA = 15;
+
+    private int COORDENADA_META;
     private Scene active_scene;
 
 
@@ -158,8 +160,9 @@ public class App extends Application {
         stage.setScene(active_scene);
     }
 
-    private void dibujarPantallaDeJuego(JuegoDirector director, Scene scene0, Stage stage) throws FileNotFoundException {
+    private void dibujarPantallaDeJuego(JuegoDirector director, Scene escenaJuego, Stage stage) throws FileNotFoundException {
         Juego juego = director.obtenerPartida();
+        this.COORDENADA_META = juego.obtenerCoordenadaMeta();
         juego.aplicarJugador("RAUL");
         GridPane calles = dibujarCalles(juego.mapSize);
         ImageView vehiculo = dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y, "assets/car.png");
@@ -181,7 +184,7 @@ public class App extends Application {
 
         Circle visionMeta = new Circle();
         visionMeta.setCenterX((juego.mapSize) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
-        visionMeta.setCenterY((juego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+        visionMeta.setCenterY((juego.obtenerCoordenadaMeta()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
         visionMeta.setRadius(TAMANIO_MANZANA + TAMANIO_CALLE);
 
         Shape sombra = Shape.subtract(rectangulo, visionVehiculo);
@@ -219,7 +222,7 @@ public class App extends Application {
                     actualizarMovimientoHorizontal(vehiculo, finalJuego);
                     break;
                 case "ENTER":
-                    dibujarMenuPrincipal(scene0, stage);
+                    dibujarMenuPrincipal(escenaJuego, stage);
                     break;
             }
             pane.getChildren().retainAll(vehiculo, calles);
@@ -237,7 +240,7 @@ public class App extends Application {
             //Actualización de la visión.
             visionVehiculo.setCenterX(finalJuego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
             visionVehiculo.setCenterY(finalJuego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
-            visionMeta.setCenterY((finalJuego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+            visionMeta.setCenterY((juego.obtenerCoordenadaMeta()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
             Shape sombra1 = Shape.subtract(rectangulo, visionVehiculo);
             sombra1 = Shape.subtract(sombra1, visionMeta);
             pane2.setClip(sombra1);
@@ -283,7 +286,7 @@ public class App extends Application {
         });
     }
 
-    private void dibujarTablaDePosiciones(JuegoDirector director, Scene scene0, Stage stage) {
+    private void dibujarTablaDePosiciones(Stage stage, Scene scene0, JuegoDirector director) {
         Button botonVolver = new Button("Volver");
         VBox vboxizq = new VBox();
         VBox vboxder = new VBox();
@@ -332,14 +335,14 @@ public class App extends Application {
         VBox.setMargin(label, new Insets(60));
         vbox.setPrefSize(350, 500);
         vbox.setAlignment(Pos.TOP_CENTER);
-        var scene0 = new Scene(vbox);
+        var escenaMenu = new Scene(vbox);
 
-        active_scene = scene0;
+        active_scene = escenaMenu;
 
         //Accion de los botones
-        botonJugar.setOnAction(e -> dibujarPantallaDeDificultad(stage, scene0, director));
+        botonJugar.setOnAction(e -> dibujarPantallaDeDificultad(stage, escenaMenu, director));
         botonSalir.setOnAction(e -> System.exit(0));
-        botonRanking.setOnAction(e -> dibujarTablaDePosiciones(director, scene0, stage));
+        botonRanking.setOnAction(e -> dibujarTablaDePosiciones(stage, escenaMenu, director));
 
         stage.setScene(active_scene);
         stage.show();

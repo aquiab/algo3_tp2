@@ -1,15 +1,13 @@
 package edu.fiuba.algo3.modelo.constructor_juego;
 
+import edu.fiuba.algo3.modelo.Calle;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
 import edu.fiuba.algo3.modelo.estado.Moto;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicialFabrica;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.IObstaculo;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.PiqueteFabrica;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.PozoFabrica;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.*;
 import edu.fiuba.algo3.modelo.fabrica_sorpresa.*;
 
 public class JuegoConstructor {
@@ -90,6 +88,16 @@ public class JuegoConstructor {
         return this;
     }
 
+    /*    Meta    */
+
+    public JuegoConstructor agregarMetaEn(int y) {
+        Calle calle = juego.obtenerMapa().obtenerCalleHorizontal(dimensionMapa - 1, y);
+        juego.asignarCoordenadaMeta(y);
+        calle.agregarObstaculo(new VacioObstaculo());
+        calle.agregarSorpresa(new Meta());
+        return this;
+    }
+
     /*    Estados    */
 
     public void asignarAutoInicial() {
@@ -107,7 +115,16 @@ public class JuegoConstructor {
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
     }
 
+    public Mapa obtenerMapa() {
+        return juego.obtenerMapa();
+    }
+
     public Juego construir() {
         return juego;
+    }
+
+    public JuegoConstructor asignarCodigo(int codigo) {
+        this.juego.asignarCodigo(codigo);
+        return this;
     }
 }

@@ -9,8 +9,12 @@ public class Juego {
 
 	private Integer POSICION_INICIAL = 0;
 	private Integer MOVIMIENTOS_INICIALES = 0;
+
+	private Integer COORDENADA_META;
+
+	private int CODIGO;
 	public Ranking ranking = new Ranking();
-	public int mapSize;//ThreadLocalRandom.current().nextInt(10, 15);
+	public int mapSize;
 	public Mapa mapa;
 	public Vehiculo vehiculo;
 
@@ -19,7 +23,8 @@ public class Juego {
 	}
 
 	public void reiniciarJuego() {
-		this.mapa = new Mapa(mapSize);
+		this.COORDENADA_META = JuegoDirector.valorAleatorio();
+		this.mapa = JuegoDirector.reiniciarJuego(this.CODIGO, this.COORDENADA_META);
 		Jugador aux = vehiculo.jugador;
 		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
 		aplicarEstadoInicial(new Auto(this.vehiculo));
@@ -50,5 +55,17 @@ public class Juego {
 
 	public Vehiculo obtenerVehiculo() {
 		return this.vehiculo;
+	}
+
+	public void asignarCodigo(int codigo) {
+		this.CODIGO = codigo;
+	}
+
+	public void asignarCoordenadaMeta(int coordeanda) {
+		this.COORDENADA_META = coordeanda;
+	}
+
+	public int obtenerCoordenadaMeta() {
+		return this.COORDENADA_META;
 	}
 }

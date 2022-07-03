@@ -3,8 +3,6 @@ import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
 import edu.fiuba.algo3.modelo.fabrica_sorpresa.Meta;
 import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
 
-import java.util.Random;
-
 import java.util.LinkedList;
 
 public class Mapa {
@@ -13,8 +11,8 @@ public class Mapa {
 	private int cantidadModificadoresIniciales;
 	protected int dimension;
 
-	private VacioObstaculo VACIOOBSTACULO = new VacioObstaculo();
-	private VacioSorpresa VACIOSORPRESA = new VacioSorpresa();
+	private VacioObstaculo VACIO_OBSTACULO = new VacioObstaculo();
+	private VacioSorpresa VACIO_SORPRESA = new VacioSorpresa();
 
 	Mapa(int dimension) {
 		this.dimension = dimension;
@@ -29,16 +27,15 @@ public class Mapa {
 				callesVerticales.get(i).add(new Calle());
 			}
 		}
-		agregarMeta();
-		liberarElRestoDelMapa();
+		incializarMapa();
 	}
 
-	private void liberarElRestoDelMapa() {
+	private void incializarMapa() {
 		for (int i=0; i < dimension; i++){
-			callesHorizontales.get(i).stream().filter(calle -> calle.obstaculo == null).forEach(calle -> calle.agregarObstaculo(VACIOOBSTACULO));
-			callesVerticales.get(i).stream().filter(calle -> calle.obstaculo == null).forEach(calle -> calle.agregarObstaculo(VACIOOBSTACULO));
-			callesHorizontales.get(i).stream().filter(calle -> calle.sorpresa == null).forEach(calle -> calle.agregarSorpresa(VACIOSORPRESA));
-			callesVerticales.get(i).stream().filter(calle -> calle.sorpresa == null).forEach(calle -> calle.agregarSorpresa(VACIOSORPRESA));
+			callesHorizontales.get(i).stream().filter(calle -> calle.obstaculo == null).forEach(calle -> calle.agregarObstaculo(VACIO_OBSTACULO));
+			callesVerticales.get(i).stream().filter(calle -> calle.obstaculo == null).forEach(calle -> calle.agregarObstaculo(VACIO_OBSTACULO));
+			callesHorizontales.get(i).stream().filter(calle -> calle.sorpresa == null).forEach(calle -> calle.agregarSorpresa(VACIO_SORPRESA));
+			callesVerticales.get(i).stream().filter(calle -> calle.sorpresa == null).forEach(calle -> calle.agregarSorpresa(VACIO_SORPRESA));
 		}
 	}
 
@@ -54,20 +51,8 @@ public class Mapa {
 		return dimension;
 	}
 
-
-
-	public void agregarMeta() {
-		Random rand = new Random();
-		Calle calle = this.obtenerCalleHorizontal(dimension - 1, rand.nextInt(dimension - 1));
-		calle.agregarObstaculo(new VacioObstaculo());
-		calle.agregarSorpresa(new Meta());
-	}
-
 	public int obtenerMetaY() {
-		for (int i = 0; i < dimension; i++) {
-			if (obtenerCalleHorizontal(dimension-1, i).sorpresa.getClass() == Meta.class)
-				return i;
-		}
+		for (int i = 0; i < dimension; i++) if (obtenerCalleHorizontal(dimension-1, i).sorpresa.getClass() == Meta.class) return i;
 		return 0;
 	}
 

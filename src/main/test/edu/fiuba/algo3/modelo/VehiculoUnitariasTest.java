@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
 public class VehiculoUnitariasTest {
+
     @Test
     public void VehiculoMover() {
         Posicion posicion = mock(Posicion.class);
@@ -17,6 +18,7 @@ public class VehiculoUnitariasTest {
         assert (vehiculo.movimientos == 1);
         verify(direccion, times(1)).mover(posicion, vehiculo);
     }
+
     @Test
     public void VehiculoAplicarEstado() {
         Estado estado = mock(Estado.class);

@@ -16,7 +16,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -35,6 +34,7 @@ import javafx.util.Duration;
 
 
 public class App extends Application {
+
     private static final int TAMANIO_MANZANA = 35;
     private static final int TAMANIO_CALLE = 15;
     private static final int OFFSET_X = -7;
@@ -43,8 +43,7 @@ public class App extends Application {
     private Scene active_scene;
 
 
-    //--------------
-
+    //Animaciones para el vehículo.
     private void actualizarMovimientoHorizontal(ImageView imageView, Juego juego) {
         try {
             imageView.setImage(obtenerVehiculo(juego));
@@ -77,8 +76,7 @@ public class App extends Application {
         transition.play();
     }
 
-    //--------
-
+    //Dibujo del mapa y su contenido.
     private GridPane dibujarCalles(int size) {
         GridPane gp = new GridPane();
         gp.setPadding(new Insets(6));
@@ -154,7 +152,13 @@ public class App extends Application {
         return moto;
     }
 
-    private void dibujarPartida(JuegoDirector director, Scene scene0, Stage stage) throws FileNotFoundException {
+    //Generación de las distintas pantallas del juego.
+    private void dibujarMenuPrincipal(Scene menuPrincipal, Stage stage) {
+        active_scene = menuPrincipal;
+        stage.setScene(active_scene);
+    }
+
+    private void dibujarPantallaDeJuego(JuegoDirector director, Scene scene0, Stage stage) throws FileNotFoundException {
         Juego juego = director.obtenerPartida();
         juego.aplicarJugador("RAUL");
         GridPane calles = dibujarCalles(juego.mapSize);
@@ -187,42 +191,50 @@ public class App extends Application {
         //Hasta aca
         StackPane stack = new StackPane(pane, pane2);
 
-        var scene1 = new Scene(stack);
-        stage.setScene(scene1);
+        var pantallaJuego = new Scene(stack);
+        active_scene = pantallaJuego;
+        stage.setScene(active_scene);
         Juego finalJuego = juego;
 
-        scene1.setOnKeyReleased(e -> {
-            if (e.getCode() == KeyCode.UP) {
-                finalJuego.mover(new DireccionArriba());
-                rotarVehiculo(vehiculo, -90);
-                actualizarMovimientoVertical(vehiculo, finalJuego);
-            } else if (e.getCode() == KeyCode.DOWN) {
-                finalJuego.mover(new DireccionAbajo());
-                rotarVehiculo(vehiculo, 90);
-                actualizarMovimientoVertical(vehiculo, finalJuego);
-            } else if (e.getCode() == KeyCode.LEFT) {
-                finalJuego.mover(new DireccionIzquierda());
-                rotarVehiculo(vehiculo, 180);
-                actualizarMovimientoHorizontal(vehiculo, finalJuego);
-            } else if (e.getCode() == KeyCode.RIGHT) {
-                finalJuego.mover(new DireccionDerecha());
-                rotarVehiculo(vehiculo, 0);
-                actualizarMovimientoHorizontal(vehiculo, finalJuego);
-            } else if (e.getCode() == KeyCode.ENTER) { //Puse esto para volver al menu desde el juego porque no esta la ultima escena
-                active_scene = scene0;
-                stage.setScene(active_scene);
+        pantallaJuego.setOnKeyReleased(tecla -> {
+            switch (tecla.getCode().toString()) {
+                case "UP":
+                    finalJuego.mover(new DireccionArriba());
+                    rotarVehiculo(vehiculo, -90);
+                    actualizarMovimientoVertical(vehiculo, finalJuego);
+                    break;
+                case "DOWN":
+                    finalJuego.mover(new DireccionAbajo());
+                    rotarVehiculo(vehiculo, 90);
+                    actualizarMovimientoVertical(vehiculo, finalJuego);
+                    break;
+                case "LEFT":
+                    finalJuego.mover(new DireccionIzquierda());
+                    rotarVehiculo(vehiculo, 180);
+                    actualizarMovimientoHorizontal(vehiculo, finalJuego);
+                    break;
+                case "RIGHT":
+                    finalJuego.mover(new DireccionDerecha());
+                    rotarVehiculo(vehiculo, 0);
+                    actualizarMovimientoHorizontal(vehiculo, finalJuego);
+                    break;
+                case "ENTER":
+                    dibujarMenuPrincipal(scene0, stage);
+                    break;
             }
             pane.getChildren().retainAll(vehiculo, calles);
+
+            //Actualización de obstáculos y sorpresas.
             try {
                 dibujarObstaculosYSorpresas(pane, finalJuego, juego.mapa.callesHorizontales,
                         (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
                 dibujarObstaculosYSorpresas(pane, finalJuego, juego.mapa.callesVerticales,
                         TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
-            }
-            catch (Exception exception) {
+            } catch (Exception exception) {
                 System.out.print(exception);
             }
-            //Actualiza la sombra
+
+            //Actualización de la visión.
             visionVehiculo.setCenterX(finalJuego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
             visionVehiculo.setCenterY(finalJuego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
             visionMeta.setCenterY((finalJuego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
@@ -230,14 +242,79 @@ public class App extends Application {
             sombra1 = Shape.subtract(sombra1, visionMeta);
             pane2.setClip(sombra1);
 
+            //Actualización del título de la ventana.
             stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(finalJuego.vehiculo.movimientos));
         });
     }
 
+    private void dibujarNuevaPartida(JuegoDirector director, Scene scene0, Stage stage) {
+        try {
+            dibujarPantallaDeJuego(director, scene0, stage);
+        }  catch (Exception error) {
+            System.out.println(error);
+        }
+    }
 
+    private void dibujarPantallaDeDificultad(Stage stage, Scene scene0, JuegoDirector director) {
+        Button botonFacil = new Button("Fácil");
+        Button botonMedio = new Button("Medio");
+        Button botonDificil = new Button("Dificil");
+        Label label1 = new Label("Seleccione dificultad");
+        label1.setUnderline(true);
+        VBox vbox1 = new VBox(30, label1, botonFacil, botonMedio, botonDificil);
+        VBox.setMargin(label1, new Insets(60));
+        vbox1.setPrefSize(350, 500);
+        vbox1.setAlignment(Pos.TOP_CENTER);
+        var sceneDificultad = new Scene(vbox1);
+        active_scene = sceneDificultad;
+        stage.setScene(active_scene);
+
+        botonFacil.setOnAction(ee -> {
+            director.configurarPartidaFacil();
+            dibujarNuevaPartida(director, scene0, stage);
+        });
+        botonMedio.setOnAction(ee -> {
+            director.configurarPartidaNormal();
+            dibujarNuevaPartida(director, scene0, stage);
+        });
+        botonDificil.setOnAction(ee -> {
+            director.configurarPartidaDificil();
+            dibujarNuevaPartida(director, scene0, stage);
+        });
+    }
+
+    private void dibujarTablaDePosiciones(JuegoDirector director, Scene scene0, Stage stage) {
+        Button botonVolver = new Button("Volver");
+        VBox vboxizq = new VBox();
+        VBox vboxder = new VBox();
+        HBox hbox = new HBox(50, botonVolver, vboxizq, vboxder);
+        hbox.setPrefSize(350, 500);
+        hbox.setAlignment(Pos.TOP_CENTER);
+        var scene2 = new Scene(hbox);
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        vboxizq.getChildren().clear();
+        vboxder.getChildren().clear();
+        vboxizq.getChildren().add(new Label("Jugador"));
+        vboxder.getChildren().add(new Label("Puntaje"));
+        Juego juego = director.obtenerPartida();
+        Jugador jugador = juego.ranking.devolverGanador();
+        while ( jugador != null) {
+            vboxizq.getChildren().add(new Label(jugador.nombre));
+            vboxder.getChildren().add(new Label(String.valueOf(jugador.movimientos)));
+            jugadores.add(jugador);
+            jugador = juego.ranking.devolverGanador();
+        }
+        for (int i = 0; i < jugadores.size(); i++) {
+            juego.ranking.agregarJugador(jugadores.get(i));
+        }
+        active_scene = scene2;
+        stage.setScene(active_scene);
+        botonVolver.setOnAction(e -> dibujarMenuPrincipal(scene0, stage));
+    }
 
     @Override
-    public void start(Stage stage) throws FileNotFoundException {
+    public void start(Stage stage) {
         JuegoDirector director = new JuegoDirector();
 
         /*Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
@@ -257,95 +334,15 @@ public class App extends Application {
         vbox.setAlignment(Pos.TOP_CENTER);
         var scene0 = new Scene(vbox);
 
-
-        //Escena dificultad -- copia de arriba modularizar
-        Button botonFacil = new Button("Fácil");
-        Button botonMedio = new Button("Medio");
-        Button botonDificil = new Button("Dificil");
-        Label label1 = new Label("AlgoGPS");
-        label1.setUnderline(true);
-        VBox vbox1 = new VBox(30, label1, botonFacil, botonMedio, botonDificil);
-        VBox.setMargin(label1, new Insets(60));
-        vbox1.setPrefSize(350, 500);
-        vbox1.setAlignment(Pos.TOP_CENTER);
-        var sceneDificultad = new Scene(vbox1);
-
-
-        //Escena Ranking
-        Button botonVolver = new Button("Volver");
-        VBox vboxizq = new VBox();
-        VBox vboxder = new VBox();
-        HBox hbox = new HBox(50, botonVolver, vboxizq, vboxder);
-        hbox.setPrefSize(350, 500);
-        hbox.setAlignment(Pos.TOP_CENTER);
-        var scene2 = new Scene(hbox);
-
         active_scene = scene0;
 
-        //Accion de los botones de las escenas nuevas
-        botonJugar.setOnAction(e -> {
-            active_scene = sceneDificultad;
-            stage.setScene(active_scene);
-            botonFacil.setOnAction(evento -> {
-                director.configurarPartidaFacil();
-                try {
-                    dibujarPartida(director, scene0, stage);
-                }  catch (Exception error) {
-                    System.out.println(error);
-                }
-            });
-            botonMedio.setOnAction(evento -> {
-                director.configurarPartidaNormal();
-                try {
-                    dibujarPartida(director, scene0, stage);
-                }  catch (Exception error) {
-                    System.out.println(error);
-                }
-            });
-            botonDificil.setOnAction(evento -> {
-                director.configurarPartidaDificil();
-                try {
-                    dibujarPartida(director, scene0, stage);
-                }  catch (Exception error) {
-                    System.out.println(error);
-                }
-            });
-        });
+        //Accion de los botones
+        botonJugar.setOnAction(e -> dibujarPantallaDeDificultad(stage, scene0, director));
+        botonSalir.setOnAction(e -> System.exit(0));
+        botonRanking.setOnAction(e -> dibujarTablaDePosiciones(director, scene0, stage));
 
-        botonSalir.setOnAction(e -> {
-            System.exit(0);
-        });
-        botonRanking.setOnAction(e -> {
-            dibujarTablaDePosiciones(director, stage, scene2, vboxizq, vboxder);
-        });
-        botonVolver.setOnAction(e -> {
-            active_scene = scene0;
-            stage.setScene(active_scene);
-        });
-        
         stage.setScene(active_scene);
         stage.show();
-    }
-
-    private void dibujarTablaDePosiciones(JuegoDirector director, Stage stage, Scene scene2, VBox vboxizq, VBox vboxder) {
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        vboxizq.getChildren().clear();
-        vboxder.getChildren().clear();
-        vboxizq.getChildren().add(new Label("Jugador"));
-        vboxder.getChildren().add(new Label("Puntaje"));
-        Juego juego = director.obtenerPartida();
-        Jugador jugador = juego.ranking.devolverGanador();
-        while ( jugador != null) {
-            vboxizq.getChildren().add(new Label(jugador.nombre));
-            vboxder.getChildren().add(new Label(String.valueOf(jugador.movimientos)));
-            jugadores.add(jugador);
-            jugador = juego.ranking.devolverGanador();
-        }
-        for (int i = 0; i < jugadores.size(); i++) {
-            juego.ranking.agregarJugador(jugadores.get(i));
-        }
-        active_scene = scene2;
-        stage.setScene(active_scene);
     }
 
     public static void main(String[] args) {

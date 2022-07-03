@@ -7,8 +7,6 @@ import java.util.Random;
 
 public class ControlPolicial implements IObstaculo {
 
-
-
     /** Generador de valores aleatorios para el paso del control policial
      * @return valor aleatorio (double) entre 0 y 10.
      */
@@ -21,4 +19,5 @@ public class ControlPolicial implements IObstaculo {
     public void pasar(Vehiculo vehiculo) {
         vehiculo.pasarControlPolicial(pasoControlAleatorio());
     }
+
 }

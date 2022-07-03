@@ -59,7 +59,9 @@ public class App extends Application {
     private void actualizarMovimientoVertical(ImageView imageView, Juego juego) {
         try {
             imageView.setImage(obtenerVehiculo(juego));
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         TranslateTransition transition = new TranslateTransition();
         transition.setNode(imageView);
         transition.setDuration(Duration.seconds(0.5));
@@ -143,12 +145,6 @@ public class App extends Application {
         return imageView;
     }
 
-    private void actualizarMovimiento(ImageView imageView, Juego juego) throws FileNotFoundException {
-        imageView.setImage(obtenerVehiculo(juego));
-        imageView.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
-        imageView.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
-    }
-
     private Image obtenerVehiculo(Juego juego) throws FileNotFoundException {
         Image auto = new Image(new FileInputStream("assets/car.png"));
         Image camioneta = new Image(new FileInputStream("assets/4x4.png"));
@@ -158,27 +154,16 @@ public class App extends Application {
         return moto;
     }
 
-    @Override
-    public void start(Stage stage) throws FileNotFoundException {
-        JuegoDirector director = new JuegoDirector();
-        Juego juego = director.crearPartidaNormal();
+    private void dibujarPartida(JuegoDirector director, Scene scene0, Stage stage) throws FileNotFoundException {
+        Juego juego = director.obtenerPartida();
         juego.aplicarJugador("RAUL");
-
-        /*Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
-        AudioClip mediaPlayer = new AudioClip(musica.getSource());
-        mediaPlayer.setVolume(0.2);
-        mediaPlayer.play();*/
-
-        //Escena Juego
-        ImageView vehiculo =  dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y, "assets/car.png");
         GridPane calles = dibujarCalles(juego.mapSize);
+        ImageView vehiculo = dibujarVehiculo(TAMANIO_MANZANA + OFFSET_X, TAMANIO_MANZANA + OFFSET_Y, "assets/car.png");
         Pane pane = new Pane(calles, vehiculo);
         Pane pane2 = new Pane();
 
-        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
-                (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
-        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
-                TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
+        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales, (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
+        dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales, TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
 
         //Desde aca es de la sombra
         Rectangle rectangulo = new Rectangle();
@@ -201,8 +186,64 @@ public class App extends Application {
         pane2.setStyle("-fx-background-color: black");
         //Hasta aca
         StackPane stack = new StackPane(pane, pane2);
-        
+
         var scene1 = new Scene(stack);
+        stage.setScene(scene1);
+        Juego finalJuego = juego;
+
+        scene1.setOnKeyReleased(e -> {
+            if (e.getCode() == KeyCode.UP) {
+                finalJuego.mover(new DireccionArriba());
+                rotarVehiculo(vehiculo, -90);
+                actualizarMovimientoVertical(vehiculo, finalJuego);
+            } else if (e.getCode() == KeyCode.DOWN) {
+                finalJuego.mover(new DireccionAbajo());
+                rotarVehiculo(vehiculo, 90);
+                actualizarMovimientoVertical(vehiculo, finalJuego);
+            } else if (e.getCode() == KeyCode.LEFT) {
+                finalJuego.mover(new DireccionIzquierda());
+                rotarVehiculo(vehiculo, 180);
+                actualizarMovimientoHorizontal(vehiculo, finalJuego);
+            } else if (e.getCode() == KeyCode.RIGHT) {
+                finalJuego.mover(new DireccionDerecha());
+                rotarVehiculo(vehiculo, 0);
+                actualizarMovimientoHorizontal(vehiculo, finalJuego);
+            } else if (e.getCode() == KeyCode.ENTER) { //Puse esto para volver al menu desde el juego porque no esta la ultima escena
+                active_scene = scene0;
+                stage.setScene(active_scene);
+            }
+            pane.getChildren().retainAll(vehiculo, calles);
+            try {
+                dibujarObstaculosYSorpresas(pane, finalJuego, juego.mapa.callesHorizontales,
+                        (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
+                dibujarObstaculosYSorpresas(pane, finalJuego, juego.mapa.callesVerticales,
+                        TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
+            }
+            catch (Exception exception) {
+                System.out.print(exception);
+            }
+            //Actualiza la sombra
+            visionVehiculo.setCenterX(finalJuego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+            visionVehiculo.setCenterY(finalJuego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+            visionMeta.setCenterY((finalJuego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+            Shape sombra1 = Shape.subtract(rectangulo, visionVehiculo);
+            sombra1 = Shape.subtract(sombra1, visionMeta);
+            pane2.setClip(sombra1);
+
+            stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(finalJuego.vehiculo.movimientos));
+        });
+    }
+
+
+
+    @Override
+    public void start(Stage stage) throws FileNotFoundException {
+        JuegoDirector director = new JuegoDirector();
+
+        /*Media musica = new Media(new File("assets/musica.mp3").toURI().toString());
+        AudioClip mediaPlayer = new AudioClip(musica.getSource());
+        mediaPlayer.setVolume(0.2);
+        mediaPlayer.play();*/
 
         //Escena MainMenu
         Button botonRanking = new Button("Ranking");
@@ -215,6 +256,20 @@ public class App extends Application {
         vbox.setPrefSize(350, 500);
         vbox.setAlignment(Pos.TOP_CENTER);
         var scene0 = new Scene(vbox);
+
+
+        //Escena dificultad -- copia de arriba modularizar
+        Button botonFacil = new Button("Fácil");
+        Button botonMedio = new Button("Medio");
+        Button botonDificil = new Button("Dificil");
+        Label label1 = new Label("AlgoGPS");
+        label1.setUnderline(true);
+        VBox vbox1 = new VBox(30, label1, botonFacil, botonMedio, botonDificil);
+        VBox.setMargin(label1, new Insets(60));
+        vbox1.setPrefSize(350, 500);
+        vbox1.setAlignment(Pos.TOP_CENTER);
+        var sceneDificultad = new Scene(vbox1);
+
 
         //Escena Ranking
         Button botonVolver = new Button("Volver");
@@ -229,80 +284,68 @@ public class App extends Application {
 
         //Accion de los botones de las escenas nuevas
         botonJugar.setOnAction(e -> {
-            active_scene = scene1;
+            active_scene = sceneDificultad;
             stage.setScene(active_scene);
+            botonFacil.setOnAction(evento -> {
+                director.configurarPartidaFacil();
+                try {
+                    dibujarPartida(director, scene0, stage);
+                }  catch (Exception error) {
+                    System.out.println(error);
+                }
+            });
+            botonMedio.setOnAction(evento -> {
+                director.configurarPartidaNormal();
+                try {
+                    dibujarPartida(director, scene0, stage);
+                }  catch (Exception error) {
+                    System.out.println(error);
+                }
+            });
+            botonDificil.setOnAction(evento -> {
+                director.configurarPartidaDificil();
+                try {
+                    dibujarPartida(director, scene0, stage);
+                }  catch (Exception error) {
+                    System.out.println(error);
+                }
+            });
         });
+
         botonSalir.setOnAction(e -> {
             System.exit(0);
         });
         botonRanking.setOnAction(e -> {
-            ArrayList<Jugador> jugadores = new ArrayList<>();
-            vboxizq.getChildren().clear();
-            vboxder.getChildren().clear();
-            vboxizq.getChildren().add(new Label("Jugador"));
-            vboxder.getChildren().add(new Label("Puntaje"));
-            Jugador jugador = juego.ranking.devolverGanador();
-            while ( jugador != null) {
-                vboxizq.getChildren().add(new Label(jugador.nombre));
-                vboxder.getChildren().add(new Label(String.valueOf(jugador.movimientos)));
-                jugadores.add(jugador);
-                jugador = juego.ranking.devolverGanador();
-            }
-            for (int i = 0; i < jugadores.size(); i++) {
-                juego.ranking.agregarJugador(jugadores.get(i));
-            }
-            active_scene = scene2;
-            stage.setScene(active_scene);
+            dibujarTablaDePosiciones(director, stage, scene2, vboxizq, vboxder);
         });
         botonVolver.setOnAction(e -> {
             active_scene = scene0;
             stage.setScene(active_scene);
         });
-
-        scene1.setOnKeyReleased(e -> {
-            if (e.getCode() == KeyCode.UP) {
-                juego.mover(new DireccionArriba());
-                rotarVehiculo(vehiculo, -90);
-                actualizarMovimientoVertical(vehiculo, juego);
-            } else if (e.getCode() == KeyCode.DOWN) {
-                juego.mover(new DireccionAbajo());
-                rotarVehiculo(vehiculo, 90);
-                actualizarMovimientoVertical(vehiculo, juego);
-            } else if (e.getCode() == KeyCode.LEFT) {
-                juego.mover(new DireccionIzquierda());
-                rotarVehiculo(vehiculo, 180);
-                actualizarMovimientoHorizontal(vehiculo, juego);
-            } else if (e.getCode() == KeyCode.RIGHT) {
-                juego.mover(new DireccionDerecha());
-                rotarVehiculo(vehiculo, 0);
-                actualizarMovimientoHorizontal(vehiculo, juego);
-            } else if (e.getCode() == KeyCode.ENTER) { //Puse esto para volver al menu desde el juego porque no esta la ultima escena
-                active_scene = scene0;
-                stage.setScene(active_scene);
-            }
-            pane.getChildren().retainAll(vehiculo, calles);
-            try {
-                dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesHorizontales,
-                        (TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
-                dibujarObstaculosYSorpresas(pane, juego, juego.mapa.callesVerticales,
-                        TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
-            }
-            catch (Exception exception) {
-                System.out.print(exception);
-            }
-            //Actualiza la sombra
-            visionVehiculo.setCenterX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
-            visionVehiculo.setCenterY(juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
-            visionMeta.setCenterY((juego.mapa.obtenerMetaY()+1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
-            Shape sombra1 = Shape.subtract(rectangulo, visionVehiculo);
-            sombra1 = Shape.subtract(sombra1, visionMeta);
-            pane2.setClip(sombra1);
-
-            stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.vehiculo.movimientos));
-        });
         
         stage.setScene(active_scene);
         stage.show();
+    }
+
+    private void dibujarTablaDePosiciones(JuegoDirector director, Stage stage, Scene scene2, VBox vboxizq, VBox vboxder) {
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        vboxizq.getChildren().clear();
+        vboxder.getChildren().clear();
+        vboxizq.getChildren().add(new Label("Jugador"));
+        vboxder.getChildren().add(new Label("Puntaje"));
+        Juego juego = director.obtenerPartida();
+        Jugador jugador = juego.ranking.devolverGanador();
+        while ( jugador != null) {
+            vboxizq.getChildren().add(new Label(jugador.nombre));
+            vboxder.getChildren().add(new Label(String.valueOf(jugador.movimientos)));
+            jugadores.add(jugador);
+            jugador = juego.ranking.devolverGanador();
+        }
+        for (int i = 0; i < jugadores.size(); i++) {
+            juego.ranking.agregarJugador(jugadores.get(i));
+        }
+        active_scene = scene2;
+        stage.setScene(active_scene);
     }
 
     public static void main(String[] args) {

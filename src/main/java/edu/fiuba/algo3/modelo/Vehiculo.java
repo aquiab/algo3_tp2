@@ -64,8 +64,12 @@ public class Vehiculo {
         this.juego.reiniciarJuego();
     }
 
-    public Estado estadoActual() {
-        return estado;
+    public Class<? extends Estado> estadoActual() {
+        return estado.getClass();
+    }
+
+    public double obtenerMovimientos() {
+        return this.movimientos;
     }
 }
 

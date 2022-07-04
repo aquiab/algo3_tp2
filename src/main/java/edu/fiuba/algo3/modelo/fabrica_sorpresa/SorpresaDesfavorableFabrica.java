@@ -6,7 +6,7 @@ public class SorpresaDesfavorableFabrica implements ISorpresaFabrica {
 
     @Override
     public ISorpresa crearSorpresa() {
-        return new SopresaPuntaje(this.VALOR_SORPRESA_DESFAVORABLE);
+        return new SorpresaPuntaje(this.VALOR_SORPRESA_DESFAVORABLE);
     }
 
 }

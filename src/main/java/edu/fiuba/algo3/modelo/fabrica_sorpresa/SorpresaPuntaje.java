@@ -2,16 +2,20 @@ package edu.fiuba.algo3.modelo.fabrica_sorpresa;
 
 import edu.fiuba.algo3.modelo.Vehiculo;
 
-public class SopresaPuntaje implements ISorpresa {
+public class SorpresaPuntaje implements ISorpresa {
 
     private double valorSorpresa;
 
-    public SopresaPuntaje(double valorSorpresa) {
+    public SorpresaPuntaje(double valorSorpresa) {
         this.valorSorpresa = valorSorpresa;
     }
 
     @Override
     public void aplicar(Vehiculo vehiculo) {
-        vehiculo.aplicarSorpresaPuntaje(this.valorSorpresa);
+        vehiculo.aplicarSorpresaPuntaje(obtenerValor());
+    }
+
+    public double obtenerValor() {
+        return this.valorSorpresa;
     }
 }

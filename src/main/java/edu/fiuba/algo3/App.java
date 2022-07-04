@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicial;
 import edu.fiuba.algo3.modelo.fabrica_obstaculos.Piquete;
 import edu.fiuba.algo3.modelo.fabrica_obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.fabrica_sorpresa.Meta;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.SopresaPuntaje;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaPuntaje;
 import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaVehiculo;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
@@ -127,7 +127,7 @@ public class App extends Application {
                     dibujarElementoCalle(pozo, pane, x, y);
                 }
                 
-                if ((calle.sorpresa.getClass() == SopresaPuntaje.class) ||
+                if ((calle.sorpresa.getClass() == SorpresaPuntaje.class) ||
                 (calle.sorpresa.getClass() == SorpresaVehiculo.class)) {
                     dibujarElementoCalle(sorpresa, pane, x - offsetSorpresaX, y - offsetSorpresaY);
                 } else if (calle.sorpresa.getClass() == Meta.class) {

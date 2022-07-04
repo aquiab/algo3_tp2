@@ -131,7 +131,7 @@ public class AutoTest {
 
         verify(sorpresa, times(1)).obtenerValor();
         verify(sorpresa, times(1)).aplicar(vehiculo);
-        assert (vehiculo.estadoActual() != Camioneta.class);
+        assert (vehiculo.estadoActual() == Auto.class);
         assert (vehiculo.obtenerMovimientos() == 0.8);
     }
 
@@ -151,7 +151,7 @@ public class AutoTest {
 
         verify(sorpresa, times(1)).obtenerValor();
         verify(sorpresa, times(1)).aplicar(vehiculo);
-        assert (vehiculo.estadoActual() != Camioneta.class);
+        assert (vehiculo.estadoActual() == Auto.class);
         assert (vehiculo.obtenerMovimientos() == 1.25);
     }
 

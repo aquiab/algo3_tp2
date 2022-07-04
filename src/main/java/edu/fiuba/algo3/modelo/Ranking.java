@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class Ranking {
@@ -13,5 +12,13 @@ public class Ranking {
 
     public Jugador devolverGanador(){
         return this.jugadores.poll();
+    }
+
+    public double devolverMayorPuntaje() {
+        return this.jugadores.poll().obtenerPuntaje();
+    }
+
+    public String devolverNombreGanador() {
+        return this.jugadores.poll().obtenerNombre();
     }
 }

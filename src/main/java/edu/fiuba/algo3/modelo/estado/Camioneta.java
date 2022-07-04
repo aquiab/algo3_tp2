@@ -18,9 +18,13 @@ public class Camioneta extends Estado {
     @Override
     public void pasarPozo() {
         this.cantidadPozos++;
-        if (this.cantidadPozos % 3 == 0) {
+        if (penlizacionPozoHabilitada()) {
             vehiculo.incrementarMovimientos(PENALIZACION_POZO);
         }
+    }
+
+    public boolean penlizacionPozoHabilitada() {
+        return (this.cantidadPozos % 3 == 0);
     }
 
     public void pasarPiquete() {

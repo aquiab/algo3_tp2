@@ -20,7 +20,7 @@ public class Jugador implements Comparable<Jugador> {
         if (this.movimientos == o.getMovimientos()) {
             //Los objetos son iguales
             estado = 0;
-        } else if( this.movimientos > o.getMovimientos()){ //asi anda
+        } else if(this.movimientos > o.getMovimientos()){ //asi anda
             //El objeto 1 es mejor que el pasado por parametro
             estado = 1;
         }
@@ -30,5 +30,13 @@ public class Jugador implements Comparable<Jugador> {
     public void ingresarPuntaje(double movimientos) {
         this.movimientos = movimientos;
         this.ranking.agregarJugador(this);
+    }
+
+    public double obtenerPuntaje() {
+        return this.movimientos;
+    }
+
+    public String obtenerNombre() {
+        return this.nombre;
     }
 }

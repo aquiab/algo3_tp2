@@ -5,9 +5,6 @@ import edu.fiuba.algo3.modelo.estado.Estado;
 import edu.fiuba.algo3.modelo.fabrica_obstaculos.*;
 import edu.fiuba.algo3.modelo.fabrica_sorpresa.*;
 import org.junit.jupiter.api.Test;
-
-import javax.print.attribute.standard.MediaSize;
-
 import static org.mockito.Mockito.*;
 
 public class CalleTest {

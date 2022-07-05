@@ -17,7 +17,7 @@ public class JuegoConstructor {
 
     public JuegoConstructor asignarLongitudMapa(int dimension) {
         this.dimensionMapa = dimension;
-        juego.asginarLongitudMapa(dimension);
+        juego.asignarLongitudMapa(dimension);
         return this;
     }
 

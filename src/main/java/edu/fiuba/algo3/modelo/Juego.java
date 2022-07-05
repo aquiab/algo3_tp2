@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.constructor_juego.JuegoConstructor;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
-import edu.fiuba.algo3.modelo.estado.Auto;
-import edu.fiuba.algo3.modelo.estado.Estado;
+import edu.fiuba.algo3.modelo.estado.*;
 
 public class Juego {
 
@@ -33,14 +31,14 @@ public class Juego {
 
 	public void aplicarJugador(String nombre) {
 		Jugador jugador = new Jugador(nombre, this.ranking);
-		vehiculo.jugador = jugador;
+		vehiculo.aplicarJugador(jugador);
 	}
 
 	public void aplicarEstadoInicial(Estado estado) {
 		vehiculo.aplicarEstado(estado);
 	}
 
-	public void asginarLongitudMapa(int dimension) {
+	public void asignarLongitudMapa(int dimension) {
 		this.mapSize = dimension;
 		this.mapa = new Mapa(dimension);
 	}
@@ -67,5 +65,8 @@ public class Juego {
 
 	public int obtenerCoordenadaMeta() {
 		return this.COORDENADA_META;
+	}
+	public double obtenerMovimientos() {
+		return this.vehiculo.movimientos;
 	}
 }

@@ -88,4 +88,14 @@ public class JuegoDirector {
     public int obtenerCoordenadaMeta() {
         return this.COORDENADA_META;
     }
+
+    public void asignarAutoInicial() {
+        constructor.asignarAutoInicial();
+    }
+    public void asignarMotoInicial() {
+        constructor.asignarMotoInicial();
+    }
+    public void asignarCamionetaInicial() {
+        constructor.asignarCamionetaInicial();
+    }
 }

@@ -24,4 +24,11 @@ public class Calle {
     public void borrarSorpresa() {
         this.sorpresa = new VacioSorpresa();
     }
+
+    public IObstaculo obtenerObstaculo() {
+        return this.obstaculo;
+    }
+    public ISorpresa obtenerSorpresa() {
+        return this.sorpresa;
+    }
 }

@@ -2,11 +2,9 @@ package edu.fiuba.algo3.modelo.estado;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Vehiculo;
 
-import java.util.Random;
 
 public class Camioneta extends Estado {
-    Random rand = new Random();
-
+    
     public Camioneta(Vehiculo vehiculo) {
         super(vehiculo);
         PENALIZACION_POLICIAL = 3;

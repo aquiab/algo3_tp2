@@ -5,4 +5,3 @@ public class DireccionArriba implements Direccion {
 		posicion.moverArriba(vehiculo);
 	}
 }
-

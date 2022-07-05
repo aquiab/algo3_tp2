@@ -115,10 +115,6 @@ public class JuegoConstructor {
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
     }
 
-    public Mapa obtenerMapa() {
-        return juego.obtenerMapa();
-    }
-
     public Juego construir() {
         return juego;
     }

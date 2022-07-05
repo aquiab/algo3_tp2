@@ -1,14 +1,12 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.Meta;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.*;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.*;
 
 import java.util.LinkedList;
 
 public class Mapa {
 	public LinkedList<LinkedList<Calle>> callesHorizontales;
 	public LinkedList<LinkedList<Calle>> callesVerticales;
-	private int cantidadModificadoresIniciales;
 	protected int dimension;
 
 	private VacioObstaculo VACIO_OBSTACULO = new VacioObstaculo();
@@ -18,7 +16,6 @@ public class Mapa {
 		this.dimension = dimension;
 		callesHorizontales = new LinkedList<>();
 		callesVerticales = new LinkedList<>();
-		cantidadModificadoresIniciales = dimension * 2;
 		for (int i=0; i < dimension; i++) {
 			callesHorizontales.add(new LinkedList<Calle>());
 			callesVerticales.add(new LinkedList<Calle>());
@@ -60,4 +57,32 @@ public class Mapa {
 	private Posicion obtenerPosicionAleatoria(int dimension) {
 		return new Posicion((int) (Math.random() * (dimension - 1)), (int) (Math.random() * (dimension - 1)), this);
 	}
+
+    public int cantidadObstaculos() {
+		int contador = 0;
+		for (int i=0; i < dimension; i++){
+			contador += callesHorizontales.get(i).stream().filter(calle -> calle.obstaculo.getClass() != VacioObstaculo.class).count();
+			contador += callesVerticales.get(i).stream().filter(calle -> calle.obstaculo.getClass() != VacioObstaculo.class).count();
+			}
+		return contador;
+    }
+
+	public int cantidadSorpresa() {
+		int contador = 0;
+		for (int i=0; i < dimension; i++){
+			contador += callesHorizontales.get(i).stream().filter(calle -> calle.sorpresa.getClass() != VacioSorpresa.class).count();
+			contador += callesVerticales.get(i).stream().filter(calle -> calle.sorpresa.getClass() != VacioSorpresa.class).count();
+		}
+		return contador;
+	}
+
+	public int cantidadMeta() {
+		int contador = 0;
+		for (int i=0; i < dimension; i++){
+			contador += callesHorizontales.get(i).stream().filter(calle -> calle.sorpresa.getClass() == Meta.class).count();
+			contador += callesVerticales.get(i).stream().filter(calle -> calle.sorpresa.getClass() == Meta.class).count();
+		}
+		return contador;
+	}
+
 }

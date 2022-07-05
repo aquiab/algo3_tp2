@@ -9,7 +9,7 @@ public class FactoryTests {
     private static final double VALOR_SORPRESA_FAVORABLE = 0.8;
     private static final double VALOR_SORPRESA_DESFAVORABLE = 1.25;
 
-    /**Creación de obstaculos*/
+    /**Creación de obstaculos**/
 
     @Test
     public void creoPozoATravesDeFabrica() {

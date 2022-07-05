@@ -85,6 +85,6 @@ public class GamePlayTest {
         vehiculo.mover(direccionSorpresaFavorable); // La moto se encuentra una sorpresa favorable, movimientos = (29 + 1) * 0.8
         vehiculo.mover(direccionMeta); // La moto llega a la meta y gana, movimientos = 24 + 1
 
-        assert (vehiculo.movimientos == 25);
+        assert (vehiculo.obtenerMovimientos() == 25);
     }
 }

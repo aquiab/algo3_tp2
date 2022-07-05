@@ -21,19 +21,19 @@ public class MotoTest {
     
     @Test
     public void MotoEncuentraPozoTest() {
-        //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
 
         //assert
-        assert(juego.vehiculo.movimientos == 4);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 4);
     }
     @Test
     public void MotoEncuentraPiqueteTest() {
@@ -42,14 +42,16 @@ public class MotoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(piqueteFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(piqueteFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
+
         //assert
-        assert(juego.vehiculo.posicion.x == 1);
-        assert(juego.vehiculo.posicion.y == 0);
-        assert(juego.vehiculo.movimientos == 3);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 1);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 3);
     }
     @Test
     public void MotoEncuentraPolicialTest() {
@@ -58,13 +60,14 @@ public class MotoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(controlFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(controlFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
 
         //assert
-        assert(juego.vehiculo.movimientos == 4 || juego.vehiculo.movimientos == 1);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 4 || juego.obtenerVehiculo().obtenerMovimientos() == 1);
     }
     @Test
     public void MotoEncuentraPiqueteYPozoTest() {
@@ -73,17 +76,19 @@ public class MotoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(piqueteFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(piqueteFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(new VacioSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
         juego.mover(new DireccionDerecha());
+
         //assert
-        assert(juego.vehiculo.posicion.x == 2);
-        assert(juego.vehiculo.posicion.y == 0);
-        assert(juego.vehiculo.movimientos == 7);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 2);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 7);
     }
 
     @Test
@@ -93,15 +98,17 @@ public class MotoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
+
         //assert
-        assert(juego.vehiculo.posicion.x == 1);
-        assert(juego.vehiculo.posicion.y == 0);
-        assert(juego.vehiculo.movimientos == 1);
-        assert(juego.vehiculo.estado.getClass() == Auto.class);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 1);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 1);
+        assert(juego.obtenerVehiculo().estadoActual() == Auto.class);
     }
     @Test
     public void MotoEncuentraSorpresaFavorable() {
@@ -110,15 +117,17 @@ public class MotoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(sorpresaFavFabrica.crearSorpresa());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaFavFabrica.crearSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
+
         //assert
-        assert(juego.vehiculo.posicion.x == 1);
-        assert(juego.vehiculo.posicion.y == 0);
-        assert(juego.vehiculo.movimientos == 0.8);
-        assert(juego.vehiculo.estado.getClass() == Moto.class);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 1);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 0.8);
+        assert(juego.obtenerVehiculo().estadoActual() == Moto.class);
     }
     @Test
     public void MotoEncuentraSorpresaDesavorable() {
@@ -127,15 +136,17 @@ public class MotoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesVerticales.get(0).get(1).agregarSorpresa(sorpresaDesfavFabrica.crearSorpresa());
-        juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarSorpresa(sorpresaDesfavFabrica.crearSorpresa());
+
         //act
         juego.mover(new DireccionAbajo());
+
         //assert
-        assert(juego.vehiculo.posicion.x == 0);
-        assert(juego.vehiculo.posicion.y == 1);
-        assert(juego.vehiculo.movimientos == 1.25);
-        assert(juego.vehiculo.estado.getClass() == Moto.class);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 0);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 1);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 1.25);
+        assert(juego.obtenerVehiculo().estadoActual() == Moto.class);
     }
     @Test
     public void MotoEncuentraSorpresaCambioVehiculo3Veces() {
@@ -144,21 +155,23 @@ public class MotoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new VacioObstaculo());
-        juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(3, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(3, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
         juego.mover(new DireccionDerecha());
         juego.mover(new DireccionDerecha());
+
         //assert
-        assert(juego.vehiculo.posicion.x == 3);
-        assert(juego.vehiculo.posicion.y == 0);
-        assert(juego.vehiculo.movimientos == 3);
-        assert(juego.vehiculo.estado.getClass() == Moto.class);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 3);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 3);
+        assert(juego.obtenerVehiculo().estadoActual() == Moto.class);
     }
     @Test
     public void MotoEncuentraSorpresaCambioVehiculo2veces() {
@@ -167,17 +180,19 @@ public class MotoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.vehiculo));
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
-        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
         juego.mover(new DireccionDerecha());
+
         //assert
-        assert(juego.vehiculo.posicion.x == 2);
-        assert(juego.vehiculo.posicion.y == 0);
-        assert(juego.vehiculo.movimientos == 2);
-        assert(juego.vehiculo.estado.getClass() == Camioneta.class);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 2);
+        assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
+        assert(juego.obtenerVehiculo().obtenerMovimientos() == 2);
+        assert(juego.obtenerVehiculo().estadoActual() == Camioneta.class);
     }
 }

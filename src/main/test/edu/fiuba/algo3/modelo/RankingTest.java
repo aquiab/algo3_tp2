@@ -72,22 +72,23 @@ public class RankingTest {
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
+
         //act
         juego.mover(new DireccionDerecha());
-        juego.vehiculo.ganar();
+        juego.obtenerVehiculo().ganar();
         juego.reiniciarJuego();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Aquiles");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
-        juego.vehiculo.ganar();
+        juego.obtenerVehiculo().ganar();
 
         //assert
-        assert(juego.ranking.devolverGanador().nombre == "Aquiles" );
-        assert(juego.ranking.devolverGanador().nombre == "Pedro");
+        assert(juego.ranking.devolverGanador().obtenerNombre().equals("Aquiles"));
+        assert(juego.ranking.devolverGanador().obtenerNombre().equals("Pedro"));
     }
 
     @Test
@@ -97,30 +98,30 @@ public class RankingTest {
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
-        juego.vehiculo.ganar();
+        juego.obtenerVehiculo().ganar();
         //
         juego.reiniciarJuego();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Aquiles");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
-        juego.vehiculo.ganar();
+        juego.obtenerVehiculo().ganar();
         //
         juego.reiniciarJuego();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Campi");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(sorpresaFavFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaFavFabrica.crearSorpresa());
         juego.mover(new DireccionDerecha());
-        juego.vehiculo.ganar();
+        juego.obtenerVehiculo().ganar();
 
         //assert
-        assert(juego.ranking.devolverGanador().nombre == "Campi");
-        assert(juego.ranking.devolverGanador().nombre == "Aquiles" );
-        assert(juego.ranking.devolverGanador().nombre == "Pedro");
+        assert(juego.ranking.devolverGanador().obtenerNombre().equals("Campi"));
+        assert(juego.ranking.devolverGanador().obtenerNombre().equals("Aquiles"));
+        assert(juego.ranking.devolverGanador().obtenerNombre().equals("Pedro"));
     }
 }

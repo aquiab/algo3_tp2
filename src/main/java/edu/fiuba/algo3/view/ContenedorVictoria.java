@@ -34,7 +34,7 @@ public class ContenedorVictoria extends VBox {
         }
         this.getChildren().add(hbox);
         botonVolver.setOnAction(e -> {
-			this.getScene().setRoot(new ContenedorMenu(director));
+			//this.getScene().setRoot(new ContenedorMenu(director));
 		});
 	}
 }

@@ -18,14 +18,7 @@ public class App extends Application {
     public void start(Stage stage) throws FileNotFoundException {
         JuegoDirector director = new JuegoDirector();
         Scene scene = new Scene(new ContenedorMenu(director));
-
-        //ContenedorMapa contenedorMapa = new ContenedorMapa(juego);
-        //ContenedorVictoria contenedorVictoria = new ContenedorVictoria(contenedorMenu, juego.ranking);
-        //contenedorMapa.contenedorVictoria = contenedorVictoria;
-
         stage.setScene(scene);
-        stage.setMinWidth(500);
-        stage.setMinHeight(500);
         stage.show();
     }
 }

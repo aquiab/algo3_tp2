@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.view;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
@@ -48,6 +49,7 @@ public class ContenedorMenu extends VBox {
 			ContenedorMapa contenedorMapa = new ContenedorMapa(juego);
 			scene.setRoot(contenedorMapa);
 			contenedorMapa.getScene().setOnKeyReleased(new ControladorMovimiento(director, contenedorMapa));
+			contenedorMapa.getScene().getWindow().sizeToScene();
 			juego.aplicarJugador(nombreUsuario.getText());
 		});
 

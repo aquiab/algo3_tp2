@@ -42,14 +42,14 @@ public class CamionetaUnitariasTest {
         Camioneta camioneta = spy(new Camioneta(vehiculo));
         vehiculo.aplicarEstado (camioneta);
 
-        when(camioneta.penlizacionPozoHabilitada()).thenReturn(true);
+        when(camioneta.penalizacionPozoHabilitada()).thenReturn(true);
         doAnswer(i -> {
             vehiculo.pasarPozo();
             return null;
         }).when(pozo).pasar(vehiculo);
 
         doAnswer(i -> {
-            if (camioneta.penlizacionPozoHabilitada()) vehiculo.incrementarMovimientos(2);
+            if (camioneta.penalizacionPozoHabilitada()) vehiculo.incrementarMovimientos(2);
             return null;
         }).when(camioneta).pasarPozo();
 
@@ -66,14 +66,14 @@ public class CamionetaUnitariasTest {
         Camioneta camioneta = spy(new Camioneta(vehiculo));
         vehiculo.aplicarEstado (camioneta);
 
-        when(camioneta.penlizacionPozoHabilitada()).thenReturn(false);
+        when(camioneta.penalizacionPozoHabilitada()).thenReturn(false);
         doAnswer(i -> {
             vehiculo.pasarPozo();
             return null;
         }).when(pozo).pasar(vehiculo);
 
         doAnswer(i -> {
-            if (camioneta.penlizacionPozoHabilitada()) vehiculo.incrementarMovimientos(2);
+            if (camioneta.penalizacionPozoHabilitada()) vehiculo.incrementarMovimientos(2);
             return null;
         }).when(camioneta).pasarPozo();
 

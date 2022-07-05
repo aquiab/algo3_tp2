@@ -1,12 +1,17 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicialFabrica;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.PiqueteFabrica;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.PozoFabrica;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.*;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
 public class RankingTest {
-    
-    private Fabrica fabrica = new Fabrica();
+
+    private PozoFabrica pozoFabrica = new PozoFabrica();
+    private SorpresaFavorableFabrica sorpresaFavFabrica = new SorpresaFavorableFabrica();
 
     @Test
     public void rankingInicialmenteEstaVacio() {
@@ -67,16 +72,16 @@ public class RankingTest {
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
         //act
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
         juego.reiniciarJuego();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Aquiles");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
 
@@ -92,24 +97,24 @@ public class RankingTest {
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
         juego.aplicarJugador("Pedro");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
         //
         juego.reiniciarJuego();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Aquiles");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(new VacioSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
         //
         juego.reiniciarJuego();
         juego.aplicarEstadoInicial(new Camioneta(juego.vehiculo));
         juego.aplicarJugador("Campi");
-        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
-        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaFavorable());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(sorpresaFavFabrica.crearSorpresa());
         juego.mover(new DireccionDerecha());
         juego.vehiculo.ganar();
 

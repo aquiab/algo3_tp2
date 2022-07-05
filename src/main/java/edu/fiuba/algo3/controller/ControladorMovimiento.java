@@ -2,7 +2,6 @@ package edu.fiuba.algo3.controller;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.view.ContenedorMapa;
-import edu.fiuba.algo3.view.ContenedorMenu;
 import edu.fiuba.algo3.view.ContenedorVictoria;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
@@ -15,7 +14,6 @@ public class ControladorMovimiento implements EventHandler<KeyEvent> {
     JuegoDirector director;
     Juego juego;
     ContenedorMapa contenedorMapa;
-    ContenedorMenu contenedorMenu;
     ImageView imagenVehiculo;
 
     public ControladorMovimiento(JuegoDirector director, ContenedorMapa contenedorMapa) {

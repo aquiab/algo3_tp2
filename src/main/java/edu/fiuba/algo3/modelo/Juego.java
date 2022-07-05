@@ -7,15 +7,15 @@ public class Juego {
 
 	private Integer POSICION_INICIAL = 0;
 	private Integer MOVIMIENTOS_INICIALES = 0;
-
 	private Integer COORDENADA_META;
 
 	private int CODIGO;
+	private Boolean gano = false;
 	public Ranking ranking = new Ranking();
 	public int mapSize;
 	public Mapa mapa;
 	public Vehiculo vehiculo;
-
+	
 	public void mover(Direccion direccion) {
 		vehiculo.mover(direccion);
 	}
@@ -27,6 +27,7 @@ public class Juego {
 		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
 		aplicarEstadoInicial(new Auto(this.vehiculo));
 		aplicarJugador(aux.nombre);
+		//gano = false;
 	}
 
 	public void aplicarJugador(String nombre) {
@@ -68,5 +69,11 @@ public class Juego {
 	}
 	public double obtenerMovimientos() {
 		return this.vehiculo.movimientos;
+	}
+	public void ganar() {
+		gano = true;
+	}
+	public Boolean gano() {
+		return gano;
 	}
 }

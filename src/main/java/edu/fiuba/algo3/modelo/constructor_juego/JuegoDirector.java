@@ -13,6 +13,8 @@ public class JuegoDirector {
 
     public JuegoDirector() {
         this.COORDENADA_META = valorAleatorio();
+        configurarPartidaNormal();
+        asignarAutoInicial();
     }
 
     public JuegoDirector(int codigo, int coordenadaMeta) {
@@ -50,8 +52,7 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(10)
                 .agregarSorpresasDesfavorables(5)
                 .agregarSorpresasCambioDeVehiculo(5)
-                .agregarMetaEn(COORDENADA_META)
-                .asignarAutoInicial();
+                .agregarMetaEn(COORDENADA_META);
     }
 
     public void configurarPartidaNormal() {
@@ -63,8 +64,7 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(5)
                 .agregarSorpresasDesfavorables(10)
                 .agregarSorpresasCambioDeVehiculo(10)
-                .agregarMetaEn(COORDENADA_META)
-                .asignarAutoInicial();
+                .agregarMetaEn(COORDENADA_META);
     }
 
     public void configurarPartidaDificil() {
@@ -76,8 +76,7 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(0)
                 .agregarSorpresasDesfavorables(10)
                 .agregarSorpresasCambioDeVehiculo(10)
-                .agregarMetaEn(COORDENADA_META)
-                .asignarAutoInicial();
+                .agregarMetaEn(COORDENADA_META);
     }
 
     public Juego obtenerPartida() {

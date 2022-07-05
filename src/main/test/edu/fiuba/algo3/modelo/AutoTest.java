@@ -32,7 +32,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
@@ -50,7 +50,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(piqueteFabrica.crearObstaculo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
@@ -68,7 +68,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(controlFabrica.crearObstaculo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
@@ -84,7 +84,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
         juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(piqueteFabrica.crearObstaculo());
@@ -106,7 +106,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
 
@@ -125,7 +125,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaFavFabrica.crearSorpresa());
 
@@ -144,7 +144,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarObstaculo(new VacioObstaculo());
         juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarSorpresa(sorpresaDesfavFabrica.crearSorpresa());
 
@@ -163,7 +163,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
         juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new VacioObstaculo());
@@ -188,7 +188,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
         juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new VacioObstaculo());
@@ -210,7 +210,7 @@ public class AutoTest {
         Juego juego = new Juego();
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
-        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
 
         //act
         juego.mover(new DireccionIzquierda());

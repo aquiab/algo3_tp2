@@ -80,7 +80,6 @@ public class JuegoDirector {
     }
 
     public Juego obtenerPartida() {
-        //pasamanos
         return constructor.construir();
     }
 

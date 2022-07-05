@@ -90,7 +90,7 @@ public class ContenedorMapa extends StackPane {
                     dibujarElementoCalle(pozo, x, y);
                 }
                 
-                if ((sorpresa.getClass() == SorpresaVehiculo.class)) {
+                if ((sorpresa.getClass() == SorpresaVehiculo.class) || sorpresa.getClass() == SorpresaPuntaje.class) {
                     dibujarElementoCalle(sorpresaImagen, x - offsetSorpresaX, y - offsetSorpresaY);
                 } else if (sorpresa.getClass() == Meta.class) {
                     dibujarElementoCalle(meta, x + 5, y - 10);

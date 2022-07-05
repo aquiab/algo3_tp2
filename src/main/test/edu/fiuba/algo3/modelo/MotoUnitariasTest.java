@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.estado.*;
+import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
+import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
@@ -8,6 +10,20 @@ public class MotoUnitariasTest {
     Juego juego = mock(Juego.class);
     Posicion posicion = mock(Posicion.class);
     Direccion direccion = mock(Direccion.class);
+
+    @Test
+    public void MotoEncuentraVacioDeTipoObstaculoTest() {
+        Vehiculo vehiculo = new Vehiculo(0, posicion, juego);
+        VacioObstaculo vacio = mock(VacioObstaculo.class);
+        Moto moto = new Moto(vehiculo);
+        vehiculo.aplicarEstado(moto);
+
+        doAnswer(i -> null).when(vacio).pasar(vehiculo);
+        vacio.pasar(vehiculo);
+
+        verify(vacio, times(1)).pasar(vehiculo);
+        assert (vehiculo.obtenerMovimientos() == 0);
+    }
 
     @Test
     public void MotoEncuentraPozoTest() {
@@ -77,6 +93,21 @@ public class MotoUnitariasTest {
         vehiculo.mover(direccion2);
 
         assert (vehiculo.movimientos == 7);
+    }
+
+    @Test
+    public void MotoEncuentraVacioDeTipoSorpresaTest() {
+        Vehiculo vehiculo = new Vehiculo(0, posicion, juego);
+        VacioSorpresa vacio = mock(VacioSorpresa.class);
+        Moto moto = new Moto(vehiculo);
+        vehiculo.aplicarEstado(moto);
+
+        doAnswer(i -> null).when(vacio).aplicar(vehiculo);
+        vacio.aplicar(vehiculo);
+
+        verify(vacio, times(1)).aplicar(vehiculo);
+        assert (vehiculo.obtenerMovimientos() == 0);
+        assert (vehiculo.estadoActual() == Moto.class);
     }
 
     @Test

@@ -1,243 +1,188 @@
 package edu.fiuba.algo3.modelo;
-
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
 import edu.fiuba.algo3.modelo.estado.Moto;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicial;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.Piquete;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaPuntaje;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaVehiculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.*;
-
 public class AutoTest {
-
-    private Juego juegoMock = mock(Juego.class);
-    private Posicion posicionMock = mock(Posicion.class);
-
-    /**Interacciones con obstáculos***/
-
-    @Test
-    public void AutoEncuentraVacioDeTipoObstaculoTest() {
-        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
-        VacioObstaculo vacio = mock(VacioObstaculo.class);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-
-        doAnswer(i -> null).when(vacio).pasar(vehiculo);
-        vacio.pasar(vehiculo);
-
-        verify(vacio, times(1)).pasar(vehiculo);
-        assert (vehiculo.obtenerMovimientos() == 0);
-    }
+    private Fabrica fabrica = new Fabrica();
 
     @Test
     public void AutoEncuentraPozoTest() {
-        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
-        Pozo pozo = mock(Pozo.class);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
+        //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        //act
+        juego.mover(new DireccionDerecha());
 
-        doAnswer(i -> {
-            vehiculo.pasarPozo();
-            return null;
-        }).when(pozo).pasar(vehiculo);
-        pozo.pasar(vehiculo);
-
-        verify(pozo, times(1)).pasar(vehiculo);
-        assert (vehiculo.obtenerMovimientos() == 3);
+        //assert
+        assert(juego.vehiculo.movimientos == 4);
     }
-
     @Test
-    public void AutoInteractuaConControlPolicialTest() {
-        Vehiculo vehiculo =  new Vehiculo(0, posicionMock, juegoMock);
-        ControlPolicial control = mock(ControlPolicial.class);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-
-        when(control.pasoControlAleatorio()).thenReturn((double)0);
-        doAnswer(i -> {
-            vehiculo.pasarControlPolicial(control.pasoControlAleatorio());
-            return null;
-        }).when(control).pasar(vehiculo);
-        control.pasar(vehiculo);
-
-        verify(control, times(1)).pasoControlAleatorio();
-        assert(vehiculo.obtenerMovimientos() == 3);
+    public void AutoEncuentraPiqueteTest() {
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPiquete());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        //act
+        juego.mover(new DireccionDerecha());
+        //assert
+        assert(juego.vehiculo.posicion.x == 0);
+        assert(juego.vehiculo.posicion.y == 0);
+        assert(juego.vehiculo.movimientos == 1);
     }
-
     @Test
-    public void AutoInteractuaConPiqueteTest() {
-        //Auto no presenta penalizacion alguna al chocar con un piquete.
-        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
-        Piquete piquete = mock(Piquete.class);
-        Auto auto = new Auto(vehiculo);
+    public void AutoEncuentraPolicialTest() {
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarControlPolicial());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        //act
+        juego.mover(new DireccionDerecha());
 
-        vehiculo.aplicarEstado(auto);
-        doAnswer(i -> {
-            vehiculo.pasarPiquete();
-            return null;
-        }).when(piquete).pasar(vehiculo);
-        piquete.pasar(vehiculo);
-
-        verify(piquete, times(1)).pasar(vehiculo);
-        assert (vehiculo.obtenerMovimientos() == 0);
+        //assert
+        assert(juego.vehiculo.movimientos == 4 || juego.vehiculo.movimientos == 1);
     }
-
     @Test
     public void AutoEncuentraPiqueteYPozoTest() {
-        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
-        Piquete piquete = mock(Piquete.class);
-        Pozo pozo = mock(Pozo.class);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-
-        doAnswer(i -> {
-            vehiculo.pasarPozo();
-            return null;
-        }).when(pozo).pasar(vehiculo);
-        pozo.pasar(vehiculo);
-
-        doAnswer(i -> {
-            vehiculo.pasarPiquete();
-            return null;
-        }).when(piquete).pasar(vehiculo);
-        piquete.pasar(vehiculo);
-
-        verify(pozo, times(1)).pasar(vehiculo);
-        verify(piquete, times(1)).pasar(vehiculo);
-        assert (vehiculo.obtenerMovimientos() == 3);
-    }
-
-    /**Interacción con Sorpresas**/
-
-    @Test
-    public void AutoEncuentraSorpresaFavorable() {
-        Vehiculo vehiculo = new Vehiculo(1, posicionMock, juegoMock);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-        SorpresaPuntaje sorpresa = mock(SorpresaPuntaje.class);
-
-        when(sorpresa.obtenerValor()).thenReturn(0.8);
-        doAnswer(i -> {
-            vehiculo.aplicarSorpresaPuntaje(sorpresa.obtenerValor());
-            return null;
-        }).when(sorpresa).aplicar(vehiculo);
-        sorpresa.aplicar(vehiculo);
-
-        verify(sorpresa, times(1)).obtenerValor();
-        verify(sorpresa, times(1)).aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Auto.class);
-        assert (vehiculo.obtenerMovimientos() == 0.8);
-    }
-
-    @Test
-    public void AutoEncuentraSorpresaDesfavorable() {
-        Vehiculo vehiculo = new Vehiculo(1, posicionMock, juegoMock);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-        SorpresaPuntaje sorpresa = mock(SorpresaPuntaje.class);
-
-        when(sorpresa.obtenerValor()).thenReturn(1.25);
-        doAnswer(i -> {
-            vehiculo.aplicarSorpresaPuntaje(sorpresa.obtenerValor());
-            return null;
-        }).when(sorpresa).aplicar(vehiculo);
-        sorpresa.aplicar(vehiculo);
-
-        verify(sorpresa, times(1)).obtenerValor();
-        verify(sorpresa, times(1)).aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Auto.class);
-        assert (vehiculo.obtenerMovimientos() == 1.25);
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarPozo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(fabrica.generarPiquete());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(fabrica.generarVacioSorpresa());
+        //act
+        juego.mover(new DireccionDerecha());
+        juego.mover(new DireccionDerecha());
+        //assert
+        assert(juego.vehiculo.posicion.x == 1);
+        assert(juego.vehiculo.posicion.y == 0);
+        assert(juego.vehiculo.movimientos == 5);
     }
 
     @Test
     public void AutoEncuentraSorpresaCambioVehiculo() {
-        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-        SorpresaVehiculo sorpresa = mock(SorpresaVehiculo.class);
-
-        doAnswer(i -> {
-            vehiculo.aplicarSorpresaCambioVehiculo();
-            return null;
-        }).when(sorpresa).aplicar(vehiculo);
-        sorpresa.aplicar(vehiculo);
-
-        verify(sorpresa, times(1)).aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(new VacioObstaculo());
+        //act
+        juego.mover(new DireccionDerecha());
+        //assert
+        assert(juego.vehiculo.posicion.x == 1);
+        assert(juego.vehiculo.posicion.y == 0);
+        assert(juego.vehiculo.movimientos == 1);
+        assert(juego.vehiculo.estado.getClass() == Camioneta.class);
     }
-
     @Test
-    public void AutoEncuentraSorpresaCambioVehiculo2veces() {
-        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-        SorpresaVehiculo sorpresa = mock(SorpresaVehiculo.class);
-
-        doAnswer(i -> {
-            vehiculo.aplicarSorpresaCambioVehiculo();
-            return null;
-        }).when(sorpresa).aplicar(vehiculo);
-        sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Camioneta.class);
-
-        doAnswer(i -> {
-            vehiculo.aplicarSorpresaCambioVehiculo();
-            return null;
-        }).when(sorpresa).aplicar(vehiculo);
-        sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Moto.class);
-
-        verify(sorpresa, times(2)).aplicar(vehiculo);
+    public void AutoEncuentraSorpresaFavorable() {
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaFavorable());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
+        //act
+        juego.mover(new DireccionDerecha());
+        //assert
+        assert(juego.vehiculo.posicion.x == 1);
+        assert(juego.vehiculo.posicion.y == 0);
+        assert(juego.vehiculo.movimientos == 0.8);
+        assert(juego.vehiculo.estado.getClass() == Auto.class);
     }
-
-
+    @Test
+    public void AutoEncuentraSorpresaDesfavorable() {
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesVerticales.get(0).get(1).agregarSorpresa(fabrica.generarSorpresaDesfavorable());
+        juego.mapa.callesVerticales.get(0).get(1).agregarObstaculo(fabrica.generarVacioObstaculo());
+        //act
+        juego.mover(new DireccionAbajo());
+        //assert
+        assert(juego.vehiculo.posicion.x == 0);
+        assert(juego.vehiculo.posicion.y == 1);
+        assert(juego.vehiculo.movimientos == 1.25);
+        assert(juego.vehiculo.estado.getClass() == Auto.class);
+    }
     @Test
     public void AutoEncuentraSorpresaCambioVehiculo3Veces() {
-        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-        SorpresaVehiculo sorpresa = mock(SorpresaVehiculo.class);
-
-        doAnswer(i -> {
-            vehiculo.aplicarSorpresaCambioVehiculo();
-            return null;
-        }).when(sorpresa).aplicar(vehiculo);
-        sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Camioneta.class);
-
-        doAnswer(i -> {
-            vehiculo.aplicarSorpresaCambioVehiculo();
-            return null;
-        }).when(sorpresa).aplicar(vehiculo);
-        sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Moto.class);
-
-        doAnswer(i -> {
-            vehiculo.aplicarSorpresaCambioVehiculo();
-            return null;
-        }).when(sorpresa).aplicar(vehiculo);
-        sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Auto.class);
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(3).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
+        juego.mapa.callesHorizontales.get(3).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
+        //act
+        juego.mover(new DireccionDerecha());
+        juego.mover(new DireccionDerecha());
+        juego.mover(new DireccionDerecha());
+        //assert
+        assert(juego.vehiculo.posicion.x == 3);
+        assert(juego.vehiculo.posicion.y == 0);
+        assert(juego.vehiculo.movimientos == 3);
+        assert(juego.vehiculo.estado.getClass() == Auto.class);
     }
-
     @Test
-    public void AutoEncuentraVacioDeTipoSorpresaTest() {
-        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
-        VacioSorpresa vacio = mock(VacioSorpresa.class);
-        Auto auto = new Auto(vehiculo);
-        vehiculo.aplicarEstado(auto);
-
-        doAnswer(i -> null).when(vacio).aplicar(vehiculo);
-        vacio.aplicar(vehiculo);
-
-        verify(vacio, times(1)).aplicar(vehiculo);
-        assert (vehiculo.obtenerMovimientos() == 0);
-        assert (vehiculo.estadoActual() == Auto.class);
+    public void AutoEncuentraSorpresaCambioVehiculo2veces() {
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(1).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarSorpresa(fabrica.generarSorpresaCambioDeVehiculo());
+        juego.mapa.callesHorizontales.get(1).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
+        juego.mapa.callesHorizontales.get(2).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
+        //act
+        juego.mover(new DireccionDerecha());
+        juego.mover(new DireccionDerecha());
+        //assert
+        assert(juego.vehiculo.posicion.x == 2);
+        assert(juego.vehiculo.posicion.y == 0);
+        assert(juego.vehiculo.movimientos == 2);
+        assert(juego.vehiculo.estado.getClass() == Moto.class);
+    }
+    @Test
+    public void AutoVisitaCalleEnLimiteDelMapaYSigueEnElMismoLugar() {
+        //arrange
+        Juego juego = new Juego();
+        juego.asignarLongitudMapa(5);
+        juego.asignarVehiculoInicial();
+        juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
+        juego.mapa.callesHorizontales.get(0).get(0).agregarSorpresa(fabrica.generarSorpresaDesfavorable());
+        juego.mapa.callesHorizontales.get(0).get(0).agregarObstaculo(fabrica.generarVacioObstaculo());
+        //act
+        juego.mover(new DireccionIzquierda());
+        //assert
+        assert(juego.vehiculo.posicion.x == 0);
+        assert(juego.vehiculo.posicion.y == 0);
+        assert(juego.vehiculo.movimientos == 1.25);
     }
 }

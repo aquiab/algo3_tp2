@@ -27,7 +27,7 @@ public class Juego {
 		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
 		aplicarEstadoInicial(new Auto(this.vehiculo));
 		aplicarJugador(aux.nombre);
-		//gano = false;
+		gano = false;
 	}
 
 	public void aplicarJugador(String nombre) {

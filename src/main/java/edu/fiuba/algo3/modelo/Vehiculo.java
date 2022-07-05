@@ -62,7 +62,6 @@ public class Vehiculo {
     public void ganar() {
         this.jugador.ingresarPuntaje(this.movimientos);
         this.juego.ganar();
-        this.juego.reiniciarJuego();
     }
 
     public Class<? extends Estado> estadoActual() {

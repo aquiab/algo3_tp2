@@ -42,6 +42,4 @@ public abstract class Estado {
         return PENALIZACION_PIQUETE;
     }
 
-
 }
-

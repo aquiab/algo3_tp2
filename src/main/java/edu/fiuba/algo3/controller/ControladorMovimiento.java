@@ -1,23 +1,26 @@
 package edu.fiuba.algo3.controller;
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.view.ContenedorMapa;
+import edu.fiuba.algo3.view.ContenedorMenu;
+import edu.fiuba.algo3.view.ContenedorVictoria;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 import javafx.scene.image.*;
 import java.text.DecimalFormat;
 
 public class ControladorMovimiento implements EventHandler<KeyEvent> {
 	
+    JuegoDirector director;
     Juego juego;
-    Stage stage;
     ContenedorMapa contenedorMapa;
+    ContenedorMenu contenedorMenu;
     ImageView imagenVehiculo;
 
-    public ControladorMovimiento(Juego juego, Stage stage, ContenedorMapa contenedorMapa) {
-        this.juego = juego;
-        this.stage = stage;
+    public ControladorMovimiento(JuegoDirector director, ContenedorMapa contenedorMapa) {
+        this.director = director;
+        this.juego = director.obtenerPartida();
         this.contenedorMapa = contenedorMapa;
         this.imagenVehiculo = contenedorMapa.imagenVehiculo;
     }
@@ -36,8 +39,17 @@ public class ControladorMovimiento implements EventHandler<KeyEvent> {
         } else if (e.getCode() == KeyCode.RIGHT) {
             juego.mover(new DireccionDerecha());
             imagenVehiculo.setRotate(0);
+        } else {
+            return;
         }
         contenedorMapa.actualizar();
-        stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.obtenerMovimientos()));
+        //stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.obtenerMovimientos()));
+        
+        if (juego.gano()) {
+            contenedorMapa.getScene().removeEventHandler(KeyEvent.KEY_RELEASED, this);
+            contenedorMapa.getScene().setRoot(new ContenedorVictoria(director));
+            juego.reiniciarJuego();
+        }
+        
     }
 }

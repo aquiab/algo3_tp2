@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.view;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.GridPane;
@@ -9,7 +10,6 @@ import javafx.scene.image.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
-
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.fabrica_obstaculos.*;
 import edu.fiuba.algo3.modelo.fabrica_sorpresa.*;
@@ -33,6 +33,7 @@ public class ContenedorMapa extends StackPane {
 		dibujarCalles(juego.mapSize);
         this.getChildren().add(mapaConElementos);
         dibujarSombra();
+        
 		try {
 			dibujarObstaculosYSorpresas(juego, juego.mapa.callesHorizontales,
 			(TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);

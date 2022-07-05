@@ -1,21 +1,18 @@
 package edu.fiuba.algo3.view;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.beans.value.*;
-import edu.fiuba.algo3.controller.ControladorMovimiento;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
+import edu.fiuba.algo3.controller.ControladorMovimiento;
 
 public class ContenedorMenu extends VBox {
-	private Stage stage;
 	private JuegoDirector director;
 	private Juego juego;
-	public ContenedorMenu(Stage stage, ContenedorMapa contenedorMapa, JuegoDirector director) {
-		this.stage = stage;
+	public ContenedorMenu(JuegoDirector director) {
 		this.director = director;
 		this.juego = director.obtenerPartida();
 
@@ -46,9 +43,11 @@ public class ContenedorMenu extends VBox {
 		Button botonJugar = new Button();
         botonJugar.setText("Jugar");
 		botonJugar.setOnAction(e -> {
-			var escenaMapa = new Scene(contenedorMapa);
-			escenaMapa.setOnKeyReleased(new ControladorMovimiento(juego, stage, contenedorMapa));
-			stage.setScene(escenaMapa);
+			Button button = (Button) e.getSource();
+    		Scene scene = button.getScene();
+			ContenedorMapa contenedorMapa = new ContenedorMapa(juego);
+			scene.setRoot(contenedorMapa);
+			contenedorMapa.getScene().setOnKeyReleased(new ControladorMovimiento(director, contenedorMapa));
 			juego.aplicarJugador(nombreUsuario.getText());
 		});
 
@@ -65,7 +64,6 @@ public class ContenedorMenu extends VBox {
 					if (group.getSelectedToggle() == opcionCamioneta) {
 						director.asignarCamionetaInicial();
 					}
-					contenedorMapa.actualizar();
 				}
 		});
         this.getChildren().addAll(etiqueta, nombreUsuario, etiquetaVehiculo,

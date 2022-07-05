@@ -257,7 +257,6 @@ public class App extends Application {
             System.out.println(error);
         }
     }
-
     private void dibujarPantallaDeDificultad(Stage stage, Scene scene0, JuegoDirector director) {
         Button botonFacil = new Button("Fácil");
         Button botonMedio = new Button("Medio");

@@ -17,8 +17,6 @@ public class Posicion {
 		this.mapa = mapa;
 	}
 
-	public void setearMapa(Mapa mapa) {this.mapa = mapa;}
-
 	private boolean dentroDeLimites(int coordenada) {
 		return (coordenada >= LIMITE_IZQUIERDO_O_SUPERIOR_MAPA && coordenada < limiteDerechoInferiorMapa);
 	}

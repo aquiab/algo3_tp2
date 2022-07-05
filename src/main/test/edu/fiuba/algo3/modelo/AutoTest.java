@@ -33,12 +33,8 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle = new Calle();
-        calle.agregarObstaculo(pozoFabrica.crearObstaculo());
-        calle.agregarSorpresa(new VacioSorpresa());
-        when(mapa.obtenerCalleHorizontal(1, 0)).thenReturn(calle);
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -55,12 +51,8 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle = new Calle();
-        calle.agregarObstaculo(piqueteFabrica.crearObstaculo());
-        calle.agregarSorpresa(new VacioSorpresa());
-        when(mapa.obtenerCalleHorizontal(1, 0)).thenReturn(calle);
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(piqueteFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -77,12 +69,8 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle = new Calle();
-        calle.agregarObstaculo(controlFabrica.crearObstaculo());
-        calle.agregarSorpresa(new VacioSorpresa());
-        when(mapa.obtenerCalleHorizontal(1, 0)).thenReturn(calle);
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(controlFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -97,16 +85,10 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle1 = new Calle();
-        calle1.agregarObstaculo(pozoFabrica.crearObstaculo());
-        calle1.agregarSorpresa(new VacioSorpresa());
-        Calle calle2 = new Calle();
-        calle2.agregarObstaculo(piqueteFabrica.crearObstaculo());
-        calle2.agregarSorpresa(new VacioSorpresa());
-        when(mapa.obtenerCalleHorizontal(1, 0)).thenReturn(calle1);
-        when(mapa.obtenerCalleHorizontal(2, 0)).thenReturn(calle2);
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(piqueteFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(new VacioSorpresa());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -125,12 +107,8 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle = new Calle();
-        calle.agregarObstaculo(new VacioObstaculo());
-        calle.agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        when(mapa.obtenerCalleHorizontal(1, 0)).thenReturn(calle);
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -148,12 +126,8 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle = new Calle();
-        calle.agregarObstaculo(new VacioObstaculo());
-        calle.agregarSorpresa(sorpresaFavFabrica.crearSorpresa());
-        when(mapa.obtenerCalleHorizontal(1, 0)).thenReturn(calle);
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaFavFabrica.crearSorpresa());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -171,12 +145,8 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle = new Calle();
-        calle.agregarObstaculo(new VacioObstaculo());
-        calle.agregarSorpresa(sorpresaDesfavFabrica.crearSorpresa());
-        when(mapa.obtenerCalleVertical(0, 1)).thenReturn(calle);
+        juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarSorpresa(sorpresaDesfavFabrica.crearSorpresa());
 
         //act
         juego.mover(new DireccionAbajo());
@@ -194,20 +164,12 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle1 = new Calle();
-        calle1.agregarObstaculo(new VacioObstaculo());
-        calle1.agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        Calle calle2 = new Calle();
-        calle2.agregarObstaculo(new VacioObstaculo());
-        calle2.agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        Calle calle3 = new Calle();
-        calle3.agregarObstaculo(new VacioObstaculo());
-        calle3.agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        when(mapa.obtenerCalleHorizontal(1, 0)).thenReturn(calle1);
-        when(mapa.obtenerCalleHorizontal(2, 0)).thenReturn(calle2);
-        when(mapa.obtenerCalleHorizontal(3, 0)).thenReturn(calle3);
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(3, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(3, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -227,16 +189,10 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.vehiculo));
-        Mapa mapa = mock(Mapa.class);
-        juego.obtenerVehiculo().devolverPosicion().setearMapa(mapa);
-        Calle calle1 = new Calle();
-        calle1.agregarObstaculo(new VacioObstaculo());
-        calle1.agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        Calle calle2 = new Calle();
-        calle2.agregarObstaculo(new VacioObstaculo());
-        calle2.agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
-        when(mapa.obtenerCalleHorizontal(1, 0)).thenReturn(calle1);
-        when(mapa.obtenerCalleHorizontal(2, 0)).thenReturn(calle2);
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new VacioObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
 
         //act
         juego.mover(new DireccionDerecha());

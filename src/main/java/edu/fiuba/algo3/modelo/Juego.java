@@ -17,6 +17,7 @@ public class Juego {
 	public int mapSize;
 	private Mapa mapa;
 	public Vehiculo vehiculo;
+	public Jugador jugador;
 	
 	public void mover(Direccion direccion) {
 		vehiculo.mover(direccion);
@@ -26,16 +27,14 @@ public class Juego {
 		this.COORDENADA_META = JuegoDirector.valorAleatorio();
 		this.mapa = JuegoDirector.reiniciarJuego(this.CODIGO, this.COORDENADA_META);
 		this.mapSize = mapa.dimension();
-		Jugador aux = vehiculo.jugador;
 		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
 		aplicarEstadoInicial(new Auto(this.vehiculo));
-		aplicarJugador(aux.nombre);
+		aplicarJugador(this.jugador.nombre);
 		gano = false;
 	}
 
 	public void aplicarJugador(String nombre) {
-		Jugador jugador = new Jugador(nombre, this.ranking);
-		vehiculo.aplicarJugador(jugador);
+		this.jugador = new Jugador(nombre);
 	}
 
 	public void aplicarEstadoInicial(Estado estado) {
@@ -95,7 +94,9 @@ public class Juego {
 		return this.vehiculo.movimientos;
 	}
 
-	public void ganar() {
+	public void ganar(double movimientos) {
+		this.jugador.ingresarPuntaje(movimientos);
+		this.ranking.agregarJugador(this.jugador);
 		gano = true;
 	}
 	public Boolean gano() {

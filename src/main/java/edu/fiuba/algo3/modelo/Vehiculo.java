@@ -6,7 +6,6 @@ public class Vehiculo {
 
     public double movimientos;
     public Estado estado;
-    public Jugador jugador;
     private Posicion posicion;
     private Integer PENALIZACION_POR_CADA_MOVIMENTO = 1;
     private Juego juego;
@@ -24,8 +23,6 @@ public class Vehiculo {
     public void aplicarEstado(Estado estado) {
         this.estado = estado;
     }
-
-    public void aplicarJugador(Jugador jugador) {this.jugador = jugador;}
 
     public void incrementarMovimientos(double incremento) {
         movimientos += incremento;
@@ -60,8 +57,7 @@ public class Vehiculo {
     }
 
     public void ganar() {
-        this.jugador.ingresarPuntaje(this.movimientos);
-        this.juego.ganar();
+        this.juego.ganar(this.movimientos);
     }
 
     public Class<? extends Estado> estadoActual() {

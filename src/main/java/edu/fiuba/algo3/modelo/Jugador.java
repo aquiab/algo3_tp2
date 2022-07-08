@@ -3,11 +3,9 @@ package edu.fiuba.algo3.modelo;
 public class Jugador implements Comparable<Jugador> {
     public double movimientos;
     public String nombre;
-    public Ranking ranking;
 
-    public Jugador(String nombre, Ranking ranking) {
+    public Jugador(String nombre) {
         this.nombre = nombre;
-        this.ranking = ranking;
     }
 
     public double getMovimientos() {
@@ -29,7 +27,6 @@ public class Jugador implements Comparable<Jugador> {
 
     public void ingresarPuntaje(double movimientos) {
         this.movimientos = movimientos;
-        this.ranking.agregarJugador(this);
     }
 
     public double obtenerPuntaje() {

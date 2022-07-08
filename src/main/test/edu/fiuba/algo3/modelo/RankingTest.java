@@ -21,14 +21,16 @@ public class RankingTest {
     @Test
     public void unUnicoJugadorAnotaDosPuntajesDiferentsTest() {
         Ranking ranking = new Ranking();
-        Jugador primeraPartida = spy(new Jugador("Cosme Fulanito", ranking));
+        Jugador primeraPartida = spy(new Jugador("Cosme Fulanito"));
         primeraPartida.ingresarPuntaje(100);
+        ranking.agregarJugador(primeraPartida);
 
         when(primeraPartida.obtenerPuntaje()).thenReturn((double)100);
         when(primeraPartida.getMovimientos()).thenReturn((double)100);
 
-        Jugador segundaPartida = spy(new Jugador("Cosme Fulanito", ranking));
+        Jugador segundaPartida = spy(new Jugador("Cosme Fulanito"));
         segundaPartida.ingresarPuntaje(120);
+        ranking.agregarJugador(segundaPartida);
 
         when(segundaPartida.obtenerPuntaje()).thenReturn((double)120);
         when(segundaPartida.getMovimientos()).thenReturn((double)120);
@@ -42,14 +44,16 @@ public class RankingTest {
     @Test
     public void DosJugadoresAnotanIgualPrimerLugarPrimeraPartidaTest() {
         Ranking ranking = new Ranking();
-        Jugador primeraPartida = spy(new Jugador("Cosme Fulanito", ranking));
+        Jugador primeraPartida = spy(new Jugador("Cosme Fulanito"));
         primeraPartida.ingresarPuntaje(100);
+        ranking.agregarJugador(primeraPartida);
 
         when(primeraPartida.obtenerPuntaje()).thenReturn((double)100);
         when(primeraPartida.getMovimientos()).thenReturn((double)100);
 
-        Jugador segundaPartida = spy(new Jugador("El Gordo Tony", ranking));
+        Jugador segundaPartida = spy(new Jugador("El Gordo Tony"));
         segundaPartida.ingresarPuntaje(100);
+        ranking.agregarJugador(segundaPartida);
 
         when(segundaPartida.obtenerPuntaje()).thenReturn((double)100);
         when(segundaPartida.getMovimientos()).thenReturn((double)100);

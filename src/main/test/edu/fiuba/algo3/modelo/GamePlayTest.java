@@ -14,7 +14,6 @@ public class GamePlayTest {
         Vehiculo vehiculo = new Vehiculo(0, posicion, juego);
         Auto auto = new Auto(vehiculo);
         vehiculo.aplicarEstado(auto);
-        vehiculo.aplicarJugador(jugador);
 
         Direccion direccionPozo = mock(Direccion.class);
         Direccion direccionPiquete = mock(Direccion.class);

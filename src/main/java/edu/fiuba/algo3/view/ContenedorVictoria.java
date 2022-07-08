@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.view;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
-import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.*;
-import javafx.geometry.Pos;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
@@ -61,6 +58,8 @@ public class ContenedorVictoria extends VBox {
         }
         this.getChildren().add(pane);
         botonVolver.setOnAction(e -> {
+            director.configurarPartidaNormal();
+            juego.reiniciarJuego();
 			this.getScene().setRoot(new ContenedorMenu(director));
 		});
 	}

@@ -23,14 +23,16 @@ public class ContenedorMapa extends StackPane {
     private static final int OFFSET_X = -7;
     private static final int OFFSET_Y = 3;
     private Juego juego;
-    private Pane mapaConElementos = new Pane();
+    private Pane vehiculo = new Pane();
     private Pane overlaySombra = new Pane();
+    private Pane sorpresas = new Pane();
+    private Pane obstaculos = new Pane();
     public ImageView imagenVehiculo = new ImageView();
 
 	public ContenedorMapa(Juego juego) {
         this.juego = juego;
 		dibujarCalles(juego.mapSize);
-        this.getChildren().add(mapaConElementos);
+        this.getChildren().addAll(vehiculo, obstaculos, sorpresas);
         dibujarSombra();
         
 		try {
@@ -39,7 +41,7 @@ public class ContenedorMapa extends StackPane {
 			dibujarObstaculosYSorpresas(juego, juego.mapa.callesVerticales,
 			TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
             actualizarVehiculo();
-            mapaConElementos.getChildren().add(imagenVehiculo);
+            vehiculo.getChildren().add(imagenVehiculo);
 		}
 		catch (FileNotFoundException ff) {
 		    System.out.println("Exception " + ff.toString());
@@ -83,27 +85,27 @@ public class ContenedorMapa extends StackPane {
 
 
                 if (obstaculo.getClass() == Piquete.class) {
-                    dibujarElementoCalle(piquete, x, y);
+                    dibujarElementoCalle(obstaculos, piquete, x, y);
                 } else if (obstaculo.getClass() == ControlPolicial.class) {
-                    dibujarElementoCalle(policia, x, y);
+                    dibujarElementoCalle(obstaculos, policia, x, y);
                 } else if (obstaculo.getClass() == Pozo.class) {
-                    dibujarElementoCalle(pozo, x, y);
+                    dibujarElementoCalle(obstaculos, pozo, x, y);
                 }
                 
                 if ((sorpresa.getClass() == SorpresaVehiculo.class) || sorpresa.getClass() == SorpresaPuntaje.class) {
-                    dibujarElementoCalle(sorpresaImagen, x - offsetSorpresaX, y - offsetSorpresaY);
+                    dibujarElementoCalle(sorpresas, sorpresaImagen, x - offsetSorpresaX, y - offsetSorpresaY);
                 } else if (sorpresa.getClass() == Meta.class) {
-                    dibujarElementoCalle(meta, x + 5, y - 10);
+                    dibujarElementoCalle(sorpresas, meta, x + 5, y - 10);
                 }
             }
         }
     }
 
-	private void dibujarElementoCalle(Image img, int x, int y) {
+	private void dibujarElementoCalle(Pane pane, Image img, int x, int y) {
         ImageView imagen = new ImageView(img);
         imagen.setX(x);
         imagen.setY(y);
-        mapaConElementos.getChildren().add(imagen);
+        pane.getChildren().add(imagen);
     }
 
     private void actualizarVehiculo() {
@@ -148,11 +150,27 @@ public class ContenedorMapa extends StackPane {
         this.getChildren().add(overlaySombra);
     }
 
-    private void actualizarMapa() {
-        
+    private void actualizarMapa(Juego juego) throws FileNotFoundException {
+        this.getChildren().remove(sorpresas);
+        this.sorpresas = new Pane();
+        dibujarObstaculosYSorpresas(juego, juego.mapa.callesHorizontales,
+		(TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
+		dibujarObstaculosYSorpresas(juego, juego.mapa.callesVerticales,
+		TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
+        this.getChildren().add(sorpresas);
     }
 
-    public void actualizar() {
+    public void actualizar(Juego juego) {
+        System.out.println(juego.mapSize);
+        System.out.println(juego.mapa.dimension());
+        System.out.println(juego.vehiculo.posicion.x);
+        System.out.println(juego.vehiculo.posicion.y);
+        System.out.println(juego.vehiculo.movimientos);
+        try {
+            actualizarMapa(juego);
+        } catch (FileNotFoundException ff) {
+		    System.out.println("Exception " + ff.toString());
+	    }
         actualizarVehiculo();
         this.getChildren().remove(overlaySombra);
         dibujarSombra();

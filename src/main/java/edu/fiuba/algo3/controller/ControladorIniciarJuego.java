@@ -11,18 +11,17 @@ public class ControladorIniciarJuego implements EventHandler<ActionEvent> {
 
 	JuegoDirector director;
 	ContenedorMenu contenedorMenu;
-	Juego juego;
 	TextField nombreUsuario;
 
 	public ControladorIniciarJuego(JuegoDirector director, ContenedorMenu contenedorMenu, TextField nombreUsuario) {
 		this.director = director;
-        this.juego = director.obtenerPartida();
         this.contenedorMenu = contenedorMenu;
 		this.nombreUsuario = nombreUsuario;
     }
 
 	@Override
     public void handle(ActionEvent e) {
+		Juego juego = director.obtenerPartida();
 		ContenedorMapa contenedorMapa = new ContenedorMapa(juego);
 		contenedorMenu.getScene().setRoot(contenedorMapa);
 		contenedorMapa.getScene().setOnKeyReleased(new ControladorMovimiento(director, contenedorMapa));

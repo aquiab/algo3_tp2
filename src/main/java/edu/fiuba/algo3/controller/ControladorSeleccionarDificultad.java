@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controller;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
+import edu.fiuba.algo3.modelo.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
@@ -7,29 +8,29 @@ import javafx.scene.control.*;
 public class ControladorSeleccionarDificultad implements ChangeListener<Toggle> {
 	ToggleGroup group;
 	JuegoDirector director;
-	RadioButton opcionAuto;
-	RadioButton opcionMoto;
-	RadioButton opcionCamioneta;
-	public ControladorSeleccionarDificultad(ToggleGroup group, JuegoDirector director, RadioButton opcionAuto,
-	RadioButton opcionMoto, RadioButton opcionCamioneta) {
+	RadioButton opcionFacil;
+	RadioButton opcionNormal;
+	RadioButton opcionDificil;
+	public ControladorSeleccionarDificultad(ToggleGroup group, JuegoDirector director, RadioButton opcionFacil,
+	RadioButton opcionNormal, RadioButton opcionDificil) {
 		this.group = group;
 		this.director = director;
-		this.opcionAuto = opcionAuto;
-		this.opcionMoto = opcionMoto;
-		this.opcionCamioneta = opcionCamioneta;
+		this.opcionFacil = opcionFacil;
+		this.opcionNormal = opcionNormal;
+		this.opcionDificil = opcionDificil;
 	}
 
 	@Override
 	public void changed(ObservableValue<? extends Toggle> ov,
 		Toggle oldToggle, Toggle newToggle) {
-			if (group.getSelectedToggle() == opcionAuto) {
-				director.asignarAutoInicial();
+			if (group.getSelectedToggle() == opcionFacil) {
+				director.configurarPartidaFacil();
 			}
-			if (group.getSelectedToggle() == opcionMoto) {
-				director.asignarMotoInicial();
+			if (group.getSelectedToggle() == opcionNormal) {
+				director.configurarPartidaNormal();
 			} 
-			if (group.getSelectedToggle() == opcionCamioneta) {
-				director.asignarCamionetaInicial();
+			if (group.getSelectedToggle() == opcionDificil) {
+				director.configurarPartidaDificil();
 			}
 	}
 }

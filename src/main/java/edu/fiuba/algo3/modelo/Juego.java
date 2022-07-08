@@ -23,6 +23,7 @@ public class Juego {
 	public void reiniciarJuego() {
 		this.COORDENADA_META = JuegoDirector.valorAleatorio();
 		this.mapa = JuegoDirector.reiniciarJuego(this.CODIGO, this.COORDENADA_META);
+		this.mapSize = mapa.dimension();
 		Jugador aux = vehiculo.jugador;
 		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
 		aplicarEstadoInicial(new Auto(this.vehiculo));

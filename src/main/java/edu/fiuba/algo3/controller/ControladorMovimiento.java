@@ -40,12 +40,13 @@ public class ControladorMovimiento implements EventHandler<KeyEvent> {
         } else {
             return;
         }
-        contenedorMapa.actualizar();
+        contenedorMapa.actualizar(juego);
         //stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.obtenerMovimientos()));
         
         if (juego.gano()) {
+            ContenedorVictoria contenedorVictoria = new ContenedorVictoria(director);
             contenedorMapa.getScene().removeEventHandler(KeyEvent.KEY_RELEASED, this);
-            contenedorMapa.getScene().setRoot(new ContenedorVictoria(director));
+            contenedorMapa.getScene().setRoot(contenedorVictoria);
             juego.reiniciarJuego();
         }
         

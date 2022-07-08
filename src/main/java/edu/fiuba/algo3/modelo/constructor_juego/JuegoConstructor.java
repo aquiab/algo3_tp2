@@ -28,7 +28,7 @@ public class JuegoConstructor {
     /*    Sorpresas    */
 
     public void agregarSorpresaEnCalleHorizontal(Mapa mapa, Posicion posicion, ISorpresa sorpresa) {
-        mapa.obtenerCalleVertical(posicion.obtenerCoordenadaX(), posicion.obtenerCoordenadaY()).agregarSorpresa(sorpresa);
+        mapa.obtenerCalleHorizontal(posicion.obtenerCoordenadaX(), posicion.obtenerCoordenadaY()).agregarSorpresa(sorpresa);
     }
 
     public void agregarSorpresaEnCalleVertical(Mapa mapa, Posicion posicion, ISorpresa sorpresa) {
@@ -59,7 +59,7 @@ public class JuegoConstructor {
     /*    Obstáculos    */
 
     public void agregarObstaculoEnCalleHorizontal(Mapa mapa, Posicion posicion, IObstaculo obstaculo) {
-        mapa.obtenerCalleVertical(posicion.obtenerCoordenadaX(), posicion.obtenerCoordenadaY()).agregarObstaculo(obstaculo);
+        mapa.obtenerCalleHorizontal(posicion.obtenerCoordenadaX(), posicion.obtenerCoordenadaY()).agregarObstaculo(obstaculo);
     }
 
     public void agregarObstaculoEnCalleVertical(Mapa mapa, Posicion posicion, IObstaculo obstaculo) {

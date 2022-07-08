@@ -44,7 +44,7 @@ public class JuegoDirector {
     }
 
     public void configurarPartidaFacil() {
-        constructor.asignarLongitudMapa(8)
+        constructor.asignarLongitudMapa(10)
                 .asignarCodigo(1)
                 .agregarPozos(5)
                 .agregarPiquetes(5)
@@ -68,7 +68,7 @@ public class JuegoDirector {
     }
 
     public void configurarPartidaDificil() {
-        constructor.asignarLongitudMapa(12)
+        constructor.asignarLongitudMapa(10)
                 .asignarCodigo(3)
                 .agregarPozos(15)
                 .agregarPiquetes(15)

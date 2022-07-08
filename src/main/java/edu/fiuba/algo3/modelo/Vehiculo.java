@@ -4,10 +4,10 @@ import edu.fiuba.algo3.modelo.estado.Estado;
 
 public class Vehiculo {
 
-    public Posicion posicion;
     public double movimientos;
     public Estado estado;
     public Jugador jugador;
+    private Posicion posicion;
     private Integer PENALIZACION_POR_CADA_MOVIMENTO = 1;
     private Juego juego;
 
@@ -70,6 +70,17 @@ public class Vehiculo {
 
     public double obtenerMovimientos() {
         return this.movimientos;
+    }
+    
+    public Posicion obtenerPosicion() {
+        return this.posicion;
+    }
+    
+    public int obtenerPosicionX() {
+        return posicion.obtenerCoordenadaX();
+    }
+    public int obtenerPosicionY() {
+        return posicion.obtenerCoordenadaY();
     }
 }
 

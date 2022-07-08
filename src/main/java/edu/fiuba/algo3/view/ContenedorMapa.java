@@ -36,9 +36,9 @@ public class ContenedorMapa extends StackPane {
         dibujarSombra();
         
 		try {
-			dibujarObstaculosYSorpresas(juego, juego.mapa.callesHorizontales,
+			dibujarObstaculosYSorpresas(juego, juego.obtenerCallesHorizontales(),
 			(TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
-			dibujarObstaculosYSorpresas(juego, juego.mapa.callesVerticales,
+			dibujarObstaculosYSorpresas(juego, juego.obtenerCallesVerticales(),
 			TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
             actualizarVehiculo();
             vehiculo.getChildren().add(imagenVehiculo);
@@ -111,9 +111,9 @@ public class ContenedorMapa extends StackPane {
     private void actualizarVehiculo() {
         Image image;
         try {
-            if (juego.vehiculo.estado.getClass() == Auto.class) {
+            if (juego.obtenerEstadoVehiculo().getClass() == Auto.class) {
                 image = new Image(new FileInputStream("assets/car.png"));
-            } else if (juego.vehiculo.estado.getClass() == Camioneta.class) {
+            } else if (juego.obtenerEstadoVehiculo().getClass() == Camioneta.class) {
                 image = new Image(new FileInputStream("assets/4x4.png"));
             } else {
                 image = new Image(new FileInputStream("assets/motorbike.png"));
@@ -123,8 +123,8 @@ public class ContenedorMapa extends StackPane {
         catch (FileNotFoundException ff) {
 		    System.out.println("Exception " + ff.toString());
 		}
-        imagenVehiculo.setX(TAMANIO_MANZANA + juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
-        imagenVehiculo.setY(TAMANIO_MANZANA + juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
+        imagenVehiculo.setX(TAMANIO_MANZANA + juego.obtenerPosicionXVehiculo() * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
+        imagenVehiculo.setY(TAMANIO_MANZANA + juego.obtenerPosicionYVehiculo() * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
     }
 
     private void dibujarSombra() {
@@ -133,8 +133,8 @@ public class ContenedorMapa extends StackPane {
         rectangulo.setWidth(juego.mapSize * (TAMANIO_MANZANA + TAMANIO_CALLE));
 
         Circle visionVehiculo = new Circle();
-        visionVehiculo.setCenterX(juego.vehiculo.posicion.x * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
-        visionVehiculo.setCenterY(juego.vehiculo.posicion.y * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+        visionVehiculo.setCenterX(juego.obtenerPosicionXVehiculo() * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
+        visionVehiculo.setCenterY(juego.obtenerPosicionYVehiculo() * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
         visionVehiculo.setRadius(2 * (TAMANIO_MANZANA + TAMANIO_CALLE));
 
         Circle visionMeta = new Circle();
@@ -153,19 +153,18 @@ public class ContenedorMapa extends StackPane {
     private void actualizarMapa(Juego juego) throws FileNotFoundException {
         this.getChildren().remove(sorpresas);
         this.sorpresas = new Pane();
-        dibujarObstaculosYSorpresas(juego, juego.mapa.callesHorizontales,
+        dibujarObstaculosYSorpresas(juego, juego.obtenerCallesHorizontales(),
 		(TAMANIO_MANZANA / 2), TAMANIO_MANZANA, OFFSET_SORPRESA, 0);
-		dibujarObstaculosYSorpresas(juego, juego.mapa.callesVerticales,
+		dibujarObstaculosYSorpresas(juego, juego.obtenerCallesVerticales(),
 		TAMANIO_MANZANA, (TAMANIO_MANZANA / 2), 0, OFFSET_SORPRESA);
         this.getChildren().add(sorpresas);
     }
 
     public void actualizar(Juego juego) {
         System.out.println(juego.mapSize);
-        System.out.println(juego.mapa.dimension());
-        System.out.println(juego.vehiculo.posicion.x);
-        System.out.println(juego.vehiculo.posicion.y);
-        System.out.println(juego.vehiculo.movimientos);
+        System.out.println(juego.obtenerPosicionXVehiculo());
+        System.out.println(juego.obtenerPosicionYVehiculo());
+        System.out.println(juego.obtenerMovimientos());
         try {
             actualizarMapa(juego);
         } catch (FileNotFoundException ff) {

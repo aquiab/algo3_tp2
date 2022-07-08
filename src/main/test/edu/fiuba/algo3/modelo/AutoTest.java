@@ -1,27 +1,13 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.estado.Auto;
-import edu.fiuba.algo3.modelo.estado.Camioneta;
-import edu.fiuba.algo3.modelo.estado.Moto;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicialFabrica;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.PiqueteFabrica;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.PozoFabrica;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaDesfavorableFabrica;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaFavorableFabrica;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaVehiculoFabrica;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
+
+import edu.fiuba.algo3.modelo.estado.*;
+import edu.fiuba.algo3.modelo.obstaculos.*;
+import edu.fiuba.algo3.modelo.sorpresas.*;
+
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class AutoTest {
-    
-    private PozoFabrica pozoFabrica = new PozoFabrica();
-    private PiqueteFabrica piqueteFabrica = new PiqueteFabrica();
-    private ControlPolicialFabrica controlFabrica = new ControlPolicialFabrica();
-
-    private SorpresaVehiculoFabrica sorpresaVehiculoFabrica = new SorpresaVehiculoFabrica();
     private SorpresaFavorableFabrica sorpresaFavFabrica =  new SorpresaFavorableFabrica();
     private SorpresaDesfavorableFabrica sorpresaDesfavFabrica = new SorpresaDesfavorableFabrica();
 
@@ -33,7 +19,7 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
-        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
         //act
@@ -51,7 +37,7 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
-        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(piqueteFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Piquete());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
         //act
@@ -69,7 +55,7 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
-        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(controlFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new ControlPolicial());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
 
         //act
@@ -85,9 +71,9 @@ public class AutoTest {
         juego.asignarLongitudMapa(5);
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
-        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(pozoFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());
-        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(piqueteFabrica.crearObstaculo());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new Piquete());
         juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(new VacioSorpresa());
 
         //act
@@ -108,7 +94,7 @@ public class AutoTest {
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
-        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new SorpresaVehiculo());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -165,11 +151,11 @@ public class AutoTest {
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
-        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new SorpresaVehiculo());
         juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new VacioObstaculo());
-        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(new SorpresaVehiculo());
         juego.obtenerMapa().obtenerCalleHorizontal(3, 0).agregarObstaculo(new VacioObstaculo());
-        juego.obtenerMapa().obtenerCalleHorizontal(3, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(3, 0).agregarSorpresa(new SorpresaVehiculo());
 
         //act
         juego.mover(new DireccionDerecha());
@@ -190,9 +176,9 @@ public class AutoTest {
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
-        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new SorpresaVehiculo());
         juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarObstaculo(new VacioObstaculo());
-        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(sorpresaVehiculoFabrica.crearSorpresa());
+        juego.obtenerMapa().obtenerCalleHorizontal(2, 0).agregarSorpresa(new SorpresaVehiculo());
 
         //act
         juego.mover(new DireccionDerecha());

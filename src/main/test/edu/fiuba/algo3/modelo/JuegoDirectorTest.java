@@ -10,8 +10,6 @@ public class JuegoDirectorTest {
 
     private static final int LONGITUD_MAPA = 10;
     private static final int CANTIDAD_META = 1;
-    private static final int OBSTACULOS = 0;
-    private static final int SORPRESAS = 1;
     private static final double MOVIMIENTOS_INICIALES = 0;
 
     /**Creación de partida fácil**/

@@ -2,13 +2,14 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
 import edu.fiuba.algo3.modelo.estado.Moto;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicial;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.Piquete;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.Pozo;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaPuntaje;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.SorpresaVehiculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
+import edu.fiuba.algo3.modelo.obstaculos.ControlPolicial;
+import edu.fiuba.algo3.modelo.obstaculos.Piquete;
+import edu.fiuba.algo3.modelo.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.obstaculos.VacioObstaculo;
+import edu.fiuba.algo3.modelo.sorpresas.SorpresaPuntaje;
+import edu.fiuba.algo3.modelo.sorpresas.SorpresaVehiculo;
+import edu.fiuba.algo3.modelo.sorpresas.VacioSorpresa;
+
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;

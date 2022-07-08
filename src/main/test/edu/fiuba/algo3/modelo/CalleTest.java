@@ -2,8 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Estado;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.*;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.*;
+import edu.fiuba.algo3.modelo.obstaculos.*;
+import edu.fiuba.algo3.modelo.sorpresas.*;
+
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
@@ -12,8 +13,8 @@ public class CalleTest {
     @Test
     public void calleRecienCreadaVieneSinNada() {
         Calle calle = new Calle();
-        assert (calle.obtenerObstaculo() == null);
-        assert (calle.obtenerSorpresa() == null);
+        assert (calle.obtenerObstaculo().getClass() == VacioObstaculo.class);
+        assert (calle.obtenerSorpresa().getClass() == VacioSorpresa.class);
     }
 
     @Test

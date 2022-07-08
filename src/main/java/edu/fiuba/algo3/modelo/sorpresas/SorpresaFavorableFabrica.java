@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.fabrica_sorpresa;
+package edu.fiuba.algo3.modelo.sorpresas;
 
 public class SorpresaFavorableFabrica implements ISorpresaFabrica {
 

@@ -1,16 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoConstructor;
-import edu.fiuba.algo3.modelo.estado.Auto;
-import edu.fiuba.algo3.modelo.estado.Camioneta;
-import edu.fiuba.algo3.modelo.estado.Moto;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.estado.*;
 import org.junit.jupiter.api.Test;
 
 public class JuegoConstructorTest {
-
-    private static final int OBSTACULO = 0;
-    private static final int SORPRESA = 1;
 
     @Test
     public void creoJuegoNoEsNulo() {

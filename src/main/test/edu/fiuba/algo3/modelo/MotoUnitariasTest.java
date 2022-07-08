@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.estado.*;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.VacioObstaculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
+import edu.fiuba.algo3.modelo.obstaculos.VacioObstaculo;
+import edu.fiuba.algo3.modelo.sorpresas.VacioSorpresa;
+
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 

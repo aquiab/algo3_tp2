@@ -1,7 +1,6 @@
-package edu.fiuba.algo3.modelo.fabrica_sorpresa;
+package edu.fiuba.algo3.modelo.sorpresas;
 
 import edu.fiuba.algo3.modelo.Vehiculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.ISorpresa;
 
 public class VacioSorpresa implements ISorpresa {
 

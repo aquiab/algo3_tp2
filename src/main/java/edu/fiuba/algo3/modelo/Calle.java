@@ -1,12 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.IObstaculo;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.ISorpresa;
-import edu.fiuba.algo3.modelo.fabrica_sorpresa.VacioSorpresa;
+import edu.fiuba.algo3.modelo.obstaculos.IObstaculo;
+import edu.fiuba.algo3.modelo.obstaculos.VacioObstaculo;
+import edu.fiuba.algo3.modelo.sorpresas.ISorpresa;
+import edu.fiuba.algo3.modelo.sorpresas.VacioSorpresa;
 
 public class Calle {
-    public IObstaculo obstaculo;
-    public ISorpresa sorpresa;
+    public IObstaculo obstaculo = new VacioObstaculo();
+    public ISorpresa sorpresa = new VacioSorpresa();
     public void recorrer(Vehiculo vehiculo) {
         obstaculo.pasar(vehiculo);
         sorpresa.aplicar(vehiculo);

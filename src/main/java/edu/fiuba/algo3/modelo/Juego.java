@@ -61,8 +61,8 @@ public class Juego {
 		this.CODIGO = codigo;
 	}
 
-	public void asignarCoordenadaMeta(int coordeanda) {
-		this.COORDENADA_META = coordeanda;
+	public void asignarCoordenadaMeta(int coordenada) {
+		this.COORDENADA_META = coordenada;
 	}
 
 	public int obtenerCoordenadaMeta() {

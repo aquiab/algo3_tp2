@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.estado.Estado;
-import edu.fiuba.algo3.modelo.fabrica_obstaculos.ControlPolicial;
+import edu.fiuba.algo3.modelo.obstaculos.ControlPolicial;
+
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;

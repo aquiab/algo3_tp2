@@ -28,7 +28,7 @@ public class ContenedorVictoria extends VBox {
         felicidades.setFont(new Font(30));
 
         Label llegaste = new Label();
-        llegaste.setText("Llegaste a la meta con un puntaje de " + String.valueOf(jugador.obtenerPuntaje()));
+        llegaste.setText("Llegaste a la meta con un puntaje de " + String.valueOf(juego.obtenerMovimientos()));
         llegaste.relocate(110, 60);
         llegaste.setFont(new Font(15));
 

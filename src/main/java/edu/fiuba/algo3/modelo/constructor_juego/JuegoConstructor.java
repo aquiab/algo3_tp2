@@ -9,8 +9,8 @@ import edu.fiuba.algo3.modelo.sorpresas.*;
 
 public class JuegoConstructor {
 
-    private Juego juego = new Juego();
-    private int dimensionMapa;
+    public Juego juego = new Juego();
+    public int dimensionMapa;
 
     public JuegoConstructor asignarLongitudMapa(int dimension) {
         this.dimensionMapa = dimension;

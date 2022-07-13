@@ -16,6 +16,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws FileNotFoundException {
         JuegoDirector director = new JuegoDirector(new Ranking());
+        director.setearPartidaDefault();
         Scene scene = new Scene(new ContenedorMenu(director));
         stage.setScene(scene);
         stage.show();

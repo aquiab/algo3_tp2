@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoConstructor;
+import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.modelo.estado.*;
 import org.junit.jupiter.api.Test;
 
@@ -28,11 +29,11 @@ public class JuegoConstructorTest {
 
     @Test
     public void creoJuegoSeteandoAuto() {
-        JuegoConstructor constructor = new JuegoConstructor();
-        constructor.asignarLongitudMapa(5)
-                .asignarAutoInicial();
+        JuegoDirector director = new JuegoDirector(new Ranking());
+        director.configurarPartidaNormal();
+        director.asignarAutoInicial();
 
-        Juego juego = constructor.construir();
+        Juego juego = director.obtenerPartida();
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo!= null);
@@ -41,11 +42,11 @@ public class JuegoConstructorTest {
 
     @Test
     public void creoJuegoSeteandoCamioneta() {
-        JuegoConstructor constructor = new JuegoConstructor();
-        constructor.asignarLongitudMapa(5)
-                .asignarCamionetaInicial();
+        JuegoDirector director = new JuegoDirector(new Ranking());
+        director.configurarPartidaNormal();
+        director.asignarCamionetaInicial();
 
-        Juego juego = constructor.construir();
+        Juego juego = director.obtenerPartida();
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo!= null);
@@ -54,11 +55,11 @@ public class JuegoConstructorTest {
 
     @Test
     public void creoJuegoSeteandoMoto() {
-        JuegoConstructor constructor = new JuegoConstructor();
-        constructor.asignarLongitudMapa(5)
-                .asignarMotoInicial();
+        JuegoDirector director = new JuegoDirector(new Ranking());
+        director.configurarPartidaNormal();
+        director.asignarMotoInicial();
 
-        Juego juego = constructor.construir();
+        Juego juego = director.obtenerPartida();
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo!= null);

@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class JuegoDirector {
 
-    private JuegoConstructor constructor = new JuegoConstructor();
+    public JuegoConstructor constructor = new JuegoConstructor();
 
     private int COORDENADA_META;
     private Ranking ranking;
@@ -50,7 +50,7 @@ public class JuegoDirector {
 
     public void configurarPartidaDificil() {
         constructor.asignarLongitudMapa(10)
-                .agregarPozos(15)
+                  .agregarPozos(15)
                 .agregarPiquetes(15)
                 .agregarControlesPoliciales(15)
                 .agregarSorpresasFavorables(0)
@@ -78,5 +78,12 @@ public class JuegoDirector {
         constructor.asignarCamionetaInicial();
     }
 
-    public void refreshConstructor() { this.constructor = new JuegoConstructor();}
+    public void refreshConstructor() {
+        this.COORDENADA_META = valorAleatorio();
+        this.constructor = new JuegoConstructor();}
+
+    public void setearPartidaDefault() {
+        configurarPartidaNormal();
+        asignarAutoInicial();
+    }
 }

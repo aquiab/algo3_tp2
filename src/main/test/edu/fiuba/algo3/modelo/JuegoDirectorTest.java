@@ -1,10 +1,14 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.constructor_juego.JuegoConstructor;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
 import edu.fiuba.algo3.modelo.estado.Moto;
+import edu.fiuba.algo3.modelo.sorpresas.ISorpresa;
 import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.*;
 
 public class JuegoDirectorTest {
 
@@ -212,5 +216,20 @@ public class JuegoDirectorTest {
         assert (vehiculo.estadoActual() == Moto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
+
+//    @Test
+//    public void creoJuegoDificilMiroCant() {
+//        JuegoDirector director = new JuegoDirector(new Ranking());
+//        JuegoConstructor constructor = mock(JuegoConstructor.class);
+//        director.setConstructor(constructor);
+//        director.configurarPartidaDificil();
+//        director.asignarCamionetaInicial();
+//
+//        verify(constructor, times(1)).agregarSorpresasFavorables(anyDouble());
+//        verify(constructor, times(1)).agregarSorpresasDesfavorables(anyDouble());
+//        verify(constructor, times(1)).agregarSorpresasCambioDeVehiculo(anyDouble());
+//        verify(constructor, times(10)).agregarSorpresaEnCalleHorizontal(any(Mapa.class),any(Posicion.class),any(ISorpresa.class));
+//        verify(constructor, times(10)).agregarSorpresaEnCalleVertical(any(Mapa.class),any(Posicion.class),any(ISorpresa.class));
+//    }
 
 }

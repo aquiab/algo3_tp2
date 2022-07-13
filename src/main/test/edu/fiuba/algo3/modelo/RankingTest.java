@@ -99,8 +99,8 @@ public class RankingTest {
     public void TresJugadoresRankingTest() {
         JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaNormal();
-        Juego juego = director.obtenerPartida();
         director.asignarAutoInicial();
+        Juego juego = director.obtenerPartida();
         juego.aplicarJugador("Pedro");
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarSorpresa(new VacioSorpresa());

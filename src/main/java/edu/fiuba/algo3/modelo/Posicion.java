@@ -20,18 +20,6 @@ public class Posicion {
 	private boolean dentroDeLimites(int coordenada) {
 		return (coordenada >= LIMITE_IZQUIERDO_O_SUPERIOR_MAPA && coordenada < limiteDerechoInferiorMapa);
 	}
-
-	public void modificarX(int x) {
-		if (dentroDeLimites(x)) {
-			this.x = x;
-		}
-	}
-
-	public void modificarY(int y) {
-		if (dentroDeLimites(y)) {
-			this.y = y;
-		}
-	}
 	public void establecerSig(int x, int y) {
 		this.sigX = this.x + x;
 		this.sigY = this.y + y;
@@ -40,7 +28,6 @@ public class Posicion {
 		this.sigX = x;
 		this.sigY = y;
 	}
-
 	public void modificarPosicion() {
 		if (dentroDeLimites(this.sigX) && dentroDeLimites(this.sigY)) {
 			this.x = this.sigX;

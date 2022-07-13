@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.modelo.Ranking;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,7 +15,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         Scene scene = new Scene(new ContenedorMenu(director));
         stage.setScene(scene);
         stage.show();

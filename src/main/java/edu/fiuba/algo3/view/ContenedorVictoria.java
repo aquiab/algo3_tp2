@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class ContenedorVictoria extends VBox {
 	public ContenedorVictoria(JuegoDirector director) {
 		Juego juego = director.obtenerPartida();
-        Jugador jugador = juego.ranking.devolverGanador();
+        Ranking rank = director.obtenerRanking();
+        Jugador jugador = rank.devolverGanador();
 
 		Button botonVolver = new Button("Volver");
         botonVolver.relocate(20, 460);
@@ -58,8 +59,7 @@ public class ContenedorVictoria extends VBox {
         }
         this.getChildren().add(pane);
         botonVolver.setOnAction(e -> {
-            director.configurarPartidaNormal();
-            juego.reiniciarJuego();
+            director.refreshConstructor();
 			this.getScene().setRoot(new ContenedorMenu(director));
 		});
 	}

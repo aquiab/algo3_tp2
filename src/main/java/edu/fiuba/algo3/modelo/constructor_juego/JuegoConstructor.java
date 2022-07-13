@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo.constructor_juego;
 
-import edu.fiuba.algo3.modelo.Calle;
-import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
 import edu.fiuba.algo3.modelo.estado.Moto;
@@ -18,6 +15,11 @@ public class JuegoConstructor {
     public JuegoConstructor asignarLongitudMapa(int dimension) {
         this.dimensionMapa = dimension;
         juego.asignarLongitudMapa(dimension);
+        return this;
+    }
+
+    public JuegoConstructor asignarRanking(Ranking ranking) {
+        this.juego.aplicarRanking(ranking);
         return this;
     }
 
@@ -116,10 +118,5 @@ public class JuegoConstructor {
 
     public Juego construir() {
         return juego;
-    }
-
-    public JuegoConstructor asignarCodigo(int codigo) {
-        this.juego.asignarCodigo(codigo);
-        return this;
     }
 }

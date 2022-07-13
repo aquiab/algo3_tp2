@@ -16,7 +16,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoFacil() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaFacil();
         Juego juego = director.obtenerPartida();
 
@@ -27,7 +27,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoFacilVerificoElMapaInterno() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaFacil();
         Juego juego = director.obtenerPartida();
         Mapa mapa = juego.obtenerMapa();
@@ -42,7 +42,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoFacilConUnAuto() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaFacil();
         director.asignarAutoInicial();
         Juego juego = director.obtenerPartida();
@@ -55,7 +55,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoFacilConUnaCamioneta() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaFacil();
         director.asignarCamionetaInicial();
         Juego juego = director.obtenerPartida();
@@ -68,7 +68,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoFacilConUnaMoto() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaFacil();
         director.asignarMotoInicial();
         Juego juego = director.obtenerPartida();
@@ -79,35 +79,11 @@ public class JuegoDirectorTest {
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
-    @Test
-    public void creoPartidaFacilConCodigo() {
-        JuegoDirector director = new JuegoDirector(1, 5);
-        Juego juego = director.obtenerPartida();
-
-        assert (director.obtenerCoordenadaMeta() == 5);
-        assert (juego != null);
-        assert (juego.obtenerMapa() != null);
-    }
-
-    @Test
-    public void creoJuegoFacilConCodigoVerificoElMapaInterno() {
-        JuegoDirector director = new JuegoDirector(1, 5);
-        Juego juego = director.obtenerPartida();
-        Mapa mapa = juego.obtenerMapa();
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas != 0);
-        assert (mapa.dimension() == LONGITUD_MAPA);
-        assert (mapa.cantidadMeta() == CANTIDAD_META);
-    }
-
     /**Creación de partida normal**/
 
     @Test
     public void creoJuegoNormal() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaNormal();
         Juego juego = director.obtenerPartida();
 
@@ -118,7 +94,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoNormalVerificoElMapaInterno() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaNormal();
         Juego juego = director.obtenerPartida();
         Mapa mapa = juego.obtenerMapa();
@@ -133,7 +109,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoNormalConUnAuto() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaNormal();
         director.asignarAutoInicial();
         Juego juego = director.obtenerPartida();
@@ -146,7 +122,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoNormalConUnaCamioneta() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaNormal();
         director.asignarCamionetaInicial();
         Juego juego = director.obtenerPartida();
@@ -159,7 +135,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoNormalConUnaMoto() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaNormal();
         director.asignarMotoInicial();
         Juego juego = director.obtenerPartida();
@@ -170,35 +146,11 @@ public class JuegoDirectorTest {
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
-    @Test
-    public void creoPartidaNormalConCodigo() {
-        JuegoDirector director = new JuegoDirector(1, 5);
-        Juego juego = director.obtenerPartida();
-
-        assert (director.obtenerCoordenadaMeta() == 5);
-        assert (juego != null);
-        assert (juego.obtenerMapa() != null);
-    }
-
-    @Test
-    public void creoJuegoNormalConCodigoVerificoElMapaInterno() {
-        JuegoDirector director = new JuegoDirector(2, 5);
-        Juego juego = director.obtenerPartida();
-        Mapa mapa = juego.obtenerMapa();
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas != 0);
-        assert (mapa.dimension() == LONGITUD_MAPA);
-        assert (mapa.cantidadMeta() == CANTIDAD_META);
-    }
-
     /**Creación de partida díficil**/
 
     @Test
     public void creoJuegoDificil() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaDificil();
         Juego juego = director.obtenerPartida();
 
@@ -209,7 +161,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoDificilVerificoElMapaInterno() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaDificil();
         Juego juego = director.obtenerPartida();
         Mapa mapa = juego.obtenerMapa();
@@ -224,7 +176,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoDificilConUnAuto() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaDificil();
         director.asignarAutoInicial();
         Juego juego = director.obtenerPartida();
@@ -237,7 +189,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoDificilConUnaCamioneta() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaDificil();
         director.asignarCamionetaInicial();
         Juego juego = director.obtenerPartida();
@@ -250,7 +202,7 @@ public class JuegoDirectorTest {
 
     @Test
     public void creoJuegoDificilConUnaMoto() {
-        JuegoDirector director = new JuegoDirector();
+        JuegoDirector director = new JuegoDirector(new Ranking());
         director.configurarPartidaDificil();
         director.asignarMotoInicial();
         Juego juego = director.obtenerPartida();
@@ -259,30 +211,6 @@ public class JuegoDirectorTest {
         assert (vehiculo != null);
         assert (vehiculo.estadoActual() == Moto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
-    }
-
-    @Test
-    public void creoPartidaDificilConCodigo() {
-        JuegoDirector director = new JuegoDirector(3, 5);
-        Juego juego = director.obtenerPartida();
-
-        assert (director.obtenerCoordenadaMeta() == 5);
-        assert (juego != null);
-        assert (juego.obtenerMapa() != null);
-    }
-
-    @Test
-    public void creoJuegoDificilConCodigoVerificoElMapaInterno() {
-        JuegoDirector director = new JuegoDirector(3, 5);
-        Juego juego = director.obtenerPartida();
-        Mapa mapa = juego.obtenerMapa();
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas != 0);
-        assert (mapa.dimension() == LONGITUD_MAPA);
-        assert (mapa.cantidadMeta() == CANTIDAD_META);
     }
 
 }

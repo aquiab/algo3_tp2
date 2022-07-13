@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.constructor_juego;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Ranking;
 
 import java.util.Random;
 
@@ -10,34 +11,12 @@ public class JuegoDirector {
     private JuegoConstructor constructor = new JuegoConstructor();
 
     private int COORDENADA_META;
+    private Ranking ranking;
 
-    public JuegoDirector() {
+    public JuegoDirector(Ranking ranking) {
         this.COORDENADA_META = valorAleatorio();
-        configurarPartidaNormal();
-        asignarAutoInicial();
+        this.ranking = ranking;
     }
-
-    public JuegoDirector(int codigo, int coordenadaMeta) {
-        this.COORDENADA_META = coordenadaMeta;
-        switch (codigo) {
-            case 1:
-                configurarPartidaFacil();
-                break;
-            case 2:
-                configurarPartidaNormal();
-                break;
-            default:
-                configurarPartidaDificil();
-                break;
-        }
-    }
-
-    public static Mapa reiniciarJuego(int codigo, int coordenadaMeta) {
-        JuegoDirector aux = new JuegoDirector(codigo, coordenadaMeta);
-        Juego juegoAuxiliar = aux.obtenerPartida();
-        return juegoAuxiliar.obtenerMapa();
-    }
-
     public static int valorAleatorio() {
         Random rand = new Random();
         return rand.nextInt(10 - 1);
@@ -45,7 +24,6 @@ public class JuegoDirector {
 
     public void configurarPartidaFacil() {
         constructor.asignarLongitudMapa(10)
-                .asignarCodigo(1)
                 .agregarPozos(5)
                 .agregarPiquetes(5)
                 .agregarControlesPoliciales(5)
@@ -53,12 +31,12 @@ public class JuegoDirector {
                 .agregarSorpresasDesfavorables(5)
                 .agregarSorpresasCambioDeVehiculo(5)
                 .agregarMetaEn(COORDENADA_META)
+                .asignarRanking(this.ranking)
                 .asignarVehiculoInicial();
     }
 
     public void configurarPartidaNormal() {
         constructor.asignarLongitudMapa(10)
-                .asignarCodigo(2)
                 .agregarPozos(10)
                 .agregarPiquetes(10)
                 .agregarControlesPoliciales(10)
@@ -66,12 +44,12 @@ public class JuegoDirector {
                 .agregarSorpresasDesfavorables(10)
                 .agregarSorpresasCambioDeVehiculo(10)
                 .agregarMetaEn(COORDENADA_META)
+                .asignarRanking(this.ranking)
                 .asignarVehiculoInicial();
     }
 
     public void configurarPartidaDificil() {
         constructor.asignarLongitudMapa(10)
-                .asignarCodigo(3)
                 .agregarPozos(15)
                 .agregarPiquetes(15)
                 .agregarControlesPoliciales(15)
@@ -79,17 +57,17 @@ public class JuegoDirector {
                 .agregarSorpresasDesfavorables(10)
                 .agregarSorpresasCambioDeVehiculo(10)
                 .agregarMetaEn(COORDENADA_META)
+                .asignarRanking(this.ranking)
                 .asignarVehiculoInicial();
     }
 
     public Juego obtenerPartida() {
         return constructor.construir();
     }
-
+    public Ranking obtenerRanking() {return this.ranking;}
     public int obtenerCoordenadaMeta() {
         return this.COORDENADA_META;
     }
-
     public void asignarAutoInicial() {
         constructor.asignarAutoInicial();
     }
@@ -99,4 +77,6 @@ public class JuegoDirector {
     public void asignarCamionetaInicial() {
         constructor.asignarCamionetaInicial();
     }
+
+    public void refreshConstructor() { this.constructor = new JuegoConstructor();}
 }

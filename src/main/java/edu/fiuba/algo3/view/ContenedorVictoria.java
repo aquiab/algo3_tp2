@@ -61,7 +61,7 @@ public class ContenedorVictoria extends VBox {
         botonVolver.setOnAction(e -> {
             director.refreshConstructor();
             director.setearPartidaDefault();
-			this.getScene().setRoot(new ContenedorMenu(director));
+			this.getScene().setRoot(new ContenedorSeleccionarDificultad(director));
 		});
 	}
 }

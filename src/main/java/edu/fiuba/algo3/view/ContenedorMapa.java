@@ -161,10 +161,6 @@ public class ContenedorMapa extends StackPane {
     }
 
     public void actualizar(Juego juego) {
-        System.out.println(juego.mapSize);
-        System.out.println(juego.obtenerPosicionXVehiculo());
-        System.out.println(juego.obtenerPosicionYVehiculo());
-        System.out.println(juego.obtenerMovimientos());
         try {
             actualizarMapa(juego);
         } catch (FileNotFoundException ff) {

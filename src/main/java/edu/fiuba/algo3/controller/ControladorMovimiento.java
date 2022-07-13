@@ -47,7 +47,6 @@ public class ControladorMovimiento implements EventHandler<KeyEvent> {
             ContenedorVictoria contenedorVictoria = new ContenedorVictoria(director);
             contenedorMapa.getScene().removeEventHandler(KeyEvent.KEY_RELEASED, this);
             contenedorMapa.getScene().setRoot(contenedorVictoria);
-            juego.reiniciarJuego();
         }
         
     }

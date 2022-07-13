@@ -95,20 +95,22 @@ public class JuegoConstructor {
         return this;
     }
 
+    public JuegoConstructor asignarVehiculoInicial() {
+        juego.asignarVehiculoInicial();
+        return this;
+    }
+
     /*    Estados    */
 
     public void asignarAutoInicial() {
-        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
     }
 
     public void asignarMotoInicial() {
-        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
     }
 
     public void asignarCamionetaInicial() {
-        juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
     }
 

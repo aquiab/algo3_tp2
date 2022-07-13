@@ -52,7 +52,8 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(10)
                 .agregarSorpresasDesfavorables(5)
                 .agregarSorpresasCambioDeVehiculo(5)
-                .agregarMetaEn(COORDENADA_META);
+                .agregarMetaEn(COORDENADA_META)
+                .asignarVehiculoInicial();
     }
 
     public void configurarPartidaNormal() {
@@ -64,7 +65,8 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(5)
                 .agregarSorpresasDesfavorables(10)
                 .agregarSorpresasCambioDeVehiculo(10)
-                .agregarMetaEn(COORDENADA_META);
+                .agregarMetaEn(COORDENADA_META)
+                .asignarVehiculoInicial();
     }
 
     public void configurarPartidaDificil() {
@@ -76,7 +78,8 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(0)
                 .agregarSorpresasDesfavorables(10)
                 .agregarSorpresasCambioDeVehiculo(10)
-                .agregarMetaEn(COORDENADA_META);
+                .agregarMetaEn(COORDENADA_META)
+                .asignarVehiculoInicial();
     }
 
     public Juego obtenerPartida() {

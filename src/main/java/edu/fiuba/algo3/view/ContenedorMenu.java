@@ -56,10 +56,10 @@ public class ContenedorMenu extends VBox {
         botonJugar.setText("Jugar");
 		botonJugar.setOnAction(new ControladorIniciarJuego(director, this, nombreUsuario));
 
-		groupVehiculo.selectedToggleProperty().addListener(new ControladorSeleccionarVehiculo(groupVehiculo, director,
-		opcionAuto, opcionMoto, opcionCamioneta));
 		groupDificultad.selectedToggleProperty().addListener(new ControladorSeleccionarDificultad(groupDificultad, director, 
 		opcionFacil, opcionNormal, opcionDificil));
+		groupVehiculo.selectedToggleProperty().addListener(new ControladorSeleccionarVehiculo(groupVehiculo, director,
+		opcionAuto, opcionMoto, opcionCamioneta));
 
         this.getChildren().addAll(etiqueta, nombreUsuario, etiquetaVehiculo,
 		opcionAuto, opcionMoto, opcionCamioneta, etiquetaDificultad, opcionFacil, opcionNormal, opcionDificil, botonJugar);

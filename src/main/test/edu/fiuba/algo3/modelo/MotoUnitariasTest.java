@@ -39,7 +39,7 @@ public class MotoUnitariasTest {
 
         vehiculo.mover(direccion);
 
-        assert(vehiculo.movimientos == 4);
+        assert(vehiculo.obtenerMovimientos() == 4);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class MotoUnitariasTest {
 
         vehiculo.mover(direccion);
 
-        assert (vehiculo.movimientos == 3);
+        assert (vehiculo.obtenerMovimientos() == 3);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class MotoUnitariasTest {
 
         vehiculo.mover(direccion);
 
-        assert (vehiculo.movimientos == 4);
+        assert (vehiculo.obtenerMovimientos() == 4);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class MotoUnitariasTest {
         vehiculo.mover(direccion);
         vehiculo.mover(direccion2);
 
-        assert (vehiculo.movimientos == 7);
+        assert (vehiculo.obtenerMovimientos() == 7);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class MotoUnitariasTest {
 
         verify(vacio, times(1)).aplicar(vehiculo);
         assert (vehiculo.obtenerMovimientos() == 0);
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
     }
 
     @Test
@@ -124,7 +124,7 @@ public class MotoUnitariasTest {
 
         vehiculo.mover(direccion);
 
-        assert (vehiculo.estadoActual() == Auto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Auto.class);
     }
 
     @Test
@@ -141,7 +141,7 @@ public class MotoUnitariasTest {
         vehiculo.mover(direccion);
         vehiculo.mover(direccion);
 
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
     }
 
     @Test
@@ -159,7 +159,7 @@ public class MotoUnitariasTest {
         vehiculo.mover(direccion);
         vehiculo.mover(direccion);
 
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
     }
 
     @Test
@@ -175,7 +175,7 @@ public class MotoUnitariasTest {
 
         vehiculo.mover(direccion);
 
-        assert (vehiculo.movimientos == 0.8);
+        assert (vehiculo.obtenerMovimientos() == 0.8);
     }
 
     @Test
@@ -191,6 +191,6 @@ public class MotoUnitariasTest {
 
         vehiculo.mover(direccion);
 
-        assert (vehiculo.movimientos == 1.25);
+        assert (vehiculo.obtenerMovimientos() == 1.25);
     }
 }

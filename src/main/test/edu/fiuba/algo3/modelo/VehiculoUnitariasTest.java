@@ -16,7 +16,7 @@ public class VehiculoUnitariasTest {
 
         vehiculo.mover(direccion);
 
-        assert (vehiculo.movimientos == 1);
+        assert (vehiculo.obtenerMovimientos() == 1);
         verify(direccion, times(1)).mover(posicion, vehiculo);
     }
 
@@ -27,7 +27,7 @@ public class VehiculoUnitariasTest {
 
         vehiculo.aplicarEstado(estado);
 
-        assert(vehiculo.estado == estado);
+        assert(vehiculo.obtenerEstado() == estado);
     }
     @Test
     public void VehiculoIncrementarMovimiento() {
@@ -35,7 +35,7 @@ public class VehiculoUnitariasTest {
 
         vehiculo.incrementarMovimientos(1);
 
-        assert(vehiculo.movimientos == 1);
+        assert(vehiculo.obtenerMovimientos() == 1);
     }
     @Test
     public void VehiculoAplicarSorpresaDesfavorable() {
@@ -43,7 +43,7 @@ public class VehiculoUnitariasTest {
 
         vehiculo.aplicarSorpresaPuntaje(1.25);
 
-        assert(vehiculo.movimientos == (10*1.25));
+        assert(vehiculo.obtenerMovimientos() == (10*1.25));
     }
     @Test
     public void VehiculoAplicarSorpresaFavorable() {
@@ -51,7 +51,7 @@ public class VehiculoUnitariasTest {
 
         vehiculo.aplicarSorpresaPuntaje(0.8);
 
-        assert (vehiculo.movimientos == (10 * 0.8));
+        assert (vehiculo.obtenerMovimientos() == (10 * 0.8));
     }
     @Test
     public void VehiculoAplicarSorpresaCambioVehiculo() {

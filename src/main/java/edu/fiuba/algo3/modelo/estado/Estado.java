@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.estado;
 import edu.fiuba.algo3.modelo.Vehiculo;
 
 public abstract class Estado {
-
     protected Integer PENALIZACION_POZO;
     protected Integer PENALIZACION_POLICIAL;
     protected Integer PROBABILIDAD_CONTROL_POLICIAL;

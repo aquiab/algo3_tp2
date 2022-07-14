@@ -6,8 +6,8 @@ import edu.fiuba.algo3.modelo.sorpresas.ISorpresa;
 import edu.fiuba.algo3.modelo.sorpresas.VacioSorpresa;
 
 public class Calle {
-    public IObstaculo obstaculo = new VacioObstaculo();
-    public ISorpresa sorpresa = new VacioSorpresa();
+    private IObstaculo obstaculo = new VacioObstaculo();
+    private ISorpresa sorpresa = new VacioSorpresa();
     public void recorrer(Vehiculo vehiculo) {
         obstaculo.pasar(vehiculo);
         sorpresa.aplicar(vehiculo);

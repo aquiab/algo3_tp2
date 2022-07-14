@@ -4,8 +4,8 @@ import edu.fiuba.algo3.modelo.estado.Estado;
 
 public class Vehiculo {
 
-    public double movimientos;
-    public Estado estado;
+    private double movimientos;
+    private Estado estado;
     private Posicion posicion;
     private Integer PENALIZACION_POR_CADA_MOVIMENTO = 1;
     private Juego juego;
@@ -47,31 +47,21 @@ public class Vehiculo {
     public void aplicarSorpresaCambioVehiculo() {
         estado = estado.aplicarSorpresaCambioVehiculo();
     }
-
     public void aplicarVacio() {
         estado.pasarVacio();
     }
-
     public Posicion devolverPosicion() {
         return this.posicion;
     }
-
     public void ganar() {
         this.juego.ganar(this.movimientos);
     }
-
-    public Class<? extends Estado> estadoActual() {
-        return estado.getClass();
-    }
-
     public double obtenerMovimientos() {
         return this.movimientos;
     }
-    
-    public Posicion obtenerPosicion() {
-        return this.posicion;
+    public Estado obtenerEstado() {
+        return this.estado;
     }
-    
     public int obtenerPosicionX() {
         return posicion.obtenerCoordenadaX();
     }

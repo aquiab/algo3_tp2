@@ -51,13 +51,13 @@ public class ContenedorVictoria extends VBox {
         vboxder.getChildren().add(new Label("Puntaje"));
 
         while (jugador != null) {
-            vboxizq.getChildren().add(new Label(jugador.nombre));
+            vboxizq.getChildren().add(new Label(jugador.obtenerNombre()));
             vboxder.getChildren().add(new Label(new DecimalFormat("#.##").format(jugador.getMovimientos())));
             jugadores.add(jugador);
-            jugador = juego.ranking.devolverGanador();
+            jugador = rank.devolverGanador();
         }
         for (int i = 0; i < jugadores.size(); i++) {
-            juego.ranking.agregarJugador(jugadores.get(i));
+            rank.agregarJugador(jugadores.get(i));
         }
         this.getChildren().add(pane);
         botonVolver.setOnAction(e -> {

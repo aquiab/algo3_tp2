@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo;
 import java.util.LinkedList;
 
 public class Mapa {
-	public LinkedList<LinkedList<Calle>> callesHorizontales;
-	public LinkedList<LinkedList<Calle>> callesVerticales;
+	private LinkedList<LinkedList<Calle>> callesHorizontales;
+	private LinkedList<LinkedList<Calle>> callesVerticales;
 	protected int dimension;
 
 	public Mapa(int dimension) {
@@ -26,6 +26,14 @@ public class Mapa {
 
 	public Calle obtenerCalleVertical(int x, int y) {
 		return callesVerticales.get(x).get(y);
+	}
+
+	public LinkedList<LinkedList<Calle>> getCallesHorizontales() {
+		return callesHorizontales;
+	}
+
+	public LinkedList<LinkedList<Calle>> getCallesVerticales() {
+		return callesVerticales;
 	}
 
 	public int dimension() {

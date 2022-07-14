@@ -9,10 +9,10 @@ public class Juego {
 	private Integer MOVIMIENTOS_INICIALES = 0;
 	private Integer COORDENADA_META;
 	private Boolean gano = false;
-	public Ranking ranking;
+	private Ranking ranking;
 	private Mapa mapa;
-	public Vehiculo vehiculo;
-	public Jugador jugador;
+	private Vehiculo vehiculo;
+	private Jugador jugador;
 	
 	public void mover(Direccion direccion) {
 		vehiculo.mover(direccion);
@@ -50,11 +50,11 @@ public class Juego {
 	}
 
 	public LinkedList<LinkedList<Calle>> obtenerCallesHorizontales() {
-		return this.mapa.callesHorizontales;
+		return this.mapa.getCallesHorizontales();
 	}
 
 	public LinkedList<LinkedList<Calle>> obtenerCallesVerticales() {
-		return this.mapa.callesVerticales;
+		return this.mapa.getCallesVerticales();
 	}
 
 	public Vehiculo obtenerVehiculo() {
@@ -62,9 +62,8 @@ public class Juego {
 	}
 
 	public Estado obtenerEstadoVehiculo() {
-		return this.vehiculo.estado;
+		return this.vehiculo.obtenerEstado();
 	}
-	
 	public int obtenerPosicionXVehiculo() {
 		return this.vehiculo.obtenerPosicionX();
 	}
@@ -77,7 +76,7 @@ public class Juego {
 	}
 
 	public double obtenerMovimientos() {
-		return this.vehiculo.movimientos;
+		return this.vehiculo.obtenerMovimientos();
 	}
 
 	public void ganar(double movimientos) {

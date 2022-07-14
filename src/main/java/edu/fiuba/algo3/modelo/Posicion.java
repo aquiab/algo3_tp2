@@ -5,11 +5,11 @@ public class Posicion {
 	//El mapa es un cuadrado, por lo tanto comparte los límites izq/sup y los der/inf.
 	private static final Integer LIMITE_IZQUIERDO_O_SUPERIOR_MAPA = 0;
 	private Integer limiteDerechoInferiorMapa;
-	public int x;
-	public int y;
-	public int sigX;
-	public int sigY;
-	Mapa mapa;
+	private int x;
+	private int y;
+	private int sigX;
+	private int sigY;
+	private Mapa mapa;
 	public Posicion(int x, int y, Mapa mapa) {
 		this.limiteDerechoInferiorMapa = mapa.dimension() - 1;
 		this.x = x;
@@ -34,7 +34,6 @@ public class Posicion {
 			this.y = this.sigY;
 		}
 	}
-
 	public void moverArriba(Vehiculo vehiculo) {
 		establecerSig(0, -1);
 		Calle calle = mapa.obtenerCalleVertical(x, y);

@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 public class Jugador implements Comparable<Jugador> {
-    public double movimientos;
-    public String nombre;
+    private double movimientos;
+    private String nombre;
 
     public Jugador(String nombre) {
         this.nombre = nombre;

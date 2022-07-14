@@ -71,6 +71,7 @@ public class ContenedorMapa extends StackPane {
     int distanciaX, int distanciaY, int offsetSorpresaX, int offsetSorpresaY) throws FileNotFoundException {
         Image piquete = new Image(new FileInputStream("assets/tire.png"));
         Image policia = new Image(new FileInputStream("assets/policia.png"));
+        Image impuesto = new Image(new FileInputStream("assets/afip.png"));
         Image pozo = new Image(new FileInputStream("assets/pozo.png"));
         Image sorpresaImagen = new Image(new FileInputStream("assets/sorpresa.png"));
         Image meta = new Image(new FileInputStream("assets/meta.png"));
@@ -90,6 +91,8 @@ public class ContenedorMapa extends StackPane {
                     dibujarElementoCalle(obstaculos, policia, x, y);
                 } else if (obstaculo.getClass() == Pozo.class) {
                     dibujarElementoCalle(obstaculos, pozo, x, y);
+                } else if (obstaculo.getClass() == Impuesto.class) {
+                    dibujarElementoCalle(obstaculos, impuesto, x, y);
                 }
                 
                 if ((sorpresa.getClass() == SorpresaVehiculo.class) || sorpresa.getClass() == SorpresaPuntaje.class) {

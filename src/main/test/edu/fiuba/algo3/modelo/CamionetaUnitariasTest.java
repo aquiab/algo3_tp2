@@ -2,10 +2,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
 import edu.fiuba.algo3.modelo.estado.Moto;
-import edu.fiuba.algo3.modelo.obstaculos.ControlPolicial;
-import edu.fiuba.algo3.modelo.obstaculos.Piquete;
-import edu.fiuba.algo3.modelo.obstaculos.Pozo;
-import edu.fiuba.algo3.modelo.obstaculos.VacioObstaculo;
+import edu.fiuba.algo3.modelo.obstaculos.*;
 import edu.fiuba.algo3.modelo.sorpresas.SorpresaPuntaje;
 import edu.fiuba.algo3.modelo.sorpresas.SorpresaVehiculo;
 import edu.fiuba.algo3.modelo.sorpresas.VacioSorpresa;
@@ -21,6 +18,24 @@ public class CamionetaUnitariasTest {
     private Posicion posicionMock = mock(Posicion.class);
 
     /**Interacciones con obstáculos**/
+
+    @Test
+    public void CamionetaEncuentraImpuestoTest() {
+        Vehiculo vehiculo = new Vehiculo(0, posicionMock, juegoMock);
+        Impuesto pozo = mock(Impuesto.class);
+        Camioneta camioneta = new Camioneta(vehiculo);
+        vehiculo.aplicarEstado(camioneta);
+
+        doAnswer(i -> {
+            vehiculo.pasarImpuesto();
+            return null;
+        }).when(pozo).pasar(vehiculo);
+        pozo.pasar(vehiculo);
+
+        verify(pozo, times(1)).pasar(vehiculo);
+        assert (vehiculo.obtenerMovimientos() == 0);
+        assert (vehiculo.obtenerEstado().getClass() == Auto.class);
+    }
     
     @Test
     public void CabionetaEncuentraVacioDeTipoObstaculoTest() {

@@ -5,6 +5,9 @@ import edu.fiuba.algo3.modelo.sorpresas.*;
 
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+
 public class CamionetaTest {
 
     private SorpresaFavorableFabrica sorpresaFavFabrica =  new SorpresaFavorableFabrica();
@@ -27,6 +30,7 @@ public class CamionetaTest {
         //assert
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 1);
     }
+
     @Test
     public void CamionetaEncuentra3PozosTest() {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.

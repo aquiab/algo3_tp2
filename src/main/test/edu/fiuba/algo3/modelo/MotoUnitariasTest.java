@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.estado.*;
+import edu.fiuba.algo3.modelo.obstaculos.Impuesto;
 import edu.fiuba.algo3.modelo.obstaculos.VacioObstaculo;
 import edu.fiuba.algo3.modelo.sorpresas.VacioSorpresa;
 
@@ -11,6 +12,24 @@ public class MotoUnitariasTest {
     Juego juego = mock(Juego.class);
     Posicion posicion = mock(Posicion.class);
     Direccion direccion = mock(Direccion.class);
+
+    @Test
+    public void MotoEncuentraImpuestoTest() {
+        Vehiculo vehiculo = new Vehiculo(0, posicion, juego);
+        Impuesto pozo = mock(Impuesto.class);
+        Moto moto = new Moto(vehiculo);
+        vehiculo.aplicarEstado(moto);
+
+        doAnswer(i -> {
+            vehiculo.pasarImpuesto();
+            return null;
+        }).when(pozo).pasar(vehiculo);
+        pozo.pasar(vehiculo);
+
+        verify(pozo, times(1)).pasar(vehiculo);
+        assert (vehiculo.obtenerMovimientos() == 3);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
+    }
 
     @Test
     public void MotoEncuentraVacioDeTipoObstaculoTest() {

@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.view;
+import edu.fiuba.algo3.controller.ControladorVolverAlMenu;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import javafx.scene.layout.Pane;
@@ -17,7 +18,8 @@ public class ContenedorVictoria extends VBox {
         Ranking rank = director.obtenerRanking();
         Jugador jugador = rank.devolverGanador();
 
-		Button botonVolver = new Button("Volver");
+		Button botonVolver = new Button("Volver al menú");
+        botonVolver.setOnAction(new ControladorVolverAlMenu(director));
         botonVolver.relocate(50, 450);
 
         VBox vboxizq = new VBox();
@@ -60,10 +62,5 @@ public class ContenedorVictoria extends VBox {
             rank.agregarJugador(jugadores.get(i));
         }
         this.getChildren().add(pane);
-        botonVolver.setOnAction(e -> {
-            director.refreshConstructor();
-            director.setearPartidaDefault();
-			this.getScene().setRoot(new ContenedorSeleccionarDificultad(director));
-		});
 	}
 }

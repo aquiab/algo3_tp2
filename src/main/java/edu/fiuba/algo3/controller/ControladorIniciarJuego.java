@@ -12,9 +12,9 @@ public class ControladorIniciarJuego implements EventHandler<ActionEvent> {
 	JuegoDirector director;
 	ContenedorSeleccionarVehiculo contenedorSeleccionarVehiculo;
 
-	public ControladorIniciarJuego(JuegoDirector director, ContenedorSeleccionarVehiculo contenedorSelecContenedorSeleccionarVehiculo) {
+	public ControladorIniciarJuego(JuegoDirector director, ContenedorSeleccionarVehiculo contenedorSeleccionarVehiculo) {
 		this.director = director;
-        this.contenedorSeleccionarVehiculo = contenedorSelecContenedorSeleccionarVehiculo;
+        this.contenedorSeleccionarVehiculo = contenedorSeleccionarVehiculo;
     }
 
 	@Override

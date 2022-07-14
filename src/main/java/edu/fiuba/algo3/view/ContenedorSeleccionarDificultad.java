@@ -4,6 +4,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
+import edu.fiuba.algo3.controller.ControladorAvanzarASeleccionarVehiculo;
 import edu.fiuba.algo3.controller.ControladorSeleccionarDificultad;
 
 public class ContenedorSeleccionarDificultad extends VBox {
@@ -46,10 +47,7 @@ public class ContenedorSeleccionarDificultad extends VBox {
 
 		Button botonSiguenteEscena = new Button();
         botonSiguenteEscena.setText("Siguiente");
-		botonSiguenteEscena.setOnAction(e -> {
-			this.getScene().setRoot(new ContenedorSeleccionarVehiculo(director));
-			director.obtenerPartida().aplicarJugador(nombreUsuario.getText());
-		});
+		botonSiguenteEscena.setOnAction(new ControladorAvanzarASeleccionarVehiculo(director, nombreUsuario));
 		botonSiguenteEscena.relocate(50, 450);
 
 		groupDificultad.selectedToggleProperty().addListener(new ControladorSeleccionarDificultad(groupDificultad, director, 

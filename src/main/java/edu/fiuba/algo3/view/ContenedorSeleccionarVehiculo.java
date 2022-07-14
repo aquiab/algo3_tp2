@@ -10,8 +10,6 @@ import edu.fiuba.algo3.controller.ControladorIniciarJuego;
 
 public class ContenedorSeleccionarVehiculo extends VBox {
 	public ContenedorSeleccionarVehiculo(JuegoDirector director) {
-		director.asignarAutoInicial();
-
 		Label etiquetaVehiculo = new Label();
         etiquetaVehiculo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
 		etiquetaVehiculo.setText("Elija el vehículo inicial:");

@@ -42,7 +42,7 @@ public class ContenedorVictoria extends VBox {
 
         Pane pane = new Pane(hbox, botonVolver, felicidades, ranking, llegaste);
         pane.setPrefSize(500, 500);
-        pane.setStyle("-fx-background-color: #ec6553");
+        pane.setStyle("-fx-background-color: #32cd32");
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
         vboxizq.getChildren().clear();

@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
 import edu.fiuba.algo3.modelo.estado.Moto;
-import edu.fiuba.algo3.modelo.sorpresas.ISorpresa;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
@@ -13,7 +12,6 @@ import static org.mockito.Mockito.*;
 public class JuegoDirectorTest {
 
     private static final int LONGITUD_MAPA = 10;
-    private static final int CANTIDAD_META = 1;
     private static final double MOVIMIENTOS_INICIALES = 0;
 
     /**Creación de partida fácil**/
@@ -30,18 +28,34 @@ public class JuegoDirectorTest {
     }
 
     @Test
-    public void creoJuegoFacilVerificoElMapaInterno() {
+    public void creoJuegoFacilVerificoLaCreacionDelMapa() {
         JuegoDirector director = new JuegoDirector(new Ranking());
-        director.configurarPartidaFacil();
-        Juego juego = director.obtenerPartida();
-        Mapa mapa = juego.obtenerMapa();
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        director.setConstructor(constructor);
 
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas != 0);
-        assert (mapa.dimension() == LONGITUD_MAPA);
-        assert (mapa.cantidadMeta() == CANTIDAD_META);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarLongitudMapa(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPozos(5);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPiquetes(5);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarControlesPoliciales(5);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasFavorables(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasDesfavorables(5);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasCambioDeVehiculo(5);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarMetaEn(anyInt());
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarRanking(any(Ranking.class));
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarVehiculoInicial();
+
+        director.configurarPartidaFacil();
+
+        verify(director.obtenerConstructor(), times(1)).asignarLongitudMapa(10);
+        verify(director.obtenerConstructor(), times(1)).agregarPozos(5);
+        verify(director.obtenerConstructor(), times(1)).agregarPiquetes(5);
+        verify(director.obtenerConstructor(), times(1)).agregarControlesPoliciales(5);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasFavorables(10);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasDesfavorables(5);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasCambioDeVehiculo(5);
+        verify(director.obtenerConstructor(), times(1)).agregarMetaEn(anyInt());
+        verify(director.obtenerConstructor(), times(1)).asignarRanking(any(Ranking.class));
+        verify(director.obtenerConstructor(), times(1)).asignarVehiculoInicial();
     }
 
     @Test
@@ -97,18 +111,34 @@ public class JuegoDirectorTest {
     }
 
     @Test
-    public void creoJuegoNormalVerificoElMapaInterno() {
+    public void creoJuegoNormalVerificoLaCreacionDelMapa() {
         JuegoDirector director = new JuegoDirector(new Ranking());
-        director.configurarPartidaNormal();
-        Juego juego = director.obtenerPartida();
-        Mapa mapa = juego.obtenerMapa();
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        director.setConstructor(constructor);
 
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas != 0);
-        assert (mapa.dimension() == LONGITUD_MAPA);
-        assert (mapa.cantidadMeta() == CANTIDAD_META);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarLongitudMapa(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPozos(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPiquetes(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarControlesPoliciales(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasFavorables(5);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasDesfavorables(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasCambioDeVehiculo(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarMetaEn(anyInt());
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarRanking(any(Ranking.class));
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarVehiculoInicial();
+
+        director.configurarPartidaNormal();
+
+        verify(director.obtenerConstructor(), times(1)).asignarLongitudMapa(10);
+        verify(director.obtenerConstructor(), times(1)).agregarPozos(10);
+        verify(director.obtenerConstructor(), times(1)).agregarPiquetes(10);
+        verify(director.obtenerConstructor(), times(1)).agregarControlesPoliciales(10);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasFavorables(5);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasDesfavorables(10);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasCambioDeVehiculo(10);
+        verify(director.obtenerConstructor(), times(1)).agregarMetaEn(anyInt());
+        verify(director.obtenerConstructor(), times(1)).asignarRanking(any(Ranking.class));
+        verify(director.obtenerConstructor(), times(1)).asignarVehiculoInicial();
     }
 
     @Test
@@ -164,18 +194,34 @@ public class JuegoDirectorTest {
     }
 
     @Test
-    public void creoJuegoDificilVerificoElMapaInterno() {
+    public void creoJuegoDificilVerificoLaCreacionDelMapa() {
         JuegoDirector director = new JuegoDirector(new Ranking());
-        director.configurarPartidaDificil();
-        Juego juego = director.obtenerPartida();
-        Mapa mapa = juego.obtenerMapa();
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        director.setConstructor(constructor);
 
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas != 0);
-        assert (mapa.dimension() == LONGITUD_MAPA);
-        assert (mapa.cantidadMeta() == CANTIDAD_META);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarLongitudMapa(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPozos(15);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPiquetes(15);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarControlesPoliciales(15);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasFavorables(0);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasDesfavorables(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasCambioDeVehiculo(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarMetaEn(anyInt());
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarRanking(any(Ranking.class));
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarVehiculoInicial();
+
+        director.configurarPartidaDificil();
+
+        verify(director.obtenerConstructor(), times(1)).asignarLongitudMapa(10);
+        verify(director.obtenerConstructor(), times(1)).agregarPozos(15);
+        verify(director.obtenerConstructor(), times(1)).agregarPiquetes(15);
+        verify(director.obtenerConstructor(), times(1)).agregarControlesPoliciales(15);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasFavorables(0);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasDesfavorables(10);
+        verify(director.obtenerConstructor(), times(1)).agregarSorpresasCambioDeVehiculo(10);
+        verify(director.obtenerConstructor(), times(1)).agregarMetaEn(anyInt());
+        verify(director.obtenerConstructor(), times(1)).asignarRanking(any(Ranking.class));
+        verify(director.obtenerConstructor(), times(1)).asignarVehiculoInicial();
     }
 
     @Test
@@ -216,20 +262,5 @@ public class JuegoDirectorTest {
         assert (vehiculo.estadoActual() == Moto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
-
-//    @Test
-//    public void creoJuegoDificilMiroCant() {
-//        JuegoDirector director = new JuegoDirector(new Ranking());
-//        JuegoConstructor constructor = mock(JuegoConstructor.class);
-//        director.setConstructor(constructor);
-//        director.configurarPartidaDificil();
-//        director.asignarCamionetaInicial();
-//
-//        verify(constructor, times(1)).agregarSorpresasFavorables(anyDouble());
-//        verify(constructor, times(1)).agregarSorpresasDesfavorables(anyDouble());
-//        verify(constructor, times(1)).agregarSorpresasCambioDeVehiculo(anyDouble());
-//        verify(constructor, times(10)).agregarSorpresaEnCalleHorizontal(any(Mapa.class),any(Posicion.class),any(ISorpresa.class));
-//        verify(constructor, times(10)).agregarSorpresaEnCalleVertical(any(Mapa.class),any(Posicion.class),any(ISorpresa.class));
-//    }
 
 }

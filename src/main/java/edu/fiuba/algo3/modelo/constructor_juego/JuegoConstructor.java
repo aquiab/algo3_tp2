@@ -12,9 +12,12 @@ public class JuegoConstructor {
     public Juego juego = new Juego();
     public int dimensionMapa;
 
+    private Mapa mapa;
+
     public JuegoConstructor asignarLongitudMapa(int dimension) {
         this.dimensionMapa = dimension;
         juego.asignarLongitudMapa(dimension);
+        this.mapa = juego.obtenerMapa();
         return this;
     }
 
@@ -23,8 +26,8 @@ public class JuegoConstructor {
         return this;
     }
 
-    private Posicion obtenerPosicionAleatoria(int dimension) {
-        return new Posicion((int) (Math.random() * (dimension - 1)), (int) (Math.random() * (dimension - 1)), juego.obtenerMapa());
+    public Posicion obtenerPosicionAleatoria(int dimension) {
+        return new Posicion((int) (Math.random() * (dimension - 1)), (int) (Math.random() * (dimension - 1)), mapa);
     }
 
     /*    Sorpresas    */
@@ -39,22 +42,22 @@ public class JuegoConstructor {
 
     public JuegoConstructor agregarSorpresasFavorables(double cantidad) {
         SorpresaFavorableFabrica fabrica = new SorpresaFavorableFabrica();
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
         return this;
     }
 
     public JuegoConstructor agregarSorpresasDesfavorables(double cantidad) {
         SorpresaDesfavorableFabrica fabrica = new SorpresaDesfavorableFabrica();
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
         return this;
     }
 
     public JuegoConstructor agregarSorpresasCambioDeVehiculo(double cantidad) {
 
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), new SorpresaVehiculo());
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), new SorpresaVehiculo());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), new SorpresaVehiculo());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), new SorpresaVehiculo());
         return this;
     }
 
@@ -70,27 +73,27 @@ public class JuegoConstructor {
 
 
     public JuegoConstructor agregarPozos(double cantidad) {
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), new Pozo());
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), new Pozo());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), new Pozo());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), new Pozo());
         return this;
     }
 
     public JuegoConstructor agregarPiquetes(double cantidad) {
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), new Piquete());
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), new Piquete());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), new Piquete());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), new Piquete());
         return this;
     }
 
     public JuegoConstructor agregarControlesPoliciales(double cantidad) {
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), new ControlPolicial());
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(juego.obtenerMapa(), obtenerPosicionAleatoria(dimensionMapa), new ControlPolicial());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), new ControlPolicial());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), new ControlPolicial());
         return this;
     }
 
     /*    Meta    */
 
     public JuegoConstructor agregarMetaEn(int y) {
-        Calle calle = juego.obtenerMapa().obtenerCalleHorizontal(dimensionMapa - 1, y);
+        Calle calle = mapa.obtenerCalleHorizontal(dimensionMapa - 1, y);
         juego.asignarCoordenadaMeta(y);
         calle.agregarObstaculo(new VacioObstaculo());
         calle.agregarSorpresa(new Meta());

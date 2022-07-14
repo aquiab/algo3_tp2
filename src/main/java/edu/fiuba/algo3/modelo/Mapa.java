@@ -35,33 +35,4 @@ public class Mapa {
 		return dimension;
 	}
 
-	// eliminar
-
-    public int cantidadObstaculos() {
-		int contador = 0;
-		for (int i=0; i < dimension; i++){
-			contador += callesHorizontales.get(i).stream().filter(calle -> calle.obstaculo.getClass() != VacioObstaculo.class).count();
-			contador += callesVerticales.get(i).stream().filter(calle -> calle.obstaculo.getClass() != VacioObstaculo.class).count();
-			}
-		return contador;
-    }
-
-	public int cantidadSorpresa() {
-		int contador = 0;
-		for (int i=0; i < dimension; i++){
-			contador += callesHorizontales.get(i).stream().filter(calle -> calle.sorpresa.getClass() != VacioSorpresa.class).count();
-			contador += callesVerticales.get(i).stream().filter(calle -> calle.sorpresa.getClass() != VacioSorpresa.class).count();
-		}
-		return contador;
-	}
-
-	public int cantidadMeta() {
-		int contador = 0;
-		for (int i=0; i < dimension; i++){
-			contador += callesHorizontales.get(i).stream().filter(calle -> calle.sorpresa.getClass() == Meta.class).count();
-			contador += callesVerticales.get(i).stream().filter(calle -> calle.sorpresa.getClass() == Meta.class).count();
-		}
-		return contador;
-	}
-
 }

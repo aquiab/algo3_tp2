@@ -50,7 +50,7 @@ public class JuegoDirector {
 
     public void configurarPartidaDificil() {
         constructor.asignarLongitudMapa(10)
-                  .agregarPozos(15)
+                .agregarPozos(15)
                 .agregarPiquetes(15)
                 .agregarControlesPoliciales(15)
                 .agregarSorpresasFavorables(0)
@@ -85,5 +85,13 @@ public class JuegoDirector {
     public void setearPartidaDefault() {
         configurarPartidaNormal();
         asignarAutoInicial();
+    }
+
+    public void setConstructor(JuegoConstructor constructor) {
+        this.constructor = constructor;
+    }
+
+    public JuegoConstructor obtenerConstructor() {
+        return this.constructor;
     }
 }

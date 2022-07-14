@@ -3,7 +3,11 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoConstructor;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.modelo.estado.*;
+import edu.fiuba.algo3.modelo.obstaculos.*;
+import edu.fiuba.algo3.modelo.sorpresas.*;
 import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.*;
 
 public class JuegoConstructorTest {
 
@@ -68,96 +72,155 @@ public class JuegoConstructorTest {
 
     @Test
     public void creoJuegoSeteandoCantidadDePozos() {
-        JuegoConstructor constructor = new JuegoConstructor();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        Juego juego = mock(Juego.class);
+        Posicion pos = mock(Posicion.class);
+
+        doAnswer(i -> {
+            juego.asignarLongitudMapa(5);
+            return constructor;
+        }).when(constructor).asignarLongitudMapa(5);
+        doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
+        doNothing().when(constructor).agregarObstaculoEnCalleHorizontal(any(), any(Posicion.class), any(Pozo.class));
+        doNothing().when(constructor).agregarObstaculoEnCalleVertical(any(), any(Posicion.class), any(Pozo.class));
+
         constructor.asignarLongitudMapa(5)
                 .agregarPozos(10);
-        Juego juego = constructor.construir();
-        Mapa mapa = juego.obtenerMapa();
 
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas == 0);
+        verify(constructor, times(1)).agregarPozos(10);
+        verify(constructor, times(5)).agregarObstaculoEnCalleHorizontal(any(), any(Posicion.class), any(Pozo.class));
+        verify(constructor, times(5)).agregarObstaculoEnCalleVertical(any(), any(Posicion.class), any(Pozo.class));
     }
 
     @Test
     public void creoJuegoSeteandoCantidadDePiquetes() {
-        JuegoConstructor constructor = new JuegoConstructor();
-        constructor.asignarLongitudMapa(5)
-                .agregarPiquetes(10);
-        Juego juego = constructor.construir();
-        Mapa mapa = juego.obtenerMapa();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        Juego juego = mock(Juego.class);
+        Posicion pos = mock(Posicion.class);
 
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas == 0);
+        doAnswer(i -> {
+            juego.asignarLongitudMapa(5);
+            return constructor;
+        }).when(constructor).asignarLongitudMapa(5);
+        doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
+        doNothing().when(constructor).agregarObstaculoEnCalleHorizontal(any(), any(Posicion.class), any(Piquete.class));
+        doNothing().when(constructor).agregarObstaculoEnCalleVertical(any(), any(Posicion.class), any(Piquete.class));
+
+        constructor.asignarLongitudMapa(5)
+                .agregarPiquetes(20);
+
+        verify(constructor, times(1)).agregarPiquetes(20);
+        verify(constructor, times(10)).agregarObstaculoEnCalleHorizontal(any(), any(Posicion.class), any(Piquete.class));
+        verify(constructor, times(10)).agregarObstaculoEnCalleVertical(any(), any(Posicion.class), any(Piquete.class));
     }
 
     @Test
     public void creoJuegoSeteandoCantidadDeControles() {
-        JuegoConstructor constructor = new JuegoConstructor();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        Juego juego = mock(Juego.class);
+        Posicion pos = mock(Posicion.class);
+
+        doAnswer(i -> {
+            juego.asignarLongitudMapa(5);
+            return constructor;
+        }).when(constructor).asignarLongitudMapa(5);
+        doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
+        doNothing().when(constructor).agregarObstaculoEnCalleHorizontal(any(), any(Posicion.class), any(ControlPolicial.class));
+        doNothing().when(constructor).agregarObstaculoEnCalleVertical(any(), any(Posicion.class), any(ControlPolicial.class));
+
         constructor.asignarLongitudMapa(5)
                 .agregarControlesPoliciales(10);
-        Juego juego = constructor.construir();
-        Mapa mapa = juego.obtenerMapa();
 
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-        assert (cantidadObstaculos != 0);
-        assert (cantidadSorpresas == 0);
+        verify(constructor, times(1)).agregarControlesPoliciales(10);
+        verify(constructor, times(5)).agregarObstaculoEnCalleHorizontal(any(), any(Posicion.class), any(ControlPolicial.class));
+        verify(constructor, times(5)).agregarObstaculoEnCalleVertical(any(), any(Posicion.class), any(ControlPolicial.class));
     }
 
     @Test
     public void creoJuegoSeteandoCantidadDeSorpresasFavorables() {
-        JuegoConstructor constructor = new JuegoConstructor();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        Juego juego = mock(Juego.class);
+        Posicion pos = mock(Posicion.class);
+        SorpresaFavorableFabrica fabrica = mock(SorpresaFavorableFabrica.class);
+        SorpresaPuntaje sorpresa = mock(SorpresaPuntaje.class);
+
+        when(fabrica.crearSorpresa()).thenReturn(sorpresa);
+
+        doAnswer(i -> {
+            juego.asignarLongitudMapa(5);
+            return constructor;
+        }).when(constructor).asignarLongitudMapa(5);
+        doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
+        doNothing().when(constructor).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaPuntaje.class));
+        doNothing().when(constructor).agregarSorpresaEnCalleVertical(any(), any(Posicion.class), any(SorpresaPuntaje.class));
+
         constructor.asignarLongitudMapa(5)
                 .agregarSorpresasFavorables(10);
-        Juego juego = constructor.construir();
-        Mapa mapa = juego.obtenerMapa();
 
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-        assert (cantidadObstaculos == 0);
-        assert (cantidadSorpresas != 0);
+        verify(constructor, times(1)).agregarSorpresasFavorables(10);
+        verify(constructor, never()).agregarSorpresasDesfavorables(10);
+        verify(constructor, times(5)).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaPuntaje.class));
+        verify(constructor, times(5)).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaPuntaje.class));
     }
 
     @Test
     public void creoJuegoSeteandoCantidadDeSorpresasDesfavorables() {
-        JuegoConstructor constructor = new JuegoConstructor();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        Juego juego = mock(Juego.class);
+        Posicion pos = mock(Posicion.class);
+        SorpresaDesfavorableFabrica fabrica = mock(SorpresaDesfavorableFabrica.class);
+        SorpresaPuntaje sorpresa = mock(SorpresaPuntaje.class);
+
+        when(fabrica.crearSorpresa()).thenReturn(sorpresa);
+
+        doAnswer(i -> {
+            juego.asignarLongitudMapa(5);
+            return constructor;
+        }).when(constructor).asignarLongitudMapa(5);
+        doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
+        doNothing().when(constructor).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaPuntaje.class));
+        doNothing().when(constructor).agregarSorpresaEnCalleVertical(any(), any(Posicion.class), any(SorpresaPuntaje.class));
+
         constructor.asignarLongitudMapa(5)
                 .agregarSorpresasDesfavorables(10);
-        Juego juego = constructor.construir();
-        Mapa mapa = juego.obtenerMapa();
 
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-        assert (cantidadObstaculos == 0);
-        assert (cantidadSorpresas != 0);
+        verify(constructor, times(1)).agregarSorpresasDesfavorables(10);
+        verify(constructor, never()).agregarSorpresasFavorables(10);
+        verify(constructor, times(5)).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaPuntaje.class));
+        verify(constructor, times(5)).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaPuntaje.class));
     }
 
     @Test
     public void creoJuegoSeteandoCantidadDeSorpresasDeVehiculo() {
-        JuegoConstructor constructor = new JuegoConstructor();
+        JuegoConstructor constructor = spy(new JuegoConstructor());
+        Juego juego = mock(Juego.class);
+        Posicion pos = mock(Posicion.class);
+
+        doAnswer(i -> {
+            juego.asignarLongitudMapa(5);
+            return constructor;
+        }).when(constructor).asignarLongitudMapa(5);
+        doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
+        doNothing().when(constructor).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaVehiculo.class));
+        doNothing().when(constructor).agregarSorpresaEnCalleVertical(any(), any(Posicion.class), any(SorpresaVehiculo.class));
+
         constructor.asignarLongitudMapa(5)
                 .agregarSorpresasCambioDeVehiculo(10);
-        Juego juego = constructor.construir();
-        Mapa mapa = juego.obtenerMapa();
 
-        int cantidadObstaculos = mapa.cantidadObstaculos();
-        int cantidadSorpresas = mapa.cantidadSorpresa();
-        assert (cantidadObstaculos == 0);
-        assert (cantidadSorpresas != 0);
+        verify(constructor, times(1)).agregarSorpresasCambioDeVehiculo(10);
+        verify(constructor, never()).agregarSorpresasFavorables(10);
+        verify(constructor, never()).agregarSorpresasDesfavorables(10);
+        verify(constructor, times(5)).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaVehiculo.class));
+        verify(constructor, times(5)).agregarSorpresaEnCalleHorizontal(any(), any(Posicion.class), any(SorpresaVehiculo.class));
     }
 
     @Test
     public void creoJuegoSeteandoLugarDeMeta() {
         JuegoConstructor constructor = new JuegoConstructor();
-        constructor.asignarLongitudMapa(5)
+        constructor.asignarLongitudMapa(10)
                 .agregarMetaEn(2);
-        Juego juego = constructor.construir();
 
+        Juego juego = constructor.construir();
         assert (juego.obtenerCoordenadaMeta() == 2);
     }
-
 }

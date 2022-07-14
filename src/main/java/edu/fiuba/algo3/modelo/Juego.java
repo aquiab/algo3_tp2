@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.LinkedList;
-
-import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.modelo.estado.*;
 
 public class Juego {
@@ -24,7 +22,9 @@ public class Juego {
 		this.jugador = new Jugador(nombre);
 	}
 
-	public void aplicarRanking(Ranking ranking) { this.ranking = ranking;}
+	public void aplicarRanking(Ranking ranking) {
+		this.ranking = ranking;
+	}
 
 	public void aplicarEstadoInicial(Estado estado) {
 		vehiculo.aplicarEstado(estado);
@@ -37,14 +37,16 @@ public class Juego {
 		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);
 	}
 
-
 	public void asignarCoordenadaMeta(int coordenada) {
 		this.COORDENADA_META = coordenada;
 	}
 
-
 	public Mapa obtenerMapa() {
 		return this.mapa;
+	}
+
+	public int obtenerDimensionMapa() {
+		return this.mapa.dimension();
 	}
 
 	public LinkedList<LinkedList<Calle>> obtenerCallesHorizontales() {

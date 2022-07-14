@@ -7,7 +7,6 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.image.*;
-import java.text.DecimalFormat;
 
 public class ControladorMovimiento implements EventHandler<KeyEvent> {
 	
@@ -41,12 +40,12 @@ public class ControladorMovimiento implements EventHandler<KeyEvent> {
             return;
         }
         contenedorMapa.actualizar(juego);
-        //stage.setTitle("Movimientos: " + new DecimalFormat("#.##").format(juego.obtenerMovimientos()));
         
         if (juego.gano()) {
             ContenedorVictoria contenedorVictoria = new ContenedorVictoria(director);
             contenedorMapa.getScene().removeEventHandler(KeyEvent.KEY_RELEASED, this);
             contenedorMapa.getScene().setRoot(contenedorVictoria);
+            contenedorVictoria.getScene().getWindow().sizeToScene();
         }
         
     }

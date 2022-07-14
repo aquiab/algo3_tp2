@@ -1,7 +1,4 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.obstaculos.*;
-import edu.fiuba.algo3.modelo.sorpresas.*;
-
 import java.util.LinkedList;
 
 public class Mapa {

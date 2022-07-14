@@ -6,11 +6,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
-
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ContenedorVictoria extends VBox {
 	public ContenedorVictoria(JuegoDirector director) {
+        this.getScene();
+
 		Juego juego = director.obtenerPartida();
         Ranking rank = director.obtenerRanking();
         Jugador jugador = rank.devolverGanador();
@@ -29,7 +31,7 @@ public class ContenedorVictoria extends VBox {
         felicidades.setFont(new Font(30));
 
         Label llegaste = new Label();
-        llegaste.setText("Llegaste a la meta con un puntaje de " + String.valueOf(juego.obtenerMovimientos()));
+        llegaste.setText("Llegaste a la meta con un puntaje de " + new DecimalFormat("#.##").format(juego.obtenerMovimientos()));
         llegaste.relocate(110, 60);
         llegaste.setFont(new Font(15));
 
@@ -39,7 +41,7 @@ public class ContenedorVictoria extends VBox {
         ranking.setFont(new Font(20));
 
         Pane pane = new Pane(hbox, botonVolver, felicidades, ranking, llegaste);
-        pane.setPrefSize(350, 500);
+        pane.setPrefSize(500, 500);
         pane.setStyle("-fx-background-color: #ec6553");
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -50,7 +52,7 @@ public class ContenedorVictoria extends VBox {
 
         while (jugador != null) {
             vboxizq.getChildren().add(new Label(jugador.nombre));
-            vboxder.getChildren().add(new Label(String.valueOf(jugador.movimientos)));
+            vboxder.getChildren().add(new Label(new DecimalFormat("#.##").format(jugador.getMovimientos())));
             jugadores.add(jugador);
             jugador = juego.ranking.devolverGanador();
         }

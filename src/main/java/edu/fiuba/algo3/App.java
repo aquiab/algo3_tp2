@@ -18,6 +18,8 @@ public class App extends Application {
         director.setearPartidaDefault();
         Scene scene = new Scene(new ContenedorSeleccionarDificultad(director));
         stage.setScene(scene);
+        stage.setMinWidth(500);
+        stage.setMinHeight(500);
         stage.show();
     }
 }

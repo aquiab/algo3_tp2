@@ -31,8 +31,8 @@ public class ContenedorMapa extends StackPane {
 
 	public ContenedorMapa(Juego juego) {
         this.juego = juego;
-		dibujarCalles(juego.obtenerMapa().dimension());
-        this.getChildren().addAll(vehiculo, obstaculos, sorpresas);
+		dibujarCalles(juego.obtenerDimensionMapa());
+        this.getChildren().addAll(obstaculos, sorpresas, vehiculo);
         dibujarSombra();
         
 		try {
@@ -49,10 +49,10 @@ public class ContenedorMapa extends StackPane {
 	}
 
 	private void dibujarCalles(int size) {
-        GridPane gp = new GridPane();
-        gp.setPadding(new Insets(6));
-        gp.setHgap( 15 );
-        gp.setVgap( 15 );
+        GridPane mapa = new GridPane();
+        mapa.setPadding(new Insets(6));
+        mapa.setHgap( 15 );
+        mapa.setVgap( 15 );
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Rectangle r = new Rectangle();
@@ -61,10 +61,10 @@ public class ContenedorMapa extends StackPane {
                 r.setArcWidth(10);
                 r.setArcHeight(10);
                 r.setFill(Color.GRAY);
-                gp.add(r, i, j);
+                mapa.add(r, i, j);
             }
         }
-        this.getChildren().add(gp);
+        this.getChildren().add(mapa);
     }
 
 	private void dibujarObstaculosYSorpresas(Juego juego, LinkedList<LinkedList<Calle>> calles,
@@ -75,8 +75,8 @@ public class ContenedorMapa extends StackPane {
         Image sorpresaImagen = new Image(new FileInputStream("assets/sorpresa.png"));
         Image meta = new Image(new FileInputStream("assets/meta.png"));
 
-        for (int i = 0; i < juego.obtenerMapa().dimension(); i++) {
-            for (int j = 0; j < juego.obtenerMapa().dimension(); j++) {
+        for (int i = 0; i < juego.obtenerDimensionMapa(); i++) {
+            for (int j = 0; j < juego.obtenerDimensionMapa(); j++) {
                 Calle calle = calles.get(i).get(j);
                 IObstaculo obstaculo = calle.obtenerObstaculo();
                 ISorpresa sorpresa = calle.obtenerSorpresa();
@@ -129,8 +129,8 @@ public class ContenedorMapa extends StackPane {
 
     private void dibujarSombra() {
         Rectangle rectangulo = new Rectangle();
-        rectangulo.setHeight(juego.obtenerMapa().dimension() * (TAMANIO_MANZANA + TAMANIO_CALLE));
-        rectangulo.setWidth(juego.obtenerMapa().dimension() * (TAMANIO_MANZANA + TAMANIO_CALLE));
+        rectangulo.setHeight(juego.obtenerDimensionMapa() * (TAMANIO_MANZANA + TAMANIO_CALLE));
+        rectangulo.setWidth(juego.obtenerDimensionMapa() * (TAMANIO_MANZANA + TAMANIO_CALLE));
 
         Circle visionVehiculo = new Circle();
         visionVehiculo.setCenterX(juego.obtenerPosicionXVehiculo() * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
@@ -138,7 +138,7 @@ public class ContenedorMapa extends StackPane {
         visionVehiculo.setRadius(2 * (TAMANIO_MANZANA + TAMANIO_CALLE));
 
         Circle visionMeta = new Circle();
-        visionMeta.setCenterX((juego.obtenerMapa().dimension()) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
+        visionMeta.setCenterX((juego.obtenerDimensionMapa()) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
         visionMeta.setCenterY((juego.obtenerCoordenadaMeta() + 1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
         visionMeta.setRadius(TAMANIO_MANZANA + TAMANIO_CALLE);
 
@@ -160,6 +160,11 @@ public class ContenedorMapa extends StackPane {
         this.getChildren().add(sorpresas);
     }
 
+    private void actualizarSombra() {
+        this.getChildren().remove(overlaySombra);
+        dibujarSombra();
+    }
+
     public void actualizar(Juego juego) {
         try {
             actualizarMapa(juego);
@@ -167,7 +172,6 @@ public class ContenedorMapa extends StackPane {
 		    System.out.println("Exception " + ff.toString());
 	    }
         actualizarVehiculo();
-        this.getChildren().remove(overlaySombra);
-        dibujarSombra();
+        actualizarSombra();
     }
 }

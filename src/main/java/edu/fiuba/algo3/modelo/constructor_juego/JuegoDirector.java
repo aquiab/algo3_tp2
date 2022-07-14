@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.constructor_juego;
 
 import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ranking;
 
 import java.util.Random;
@@ -36,7 +35,7 @@ public class JuegoDirector {
     }
 
     public void configurarPartidaNormal() {
-        constructor.asignarLongitudMapa(10)
+        constructor.asignarLongitudMapa(12)
                 .agregarPozos(10)
                 .agregarPiquetes(10)
                 .agregarControlesPoliciales(10)
@@ -49,7 +48,7 @@ public class JuegoDirector {
     }
 
     public void configurarPartidaDificil() {
-        constructor.asignarLongitudMapa(10)
+        constructor.asignarLongitudMapa(14)
                 .agregarPozos(15)
                 .agregarPiquetes(15)
                 .agregarControlesPoliciales(15)

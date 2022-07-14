@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.estado.Auto;
 import edu.fiuba.algo3.modelo.estado.Camioneta;
 import edu.fiuba.algo3.modelo.estado.Moto;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 
 import static org.mockito.Mockito.*;
 
@@ -25,6 +26,21 @@ public class JuegoDirectorTest {
         assert (director.obtenerCoordenadaMeta() >= 0);
         assert (director.obtenerCoordenadaMeta() <= LONGITUD_MAPA);
         assert (juego != null);
+    }
+
+    @Test
+    public void creoJuegoFacilVerificoMeta() {
+        Posicion pos = mock(Posicion.class);
+        MockedStatic<ValoresAleatorios> valores = mockStatic(ValoresAleatorios.class);
+        valores.when(() -> ValoresAleatorios.valorAleatorio()).thenReturn(5);
+        valores.when(() -> ValoresAleatorios.obtenerPosicionAleatoria(anyInt(), any())).thenReturn(pos);
+
+        JuegoDirector director = new JuegoDirector(new Ranking());
+        director.configurarPartidaFacil();
+
+        Juego juego = director.obtenerPartida();
+        assert (juego.obtenerCoordenadaMeta() == 5);
+        valores.close();
     }
 
     @Test
@@ -111,6 +127,21 @@ public class JuegoDirectorTest {
     }
 
     @Test
+    public void creoJuegoNormalVerificoMeta() {
+        Posicion pos = mock(Posicion.class);
+        MockedStatic<ValoresAleatorios> valores = mockStatic(ValoresAleatorios.class);
+        valores.when(() -> ValoresAleatorios.valorAleatorio()).thenReturn(5);
+        valores.when(() -> ValoresAleatorios.obtenerPosicionAleatoria(anyInt(), any())).thenReturn(pos);
+
+        JuegoDirector director = new JuegoDirector(new Ranking());
+        director.configurarPartidaNormal();
+
+        Juego juego = director.obtenerPartida();
+        assert (juego.obtenerCoordenadaMeta() == 5);
+        valores.close();
+    }
+
+    @Test
     public void creoJuegoNormalVerificoLaCreacionDelMapa() {
         JuegoDirector director = new JuegoDirector(new Ranking());
         JuegoConstructor constructor = spy(new JuegoConstructor());
@@ -191,6 +222,21 @@ public class JuegoDirectorTest {
         assert (director.obtenerCoordenadaMeta() >= 0);
         assert (director.obtenerCoordenadaMeta() <= LONGITUD_MAPA);
         assert (juego != null);
+    }
+
+    @Test
+    public void creoJuegoDificilVerificoMeta() {
+        Posicion pos = mock(Posicion.class);
+        MockedStatic<ValoresAleatorios> valores = mockStatic(ValoresAleatorios.class);
+        valores.when(() -> ValoresAleatorios.valorAleatorio()).thenReturn(5);
+        valores.when(() -> ValoresAleatorios.obtenerPosicionAleatoria(anyInt(), any())).thenReturn(pos);
+
+        JuegoDirector director = new JuegoDirector(new Ranking());
+        director.configurarPartidaDificil();
+
+        Juego juego = director.obtenerPartida();
+        assert (juego.obtenerCoordenadaMeta() == 5);
+        valores.close();
     }
 
     @Test

@@ -13,14 +13,6 @@ import static org.mockito.Mockito.*;
 public class JuegoConstructorTest {
 
     @Test
-    public void creoJuegoNoEsNulo() {
-        JuegoConstructor constructor = new JuegoConstructor();
-
-        assert (constructor.construir() != null);
-        assert (constructor.construir().getClass() == Juego.class);
-    }
-
-    @Test
     public void creoJuegoSeteandoLongitudMapa() {
         JuegoConstructor constructor = new JuegoConstructor();
         constructor.asignarLongitudMapa(5);
@@ -79,7 +71,6 @@ public class JuegoConstructorTest {
         MockedStatic<ValoresAleatorios> valores = mockStatic(ValoresAleatorios.class);
         valores.when(() -> ValoresAleatorios.obtenerPosicionAleatoria(anyInt(), any())).thenReturn(pos);
 
-
         doAnswer(i -> {
             juego.asignarMapa(new Mapa(5));
             return constructor;
@@ -103,7 +94,6 @@ public class JuegoConstructorTest {
         Posicion pos = mock(Posicion.class);
         MockedStatic<ValoresAleatorios> valores = mockStatic(ValoresAleatorios.class);
         valores.when(() -> ValoresAleatorios.obtenerPosicionAleatoria(anyInt(), any())).thenReturn(pos);
-
 
         doAnswer(i -> {
             juego.asignarMapa(new Mapa(5));
@@ -154,7 +144,6 @@ public class JuegoConstructorTest {
         SorpresaPuntaje sorpresa = mock(SorpresaPuntaje.class);
         MockedStatic<ValoresAleatorios> valores = mockStatic(ValoresAleatorios.class);
         valores.when(() -> ValoresAleatorios.obtenerPosicionAleatoria(anyInt(), any())).thenReturn(pos);
-
 
         when(fabrica.crearSorpresa()).thenReturn(sorpresa);
 

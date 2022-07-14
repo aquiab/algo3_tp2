@@ -11,13 +11,12 @@ public class JuegoConstructor {
 
     public Juego juego = new Juego();
     public int dimensionMapa;
-
     private Mapa mapa;
 
     public JuegoConstructor asignarLongitudMapa(int dimension) {
         this.dimensionMapa = dimension;
-        juego.asignarLongitudMapa(dimension);
-        this.mapa = juego.obtenerMapa();
+        this.mapa = new Mapa(dimension);
+        juego.asignarMapa(this.mapa);
         return this;
     }
 

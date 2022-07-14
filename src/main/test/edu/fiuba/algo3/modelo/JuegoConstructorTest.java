@@ -77,7 +77,7 @@ public class JuegoConstructorTest {
         Posicion pos = mock(Posicion.class);
 
         doAnswer(i -> {
-            juego.asignarLongitudMapa(5);
+            juego.asignarMapa(new Mapa(5));
             return constructor;
         }).when(constructor).asignarLongitudMapa(5);
         doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
@@ -99,7 +99,7 @@ public class JuegoConstructorTest {
         Posicion pos = mock(Posicion.class);
 
         doAnswer(i -> {
-            juego.asignarLongitudMapa(5);
+            juego.asignarMapa(new Mapa(5));
             return constructor;
         }).when(constructor).asignarLongitudMapa(5);
         doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
@@ -121,7 +121,7 @@ public class JuegoConstructorTest {
         Posicion pos = mock(Posicion.class);
 
         doAnswer(i -> {
-            juego.asignarLongitudMapa(5);
+            juego.asignarMapa(new Mapa(5));
             return constructor;
         }).when(constructor).asignarLongitudMapa(5);
         doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
@@ -147,7 +147,7 @@ public class JuegoConstructorTest {
         when(fabrica.crearSorpresa()).thenReturn(sorpresa);
 
         doAnswer(i -> {
-            juego.asignarLongitudMapa(5);
+            juego.asignarMapa(new Mapa(5));
             return constructor;
         }).when(constructor).asignarLongitudMapa(5);
         doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
@@ -174,7 +174,7 @@ public class JuegoConstructorTest {
         when(fabrica.crearSorpresa()).thenReturn(sorpresa);
 
         doAnswer(i -> {
-            juego.asignarLongitudMapa(5);
+            juego.asignarMapa(new Mapa(5));
             return constructor;
         }).when(constructor).asignarLongitudMapa(5);
         doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());
@@ -197,7 +197,7 @@ public class JuegoConstructorTest {
         Posicion pos = mock(Posicion.class);
 
         doAnswer(i -> {
-            juego.asignarLongitudMapa(5);
+            juego.asignarMapa(new Mapa(5));
             return constructor;
         }).when(constructor).asignarLongitudMapa(5);
         doAnswer(i -> pos).when(constructor).obtenerPosicionAleatoria(anyInt());

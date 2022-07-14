@@ -31,7 +31,7 @@ public class ContenedorMapa extends StackPane {
 
 	public ContenedorMapa(Juego juego) {
         this.juego = juego;
-		dibujarCalles(juego.mapSize);
+		dibujarCalles(juego.obtenerMapa().dimension());
         this.getChildren().addAll(vehiculo, obstaculos, sorpresas);
         dibujarSombra();
         
@@ -75,8 +75,8 @@ public class ContenedorMapa extends StackPane {
         Image sorpresaImagen = new Image(new FileInputStream("assets/sorpresa.png"));
         Image meta = new Image(new FileInputStream("assets/meta.png"));
 
-        for (int i = 0; i < juego.mapSize; i++) {
-            for (int j = 0; j < juego.mapSize; j++) {
+        for (int i = 0; i < juego.obtenerMapa().dimension(); i++) {
+            for (int j = 0; j < juego.obtenerMapa().dimension(); j++) {
                 Calle calle = calles.get(i).get(j);
                 IObstaculo obstaculo = calle.obtenerObstaculo();
                 ISorpresa sorpresa = calle.obtenerSorpresa();
@@ -129,8 +129,8 @@ public class ContenedorMapa extends StackPane {
 
     private void dibujarSombra() {
         Rectangle rectangulo = new Rectangle();
-        rectangulo.setHeight(juego.mapSize * (TAMANIO_MANZANA + TAMANIO_CALLE));
-        rectangulo.setWidth(juego.mapSize * (TAMANIO_MANZANA + TAMANIO_CALLE));
+        rectangulo.setHeight(juego.obtenerMapa().dimension() * (TAMANIO_MANZANA + TAMANIO_CALLE));
+        rectangulo.setWidth(juego.obtenerMapa().dimension() * (TAMANIO_MANZANA + TAMANIO_CALLE));
 
         Circle visionVehiculo = new Circle();
         visionVehiculo.setCenterX(juego.obtenerPosicionXVehiculo() * (TAMANIO_MANZANA + TAMANIO_CALLE) + TAMANIO_MANZANA + TAMANIO_CALLE);
@@ -138,7 +138,7 @@ public class ContenedorMapa extends StackPane {
         visionVehiculo.setRadius(2 * (TAMANIO_MANZANA + TAMANIO_CALLE));
 
         Circle visionMeta = new Circle();
-        visionMeta.setCenterX((juego.mapSize) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
+        visionMeta.setCenterX((juego.obtenerMapa().dimension()) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_X);
         visionMeta.setCenterY((juego.obtenerCoordenadaMeta() + 1) * (TAMANIO_MANZANA + TAMANIO_CALLE) + OFFSET_Y);
         visionMeta.setRadius(TAMANIO_MANZANA + TAMANIO_CALLE);
 

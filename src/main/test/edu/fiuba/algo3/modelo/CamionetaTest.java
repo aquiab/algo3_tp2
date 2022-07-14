@@ -15,7 +15,7 @@ public class CamionetaTest {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
@@ -32,7 +32,7 @@ public class CamionetaTest {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
@@ -56,7 +56,7 @@ public class CamionetaTest {
     public void CamionetaEncuentraPiqueteTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Piquete());
@@ -74,7 +74,7 @@ public class CamionetaTest {
     public void CamionetaEncuentraPolicialTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new ControlPolicial());
@@ -90,7 +90,7 @@ public class CamionetaTest {
     public void CamionetaEncuentraPiqueteYPozoTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
@@ -112,7 +112,7 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaCambioVehiculo() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -131,7 +131,7 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaFavorable() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -150,7 +150,7 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaDesavorable() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarObstaculo(new VacioObstaculo());
@@ -169,7 +169,7 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaCambioVehiculo3Veces() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -194,7 +194,7 @@ public class CamionetaTest {
     public void CamionetaEncuentraSorpresaCambioVehiculo2veces() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Camioneta(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());

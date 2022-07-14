@@ -16,7 +16,7 @@ public class AutoTest {
         //Un auto atraviesa la ciudad y se encuentra con un Pozo. Es penalizado en tres movimientos.
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
@@ -34,7 +34,7 @@ public class AutoTest {
     public void AutoEncuentraPiqueteTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Piquete());
@@ -52,7 +52,7 @@ public class AutoTest {
     public void AutoEncuentraPolicialTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new ControlPolicial());
@@ -68,7 +68,7 @@ public class AutoTest {
     public void AutoEncuentraPiqueteYPozoTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
@@ -90,7 +90,7 @@ public class AutoTest {
     public void AutoEncuentraSorpresaCambioVehiculo() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -109,7 +109,7 @@ public class AutoTest {
     public void AutoEncuentraSorpresaFavorable() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -128,7 +128,7 @@ public class AutoTest {
     public void AutoEncuentraSorpresaDesfavorable() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarObstaculo(new VacioObstaculo());
@@ -147,7 +147,7 @@ public class AutoTest {
     public void AutoEncuentraSorpresaCambioVehiculo3Veces() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -172,7 +172,7 @@ public class AutoTest {
     public void AutoEncuentraSorpresaCambioVehiculo2veces() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -194,7 +194,7 @@ public class AutoTest {
     public void AutoVisitaCalleEnLimiteDelMapaYSigueEnElMismoLugar() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Auto(juego.obtenerVehiculo()));
 

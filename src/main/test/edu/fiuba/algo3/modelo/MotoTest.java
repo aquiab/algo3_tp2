@@ -14,7 +14,7 @@ public class MotoTest {
     public void MotoEncuentraPozoTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
@@ -30,7 +30,7 @@ public class MotoTest {
     public void MotoEncuentraPiqueteTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Piquete());
@@ -48,7 +48,7 @@ public class MotoTest {
     public void MotoEncuentraPolicialTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new ControlPolicial());
@@ -64,7 +64,7 @@ public class MotoTest {
     public void MotoEncuentraPiqueteYPozoTest() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new Pozo());
@@ -86,7 +86,7 @@ public class MotoTest {
     public void MotoEncuentraSorpresaCambioVehiculo() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -105,7 +105,7 @@ public class MotoTest {
     public void MotoEncuentraSorpresaFavorable() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -124,7 +124,7 @@ public class MotoTest {
     public void MotoEncuentraSorpresaDesavorable() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleVertical(0, 1).agregarObstaculo(new VacioObstaculo());
@@ -143,7 +143,7 @@ public class MotoTest {
     public void MotoEncuentraSorpresaCambioVehiculo3Veces() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());
@@ -168,7 +168,7 @@ public class MotoTest {
     public void MotoEncuentraSorpresaCambioVehiculo2veces() {
         //arrange
         Juego juego = new Juego();
-        juego.asignarLongitudMapa(5);
+        juego.asignarMapa(new Mapa(5));
         juego.asignarVehiculoInicial();
         juego.aplicarEstadoInicial(new Moto(juego.obtenerVehiculo()));
         juego.obtenerMapa().obtenerCalleHorizontal(1, 0).agregarObstaculo(new VacioObstaculo());

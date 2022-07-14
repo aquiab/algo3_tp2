@@ -12,7 +12,6 @@ public class Juego {
 	private Integer COORDENADA_META;
 	private Boolean gano = false;
 	public Ranking ranking;
-	public int mapSize;
 	private Mapa mapa;
 	public Vehiculo vehiculo;
 	public Jugador jugador;
@@ -31,9 +30,8 @@ public class Juego {
 		vehiculo.aplicarEstado(estado);
 	}
 
-	public void asignarLongitudMapa(int dimension) {
-		this.mapSize = dimension;
-		this.mapa = new Mapa(dimension);
+	public void asignarMapa(Mapa mapa) {
+		this.mapa = mapa;
 	}
 	public void asignarVehiculoInicial() {
 		this.vehiculo = new Vehiculo(MOVIMIENTOS_INICIALES, new Posicion(POSICION_INICIAL, POSICION_INICIAL, this.mapa), this);

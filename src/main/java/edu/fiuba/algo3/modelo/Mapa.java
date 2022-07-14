@@ -9,7 +9,7 @@ public class Mapa {
 	public LinkedList<LinkedList<Calle>> callesVerticales;
 	protected int dimension;
 
-	Mapa(int dimension) {
+	public Mapa(int dimension) {
 		this.dimension = dimension;
 		callesHorizontales = new LinkedList<>();
 		callesVerticales = new LinkedList<>();

@@ -18,7 +18,7 @@ public class Moto extends Estado {
 
     public void pasarImpuesto() {
         vehiculo.incrementarMovimientos(PENALIZACION_IMPUESTO);
-    }
+    } //agregado
 
     public Auto aplicarSorpresaCambioVehiculo() {
         return (new Auto(vehiculo));

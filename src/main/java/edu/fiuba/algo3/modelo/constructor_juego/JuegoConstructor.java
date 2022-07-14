@@ -89,7 +89,7 @@ public class JuegoConstructor {
         return this;
     }
 
-    public JuegoConstructor agregarImpuestos(double cantidad) {
+    public JuegoConstructor agregarImpuestos(double cantidad) { //agregado
         for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new Impuesto());
         for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new Impuesto());
         return this;

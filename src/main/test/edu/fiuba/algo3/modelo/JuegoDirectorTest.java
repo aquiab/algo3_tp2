@@ -203,6 +203,7 @@ public class JuegoDirectorTest {
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPozos(15);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPiquetes(15);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarControlesPoliciales(15);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarImpuestos(10);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasFavorables(0);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasDesfavorables(10);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarSorpresasCambioDeVehiculo(10);
@@ -216,6 +217,7 @@ public class JuegoDirectorTest {
         verify(director.obtenerConstructor(), times(1)).agregarPozos(15);
         verify(director.obtenerConstructor(), times(1)).agregarPiquetes(15);
         verify(director.obtenerConstructor(), times(1)).agregarControlesPoliciales(15);
+        verify(director.obtenerConstructor(), times(1)).agregarImpuestos(10);
         verify(director.obtenerConstructor(), times(1)).agregarSorpresasFavorables(0);
         verify(director.obtenerConstructor(), times(1)).agregarSorpresasDesfavorables(10);
         verify(director.obtenerConstructor(), times(1)).agregarSorpresasCambioDeVehiculo(10);

@@ -30,7 +30,7 @@ public abstract class Estado {
     public void pasarVacio() {
     }
 
-    public abstract void pasarImpuesto();
+    public abstract void pasarImpuesto(); //agregado
 
     public double obtenerPenalizacionPozo() {
         return PENALIZACION_POZO;

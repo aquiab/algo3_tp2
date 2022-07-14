@@ -18,7 +18,7 @@ public class Auto extends Estado {
     }
 
     public void pasarImpuesto() {
-        vehiculo.aplicarEstado(new Moto(this.vehiculo));
+        vehiculo.aplicarEstado(new Moto(this.vehiculo)); //agregado
     }
 
     public Camioneta aplicarSorpresaCambioVehiculo() {

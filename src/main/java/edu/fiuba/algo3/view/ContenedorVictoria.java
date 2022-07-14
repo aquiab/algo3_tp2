@@ -18,7 +18,7 @@ public class ContenedorVictoria extends VBox {
         Jugador jugador = rank.devolverGanador();
 
 		Button botonVolver = new Button("Volver");
-        botonVolver.relocate(20, 460);
+        botonVolver.relocate(50, 450);
 
         VBox vboxizq = new VBox();
         VBox vboxder = new VBox();
@@ -42,7 +42,7 @@ public class ContenedorVictoria extends VBox {
 
         Pane pane = new Pane(hbox, botonVolver, felicidades, ranking, llegaste);
         pane.setPrefSize(500, 500);
-        pane.setStyle("-fx-background-color: #32cd32");
+        pane.setStyle("-fx-background-color: rgb(168,129,65)");
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
         vboxizq.getChildren().clear();

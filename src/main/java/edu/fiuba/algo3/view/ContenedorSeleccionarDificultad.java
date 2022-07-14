@@ -57,7 +57,7 @@ public class ContenedorSeleccionarDificultad extends VBox {
 
 		Pane pane = new Pane(etiquetaTitulo, etiquetaUsuario, nombreUsuario, etiquetaDificultad,
 				opcionFacil, opcionNormal, opcionDificil, botonSiguenteEscena);
-		pane.setStyle("-fx-background-color: rgb(168,129,65)");
+		pane.setStyle("-fx-background-color: rgb(213, 237, 223)");
 		pane.setPrefSize(500, 500);
 
         this.getChildren().addAll(pane);

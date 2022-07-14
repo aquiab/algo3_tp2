@@ -15,7 +15,6 @@ public class ContenedorSeleccionarVehiculo extends VBox {
 		Label etiquetaVehiculo = new Label();
         etiquetaVehiculo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
 		etiquetaVehiculo.setText("Elija el vehículo inicial:");
-        etiquetaVehiculo.setTextFill(Color.web("#66A7C5"));
 		etiquetaVehiculo.relocate(50, 80);
 
 		final ToggleGroup groupVehiculo = new ToggleGroup();
@@ -42,7 +41,7 @@ public class ContenedorSeleccionarVehiculo extends VBox {
 		opcionAuto, opcionMoto, opcionCamioneta));
 
 		Pane pane = new Pane(etiquetaVehiculo, opcionAuto, opcionMoto, opcionCamioneta, botonJugar);
-		pane.setStyle("-fx-background-color: rgb(168,129,65)");
+		pane.setStyle("-fx-background-color: rgb(213, 237, 223)");
 		pane.setPrefSize(500, 500);
 
 		this.getChildren().addAll(pane);

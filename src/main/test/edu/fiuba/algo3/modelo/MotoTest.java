@@ -99,7 +99,7 @@ public class MotoTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 1);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 1);
-        assert(juego.obtenerVehiculo().estadoActual() == Auto.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Auto.class);
     }
     @Test
     public void MotoEncuentraSorpresaFavorable() {
@@ -118,7 +118,7 @@ public class MotoTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 1);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 0.8);
-        assert(juego.obtenerVehiculo().estadoActual() == Moto.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Moto.class);
     }
     @Test
     public void MotoEncuentraSorpresaDesavorable() {
@@ -137,7 +137,7 @@ public class MotoTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 0);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 1);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 1.25);
-        assert(juego.obtenerVehiculo().estadoActual() == Moto.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Moto.class);
     }
     @Test
     public void MotoEncuentraSorpresaCambioVehiculo3Veces() {
@@ -162,7 +162,7 @@ public class MotoTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 3);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 3);
-        assert(juego.obtenerVehiculo().estadoActual() == Moto.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Moto.class);
     }
     @Test
     public void MotoEncuentraSorpresaCambioVehiculo2veces() {
@@ -184,6 +184,6 @@ public class MotoTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 2);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 2);
-        assert(juego.obtenerVehiculo().estadoActual() == Camioneta.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Camioneta.class);
     }
 }

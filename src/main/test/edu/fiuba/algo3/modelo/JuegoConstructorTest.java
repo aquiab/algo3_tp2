@@ -42,7 +42,7 @@ public class JuegoConstructorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo!= null);
-        assert (vehiculo.estadoActual() == Auto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Auto.class);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class JuegoConstructorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo!= null);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class JuegoConstructorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo!= null);
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
     }
 
     @Test

@@ -125,7 +125,7 @@ public class CamionetaTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 1);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 1);
-        assert(juego.obtenerVehiculo().estadoActual() == Moto.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Moto.class);
     }
     @Test
     public void CamionetaEncuentraSorpresaFavorable() {
@@ -144,7 +144,7 @@ public class CamionetaTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 1);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 0.8);
-        assert(juego.obtenerVehiculo().estadoActual() == Camioneta.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Camioneta.class);
     }
     @Test
     public void CamionetaEncuentraSorpresaDesavorable() {
@@ -163,7 +163,7 @@ public class CamionetaTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 0);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 1);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 1.25);
-        assert(juego.obtenerVehiculo().estadoActual() == Camioneta.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Camioneta.class);
     }
     @Test
     public void CamionetaEncuentraSorpresaCambioVehiculo3Veces() {
@@ -188,7 +188,7 @@ public class CamionetaTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 3);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 3);
-        assert(juego.obtenerVehiculo().estadoActual() == Camioneta.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Camioneta.class);
     }
     @Test
     public void CamionetaEncuentraSorpresaCambioVehiculo2veces() {
@@ -210,6 +210,6 @@ public class CamionetaTest {
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaX() == 2);
         assert(juego.obtenerVehiculo().devolverPosicion().obtenerCoordenadaY() == 0);
         assert(juego.obtenerVehiculo().obtenerMovimientos() == 2);
-        assert(juego.obtenerVehiculo().estadoActual() == Auto.class);
+        assert(juego.obtenerVehiculo().obtenerEstado().getClass() == Auto.class);
     }
 }

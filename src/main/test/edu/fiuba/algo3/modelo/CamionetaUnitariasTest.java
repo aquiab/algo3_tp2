@@ -181,7 +181,7 @@ public class CamionetaUnitariasTest {
 
         verify(sorpresa, times(1)).obtenerValor();
         verify(sorpresa, times(1)).aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
         assert (vehiculo.obtenerMovimientos() == 0.8);
     }
 
@@ -201,7 +201,7 @@ public class CamionetaUnitariasTest {
 
         verify(sorpresa, times(1)).obtenerValor();
         verify(sorpresa, times(1)).aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
         assert (vehiculo.obtenerMovimientos() == 1.25);
     }
 
@@ -219,7 +219,7 @@ public class CamionetaUnitariasTest {
         sorpresa.aplicar(vehiculo);
 
         verify(sorpresa, times(1)).aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
     }
 
     @Test
@@ -234,14 +234,14 @@ public class CamionetaUnitariasTest {
             return null;
         }).when(sorpresa).aplicar(vehiculo);
         sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
 
         doAnswer(i -> {
             vehiculo.aplicarSorpresaCambioVehiculo();
             return null;
         }).when(sorpresa).aplicar(vehiculo);
         sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Auto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Auto.class);
 
         verify(sorpresa, times(2)).aplicar(vehiculo);
     }
@@ -258,21 +258,21 @@ public class CamionetaUnitariasTest {
             return null;
         }).when(sorpresa).aplicar(vehiculo);
         sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
 
         doAnswer(i -> {
             vehiculo.aplicarSorpresaCambioVehiculo();
             return null;
         }).when(sorpresa).aplicar(vehiculo);
         sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Auto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Auto.class);
 
         doAnswer(i -> {
             vehiculo.aplicarSorpresaCambioVehiculo();
             return null;
         }).when(sorpresa).aplicar(vehiculo);
         sorpresa.aplicar(vehiculo);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
     }
 
     @Test
@@ -287,7 +287,7 @@ public class CamionetaUnitariasTest {
 
         verify(vacio, times(1)).aplicar(vehiculo);
         assert (vehiculo.obtenerMovimientos() == 0);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
     }
 
 }

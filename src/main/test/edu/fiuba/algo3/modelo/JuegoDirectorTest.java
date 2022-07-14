@@ -67,7 +67,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Auto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Auto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
@@ -80,7 +80,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
@@ -93,7 +93,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
@@ -150,7 +150,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Auto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Auto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
@@ -163,7 +163,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
@@ -176,7 +176,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
@@ -233,7 +233,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Auto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Auto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
@@ -246,7 +246,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Camioneta.class);
+        assert (vehiculo.obtenerEstado().getClass() == Camioneta.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 
@@ -259,7 +259,7 @@ public class JuegoDirectorTest {
         Vehiculo vehiculo = juego.obtenerVehiculo();
 
         assert (vehiculo != null);
-        assert (vehiculo.estadoActual() == Moto.class);
+        assert (vehiculo.obtenerEstado().getClass() == Moto.class);
         assert (vehiculo.obtenerMovimientos() == MOVIMIENTOS_INICIALES);
     }
 

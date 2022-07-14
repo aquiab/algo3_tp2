@@ -7,6 +7,8 @@ import edu.fiuba.algo3.modelo.estado.Moto;
 import edu.fiuba.algo3.modelo.obstaculos.*;
 import edu.fiuba.algo3.modelo.sorpresas.*;
 
+import static edu.fiuba.algo3.modelo.ValoresAleatorios.obtenerPosicionAleatoria;
+
 public class JuegoConstructor {
 
     public Juego juego = new Juego();
@@ -25,9 +27,7 @@ public class JuegoConstructor {
         return this;
     }
 
-    public Posicion obtenerPosicionAleatoria(int dimension) {
-        return new Posicion((int) (Math.random() * (dimension - 1)), (int) (Math.random() * (dimension - 1)), mapa);
-    }
+
 
     /*    Sorpresas    */
 
@@ -41,22 +41,22 @@ public class JuegoConstructor {
 
     public JuegoConstructor agregarSorpresasFavorables(double cantidad) {
         SorpresaFavorableFabrica fabrica = new SorpresaFavorableFabrica();
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), fabrica.crearSorpresa());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), fabrica.crearSorpresa());
         return this;
     }
 
     public JuegoConstructor agregarSorpresasDesfavorables(double cantidad) {
         SorpresaDesfavorableFabrica fabrica = new SorpresaDesfavorableFabrica();
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), fabrica.crearSorpresa());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), fabrica.crearSorpresa());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), fabrica.crearSorpresa());
         return this;
     }
 
     public JuegoConstructor agregarSorpresasCambioDeVehiculo(double cantidad) {
 
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), new SorpresaVehiculo());
-        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), new SorpresaVehiculo());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new SorpresaVehiculo());
+        for (int i = 0; i < cantidad/2; i++) agregarSorpresaEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new SorpresaVehiculo());
         return this;
     }
 
@@ -72,20 +72,20 @@ public class JuegoConstructor {
 
 
     public JuegoConstructor agregarPozos(double cantidad) {
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), new Pozo());
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), new Pozo());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new Pozo());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new Pozo());
         return this;
     }
 
     public JuegoConstructor agregarPiquetes(double cantidad) {
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), new Piquete());
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), new Piquete());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new Piquete());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new Piquete());
         return this;
     }
 
     public JuegoConstructor agregarControlesPoliciales(double cantidad) {
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa), new ControlPolicial());
-        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa), new ControlPolicial());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleHorizontal(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new ControlPolicial());
+        for (int i = 0; i < cantidad/2; i++) agregarObstaculoEnCalleVertical(mapa, obtenerPosicionAleatoria(dimensionMapa, mapa), new ControlPolicial());
         return this;
     }
 

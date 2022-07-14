@@ -2,8 +2,7 @@ package edu.fiuba.algo3.modelo.constructor_juego;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Ranking;
-
-import java.util.Random;
+import edu.fiuba.algo3.modelo.ValoresAleatorios;
 
 public class JuegoDirector {
 
@@ -13,12 +12,8 @@ public class JuegoDirector {
     private Ranking ranking;
 
     public JuegoDirector(Ranking ranking) {
-        this.COORDENADA_META = valorAleatorio();
+        this.COORDENADA_META = ValoresAleatorios.valorAleatorio();
         this.ranking = ranking;
-    }
-    public static int valorAleatorio() {
-        Random rand = new Random();
-        return rand.nextInt(10 - 1);
     }
 
     public void configurarPartidaFacil() {
@@ -78,7 +73,7 @@ public class JuegoDirector {
     }
 
     public void refreshConstructor() {
-        this.COORDENADA_META = valorAleatorio();
+        this.COORDENADA_META = ValoresAleatorios.valorAleatorio();
         this.constructor = new JuegoConstructor();}
 
     public void setearPartidaDefault() {

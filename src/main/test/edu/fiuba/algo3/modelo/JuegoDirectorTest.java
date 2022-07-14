@@ -116,7 +116,7 @@ public class JuegoDirectorTest {
         JuegoConstructor constructor = spy(new JuegoConstructor());
         director.setConstructor(constructor);
 
-        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarLongitudMapa(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarLongitudMapa(12);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPozos(10);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPiquetes(10);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarControlesPoliciales(10);
@@ -199,7 +199,7 @@ public class JuegoDirectorTest {
         JuegoConstructor constructor = spy(new JuegoConstructor());
         director.setConstructor(constructor);
 
-        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarLongitudMapa(10);
+        doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).asignarLongitudMapa(14);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPozos(15);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarPiquetes(15);
         doAnswer(i->director.obtenerConstructor()).when(director.obtenerConstructor()).agregarControlesPoliciales(15);

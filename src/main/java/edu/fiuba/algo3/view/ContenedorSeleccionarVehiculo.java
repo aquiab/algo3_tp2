@@ -12,12 +12,6 @@ public class ContenedorSeleccionarVehiculo extends VBox {
 	public ContenedorSeleccionarVehiculo(JuegoDirector director) {
 		this.setPadding(new Insets(40));
 		director.asignarAutoInicial();
-        Label etiquetaUsuario = new Label();
-        etiquetaUsuario.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
-		etiquetaUsuario.setText("Ingrese su nombre");
-        etiquetaUsuario.setTextFill(Color.web("#66A7C5"));
-
-		TextField nombreUsuario = new TextField();
 
 		Label etiquetaVehiculo = new Label();
         etiquetaVehiculo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
@@ -38,11 +32,11 @@ public class ContenedorSeleccionarVehiculo extends VBox {
 
 		Button botonJugar = new Button();
         botonJugar.setText("Jugar");
-		botonJugar.setOnAction(new ControladorIniciarJuego(director, this, nombreUsuario));
+		botonJugar.setOnAction(new ControladorIniciarJuego(director, this));
 
 		groupVehiculo.selectedToggleProperty().addListener(new ControladorSeleccionarVehiculo(groupVehiculo, director,
 		opcionAuto, opcionMoto, opcionCamioneta));
-		this.getChildren().addAll(etiquetaUsuario, nombreUsuario, etiquetaVehiculo, opcionAuto, opcionMoto, opcionCamioneta, botonJugar);
+		this.getChildren().addAll(etiquetaVehiculo, opcionAuto, opcionMoto, opcionCamioneta, botonJugar);
 	}
 	
 }

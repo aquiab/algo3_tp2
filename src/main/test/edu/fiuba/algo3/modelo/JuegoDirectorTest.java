@@ -129,7 +129,7 @@ public class JuegoDirectorTest {
 
         director.configurarPartidaNormal();
 
-        verify(director.obtenerConstructor(), times(1)).asignarLongitudMapa(10);
+        verify(director.obtenerConstructor(), times(1)).asignarLongitudMapa(12);
         verify(director.obtenerConstructor(), times(1)).agregarPozos(10);
         verify(director.obtenerConstructor(), times(1)).agregarPiquetes(10);
         verify(director.obtenerConstructor(), times(1)).agregarControlesPoliciales(10);
@@ -212,7 +212,7 @@ public class JuegoDirectorTest {
 
         director.configurarPartidaDificil();
 
-        verify(director.obtenerConstructor(), times(1)).asignarLongitudMapa(10);
+        verify(director.obtenerConstructor(), times(1)).asignarLongitudMapa(14);
         verify(director.obtenerConstructor(), times(1)).agregarPozos(15);
         verify(director.obtenerConstructor(), times(1)).agregarPiquetes(15);
         verify(director.obtenerConstructor(), times(1)).agregarControlesPoliciales(15);

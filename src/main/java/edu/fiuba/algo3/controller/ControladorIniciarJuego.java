@@ -11,12 +11,10 @@ public class ControladorIniciarJuego implements EventHandler<ActionEvent> {
 
 	JuegoDirector director;
 	ContenedorSeleccionarVehiculo contenedorSeleccionarVehiculo;
-	TextField nombreUsuario;
 
-	public ControladorIniciarJuego(JuegoDirector director, ContenedorSeleccionarVehiculo contenedorSelecContenedorSeleccionarVehiculo, TextField nombreUsuario) {
+	public ControladorIniciarJuego(JuegoDirector director, ContenedorSeleccionarVehiculo contenedorSelecContenedorSeleccionarVehiculo) {
 		this.director = director;
         this.contenedorSeleccionarVehiculo = contenedorSelecContenedorSeleccionarVehiculo;
-		this.nombreUsuario = nombreUsuario;
     }
 
 	@Override
@@ -26,6 +24,5 @@ public class ControladorIniciarJuego implements EventHandler<ActionEvent> {
 		contenedorSeleccionarVehiculo.getScene().setRoot(contenedorMapa);
 		contenedorMapa.getScene().setOnKeyReleased(new ControladorMovimiento(director, contenedorMapa));
 		contenedorMapa.getScene().getWindow().sizeToScene();
-		juego.aplicarJugador(nombreUsuario.getText());
 	}
 }

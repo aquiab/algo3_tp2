@@ -21,6 +21,10 @@ public class Camioneta extends Estado {
         }
     }
 
+    public void pasarImpuesto() {
+        vehiculo.aplicarEstado(new Auto(this.vehiculo));
+    }
+
     public boolean penalizacionPozoHabilitada() {
         return (this.cantidadPozos % 3 == 0);
     }

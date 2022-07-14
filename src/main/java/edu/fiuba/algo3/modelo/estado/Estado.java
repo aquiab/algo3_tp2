@@ -7,6 +7,8 @@ public abstract class Estado {
     protected Integer PENALIZACION_POLICIAL;
     protected Integer PROBABILIDAD_CONTROL_POLICIAL;
     protected Integer PENALIZACION_PIQUETE = 0;
+
+    protected Integer PENALIZACION_IMPUESTO;
     protected Vehiculo vehiculo;
 
     public Estado(Vehiculo vehiculo) {
@@ -27,6 +29,8 @@ public abstract class Estado {
 
     public void pasarVacio() {
     }
+
+    public abstract void pasarImpuesto();
 
     public double obtenerPenalizacionPozo() {
         return PENALIZACION_POZO;

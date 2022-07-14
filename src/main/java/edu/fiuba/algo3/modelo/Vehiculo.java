@@ -68,5 +68,7 @@ public class Vehiculo {
     public int obtenerPosicionY() {
         return posicion.obtenerCoordenadaY();
     }
+
+    public void pasarImpuesto() { estado.pasarImpuesto();}
 }
 

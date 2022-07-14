@@ -17,6 +17,10 @@ public class Auto extends Estado {
         posicion.defaultearSig();
     }
 
+    public void pasarImpuesto() {
+        vehiculo.aplicarEstado(new Moto(this.vehiculo));
+    }
+
     public Camioneta aplicarSorpresaCambioVehiculo() {
         return (new Camioneta(vehiculo));
     }

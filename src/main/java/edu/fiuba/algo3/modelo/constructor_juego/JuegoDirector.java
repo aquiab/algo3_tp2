@@ -24,6 +24,7 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(10)
                 .agregarSorpresasDesfavorables(5)
                 .agregarSorpresasCambioDeVehiculo(5)
+                .agregarImpuestos(5) //agregado
                 .agregarMetaEn(COORDENADA_META)
                 .asignarRanking(this.ranking)
                 .asignarVehiculoInicial();
@@ -37,6 +38,7 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(5)
                 .agregarSorpresasDesfavorables(10)
                 .agregarSorpresasCambioDeVehiculo(10)
+                .agregarImpuestos(7) //agregado
                 .agregarMetaEn(COORDENADA_META)
                 .asignarRanking(this.ranking)
                 .asignarVehiculoInicial();
@@ -50,6 +52,7 @@ public class JuegoDirector {
                 .agregarSorpresasFavorables(0)
                 .agregarSorpresasDesfavorables(10)
                 .agregarSorpresasCambioDeVehiculo(10)
+                .agregarImpuestos(10) //agregado
                 .agregarMetaEn(COORDENADA_META)
                 .asignarRanking(this.ranking)
                 .asignarVehiculoInicial();

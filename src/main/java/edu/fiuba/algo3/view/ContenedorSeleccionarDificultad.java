@@ -1,21 +1,18 @@
 package edu.fiuba.algo3.view;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.controller.ControladorSeleccionarDificultad;
 
 public class ContenedorSeleccionarDificultad extends VBox {
+	private static String fontType = "Tahoma";
 	public ContenedorSeleccionarDificultad(JuegoDirector director) {
-		//this.setPadding(new Insets(40));
 		director.asignarAutoInicial();
 		Label etiquetaUsuario = new Label();
-		etiquetaUsuario.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
+		etiquetaUsuario.setFont(Font.font(fontType, FontWeight.BOLD, 18));
 		etiquetaUsuario.setText("Ingrese su nombre");
-		etiquetaUsuario.setTextFill(Color.web("#66A7C5"));
 		etiquetaUsuario.relocate(50, 80);
 
 		TextField nombreUsuario = new TextField();
@@ -23,15 +20,13 @@ public class ContenedorSeleccionarDificultad extends VBox {
 		nombreUsuario.setPrefSize(390, 10);
 
 		Label etiquetaTitulo = new Label();
-        etiquetaTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 24));
+        etiquetaTitulo.setFont(Font.font(fontType, FontWeight.BOLD, 24));
 		etiquetaTitulo.setText("AlgoGPS");
-        etiquetaTitulo.setTextFill(Color.web("#66A7C5"));
 		etiquetaTitulo.relocate(50, 30);
 
 		Label etiquetaDificultad = new Label();
-        etiquetaDificultad.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
+        etiquetaDificultad.setFont(Font.font(fontType, FontWeight.BOLD, 18));
 		etiquetaDificultad.setText("Seleccione la dificultad:");
-        etiquetaDificultad.setTextFill(Color.web("#66A7C5"));
 		etiquetaDificultad.relocate(50, 165);
 
 		final ToggleGroup groupDificultad = new ToggleGroup();

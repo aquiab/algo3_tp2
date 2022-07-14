@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo.estado;
 import edu.fiuba.algo3.modelo.Vehiculo;
-import edu.fiuba.algo3.modelo.estado.Auto;
-import edu.fiuba.algo3.modelo.estado.Estado;
 
 public class Moto extends Estado {
     private Integer PENALIZACION_PIQUETE = 2;

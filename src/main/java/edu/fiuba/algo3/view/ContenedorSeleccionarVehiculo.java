@@ -4,14 +4,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
-import javafx.geometry.Insets;
 import edu.fiuba.algo3.controller.ControladorSeleccionarVehiculo;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
 import edu.fiuba.algo3.controller.ControladorIniciarJuego;
 
 public class ContenedorSeleccionarVehiculo extends VBox {
 	public ContenedorSeleccionarVehiculo(JuegoDirector director) {
-		//this.setPadding(new Insets(40));
 		director.asignarAutoInicial();
 
 		Label etiquetaVehiculo = new Label();

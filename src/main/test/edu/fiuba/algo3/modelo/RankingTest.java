@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.constructor_juego.JuegoDirector;
-import edu.fiuba.algo3.modelo.estado.*;
 import edu.fiuba.algo3.modelo.obstaculos.*;
 import edu.fiuba.algo3.modelo.sorpresas.*;
 
